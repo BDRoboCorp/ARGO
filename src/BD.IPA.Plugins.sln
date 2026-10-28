@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37411.7 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BD.IPA.Plugins", "BD.IPA.Plugins\BD.IPA.Plugins.csproj", "{FBE1FADC-FF0B-4F46-B54C-D55A567294E2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BD.Models", "BD.Models\BD.Models.shproj", "{C9ADA6AB-7530-4F92-AC22-ADAB64AE5349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectCenterMigration", "ProjectCenterMigration\ProjectCenterMigration.csproj", "{DA6AF579-F972-4938-B6D7-2DFFB0FDF58C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBE1FADC-FF0B-4F46-B54C-D55A567294E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE1FADC-FF0B-4F46-B54C-D55A567294E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE1FADC-FF0B-4F46-B54C-D55A567294E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE1FADC-FF0B-4F46-B54C-D55A567294E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA6AF579-F972-4938-B6D7-2DFFB0FDF58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA6AF579-F972-4938-B6D7-2DFFB0FDF58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA6AF579-F972-4938-B6D7-2DFFB0FDF58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA6AF579-F972-4938-B6D7-2DFFB0FDF58C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6207B16-6EA8-46EC-A9AF-2CFE7FE164FD}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		BD.Models\BD.Models.projitems*{c9ada6ab-7530-4f92-ac22-adab64ae5349}*SharedItemsImports = 13
+		BD.Models\BD.Models.projitems*{da6af579-f972-4938-b6d7-2dffb0fdf58c}*SharedItemsImports = 4
+		BD.Models\BD.Models.projitems*{fbe1fadc-ff0b-4f46-b54c-d55a567294e2}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal

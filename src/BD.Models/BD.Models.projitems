@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c9ada6ab-7530-4f92-ac22-adab64ae5349</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>BD.Models</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\appointment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_application.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_approval.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_argoconfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_authenticationmethodassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_autonumber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_budgetrequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_budgetrequesthistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_controlledsegmentationassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_devestimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_devtask.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_firewallchangesassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_fiscalyear.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_function.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_keycontact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_milestonetype.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_operatingenvironmentassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_productpricing.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_projectmilestone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_projectmilestoneapprover.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_publicholiday.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_qpabpf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_requestintake.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_requestintakeactivity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_requestintakeapplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_requestintakeusers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_resourceallocation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_rpabpf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_serviceprovider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_solutionarchitectureassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_sraactivity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_sraappointmentassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_sradocument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_systemresideassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_taskassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_valuedriversassignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_vendor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\bdgas_regulatoryassessmentmaster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\documenttemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\personaldocumenttemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\processstage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\systemuser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\task.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\team.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EntityOptionSetEnum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\activitypointer_deliveryprioritycode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_authenticationmethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_bdcontrolledsegmentation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_chargebacktype.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_firewallchanges.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_impactchoice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_operatingenvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_piijustification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_position.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_regulatoryassessmentoption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_solutionarchitecture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_soxjustification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_srarequesttype.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\bdgas_systemreside.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\officedocument_documenttype.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\onlinemeetingtype.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\processstage_category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OptionSets\socialprofile_community.cs" />
+  </ItemGroup>
+</Project>

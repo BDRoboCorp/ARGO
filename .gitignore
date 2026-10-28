@@ -1,0 +1,24 @@
+**/.vscode/
+
+# Build output
+**/[Bb]in/
+**/[Oo]bj/
+**/[Aa]rtifacts/
+
+# Visual Studio user and workspace files
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet package and restore output
+*.nupkg
+*.snupkg
+**/packages/
+
+# MSBuild logs
+*.binlog
+
+# Test output
+**/TestResults/

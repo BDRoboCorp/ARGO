@@ -1,0 +1,230 @@
+ProjectCenterMigration - CSV to CRM (bdgas_requestintake) mapping requirements
+================================================================================
+
+Source: BC extract.csv
+Target (main table): bdgas_requestintake
+Order of operations: bdgas_requestintake is created/updated first from the column mapping below, then
+the chargeback rows (bdgas_budgetrequest) are created afterward using its Id.
+
+Request Intake write payloads
+-----------------------------
+Existing records are retrieved by ticket for their Id only. Updates send a fresh entity containing
+the CSV-mapped attributes, not the retrieved record's system columns or unrelated lookups.
+Explicit nulls in mapped fields are retained so updates can clear those fields; optional fields
+that are not mapped remain unchanged.
+RITM Creation Date uses overriddencreatedon on create only; updates preserve the original createdon.
+Records created as active and then deactivated are updated with only Id, statecode, and statuscode.
+Bulk writes continue to use CreateMultiple/UpdateMultiple with custom plug-in execution bypassed;
+Dataverse's built-in security and lookup validation still apply.
+
+Column mapping
+--------------
+1. RITM Creation Date        -> createdon
+2. ServiceNow Ticket#        -> bdgas_requestintake1 (logical name "bdgas_requestintake", plain text field on bdgas_requestintake)
+3. Title                     -> bdgas_digitalproductname
+4. Lifecycle Phase           -> statuscode (bdgas_requestintake_statuscode)
+                                 Map CSV text to option set label, e.g.:
+                                   "In Queue"                  -> InQueue (1)
+                                   "PROD on Hold"              -> PRODonHold (2)
+                                   "Concept Approval"          -> ConceptApproval (100000001)
+                                   "Solution Design"           -> SolutionDesign (100000002)
+                                   "DEV"                       -> DEV (100000003)
+                                   "QA"                        -> QA (100000004)
+                                   "Ready for Sprint/Prod Move"-> ReadyforSprintProdMove (100000005)
+                                   "PROD"                      -> PROD (100000006)
+                                   "Retired and Retained"      -> RetiredandRetained (100000007)
+                                   "Cancelled"                 -> Cancelled (100000008)
+                                   "On Hold"                   -> OnHold (100000009)
+                                 NOTE: exact CSV text values must be confirmed against the full
+                                 distinct list in the CSV (only "In Queue" and "PROD" seen in sample rows).
+5. Bot Owner                 -> bdgas_botowner (lookup to systemuser)
+                                 Search systemuser.fullname CONTAINS <value>, take first match if multiple.
+                                 If no match is found, leave the lookup empty.
+6. Developer(s)               -> bdgas_leaddeveloperid (lookup to systemuser)
+                                 Value may contain a suffix like ";#27762" (Dataverse/SharePoint person-field
+                                 export format "Name;#UserId"). Strip everything from ";#" onward before
+                                 searching, then search systemuser.fullname CONTAINS <cleaned name>,
+                                 take first match if multiple. Only the first person in a ";"-separated list
+                                 is mapped; any remaining people are not tracked. If no match is found, leave
+                                 the lookup empty.
+7. Development Team           -> bdgas_developmentteamid (lookup to bdgas_vendor)
+                                 Search bdgas_vendor.bdgas_Name CONTAINS the CSV value, take first match
+                                 if multiple.
+8. Assignee                   -> bdgas_assigneeba (lookup to systemuser)
+                                 Search systemuser.fullname CONTAINS <value>, take first match if multiple.
+                                 If no match is found, leave the lookup empty.
+9. Application(s) Used         -> Child rows on bdgas_requestintakeapplication
+                                 Split CSV value by ";" into individual application names.
+                                 For each name, create a bdgas_requestintakeapplication row:
+                                   - bdgas_requestintakeid = the created/updated bdgas_requestintake
+                                   - bdgas_application = lookup to bdgas_application by
+                                     bdgas_applicationname (match logic TBD - contains vs exact, see open
+                                     questions)
+                                   - All other fields left empty for now.
+10. AMO Support Team           -> bdgas_amosupportteamid (lookup to bdgas_vendor)
+                                 Search bdgas_vendor.bdgas_Name CONTAINS the CSV value, take first match
+                                 if multiple.
+                                 NOTE: bdgas_amosupportteamid does NOT currently exist as a field on
+                                 bdgas_requestintake in the generated model (BD.Models/Entities/bdgas_requestintake.cs).
+                                 Needs confirmation - see open questions.
+11. Bot is Active?             -> statecode (bdgas_requestintake_statecode)
+                                 TRUE  -> Active (0)
+                                 FALSE -> Inactive (1)
+12. Development Size           -> bdgas_developmentsizeid (lookup to bdgas_regulatoryassessmentmaster)
+                                 WHERE bdgas_category = "Development Size" AND bdgas_name = <CSV value>
+                                 (exact match on both category and name).
+13. GxP Level                  -> skipped for now.
+13a. FTE Benefit Monthly Hours -> bdgas_ftebenefit (text field)
+14. FTE Benefit Value          -> skipped for now.
+15. FTE Benefit                -> bdgas_estimatedhours
+16. IRB/ERB                    -> skipped for now.
+17. Region                     -> bdgas_bdintelligenceregion (lookup to bdgas_regulatoryassessmentmaster)
+                                 WHERE bdgas_category = "Region" AND bdgas_name = <CSV value>.
+18. Fee - 2nd chargeback - 50% Dev and Operations -> handled by the chargeback function (see open questions).
+19. BD Comment                 -> handled by the chargeback function (see open questions).
+20. Business Partner           -> bdgas_businesspartner (lookup to systemuser)
+                                 Search systemuser.fullname CONTAINS <value>, take first match if multiple.
+21. POH_Bot_decision           -> skipped.
+22. On Hold Description        -> deferred, will revisit.
+23. Prod Move Month            -> skipped.
+24. Change Ticket #            -> bdgas_changeticket
+25-27. (not specified)         -> not covered in this pass, see open questions.
+28. Bot is in Hypercare?       -> bdgas_botisinhypercare
+29. Go-Live Business Verification Received & Attached? -> open question, no mapping decided yet.
+30. Pod #                      -> skipped for now.
+31. Service Account(s) used    -> bdgas_autogenerateserviceaccount
+                                 Also set bdgas_serviceaccountused = true when the CSV value is not empty.
+32. Enhancement of Existing Bot? -> bdgas_enhancementofexistingbot
+33. PROD Code Release Date     -> bdgas_prodcodereleaseddate
+34. Go-Live Date               -> bdgas_botisinhypercare
+                                 NOTE: same target field as item 28 ("Bot is in Hypercare?") - looks like a
+                                 duplicate/typo, see open questions.
+35. Chargeback Comments        -> handled by the chargeback function (see open questions).
+36. Date - 2nd chargeback - 50% dev and operation -> handled by the chargeback function (see open questions).
+37. Next Chargeback date       -> handled by the chargeback function (see open questions).
+38. Chargeable                 -> handled by the chargeback function (see open questions).
+39. Cost Center Dev            -> handled by the chargeback function (see open questions).
+40. Fee - Annual               -> handled by the chargeback function (see open questions).
+41. Cost Center Reoccuring     -> handled by the chargeback function (see open questions).
+42. Bot Owner Email            -> maps to bdgas_botowner (lookup to systemuser)
+                                 Search systemuser.internalemailaddress = <value>.
+43. Description                -> bdgas_description
+44. BOT Informed               -> bdgas_botinformedid
+                                 Split CSV value by ";", search systemuser.fullname CONTAINS each value,
+                                 take the first found match.
+45. finance poc                -> handled by the chargeback function (see open questions).
+46. APAS Signoff Received & Attached? -> skipped.
+47. Automation URS Received & Attached -> bdgas_automationursreceivedatttached
+48. ARDS Signoff Received & Attached -> skipped.
+49. SOX Assessment             -> open question, need clarification.
+50. UAT Complete Date          -> bdgas_uatcompletedate
+51. Production Access Requested? -> skipped.
+52. Chargeback EmailSent       -> skipped.
+53. Chargeback LastEmailsentDate -> skipped.
+54. BOT Business Criticallity  -> bdgas_botbusinesscriticallity
+                                 Strip any leading number prefix from the CSV value, then match against
+                                 the option set label by name.
+55. Function                   -> bdgas_bdintelligencefunction (lookup to bdgas_regulatoryassessmentmaster)
+                                 WHERE bdgas_category = "Function" AND bdgas_name = <CSV value>.
+56. Business(es)               -> open question, need confirmation.
+57. KT To Ops                  -> bdgas_kttoamo
+58. Sprint(s)                  -> skipped.
+59. Automation hub resource link -> bdgas_prodlink
+60. ID                         -> skipped.
+61. ERP Environment            -> bdgas_erpenvironment (multiselect option set)
+62. ERP Request                -> bdgas_erprequest
+63. Date - 1st Chargeback - 50% Dev -> handled by the chargeback function (see open questions).
+64. Fee - 1st chargeback - 50% dev -> handled by the chargeback function (see open questions).
+65. Migration Date             -> skipped for now.
+65a. System Migrated To        -> skipped for now, open question (see below).
+66. BOT VP                     -> bdgas_botvp (lookup to systemuser)
+                                 Search systemuser.fullname CONTAINS <value>, take first match if multiple.
+67. IDP Technology Used        -> skipped.
+68. Upgrade Technology         -> skipped.
+69. Upgrade Phase              -> skipped.
+70. Power Automate Flow Name   -> skipped.
+71. Status Comment             -> skipped.
+72. Modified                   -> skipped.
+73. Cloned                     -> skipped.
+74. PlanView ID                -> bdgas_planviewid
+75. Regulatory Meeting Attendend -> open question, need clarification.
+76. Privacy Assessment         -> skipped for now.
+77. Information Security Assessment -> skipped for now.
+78. Compliance Form Routed     -> skipped for now.
+79. Created By                 -> createdby (lookup to systemuser)
+                                 Search systemuser.fullname CONTAINS <value>.
+80. L1                         -> bdgas_l1option
+                                 Match option set by checking whether the label name contains the CSV value.
+81. Show RGB                   -> skipped.
+82. T-Codes                    -> bdgas_tcodes
+83. ICM Monitor Bot Check Populated -> skipped.
+84. ERP Roles                  -> open question, need clarification.
+85. Item type                  -> open question, need clarification.
+86. Path                       -> open question, need clarification.
+
+Chargeback function (target table: bdgas_budgetrequest)
+---------------------------------------------------------
+After the bdgas_requestintake record is created/updated, up to 3 bdgas_budgetrequest child rows are
+created from the chargeback-related CSV columns (18, 19, 35-41, 45, 63, 64). Each row is independent -
+create it only if its condition is met.
+
+Row 1 - 1st chargeback (Development), created only if "Fee - 1st chargeback - 50% Dev" > 0:
+  Date - 1st Chargeback - 50% Dev            -> bdgas_datechargeback
+  Fee - 1st chargeback - 50% Dev             -> bdgas_fee
+  Cost Center Dev                            -> bdgas_costcenter
+  Chargeback Comments                        -> bdgas_name
+  Finance POC                                -> bdgas_financepoc (lookup to systemuser, same matching
+                                                 approach as other systemuser lookups above)
+  bdgas_isrecurring                          = false
+  bdgas_chargebacktype                       = Development
+  bdgas_requestintakeid                      = the bdgas_requestintake created/updated above
+
+Row 2 - 2nd chargeback (Development), created only if "Fee - 2nd chargeback - 50% Dev and Operations" > 0:
+  Date - 2nd chargeback - 50% Dev and Operation -> bdgas_datechargeback
+  Fee - 2nd chargeback - 50% Dev and Operations -> bdgas_fee
+  Cost Center Dev                            -> bdgas_costcenter
+  Chargeback Comments                        -> bdgas_name
+  Finance POC                                -> bdgas_financepoc (lookup to systemuser, same matching
+                                                 approach as other systemuser lookups above)
+  bdgas_isrecurring                          = false
+  bdgas_chargebacktype                       = Development
+  bdgas_requestintakeid                      = the bdgas_requestintake created/updated above
+
+Row 3 - Annual/recurring (Operations), created only if "Fee - Annual" > 0:
+  Next Chargeback date                       -> bdgas_nextchargebackdate
+  Fee - Annual                                -> bdgas_fee
+  Cost Center Reoccuring                     -> bdgas_costcenter
+  Chargeback Comments                        -> bdgas_name
+  Finance POC                                -> bdgas_financepoc (lookup to systemuser, same matching
+                                                 approach as other systemuser lookups above)
+  bdgas_isrecurring                          = true
+  bdgas_chargebacktype                       = Operations
+  bdgas_requestintakeid                      = the bdgas_requestintake created/updated above
+  NOTE: bdgas_datechargeback is left empty for this row (no source column maps to it).
+
+NOT YET ACCOUNTED FOR in the 3 rows above (see open questions):
+  - Chargeable (col 38): not referenced by any row.
+  - BD Comment (col 19): no longer referenced by any row (bdgas_name now comes from Chargeback Comments).
+
+Open questions / need confirmation
+-----------------------------------
+4. "Application(s) Used" -> bdgas_application lookup: match by exact bdgas_applicationname or "contains"?
+   Also, what should happen when an application name from the CSV cannot be found (skip row, error out
+   the whole record, or create a new bdgas_application)?
+7. Any fields other than the ones listed above (from the ~80 columns in BC extract.csv) that also need to
+   be mapped, or are all remaining columns out of scope for this migration?
+10. "Go-Live Business Verification Received & Attached?" - no target field/mapping decided yet.
+11. "Go-Live Date" was given the same target (bdgas_botisinhypercare) as "Bot is in Hypercare?" (item 28) -
+    please confirm the correct target field for "Go-Live Date" (likely a distinct date field).
+12. "SOX Assessment" - target field and matching logic need clarification.
+13. "Business(es)" - target field and matching logic need confirmation.
+14. "Regulatory Meeting Attendend" - target field and matching logic need clarification.
+15. "ERP Roles" - target field and matching logic need clarification.
+16. "Item type" - target field and matching logic need clarification.
+17. "Path" - target field and matching logic need clarification.
+20. "System Migrated To" (CSV column 64) - target field and matching logic need clarification.
+21. "Chargeable" (col 38) - not used by any of the 3 chargeback rows. Is this a gate that should prevent
+    creating bdgas_budgetrequest rows entirely when false (even if a fee > 0), or is it unrelated to row
+    creation?
+22. "BD Comment" (col 19) - no longer used by any chargeback row now that bdgas_name maps from
+    "Chargeback Comments" instead. Should it be dropped, or does it map to some other field/table?

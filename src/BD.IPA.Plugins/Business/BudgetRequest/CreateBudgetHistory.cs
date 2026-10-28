@@ -40,7 +40,13 @@ namespace BD.IPA.Plugins.Business.BudgetRequest
                     statuscode = bdgas_budgetrequesthistory_statuscode.Approved
                 };
 
-                AdminService.Update(update);
+                var updateReq = new UpdateRequest
+                {
+                    Target = update.ToEntity<Entity>()
+                };
+                updateReq.Parameters.Add("SuppressCallbackRegistrationExpanderJob", true);
+
+                AdminService.Execute(updateReq);
             }
             else
             {
@@ -71,6 +77,11 @@ namespace BD.IPA.Plugins.Business.BudgetRequest
                     statecode = bdgas_budgetrequesthistory_statecode.Inactive,
                     statuscode = bdgas_budgetrequesthistory_statuscode.Approved
                 };
+                var updateReq = new UpdateRequest
+                {
+                    Target = update.ToEntity<Entity>()
+                };
+                updateReq.Parameters.Add("SuppressCallbackRegistrationExpanderJob", true);
                 AdminService.Update(update);
             }
         }

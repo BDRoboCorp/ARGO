@@ -15,7 +15,7 @@ namespace BD.IPA.Plugins.Business.Appointment
 
         public override void HandleExecute()
         {
-            var systemResideText = Target.bdgas_systemresidetext?.ToLower();
+            var systemResideText = Target.bdgas_systemresidetext?.ToLower() ?? "";
             if (!systemResideText.Contains("bd controlled network")) return;
 
             var data = GetSelectedControlledSegmentationAssignment();

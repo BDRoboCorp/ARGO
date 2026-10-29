@@ -1,0 +1,19 @@
+Sequence:
+- Install PCF solutions (2) -> Done
+- export the BD IPA solution (done)
+- Install BD IPA solution (done) - connection references created but probably need to check again for the environment + environment variables updated for several > all done
+- need to turn on all the flows (specifically for the send email notifications).
+ - child upload file to sharepoint can be off if not being used (on prem)
+ - all file attachment not set to on for now
+- Move RA Master (select the table, connect to table and done)
+- Move Applications (done)
+- Move Fiscal Year (done)
+- Milestone types (done)
+- Update Email Template URL 
+  USE SQL4CDS
+UPDATE a SET a.body = REPLACE(a.body, 'https://org6547479b.crm.dynamics.com/', 'https://orge7fe3fdf.crm.dynamics.com')
+FROM template a
+WHERE a.body LIKE '%https://org6547479b.crm.dynamics.com/%'
+
+
+Refer to videos

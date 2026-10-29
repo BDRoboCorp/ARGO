@@ -56,18 +56,22 @@ namespace BD.IPA.Plugins.Business.Appointment
             Target.bdgas_storeorprocesselectronicrecordstext = FormatSingleOptionFromRAMaster(Latest.bdgas_storeorprocesselectronicrecordsid?.Id);
             Target.bdgas_electronicsignaturecapabilitytext = FormatSingleOptionFromRAMaster(Latest.bdgas_electronicsignaturecapabilityid?.Id);
             Target.bdgas_gxpapplicabilitytext = FormatSingleOptionFromRAMaster(Latest.bdgas_gxpapplicabilityid?.Id);
+            Target.bdgas_GxPApplicabilityFormatted = FormatSingleOptionFromRAMaster(Latest.bdgas_nongxpapplicabilityid?.Id);
             Target.bdgas_financialimpacttext = FormatSingleOptionFromRAMaster(Latest.bdgas_financialimpactid?.Id);
             Target.bdgas_soxapplicabletext = FormatSingleOptionFromRAMaster(Latest.bdgas_soxapplicableid?.Id);
             Target.bdgas_OperationatriskandorchangedFormatted = FormatSingleOptionFromRAMaster(Latest.bdgas_operationatriskandorchangedid?.Id);
-            Target.bdgas_soxjustificationtext = FormatSingleOptionFromRAMaster(Latest.bdgas_soxjustificationid?.Id);
             Target.bdgas_piijustificationtext = FormatSingleOptionFromRAMaster(Latest.bdgas_piijustificationid?.Id);
-            Target.bdgas_piistoredormanagedintheapptext = FormatSingleOptionFromRAMaster(Latest.bdgas_piistoredormanagedintheappid?.Id);
             Target.bdgas_otherregulationsorlegalconstraintimpactte = FormatSingleOptionFromRAMaster(Latest.bdgas_otherregulationsorlegalconstraintimpactid?.Id);
             Target.bdgas_drplanstatustext = FormatSingleOptionFromRAMaster(Latest.bdgas_drplanstatusid?.Id);
             Target.bdgas_internaltypetext = FormatSingleOptionFromRAMaster(Latest.bdgas_internaltypeid?.Id);
             Target.bdgas_documentstatustext = FormatSingleOptionFromRAMaster(Latest.bdgas_documentstatusid?.Id);
             Target.bdgas_chargebackcategorytext = FormatSingleOptionFromRAMaster(Latest.bdgas_chargebackcategoryid?.Id);
             Target.bdgas_fundedbytext = FormatSingleOptionFromRAMaster(Latest.bdgas_fundedbyid?.Id);
+            Target.bdgas_drplanrequiredfromcmdbbusinessapptext = FormatSingleOptionFromRAMaster(Latest.bdgas_drplanrequiredfromcmdbbusinessappid?.Id);
+
+            //Single value
+            Target.bdgas_piistoredormanagedintheapptext = FormatSingleValueFromRAMaster(Latest.bdgas_piistoredormanagedintheappid?.Id);
+            Target.bdgas_soxjustificationtext = FormatSingleValueFromRAMaster(Latest.bdgas_soxjustificationid?.Id);
         }
 
         private void SystemReside()
@@ -154,7 +158,7 @@ namespace BD.IPA.Plugins.Business.Appointment
             var text = string.Join(" ", multipleChoice.Select(choice =>
             {
                 var selected = selectedMethod.Any(e => e == choice.Id);
-                return $"{(selected ? _selected : _unselected)} {choice.bdgas_name}";
+                return $"{(selected ? _selected : _unselected)} {choice.bdgas_name}" + (choice.bdgas_name == "Other" ? $": {Latest.bdgas_OtherAuthenticationMethod}" : "");
             }).ToArray());
 
             Target.bdgas_AuthenticationMethodFormatted = text;
@@ -288,6 +292,15 @@ namespace BD.IPA.Plugins.Business.Appointment
             return string.Join(" ",
                 _RAMasters.Where(r => r.bdgas_category == category)
                           .OrderBy(r => r.bdgas_sequence)
+                          .Select(r => $"{(r.Id == selectedId ? _selected : _unselected)} {r.bdgas_name}")
+            );
+        }
+
+        private string FormatSingleValueFromRAMaster(Guid? selectedId)
+        {
+            var category = GetCategoryValue(selectedId);
+            return string.Join(" ",
+                _RAMasters.Where(r => r.bdgas_category == category && r.Id == selectedId)
                           .Select(r => $"{(r.Id == selectedId ? _selected : _unselected)} {r.bdgas_name}")
             );
         }

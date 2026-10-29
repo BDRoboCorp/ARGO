@@ -585,6 +585,7 @@ namespace BD.Model
 			public const string bdgas_businesspartnerlead = "bdgas_businesspartnerlead";
 			public const string bdgas_businessvaluescoreid = "bdgas_businessvaluescoreid";
 			public const string bdgas_changeticket = "bdgas_changeticket";
+			public const string bdgas_changeticketnumber = "bdgas_changeticketnumber";
 			public const string bdgas_Chargeable = "bdgas_chargeable";
 			public const string bdgas_classname = "bdgas_classname";
 			public const string bdgas_codereviewstatus = "bdgas_codereviewstatus";
@@ -644,7 +645,6 @@ namespace BD.Model
 			public const string bdgas_informationsecurityassessment = "bdgas_informationsecurityassessment";
 			public const string bdgas_installstatus = "bdgas_installstatus";
 			public const string bdgas_isaiassessment = "bdgas_isaiassessment";
-			public const string bdgas_issimplemediumform = "bdgas_issimplemediumform";
 			public const string bdgas_ktapprovaldate = "bdgas_ktapprovaldate";
 			public const string bdgas_kttoamo = "bdgas_kttoamo";
 			public const string bdgas_l1option = "bdgas_l1option";
@@ -1502,6 +1502,19 @@ namespace BD.Model
 			}
 		}
 		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bdgas_changeticketnumber")]
+		public string bdgas_changeticketnumber
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("bdgas_changeticketnumber");
+			}
+			set
+			{
+				this.SetAttributeValue("bdgas_changeticketnumber", value);
+			}
+		}
+		
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bdgas_chargeable")]
 		public System.Nullable<bool> bdgas_Chargeable
 		{
@@ -2267,19 +2280,6 @@ namespace BD.Model
 			set
 			{
 				this.SetAttributeValue("bdgas_isaiassessment", value);
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bdgas_issimplemediumform")]
-		public System.Nullable<bool> bdgas_issimplemediumform
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("bdgas_issimplemediumform");
-			}
-			set
-			{
-				this.SetAttributeValue("bdgas_issimplemediumform", value);
 			}
 		}
 		

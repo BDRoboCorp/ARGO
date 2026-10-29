@@ -326,6 +326,7 @@ namespace BD.Model
 			public const string bdgas_NetworkDataflowDiagramId = "bdgas_networkdataflowdiagramid";
 			public const string bdgas_NonGxPApplicability = "bdgas_nongxpapplicability";
 			public const string bdgas_NonGxPApplicabilityFormatted = "bdgas_nongxpapplicabilityformatted";
+			public const string bdgas_nongxpapplicabilityid = "bdgas_nongxpapplicabilityid";
 			public const string bdgas_notes = "bdgas_notes";
 			public const string bdgas_OperatingEnvironment = "bdgas_operatingenvironment";
 			public const string bdgas_OperatingEnvironmentFormatted = "bdgas_operatingenvironmentformatted";
@@ -1994,6 +1995,19 @@ namespace BD.Model
 			set
 			{
 				this.SetAttributeValue("bdgas_nongxpapplicabilityformatted", value);
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bdgas_nongxpapplicabilityid")]
+		public Microsoft.Xrm.Sdk.EntityReference bdgas_nongxpapplicabilityid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("bdgas_nongxpapplicabilityid");
+			}
+			set
+			{
+				this.SetAttributeValue("bdgas_nongxpapplicabilityid", value);
 			}
 		}
 		

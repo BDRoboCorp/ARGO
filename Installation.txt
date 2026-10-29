@@ -14,6 +14,10 @@ Sequence:
 UPDATE a SET a.body = REPLACE(a.body, 'https://org6547479b.crm.dynamics.com/', 'https://orge7fe3fdf.crm.dynamics.com')
 FROM template a
 WHERE a.body LIKE '%https://org6547479b.crm.dynamics.com/%'
+- import word templates manually
 
+
+
+- edit environment variable
 
 Refer to videos

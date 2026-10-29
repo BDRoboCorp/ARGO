@@ -282,6 +282,16 @@ namespace BD.IPA.Plugins.Business.Appointment
                     bdgas_name = source.bdgas_name,
                     bdgas_ramasterid = source.bdgas_ramasterid
                 });
+
+            var update = new Model.Appointment
+            {
+                Id = digitalSraRef.Id,
+                ScheduledStart = Latest.ScheduledStart,
+                ScheduledEnd = Latest.ScheduledEnd,
+                ActualStart = Latest.ActualStart,
+                ActualEnd = Latest.ActualEnd
+            };
+            AdminService.Update(update);
         }
 
         private void CopyAssignments<T>(

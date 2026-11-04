@@ -60,7 +60,6 @@ namespace BD.IPA.Plugins.Business.Appointment
             Target.bdgas_financialimpacttext = FormatSingleOptionFromRAMaster(Latest.bdgas_financialimpactid?.Id);
             Target.bdgas_soxapplicabletext = FormatSingleOptionFromRAMaster(Latest.bdgas_soxapplicableid?.Id);
             Target.bdgas_OperationatriskandorchangedFormatted = FormatSingleOptionFromRAMaster(Latest.bdgas_operationatriskandorchangedid?.Id);
-            Target.bdgas_piijustificationtext = FormatSingleOptionFromRAMaster(Latest.bdgas_piijustificationid?.Id);
             Target.bdgas_otherregulationsorlegalconstraintimpactte = FormatSingleOptionFromRAMaster(Latest.bdgas_otherregulationsorlegalconstraintimpactid?.Id);
             Target.bdgas_internaltypetext = FormatSingleOptionFromRAMaster(Latest.bdgas_internaltypeid?.Id);
             Target.bdgas_documentstatustext = FormatSingleOptionFromRAMaster(Latest.bdgas_documentstatusid?.Id);
@@ -72,6 +71,7 @@ namespace BD.IPA.Plugins.Business.Appointment
             Target.bdgas_piistoredormanagedintheapptext = FormatSingleValueFromRAMaster(Latest.bdgas_piistoredormanagedintheappid?.Id);
             Target.bdgas_soxjustificationtext = FormatSingleValueFromRAMaster(Latest.bdgas_soxjustificationid?.Id);
             Target.bdgas_drplanstatustext = FormatSingleValueFromRAMaster(Latest.bdgas_drplanstatusid?.Id);
+            Target.bdgas_piijustificationtext = FormatSingleValueFromRAMaster(Latest.bdgas_piijustificationid?.Id);
         }
 
         private void SystemReside()

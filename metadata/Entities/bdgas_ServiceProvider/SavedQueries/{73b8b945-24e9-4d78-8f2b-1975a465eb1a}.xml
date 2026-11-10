@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{73b8b945-24e9-4d78-8f2b-1975a465eb1a}</savedqueryid>
+    <layoutxml>
+      <grid name="bdgas_serviceproviders" jump="bdgas_serviceprovider" select="1" icon="1" preview="1">
+        <row name="bdgas_serviceprovider" id="bdgas_serviceproviderid">
+          <cell name="bdgas_serviceprovider" width="300" />
+          <cell name="bdgas_islegacy" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_serviceprovider">
+          <attribute name="bdgas_serviceproviderid" />
+          <attribute name="bdgas_serviceprovider" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_islegacy" />
+          <order attribute="bdgas_serviceprovider" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Service Provider Associated View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

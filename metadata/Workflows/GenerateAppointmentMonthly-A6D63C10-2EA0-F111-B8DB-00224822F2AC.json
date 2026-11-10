@@ -1,0 +1,250 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "type": "Recurrence",
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 30,
+            "timeZone": "Eastern Standard Time",
+            "startTime": "2026-08-24T17:30:00Z",
+            "schedule": {
+              "hours": [
+                "1"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "cdb28b49-d42c-43ee-a20e-7e289e19ca7d"
+          }
+        }
+      },
+      "actions": {
+        "Scope_-_Try": {
+          "type": "Scope",
+          "actions": {
+            "Get_ARGO_Setting": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,defaultvalue",
+                  "$filter": "schemaname eq 'bdgas_ARGOMeetingSchedules'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "0d801732-0471-4f8a-839e-7211d94f5de1"
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@coalesce(\r\n\r\n    first(\r\n\r\n        first(outputs('Get_ARGO_Setting')?['body/value'])?['environmentvariabledefinition_environmentvariablevalue']\r\n\r\n    )?['value'],\r\n\r\n    first(outputs('Get_ARGO_Setting')?['body/value'])?['defaultvalue']\r\n\r\n)",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Timezone": {
+                      "type": "string"
+                    },
+                    "Subject": {
+                      "type": "string"
+                    },
+                    "Slots": {
+                      "type": "integer"
+                    },
+                    "Durations": {
+                      "type": "integer"
+                    },
+                    "Break": {
+                      "type": "integer"
+                    },
+                    "Settings": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Day": {
+                            "type": "string"
+                          },
+                          "StartTime": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "Day",
+                          "StartTime"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Get_ARGO_Setting": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b180294d-2d31-4e72-bab9-e69e87e14f01"
+              }
+            },
+            "Create_SRA_Appointments": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "appointments",
+                  "item/bdgas_breakeachsession": "@body('Parse_JSON')?['Break']",
+                  "item/scheduledstart": "@utcNow()",
+                  "item/bdgas_duration": "@body('Parse_JSON')?['Durations']",
+                  "item/scheduledend": "@startOfDay(convertFromUtc(addDays(utcNow(), 30), body('Parse_JSON')?['Timezone']))",
+                  "item/subject": "GENERATED FROM SCHEDULE",
+                  "item/bdgas_quantity": "@body('Parse_JSON')?['Slots']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "07dd984d-38cf-4146-ba31-29552936b1e7"
+              }
+            }
+          },
+          "runAfter": {}
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Generate Appointment Monthly] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Scope_-_Try": [
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

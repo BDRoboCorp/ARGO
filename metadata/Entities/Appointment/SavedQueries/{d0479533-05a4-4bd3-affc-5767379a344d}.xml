@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{d0479533-05a4-4bd3-affc-5767379a344d}</savedqueryid>
+    <queryapi></queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" icon="1" preview="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="186" />
+          <cell name="scheduledstart" width="157" />
+          <cell name="regardingobjectid" width="100" />
+          <cell name="bdgas_requestname" width="123" />
+          <cell name="instancetypecode" width="100" ishidden="1" />
+          <cell name="bdgas_slotstatus" width="101" />
+          <cell name="onlinemeetingjoinurl" width="178" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch distinct="false" mapping="logical">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="scheduledstart" />
+          <attribute name="instancetypecode" />
+          <attribute name="bdgas_slotstatus" />
+          <attribute name="onlinemeetingjoinurl" />
+          <attribute name="regardingobjectid" />
+          <attribute name="bdgas_requestname" />
+          <order attribute="scheduledstart" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Appointment Associated View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

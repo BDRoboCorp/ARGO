@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{a62d64cf-7a9b-f111-b8dc-000d3a11e677}</WebResourceId>
+  <Name>bdgas_approval</Name>
+  <DisplayName>Approval</DisplayName>
+  <LanguageCode>0</LanguageCode>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/bdgas_approvalA62D64CF-7A9B-F111-B8DC-000D3A11E677</FileName>
+</WebResource>

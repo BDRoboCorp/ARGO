@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{f8c4ea36-f4a1-f111-b8dc-6045bded11bb}</WebResourceId>
+  <Name>bdgas_RegulatoryLock</Name>
+  <DisplayName>RegulatoryLock</DisplayName>
+  <WebResourceType>3</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/bdgas_RegulatoryLockF8C4EA36-F4A1-F111-B8DC-6045BDED11BB</FileName>
+</WebResource>

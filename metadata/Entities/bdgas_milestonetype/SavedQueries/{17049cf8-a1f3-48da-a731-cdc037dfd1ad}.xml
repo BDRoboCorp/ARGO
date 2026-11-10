@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{17049cf8-a1f3-48da-a731-cdc037dfd1ad}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_milestonetype" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_milestonetypeid">
+          <cell name="bdgas_milestonetype" width="300" />
+          <cell name="bdgas_requestintaketype" width="150" />
+          <cell name="bdgas_requestintakestatus" width="162" />
+          <cell name="bdgas_sequence" width="100" />
+          <cell name="bdgas_isapprovalneeded" width="150" />
+          <cell name="bdgas_approvaltype" width="147" />
+          <cell name="bdgas_isfileattachmentneeded" width="150" />
+          <cell name="bdgas_isnotificationneeded" width="167" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_milestonetype">
+          <attribute name="bdgas_milestonetypeid" />
+          <attribute name="bdgas_milestonetype" />
+          <attribute name="bdgas_requestintaketype" />
+          <attribute name="bdgas_isapprovalneeded" />
+          <attribute name="bdgas_approvaltype" />
+          <attribute name="bdgas_isfileattachmentneeded" />
+          <attribute name="bdgas_isnotificationneeded" />
+          <attribute name="bdgas_sequence" />
+          <attribute name="bdgas_requestintakestatus" />
+          <order attribute="bdgas_milestonetype" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Milestone Type Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

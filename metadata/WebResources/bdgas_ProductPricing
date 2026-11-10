@@ -1,0 +1,159 @@
+var ProductPricing = ProductPricing || {};
+
+(function (productPricing) {
+
+    "use strict";
+
+    const APPLICATION_FIELD = "bdgas_application";
+    const IDP_FIELD = "bdgas_isidp";
+
+    const CONTROL_FIELDS = [
+        "bdgas_numberofformat",
+        "bdgas_totalnumberofpages",
+        "bdgas_pagespermonth"
+    ];
+
+    //Initializes the Product Pricing form by registering the Application
+    //OnChange event and evaluating the selected Application's IDP configuration.
+    productPricing.onLoad = function (executionContext) {
+
+        var formContext = executionContext.getFormContext();
+
+        var applicationAttribute =
+            formContext.getAttribute(APPLICATION_FIELD);
+
+        if (applicationAttribute) {
+
+            applicationAttribute.removeOnChange(
+                productPricing.applicationOnChange
+            );
+
+            applicationAttribute.addOnChange(
+                productPricing.applicationOnChange
+            );
+        }
+
+        productPricing.evaluateIDP(formContext);
+    };
+
+    //Re-evaluates the IDP configuration whenever the selected Application changes.
+    productPricing.applicationOnChange = function (executionContext) {
+
+        var formContext = executionContext.getFormContext();
+
+        productPricing.evaluateIDP(formContext);
+    };
+
+    //Retrieves the selected Application's IDP setting and determines whether
+    //the IDP-related Product Pricing fields should be shown and required.
+    productPricing.evaluateIDP = function (formContext) {
+
+        formContext.ui.clearFormNotification("IDP_ERROR");
+
+        var applicationAttribute =
+            formContext.getAttribute(APPLICATION_FIELD);
+
+        if (!applicationAttribute) {
+
+            console.error(
+                APPLICATION_FIELD + " not found on form."
+            );
+
+            return;
+        }
+
+        var applicationValue =
+            applicationAttribute.getValue();
+
+        if (!applicationValue ||
+            applicationValue.length === 0) {
+
+            productPricing.hideAndClearFields(formContext);
+            return;
+        }
+
+        var applicationId =
+            applicationValue[0].id.replace(/[{}]/g, "");
+
+        Xrm.WebApi.retrieveRecord(
+            "bdgas_application",
+            applicationId,
+            "?$select=" + IDP_FIELD
+        )
+        .then(function (result) {
+
+            var isIDP = result[IDP_FIELD];
+
+            if (isIDP === true) {
+
+                productPricing.showAndRequireFields(formContext);
+            }
+            else {
+
+                productPricing.hideAndClearFields(formContext);
+            }
+        })
+        .catch(function (error) {
+
+            console.error(
+                "Failed to retrieve Application: " +
+                error.message
+            );
+
+            formContext.ui.setFormNotification(
+                "Unable to retrieve Application configuration.",
+                "ERROR",
+                "IDP_ERROR"
+            );
+        });
+    };
+
+    //Displays the IDP-related Product Pricing fields and sets them as required.
+    productPricing.showAndRequireFields = function (formContext) {
+
+        CONTROL_FIELDS.forEach(function (fieldName) {
+
+            var attribute =
+                formContext.getAttribute(fieldName);
+
+            var control =
+                formContext.getControl(fieldName);
+
+            if (control) {
+
+                control.setVisible(true);
+            }
+
+            if (attribute) {
+
+                attribute.setRequiredLevel("required");
+            }
+        });
+    };
+
+    //Hides the IDP-related Product Pricing fields, clears their values,
+    //and removes their required field level.
+    productPricing.hideAndClearFields = function (formContext) {
+
+        CONTROL_FIELDS.forEach(function (fieldName) {
+
+            var attribute =
+                formContext.getAttribute(fieldName);
+
+            var control =
+                formContext.getControl(fieldName);
+
+            if (attribute) {
+
+                attribute.setValue(null);
+                attribute.setRequiredLevel("none");
+            }
+
+            if (control) {
+
+                control.setVisible(false);
+            }
+        });
+    };
+
+})(ProductPricing);

@@ -1,0 +1,46 @@
+var ProjectMilestoneApproval = ProjectMilestoneApproval || {};
+(function() {
+	this.onLoad = async function(executionContext) {
+		var formContext = executionContext.getFormContext();
+		await setMilestoneTypeEntityName(formContext);
+	};
+
+	// Display-only: show the milestone's type in the form header's entity
+	// label (under the record title). Nothing is saved.
+	async function setMilestoneTypeEntityName(formContext) {
+		var milestoneAttr = formContext.getAttribute("bdgas_projectmilestoneid");
+		var milestone = milestoneAttr && milestoneAttr.getValue();
+		if (!milestone || !milestone.length) {
+			return;
+		}
+
+		try {
+			var milestoneRecord = await Xrm.WebApi.retrieveRecord(
+				"bdgas_projectmilestone",
+				cleanGuid(milestone[0].id),
+				"?$select=_bdgas_milestonetypeid_value"
+			);
+
+			var milestoneTypeId = milestoneRecord._bdgas_milestonetypeid_value;
+			if (!milestoneTypeId) {
+				return;
+			}
+
+			var milestoneType = await Xrm.WebApi.retrieveRecord(
+				"bdgas_milestonetype",
+				cleanGuid(milestoneTypeId),
+				"?$select=bdgas_milestonetype"
+			);
+
+			if (milestoneType.bdgas_milestonetype) {
+				formContext.ui.setFormEntityName(milestoneType.bdgas_milestonetype);
+			}
+		} catch (error) {
+			console.error("Unable to retrieve the milestone type.", error);
+		}
+	}
+
+	function cleanGuid(value) {
+		return String(value || "").replace(/[{}]/g, "");
+	}
+}).apply(ProjectMilestoneApproval);

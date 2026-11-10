@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{979107f4-c5c8-441b-81ca-f06f91adee02}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_requestintake" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_requestintakeid">
+          <cell name="bdgas_requestintake" width="131" />
+          <cell name="bdgas_planviewid" width="111" />
+          <cell name="bdgas_digitalproductname" width="207" />
+          <cell name="bdgas_description" width="300" />
+          <cell name="bdgas_triagedtechnology" width="153" />
+          <cell name="bdgas_requestintaketype" width="150" />
+          <cell name="statuscode" width="108" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_requestintake">
+          <attribute name="bdgas_requestintakeid" />
+          <attribute name="bdgas_requestintake" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="bdgas_requestintake" operator="like" value="{0}" />
+            <condition attribute="bdgas_digitalproductname" operator="like" value="{0}" />
+            <condition attribute="bdgas_description" operator="like" value="{0}" />
+          </filter>
+          <attribute name="bdgas_requestintaketype" />
+          <attribute name="bdgas_digitalproductname" />
+          <attribute name="bdgas_description" />
+          <attribute name="bdgas_planviewid" />
+          <attribute name="statuscode" />
+          <attribute name="bdgas_triagedtechnology" />
+          <order attribute="bdgas_requestintake" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Request Intakes" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

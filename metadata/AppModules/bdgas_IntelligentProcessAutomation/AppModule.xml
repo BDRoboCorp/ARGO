@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>bdgas_IntelligentProcessAutomation</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>9ed22fc4-b985-f111-ab0f-6045bdf09dc3</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="activitypointer" />
+    <AppModuleComponent type="1" schemaName="appointment" />
+    <AppModuleComponent type="1" schemaName="bdgas_application" />
+    <AppModuleComponent type="1" schemaName="bdgas_argoconfig" />
+    <AppModuleComponent type="1" schemaName="bdgas_budgetrequest" />
+    <AppModuleComponent type="1" schemaName="bdgas_budgetrequesthistory" />
+    <AppModuleComponent type="1" schemaName="bdgas_devestimation" />
+    <AppModuleComponent type="1" schemaName="bdgas_devtask" />
+    <AppModuleComponent type="1" schemaName="bdgas_fiscalyear" />
+    <AppModuleComponent type="1" schemaName="bdgas_governancerequest" />
+    <AppModuleComponent type="1" schemaName="bdgas_keycontact" />
+    <AppModuleComponent type="1" schemaName="bdgas_milestonetype" />
+    <AppModuleComponent type="1" schemaName="bdgas_productpricing" />
+    <AppModuleComponent type="1" schemaName="bdgas_projectmilestoneapprover" />
+    <AppModuleComponent type="1" schemaName="bdgas_publicholiday" />
+    <AppModuleComponent type="1" schemaName="bdgas_regulatoryassessmentmaster" />
+    <AppModuleComponent type="1" schemaName="bdgas_requestintake" />
+    <AppModuleComponent type="1" schemaName="bdgas_requestintakeapplication" />
+    <AppModuleComponent type="1" schemaName="bdgas_resourceallocation" />
+    <AppModuleComponent type="1" schemaName="bdgas_rpabpf" />
+    <AppModuleComponent type="1" schemaName="bdgas_serviceprovider" />
+    <AppModuleComponent type="1" schemaName="bdgas_vendor" />
+    <AppModuleComponent type="1" schemaName="systemuser" />
+    <AppModuleComponent type="1" schemaName="task" />
+    <AppModuleComponent type="1" schemaName="team" />
+    <AppModuleComponent type="1" schemaName="template" />
+    <AppModuleComponent type="62" schemaName="bdgas_IntelligentProcessAutomation" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Intelligent Process Automation" languagecode="1033" />
+  </LocalizedNames>
+  <appelements>
+    <appelement uniquename="bdgas_bdgas_IntelligentProcessAutomation_canvasappid_bdgas_intelligentprocessautomationdefaultcommandlibrary_fd3f6">
+      <canvasappid>
+        <name>bdgas_intelligentprocessautomationdefaultcommandlibrary_fd3f6</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>bdgas_bdgas_IntelligentProcessAutomation_canvasappid_bdgas_intelligentprocessautomationdefaultcommandlibrary_fd3f6</name>
+    </appelement>
+  </appelements>
+  <appsettings>
+    <appsetting settingdefinitionid.uniquename="AppChannel">
+      <iscustomizable>1</iscustomizable>
+      <value>1</value>
+    </appsetting>
+    <appsetting settingdefinitionid.uniquename="AsyncOnSave">
+      <iscustomizable>1</iscustomizable>
+      <value>true</value>
+    </appsetting>
+    <appsetting settingdefinitionid.uniquename="FormFillBarUXEnabled">
+      <iscustomizable>1</iscustomizable>
+      <value>2</value>
+    </appsetting>
+  </appsettings>
+</AppModule>

@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{a520d5b3-a590-f111-8077-7c1e527d2a28}" Name="RPA Lifecycle" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <XamlFileName>/Workflows/RPALifecycle-A520D5B3-A590-F111-8077-7C1E527D2A28.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>4</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>1</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <processorder>1</processorder>
+  <RunAs>1</RunAs>
+  <UniqueName>bdgas_rpabpf</UniqueName>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ProcessTriggerScope>1</ProcessTriggerScope>
+  <ModernFlowType>0</ModernFlowType>
+  <PrimaryEntity>bdgas_requestintake</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="RPA Lifecycle" />
+  </LocalizedNames>
+  <labels>
+    <steplabels id="{20e49eb3-d7f5-4a4e-bbe2-104036841f90}">
+      <label languagecode="1033" description="In Queue" />
+    </steplabels>
+    <steplabels id="{99007e9a-b9b5-4c23-838c-1270c10d2959}">
+      <label languagecode="1033" description="Name" />
+    </steplabels>
+    <steplabels id="{365de4c7-b6b7-4c40-8d46-5faf20e7392d}">
+      <label languagecode="1033" description="Description" />
+    </steplabels>
+    <steplabels id="{a9615c5a-0ec3-4a52-b198-3eb5cbda5e8e}">
+      <label languagecode="1033" description="BOT Owner" />
+    </steplabels>
+    <steplabels id="{500555b6-8ff0-49f5-a888-8fa14b44d821}">
+      <label languagecode="1033" description="BOT VP" />
+    </steplabels>
+    <steplabels id="{8ddb2ee8-8ae1-4d44-ac8c-d4e0b216d536}">
+      <label languagecode="1033" description="Assignee (BA)" />
+    </steplabels>
+    <steplabels id="{9b229ac6-52f9-4ccf-9c67-0d76edd0cff4}">
+      <label languagecode="1033" description="Concept Approval" />
+    </steplabels>
+    <steplabels id="{1769badd-943a-45c1-ba75-5e2d50a16227}">
+      <label languagecode="1033" description="Automation Charter Completed &amp; Attached" />
+    </steplabels>
+    <steplabels id="{d338d6c8-1762-4b16-9fb1-b763d65dadaf}">
+      <label languagecode="1033" description="Manual Estimate Reviewed By" />
+    </steplabels>
+    <steplabels id="{cec3cb83-ff32-4563-80db-88520666aaab}">
+      <label languagecode="1033" description="Development Size" />
+    </steplabels>
+    <steplabels id="{5f37b8a6-dea1-4144-a3d3-1f3d51869481}">
+      <label languagecode="1033" description="Configuration Item Link" />
+    </steplabels>
+    <steplabels id="{e3669e0e-3057-49c1-ab3f-29eb19317b6e}">
+      <label languagecode="1033" description="Estimated Hours" />
+    </steplabels>
+    <steplabels id="{3bc694f9-c0c0-4e27-bf82-319794ef674c}">
+      <label languagecode="1033" description="Solution Design" />
+    </steplabels>
+    <steplabels id="{d24d5594-ad5e-4f19-bb13-d0b182e2b44a}">
+      <label languagecode="1033" description="Lead Developer" />
+    </steplabels>
+    <steplabels id="{0386568f-540c-4f7d-903a-d0951ba0296f}">
+      <label languagecode="1033" description="Change Ticket #" />
+    </steplabels>
+    <steplabels id="{0054efe0-9298-4d97-bb07-7722d4d88bfe}">
+      <label languagecode="1033" description="ARDS Signoff Received &amp; Attached" />
+    </steplabels>
+    <steplabels id="{4ac66929-9575-4e5d-b48a-280ef6e23e2b}">
+      <label languagecode="1033" description="Automation URS Received &amp; Attached" />
+    </steplabels>
+    <steplabels id="{c67a308d-a3a4-4f60-9bf3-02936c0cd870}">
+      <label languagecode="1033" description="DEV" />
+    </steplabels>
+    <steplabels id="{7e989ce9-76d5-4b11-842a-ba7c7f9e5027}">
+      <label languagecode="1033" description="Development Start Date" />
+    </steplabels>
+    <steplabels id="{fa3cdd6a-b584-4c44-b4ab-2597ad143367}">
+      <label languagecode="1033" description="Final Code Review Date" />
+    </steplabels>
+    <steplabels id="{1ef4ae85-e7f5-4e67-8ea7-c2acf37cb8b5}">
+      <label languagecode="1033" description="Final Code Review Performed By" />
+    </steplabels>
+    <steplabels id="{216e41d1-cb10-4555-9061-5c3084d365b1}">
+      <label languagecode="1033" description="QA" />
+    </steplabels>
+    <steplabels id="{6de9e498-0a69-4ceb-91f0-a1d03b1a4496}">
+      <label languagecode="1033" description="CSV-Computer Validation Form Status" />
+    </steplabels>
+    <steplabels id="{461f3941-0f44-45e5-9824-a5ec711ec68b}">
+      <label languagecode="1033" description="UAT Complete Date" />
+    </steplabels>
+    <steplabels id="{007a2005-3ecc-467a-8d85-7f6dbc7bc9aa}">
+      <label languagecode="1033" description="BOT Business Criticality" />
+    </steplabels>
+    <steplabels id="{308935ac-6c1c-47af-afff-a2f6a9c03485}">
+      <label languagecode="1033" description="Schedule or Trigger" />
+    </steplabels>
+    <steplabels id="{8c9b16ce-282c-4010-bf09-8dfdeed1e150}">
+      <label languagecode="1033" description="FIM Managed SG" />
+    </steplabels>
+    <steplabels id="{000fc56d-1811-4736-8fad-a23df438dd23}">
+      <label languagecode="1033" description="Trigger Path" />
+    </steplabels>
+    <steplabels id="{9a3cf365-ef59-4916-b75d-c312fb8933b1}">
+      <label languagecode="1033" description="PROD Link" />
+    </steplabels>
+    <steplabels id="{748e2077-fd7e-4373-bd3f-46be0af6bc0f}">
+      <label languagecode="1033" description="Schedule Notes" />
+    </steplabels>
+    <steplabels id="{65f578ec-d731-4299-a210-86f51454aae5}">
+      <label languagecode="1033" description="AMO Lead" />
+    </steplabels>
+    <steplabels id="{25359aef-8ff3-4a4a-9e9f-6a0ebd5b5ee9}">
+      <label languagecode="1033" description="AMO Support Team" />
+    </steplabels>
+    <steplabels id="{9c6ca60c-e86a-4e6b-9b25-5001d0df3a44}">
+      <label languagecode="1033" description="Ready For Sprint Prod Move" />
+    </steplabels>
+    <steplabels id="{9237081d-0270-43af-a140-3552dee6357f}">
+      <label languagecode="1033" description="PROD Code Release Date" />
+    </steplabels>
+    <steplabels id="{35a76644-40da-48ae-af3e-e95ac1a3ed41}">
+      <label languagecode="1033" description="PROD Link" />
+    </steplabels>
+    <steplabels id="{a8338684-4ae0-4d70-9883-c38ef4e3150e}">
+      <label languagecode="1033" description="BOT is in HyperCare?" />
+    </steplabels>
+    <steplabels id="{12fbac4a-b21d-46ce-8cde-4296982b61f4}">
+      <label languagecode="1033" description="Hypercare exit Date" />
+    </steplabels>
+    <steplabels id="{2bc53733-aad8-4382-9054-72da19398c90}">
+      <label languagecode="1033" description="Hypercare" />
+    </steplabels>
+    <steplabels id="{b64b27b2-4a8e-4561-9352-1f46a373e7b0}">
+      <label languagecode="1033" description="KT to AMO" />
+    </steplabels>
+    <steplabels id="{65bac032-1d40-41d3-910d-eeb3770e2c76}">
+      <label languagecode="1033" description="KT Approval Date" />
+    </steplabels>
+    <steplabels id="{f2170979-8ecb-4e66-bcc7-e6057e45f222}">
+      <label languagecode="1033" description="Prod" />
+    </steplabels>
+    <steplabels id="{f1617c3f-7ece-4f86-b03b-074ec0996acb}">
+      <label languagecode="1033" description="BOT Business Criticality" />
+    </steplabels>
+    <steplabels id="{c77321d7-0e44-4854-a046-62b25d2d8337}">
+      <label languagecode="1033" description="Schedule or Trigger" />
+    </steplabels>
+    <steplabels id="{fdfaee58-a995-49d4-92e7-b06029ed39f4}">
+      <label languagecode="1033" description="FIM Managed SG" />
+    </steplabels>
+    <steplabels id="{4f303a7a-1973-438a-a338-9fe99ffc010a}">
+      <label languagecode="1033" description="Trigger Path" />
+    </steplabels>
+    <steplabels id="{f3e9055e-9a2a-4ff8-a702-1bff06ee71f2}">
+      <label languagecode="1033" description="PROD Link" />
+    </steplabels>
+    <steplabels id="{cfae0e37-a0f0-4e6b-b87e-698b37624ec7}">
+      <label languagecode="1033" description="Schedule Notes" />
+    </steplabels>
+    <steplabels id="{f1b64f1d-a6cb-4345-a0c9-22b26978fbfd}">
+      <label languagecode="1033" description="PROD Code Release Date" />
+    </steplabels>
+    <steplabels id="{5d51709e-0c81-4a0d-ac3b-92aad0b483a7}">
+      <label languagecode="1033" description="BOT is in HyperCare?" />
+    </steplabels>
+    <steplabels id="{e172da53-8b05-4242-af7c-cd94358ef0bb}">
+      <label languagecode="1033" description="Hypercare exit Date" />
+    </steplabels>
+  </labels>
+</Workflow>

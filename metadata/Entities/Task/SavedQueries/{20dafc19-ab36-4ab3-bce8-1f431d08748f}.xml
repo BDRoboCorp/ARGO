@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{20dafc19-ab36-4ab3-bce8-1f431d08748f}</savedqueryid>
+    <queryapi></queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" preview="0" icon="1">
+        <row name="result" id="activityid">
+          <cell name="bdgas_appointment" width="145" />
+          <cell name="subject" width="250" />
+          <cell name="scheduledend" width="100" />
+          <cell name="prioritycode" width="100" />
+          <cell name="ownerid" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>64</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="task">
+          <attribute name="subject" />
+          <attribute name="scheduledend" />
+          <attribute name="prioritycode" />
+          <attribute name="bdgas_appointment" />
+          <attribute name="ownerid" />
+          <order attribute="scheduledend" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Task Lookup View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

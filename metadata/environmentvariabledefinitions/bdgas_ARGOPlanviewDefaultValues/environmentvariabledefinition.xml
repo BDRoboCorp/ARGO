@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOPlanviewDefaultValues">
+  <defaultvalue>{ 	"BusinessValueScoreId": "ee50e8cc-67aa-f111-aaab-6045bded11bb",     "ReusabilityScoreId": "61b14436-68aa-f111-aaab-6045bded11bb",     "ValueRealizationScoreId": "41ab41d1-6caa-f111-aaac-7ced8d23115e",     "BusinessCapabilityStatusId": "dbde78e7-6daa-f111-aaac-7ced8d23115e",     "OutOfScope": "N/A",     "BenefitTypeId": "8551f148-96aa-f111-aaac-7c1e527d2a28",     "BDStrategyAlignmentId": "869c526b-95aa-f111-aaac-7c1e527d2a28",     "RoadmapAlignmentId": "8fce489b-95aa-f111-aaac-7c1e527d2a28" }</defaultvalue>
+  <displayname default="ARGO Planview Default Values">
+    <label description="ARGO Planview Default Values" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

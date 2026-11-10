@@ -1,0 +1,291 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-2": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_31dae"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "bdgas_projectmilestoneapprover",
+              "subscriptionRequest/scope": 4
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "06edcee5-65e0-40d3-b8f9-883cb66b2130"
+          }
+        }
+      },
+      "actions": {
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-2"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Project Milestone Approval] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Scope_-_Try": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          }
+        },
+        "Scope_-_Try": {
+          "type": "Scope",
+          "actions": {
+            "Get_Project_Milestone": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_projectmilestones",
+                  "recordId": "@triggerOutputs()?['body/_bdgas_projectmilestoneid_value']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "b7418110-9e6f-4922-ae7c-cbed0e4645d3"
+              }
+            },
+            "Compose_-_Status_Reason": {
+              "type": "Compose",
+              "inputs": "@triggerOutputs()?['body/statuscode']",
+              "runAfter": {
+                "Get_Project_Milestone": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "dfedb78b-8a59-4130-aeb3-74eeffe47bee"
+              }
+            },
+            "Get_user_email": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "systemusers",
+                  "recordId": "@outputs('Get_Project_Milestone')?['body/_bdgas_assigneduserid_value']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Compose_-_Status_Reason": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Condition_falls_In_Queue": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@triggerOutputs()?['body/statuscode']",
+                      1
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Terminate": {
+                  "type": "Terminate",
+                  "inputs": {
+                    "runStatus": "Failed"
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Condition_=_Approved_Or_Rejected": {
+                    "type": "If",
+                    "expression": {
+                      "and": [
+                        {
+                          "equals": [
+                            "@triggerOutputs()?['body/statuscode']",
+                            2
+                          ]
+                        }
+                      ]
+                    },
+                    "actions": {
+                      "Approval_Success": {
+                        "type": "Workflow",
+                        "inputs": {
+                          "host": {
+                            "workflowReferenceName": "20d1c063-a69a-f111-b8dc-7ced8d23115e"
+                          },
+                          "body": {
+                            "text": "<fetch xmlns:generator='MarkMpn.SQL4CDS'>\n<entity name='bdgas_projectmilestoneapprover'>\n<attribute name='bdgas_approverno' />\n<attribute name='bdgas_projectmilestoneid' />\n<attribute name='bdgas_projectmilestoneapproverid' />\n<attribute name='statuscode' />\n<link-entity name='systemuser' to='ownerid' from='systemuserid' alias='systemuser' link-type='inner'>\n<attribute name='fullname' />\n</link-entity>\n<link-entity name='bdgas_projectmilestone' from= 'bdgas_projectmilestoneid' to='bdgas_projectmilestoneid' alias='pm' link-type='inner'>\n<attribute name='bdgas_number' />\n<attribute name='bdgas_requestintakeid' />\n<attribute name='bdgas_milestonetypeid'/>\n\n<link-entity name='bdgas_requestintake' from= 'bdgas_requestintakeid' to='bdgas_requestintakeid' alias='pc' link-type='inner'>\n<attribute name='bdgas_digitalproductname' />\n<attribute name='bdgas_requestintake' />\n</link-entity>\n</link-entity>\n<filter>\n<condition attribute='bdgas_projectmilestoneapproverid' operator='eq' value='@{triggerOutputs()?['body/bdgas_projectmilestoneapproverid']}' />\n</filter>\n</entity>\n</fetch>",
+                            "text_1": "Project Milestone approver - Approved/Rejected",
+                            "boolean": false,
+                            "boolean_1": true,
+                            "boolean_2": true,
+                            "text_2": "@outputs('Get_user_email')?['body/internalemailaddress']"
+                          }
+                        }
+                      }
+                    },
+                    "else": {
+                      "actions": {
+                        "Approval_Failed": {
+                          "type": "Workflow",
+                          "inputs": {
+                            "host": {
+                              "workflowReferenceName": "20d1c063-a69a-f111-b8dc-7ced8d23115e"
+                            },
+                            "body": {
+                              "text": "<fetch xmlns:generator='MarkMpn.SQL4CDS'>\n<entity name='bdgas_projectmilestoneapprover'>\n<attribute name='bdgas_approverno' />\n<attribute name='bdgas_projectmilestoneid' />\n<attribute name='bdgas_projectmilestoneapproverid' />\n<attribute name='statuscode' />\n<link-entity name='systemuser' to='ownerid' from='systemuserid' alias='systemuser' link-type='inner'>\n<attribute name='fullname' />\n</link-entity>\n<link-entity name='bdgas_projectmilestone' from= 'bdgas_projectmilestoneid' to='bdgas_projectmilestoneid' alias='pm' link-type='inner'>\n<attribute name='bdgas_number' />\n<attribute name='bdgas_requestintakeid' />\n<attribute name='bdgas_milestonetypeid'/>\n\n<link-entity name='bdgas_requestintake' from= 'bdgas_requestintakeid' to='bdgas_requestintakeid' alias='pc' link-type='inner'>\n<attribute name='bdgas_digitalproductname' />\n<attribute name='bdgas_requestintake' />\n</link-entity>\n</link-entity>\n<filter>\n<condition attribute='bdgas_projectmilestoneapproverid' operator='eq' value='@{triggerOutputs()?['body/bdgas_projectmilestoneapproverid']}' />\n</filter>\n</entity>\n</fetch>",
+                              "text_1": "Project Milestone approver - Approved/Rejected",
+                              "boolean": false,
+                              "boolean_1": true,
+                              "boolean_2": true,
+                              "text_2": "@outputs('Get_user_email')?['body/internalemailaddress']"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Get_user_email": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {}
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

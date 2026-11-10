@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_BDIntelligenceConfiguration">
+  <defaultvalue>{ 	"BDIntelligenceSharePointURL": "https://bd1.sharepoint.com/sites/BDIntelligence280", 	"BDIntelligenceFilePath": "/Shared Documents/General/Power Automate Apps/BD Intelligence Product Data - Updated 1.xlsx", 	"BDIntelligenceTableName": "tableAutomation" }</defaultvalue>
+  <displayname default="BD Intelligence Configuration">
+    <label description="BD Intelligence Configuration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

@@ -1,0 +1,585 @@
+var BudgetRequest = BudgetRequest || {};
+
+BudgetRequest.FIELD_PERMISSION_CONFIG_NAME =
+    "ARGO Fields Permission";
+
+// Initializes the Budget Request form, registers events, sets field behavior,
+// and applies configured field access permissions.
+BudgetRequest.onLoad = async function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    BudgetRequest.registerEvents(formContext);
+    // BudgetRequest.setFeeReadOnly(formContext);
+    // BudgetRequest.setRecurringFlag(executionContext);
+    // BudgetRequest.calculateFee(executionContext);
+
+    // var isRecurringAttr = formContext.getAttribute("bdgas_isrecurring");
+    // if (isRecurringAttr) {
+    //     isRecurringAttr.addOnChange(BudgetRequest.calculateFee);
+    //     isRecurringAttr.addOnChange(BudgetRequest.setNextChargebackDate);
+    // }
+
+    var chargebackDateAttr = formContext.getAttribute("bdgas_datechargeback");
+    if (chargebackDateAttr) {
+        chargebackDateAttr.removeOnChange(BudgetRequest.setNextChargebackDate);
+        chargebackDateAttr.addOnChange(BudgetRequest.setNextChargebackDate);
+    }
+
+    //BudgetRequest.setNextChargebackDate(executionContext);
+
+    BudgetRequest.setNextChargebackDateRequirement(executionContext, false);
+
+    BudgetRequest.setDevelopmentEffortVisibility(executionContext);
+
+    await BudgetRequest.applyConfiguredFieldAccess(
+        formContext
+    );
+};
+
+// Registers OnChange events for Budget Request fields to trigger
+// fee calculation, recurring logic, date handling, visibility, and permissions.
+BudgetRequest.registerEvents = function (formContext) {
+
+    var applicationAttr = formContext.getAttribute("bdgas_applicationid");
+    if (applicationAttr) {
+        applicationAttr.addOnChange(BudgetRequest.calculateFee);
+    }
+
+    var developmentEffortAttr = formContext.getAttribute("bdgas_developmenteffort");
+    if (developmentEffortAttr) {
+        developmentEffortAttr.addOnChange(BudgetRequest.calculateFee);
+    }
+
+    var isRecurringAttr = formContext.getAttribute("bdgas_isrecurring");
+    if (isRecurringAttr) {
+        isRecurringAttr.removeOnChange(
+            BudgetRequest.handleRecurringChange
+        );
+
+        isRecurringAttr.addOnChange(
+            BudgetRequest.handleRecurringChange
+        );
+    }
+
+    var chargebackTypeAttr = formContext.getAttribute("bdgas_chargebacktype");
+    if (chargebackTypeAttr) {
+        chargebackTypeAttr.addOnChange(BudgetRequest.setRecurringFlag);
+        chargebackTypeAttr.addOnChange(BudgetRequest.setDevelopmentEffortVisibility);
+        chargebackTypeAttr.addOnChange(BudgetRequest.calculateFee);
+    }
+
+    var requestIntakeAttr = formContext.getAttribute("bdgas_requestintakeid");
+    if (requestIntakeAttr) {
+        requestIntakeAttr.removeOnChange(
+            BudgetRequest.onRequestIntakeChange
+        );
+        requestIntakeAttr.addOnChange(
+            BudgetRequest.onRequestIntakeChange
+        );
+    }
+};
+
+// Reapplies configured field access permissions when the Request Intake changes.
+BudgetRequest.onRequestIntakeChange = async function (executionContext) {
+    await BudgetRequest.applyConfiguredFieldAccess(
+        executionContext.getFormContext()
+    );
+};
+
+// Retrieves and parses the ARGO Fields Permission configuration
+// from the ARGO Config table.
+BudgetRequest.getFieldPermissionConfig = async function () {
+    var escapedConfigName =
+        BudgetRequest.FIELD_PERMISSION_CONFIG_NAME
+            .replace(/'/g, "''");
+
+    var query =
+        "?$select=bdgas_value" +
+        "&$filter=bdgas_name eq '" +
+        escapedConfigName +
+        "'&$top=1";
+
+    var result = await Xrm.WebApi.retrieveMultipleRecords(
+        "bdgas_argoconfig",
+        query
+    );
+
+    if (
+        !result.entities ||
+        result.entities.length === 0 ||
+        !result.entities[0].bdgas_value
+    ) {
+        return null;
+    }
+
+    return JSON.parse(
+        result.entities[0].bdgas_value
+    );
+};
+
+// Retrieves the team IDs associated with the current logged-in user.
+BudgetRequest.getCurrentUserTeamIds = async function () {
+    var userId =
+        Xrm.Utility.getGlobalContext()
+            .userSettings.userId
+            .replace(/[{}]/g, "");
+
+    var result = await Xrm.WebApi.retrieveRecord(
+        "systemuser",
+        userId,
+        "?$select=systemuserid" +
+        "&$expand=teammembership_association" +
+        "($select=teamid)"
+    );
+
+    return (
+        result.teammembership_association || []
+    ).map(function (team) {
+        return String(team.teamid || "")
+            .replace(/[{}]/g, "")
+            .toLowerCase();
+    });
+};
+
+// Retrieves the Project Type from the selected Request Intake record.
+BudgetRequest.getProjectType = async function (formContext) {
+    var requestIntakeAttr =
+        formContext.getAttribute(
+            "bdgas_requestintakeid"
+        );
+
+    var requestIntakeValue =
+        requestIntakeAttr
+            ? requestIntakeAttr.getValue()
+            : null;
+
+    if (!requestIntakeValue || requestIntakeValue.length === 0) {
+        return null;
+    }
+
+    var requestIntakeId =
+        requestIntakeValue[0].id
+            .replace(/[{}]/g, "");
+
+    var requestIntake = await Xrm.WebApi.retrieveRecord(
+        "bdgas_requestintake",
+        requestIntakeId,
+        "?$select=bdgas_requestintaketype"
+    );
+
+    return requestIntake.bdgas_requestintaketype;
+};
+
+// Enables or disables configured Budget Request fields based on
+// the user's team membership and the selected project's type.
+BudgetRequest.applyConfiguredFieldAccess = async function (formContext) {
+    try {
+        var results = await Promise.all([
+            BudgetRequest.getFieldPermissionConfig(),
+            BudgetRequest.getCurrentUserTeamIds(),
+            BudgetRequest.getProjectType(formContext)
+        ]);
+
+        var config = results[0];
+        var currentUserTeamIds = results[1];
+        var projectType = results[2];
+
+        if (!config) {
+            console.warn(
+                "ARGO Fields Permission config was not found."
+            );
+            return;
+        }
+
+        var entityName =
+            formContext.data.entity
+                .getEntityName()
+                .toLowerCase();
+
+        var allFieldsEntry =
+            (config.AllFields || [])
+                .find(function (entry) {
+                    return String(entry.Entity || "")
+                        .toLowerCase() === entityName;
+                });
+
+        if (!allFieldsEntry) {
+            console.warn(
+                "No ARGO field configuration found for " +
+                entityName + "."
+            );
+            return;
+        }
+
+        var supportedFields = {};
+
+        (config.Teams || []).forEach(function (team) {
+            var teamId = String(team.TeamId || "")
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+            if (
+                currentUserTeamIds.indexOf(teamId) === -1 ||
+                (team.ProjectTypes || [])
+                    .map(String)
+                    .indexOf(String(projectType)) === -1
+            ) {
+                return;
+            }
+
+            var entityEntry =
+                (team.Entities || [])
+                    .find(function (entry) {
+                        return String(entry.Entity || "")
+                            .toLowerCase() === entityName;
+                    });
+
+            if (!entityEntry) {
+                return;
+            }
+
+            (entityEntry.SupportedFields || [])
+                .forEach(function (fieldName) {
+                    supportedFields[fieldName] = true;
+                });
+        });
+
+        (allFieldsEntry.Fields || [])
+            .forEach(function (fieldName) {
+                var attribute =
+                    formContext.getAttribute(fieldName);
+
+                if (!attribute) {
+                    return;
+                }
+
+                attribute.controls.forEach(
+                    function (control) {
+                        control.setDisabled(
+                            !supportedFields[fieldName]
+                        );
+                    }
+                );
+            });
+    }
+    catch (error) {
+        console.error(
+            "Unable to apply ARGO field permissions.",
+            error
+        );
+    }
+};
+
+/*BudgetRequest.setFeeReadOnly = function (formContext) {
+    var feeControl = formContext.getControl("bdgas_fee");
+    if (feeControl) {
+        feeControl.setDisabled(true);
+    }
+
+    var feeAttr = formContext.getAttribute("bdgas_fee");
+    if (feeAttr) {
+        feeAttr.setSubmitMode("always");
+    }
+};*/
+
+// Automatically sets the Recurring flag based on the selected Chargeback Type.
+BudgetRequest.setRecurringFlag = function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var chargebackTypeAttr = formContext.getAttribute("bdgas_chargebacktype");
+    var isRecurringAttr = formContext.getAttribute("bdgas_isrecurring");
+
+    if (!chargebackTypeAttr || !isRecurringAttr) {
+        return;
+    }
+
+    var chargebackType = chargebackTypeAttr.getValue();
+
+    // Default = No
+    var isRecurring = false;
+
+    switch (chargebackType) {
+        case 100000000: // Operations
+        case 100000001: // Environment
+        case 100000002: // License
+            isRecurring = true;
+            break;
+
+        case 100000003: // Development
+        default:
+            isRecurring = false;
+            break;
+    }
+
+    if (isRecurringAttr.getValue() != isRecurring) {
+        isRecurringAttr.setValue(isRecurring);
+        isRecurringAttr.fireOnChange();
+    }
+};
+
+// Calculates the Next Chargeback Date as one year after the Chargeback Date
+// when the Budget Request is recurring.
+BudgetRequest.setNextChargebackDate = function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var chargebackDate = formContext.getAttribute("bdgas_datechargeback");
+    var nextChargebackDate = formContext.getAttribute("bdgas_nextchargebackdate");
+    var isRecurring = formContext.getAttribute("bdgas_isrecurring");
+
+    if (!chargebackDate || !nextChargebackDate || !isRecurring) {
+        return;
+    }
+
+    //If not recurring, clear Next Chargeback Date
+    if (isRecurring.getValue() !== true) {
+        nextChargebackDate.setValue(null);
+        return;
+    }
+
+    var dateValue = chargebackDate.getValue();
+
+    if (dateValue) {
+        var nextDate = new Date(dateValue);
+        nextDate.setFullYear(nextDate.getFullYear() + 1);
+
+        nextChargebackDate.setValue(nextDate);
+    } else {
+        nextChargebackDate.setValue(null);
+    }
+};
+
+// Shows and makes Next Chargeback Date mandatory for recurring requests,
+// otherwise hides, clears, and makes the field optional.
+BudgetRequest.setNextChargebackDateRequirement = function (
+    executionContext,
+    allowValueChange
+) {
+    var formContext = executionContext.getFormContext();
+
+    var isRecurringAttr =
+        formContext.getAttribute("bdgas_isrecurring");
+
+    var nextChargebackDateAttr =
+        formContext.getAttribute("bdgas_nextchargebackdate");
+
+    var nextChargebackDateCtrl =
+        formContext.getControl("bdgas_nextchargebackdate");
+
+    if (
+        !isRecurringAttr ||
+        !nextChargebackDateAttr ||
+        !nextChargebackDateCtrl
+    ) {
+        return;
+    }
+
+    var isRecurring = isRecurringAttr.getValue() === true;
+
+    if (isRecurring) {
+        nextChargebackDateAttr.setRequiredLevel("required");
+        nextChargebackDateCtrl.setVisible(true);
+    } else {
+        nextChargebackDateAttr.setRequiredLevel("none");
+        nextChargebackDateCtrl.setVisible(false);
+
+        // Only clear it after a user-triggered field change.
+        // Never clear it during OnLoad.
+        if (
+            allowValueChange === true &&
+            nextChargebackDateAttr.getValue() !== null
+        ) {
+            nextChargebackDateAttr.setValue(null);
+        }
+    }
+};
+
+// Controls Development Effort field visibility based on the selected Chargeback Type.
+BudgetRequest.setDevelopmentEffortVisibility = function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var chargebackType = formContext.getAttribute("bdgas_chargebacktype");
+    var developmentEffortCtrl = formContext.getControl("bdgas_developmenteffort");
+
+    if (!chargebackType || !developmentEffortCtrl) {
+        return;
+    }
+
+    var value = chargebackType.getValue();
+
+    if (
+        value === 100000000 || // Operations
+        value === 100000001 || // Environment
+        value === 100000002    // License
+    ) {
+        developmentEffortCtrl.setVisible(false);
+    } else {
+        developmentEffortCtrl.setVisible(true);
+    }
+};
+
+// Calculates the Budget Request fee by retrieving the matching Product Pricing
+// record based on Application, Chargeback Type, and Development Effort.
+BudgetRequest.calculateFee = async function (executionContext) {
+
+    var formContext = executionContext.getFormContext();
+
+    try {
+
+        var applicationAttr = formContext.getAttribute("bdgas_applicationid");
+        var developmentEffortAttr = formContext.getAttribute("bdgas_developmenteffort");
+        var isRecurringAttr = formContext.getAttribute("bdgas_isrecurring");
+        var feeAttr = formContext.getAttribute("bdgas_fee");
+        var chargebackTypeAttr = formContext.getAttribute("bdgas_chargebacktype");
+
+        if (!applicationAttr || /*!developmentEffortAttr || !isRecurringAttr*/ !chargebackTypeAttr || !feeAttr) {
+            return;
+        }
+
+        var application = applicationAttr.getValue();
+        var developmentEffort = developmentEffortAttr.getValue();
+        //var isRecurring = isRecurringAttr.getValue();
+        var chargebackType = chargebackTypeAttr.getValue();
+
+        console.log("Application:", application);
+        console.log("Development Effort:", developmentEffort);
+        console.log("Chargeback Type:", chargebackType);
+        console.log("Development Effort Raw Value:", developmentEffort);
+
+        formContext.ui.clearFormNotification("budget_pricing_not_found");
+
+        if (!application || chargebackType === null) {
+            feeAttr.setValue(null);
+            feeAttr.setSubmitMode("always");
+            return;
+        }
+        
+        if (
+            chargebackType === 100000003 &&
+            developmentEffort === null
+        ) {
+            feeAttr.setValue(null);
+            feeAttr.setSubmitMode("always");
+            return;
+        }
+
+        var appId = application[0].id.replace(/[{}]/g, "");
+
+        if (
+            chargebackType === 100000001 || // Environment
+            chargebackType === 100000002    // License
+        ) {
+            feeAttr.setValue(null);
+            feeAttr.setSubmitMode("always");
+            return;
+        }
+
+        var fetchXml = "";
+
+        if (chargebackType === 100000000) { // Operations
+
+            fetchXml =
+                "<fetch top='1'>" +
+                "<entity name='bdgas_productpricing'>" +
+                "<attribute name='bdgas_operationscost' />" +
+                "<filter type='and'>" +
+                "<condition attribute='bdgas_application' operator='eq' value='" + appId + "' />" +
+                "</filter>" +
+                "</entity>" +
+                "</fetch>";
+        }
+        else if (chargebackType === 100000003) { // Development
+
+            fetchXml =
+                "<fetch top='1'>" +
+                "<entity name='bdgas_productpricing'>" +
+                "<attribute name='bdgas_developmentcost' />" +
+                "<attribute name='bdgas_operationscost' />" +
+                "<filter type='and'>" +
+                "<condition attribute='bdgas_application' operator='eq' value='" + appId + "' />" +
+                "<condition attribute='bdgas_developmenteffort' operator='eq' value='" + developmentEffort + "' />" +
+                "</filter>" +
+                "</entity>" +
+                "</fetch>";
+        }
+
+        console.log("Chargeback Type:", chargebackType);
+        console.log("App Id:", appId);
+        console.log("FetchXml:", fetchXml);
+
+        var result = await Xrm.WebApi.retrieveMultipleRecords(
+            "bdgas_productpricing",
+            "?fetchXml=" + encodeURIComponent(fetchXml)
+        );
+        
+        console.log("Result:", result);
+
+        if (!result || result.entities.length === 0) {
+
+            feeAttr.setValue(null);
+            feeAttr.setSubmitMode("always");
+
+            formContext.ui.setFormNotification(
+                "No Product Pricing record found for selected Application and Development Effort.",
+                "WARNING",
+                "budget_pricing_not_found"
+            );
+
+            return;
+        }
+
+        var pricing = result.entities[0];
+
+        var fee = null;
+
+        switch (chargebackType) {
+            case 100000000: // Operations
+                fee = pricing.bdgas_operationscost;
+                break;
+
+            case 100000003: // Development
+                fee = pricing.bdgas_developmentcost;
+                break;
+
+            case 100000001: // Environment
+            case 100000002: // License
+                fee = null;
+                break;
+        }
+
+        if (fee === null || fee === undefined) {
+
+            feeAttr.setValue(null);
+            feeAttr.setSubmitMode("always");
+
+            formContext.ui.setFormNotification(
+                "Product Pricing record found, but the required cost value is empty.",
+                "WARNING",
+                "budget_pricing_not_found"
+            );
+
+            return;
+        }
+
+        feeAttr.setValue(fee);
+        feeAttr.setSubmitMode("always");
+
+    }
+    catch (e) {
+
+        console.error("BudgetRequest.calculateFee Error:", e);
+
+        Xrm.Navigation.openErrorDialog({
+            message: "An error occurred while calculating the Budget Request fee. " + e.message
+        });
+    }
+};
+
+BudgetRequest.handleRecurringChange = function (executionContext) {
+    BudgetRequest.calculateFee(executionContext);
+    BudgetRequest.setNextChargebackDate(executionContext);
+
+    BudgetRequest.setNextChargebackDateRequirement(
+        executionContext,
+        true
+    );
+};

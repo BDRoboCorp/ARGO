@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{df17ce7c-35d6-4aa1-80b4-b56d86bb4d52}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{53C43F49-BAED-447C-9463-24728C62CC88}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{9EDAECDB-8FEC-4220-82DC-99923AB59C41}" name="General" columns="11">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{460F8BF2-9CCE-4189-B844-3AA8831AC689}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                      <cell locklevel="0" id="{112ff9c7-5bb2-45ad-b5b2-00313bf5f76d}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b43e5167-367c-4acf-af6c-bdc0f5cbf407}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Service Provider" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_serviceprovider" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_serviceprovider" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{29f83605-b537-4070-9684-65e66d5d49f0}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d3663625-f571-4cf5-9792-9df7cb43c656}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is Legacy" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_islegacy" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_islegacy" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{f7ec6dfb-d4f8-4156-bc63-440f37d42e7a}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{06ef5b9a-7745-4af4-a5e9-67abfa58a3d5}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{990e5c1b-fc16-4f48-a004-428fb07d9570}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6f87a38d-f006-42a1-8035-96d54684492e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d3f1762d-068a-41cb-bd89-0a7ec7b0c636}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{06833f59-28a6-40e8-88da-cfb72ef1546c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{227c5764-43a7-466a-bcaa-95e3f6127d65}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6725fdea-2e9f-475e-a98b-4768f595c2e8}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{2e6c6e09-9771-4108-ab8c-81125efefbf3}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

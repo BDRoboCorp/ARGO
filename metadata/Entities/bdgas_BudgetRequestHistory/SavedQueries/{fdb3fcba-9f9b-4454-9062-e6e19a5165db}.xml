@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{fdb3fcba-9f9b-4454-9062-e6e19a5165db}</savedqueryid>
+    <layoutxml>
+      <grid name="bdgas_budgetrequesthistories" jump="bdgas_budgetrequesthistory" select="1" icon="1" preview="1">
+        <row name="bdgas_budgetrequesthistory" id="bdgas_budgetrequesthistoryid">
+          <cell name="bdgas_budgetrequesthistory" width="300" />
+          <cell name="bdgas_descriptionbotowner" width="150" />
+          <cell name="bdgas_costcenter" width="150" />
+          <cell name="bdgas_approveddate" width="150" />
+          <cell name="bdgas_fee" width="150" />
+          <cell name="bdgas_projectcenterid" width="121" />
+          <cell name="createdon" width="105" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_budgetrequesthistory">
+          <attribute name="bdgas_budgetrequesthistoryid" />
+          <attribute name="bdgas_budgetrequesthistory" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_costcenter" />
+          <attribute name="bdgas_descriptionbotowner" />
+          <attribute name="bdgas_approveddate" />
+          <attribute name="bdgas_fee" />
+          <attribute name="bdgas_projectcenterid" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Budget Request History Associated View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

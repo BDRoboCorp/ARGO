@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="BD.IPA.Plugins.PreProjectEstimationOnUpdate: Update of bdgas_devestimation" SdkMessageProcessingStepId="{3e5a0fd7-049d-f111-b8dc-000d3a11e677}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeExportKey>DB6D36A9C5F6239597ACFBB34171E3B2D6A9BC441DEAB8E0734FD5292D899E86</PluginTypeExportKey>
+  <PrimaryEntity>bdgas_devestimation</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>BD.IPA.Plugins.PreProjectEstimationOnUpdate: Update of bdgas_devestimation</Description>
+  <FilteringAttributes>bdgas_planenddate,bdgas_planstartdate</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{b171247a-24ce-42f9-9a8b-019164bdf707}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{91dcf662-d527-45ba-8c05-41a4057bb356}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{ce338e05-c0b9-44a9-9b6f-a73cd40a0104}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{ab15fc8b-655e-4ebe-9e13-c7b17f0f44b9}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_milestonetype" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="bdgas_milestonetype" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7fafb392-8a5a-45fd-b4e7-b6db194bbe17}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request Intake Type" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestintaketype" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_requestintaketype" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7fef9eb5-f08b-4c3d-a345-a7c66395f9b4}">
+                        <labels>
+                          <label description="Request Intake Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestintakestatus" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_requestintakestatus" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e54c6659-c597-4589-8af0-18d43b3a1730}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Sequence" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_sequence" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="bdgas_sequence" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e4049863-dedd-4ee3-a63f-bd44b387dae8}">
+                        <labels>
+                          <label description="Is Approval Needed" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isapprovalneeded" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_isapprovalneeded" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ed8246b1-eb3b-4830-adf3-c6b89779b4f4}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Approval Type" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_approvaltype" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_approvaltype" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{657fd04a-3503-4afc-ab29-d52cc20ac799}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Approval Source" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_approvalsource" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_approvalsource" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{83187ac6-ad82-4fd1-ba05-40644fdbdc5f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Send To" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_sendto" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_sendto" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{110ff61e-5fd8-4a84-b0b7-452da89d4673}">
+                        <labels>
+                          <label description="Is File Attachment Needed" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isfileattachmentneeded" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_isfileattachmentneeded" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2278be68-8c10-420f-8a35-1aaa616b342d}">
+                        <labels>
+                          <label description="Is Notification Needed" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isnotificationneeded" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_isnotificationneeded" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4de9983d-8db7-4b18-a345-05a9be79dfd0}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Notification Type" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_notificationtype" classid="{4AA28AB7-9C13-4F57-A73D-AD894D048B5F}" datafieldname="bdgas_notificationtype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{17b44916-f07a-476b-99b3-099c7cae9376}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reminder (Days)" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_reminderdays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="bdgas_reminderdays" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{473136ea-bab4-459d-b561-4dbcb90bd6b1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is Code Review" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_iscodereview" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_iscodereview" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b6e54cb1-31f3-49ed-b9ca-6ee6cf59b2b9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is RPA Special Configuration" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isrpaspecialconfiguration" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_isrpaspecialconfiguration" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d725b1aa-09ad-47a7-ad80-8fe0f2557bdc}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is BOT Credentials" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isbotcredentials" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_isbotcredentials" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8c02c915-7949-48eb-89bc-218de75f6134}" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7a400651-3369-4c37-8349-ddabce458ec7}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{20edb810-3d0a-474a-b24e-4a52e11209cf}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{76c1447f-d779-4531-8c54-38cfc60f2db5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f6bc8efe-b345-4660-8322-41598d25ef13}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{541e6832-647d-48ae-93ea-635e7bf03393}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{9b36e02e-61a1-4fea-bfca-2b96d29e2c6f}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{b2d470f3-45f2-46ff-925a-6dc84da1268b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{52411e97-ec73-4319-9c21-68941ad3d986}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{0340ecf7-903b-4992-94b4-67602194ee5c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="bdgas_MilestoneType" libraryUniqueId="{245cda16-5404-4cf7-8570-62e13e11941a}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="MilestoneType.onLoad" libraryName="bdgas_MilestoneType" handlerUniqueId="{5736ec6c-d90c-42d1-ac13-c622bf0a2e1a}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOMeetingSchedules">
+  <defaultvalue>{     "Timezone": "Eastern Standard Time",     "Subject": "RAM",     "Slots": 8,     "Durations": 20,     "Break": 0,     "Days": 60,     "Settings": [         {             "Day": "Monday",             "StartTime": "09:30"         },         {             "Day": "Tuesday",             "StartTime": "09:30"         },         {             "Day": "Wednesday",             "StartTime": "03:30"         },         {             "Day": "Thursday",             "StartTime": "09:30"         },         {             "Day": "Friday",             "StartTime": "09:30"         }     ] }</defaultvalue>
+  <displayname default="ARGO Meeting Schedules">
+    <label description="ARGO Meeting Schedules" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

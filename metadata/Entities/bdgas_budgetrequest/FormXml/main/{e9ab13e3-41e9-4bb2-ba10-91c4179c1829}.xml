@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{e9ab13e3-41e9-4bb2-ba10-91c4179c1829}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls" shownavigationbar="true" showImage="false" maxWidth="1920">
+      <tabs>
+        <tab verticallayout="true" id="{8FBD800E-73A6-4322-81E9-5F906D10348B}" IsUserDefined="1" visible="true">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{AC37C920-998C-41DE-A28E-9B73308DBA82}" columns="11" name="General">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{c2195a46-b10a-4a10-ba2d-04317446f8dc}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Chargeback Type" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_chargebacktype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_chargebacktype" disabled="false" />
+                      </cell>
+                      <cell id="{b8116cf0-0087-405f-8f6e-4c97ecb68eee}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is Recurring" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isrecurring" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_isrecurring" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{40e660ec-8688-411d-892e-9bfb5c709639}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{7af1c49d-2c37-42e6-8dd6-1405b6b5c698}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Cost Center" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_costcenter" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_costcenter" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6cd481f1-900b-449b-b829-650fc1dbb89d}" locklevel="0" colspan="1" rowspan="1" visible="true">
+                        <labels>
+                          <label description="Application" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_applicationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_applicationid" disabled="false" />
+                      </cell>
+                      <cell id="{2C8BFEFA-E9E7-47A2-95A2-190192EC989A}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Chargeback Comment" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="bdgas_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{29ed7a99-8891-406a-8665-32abf58a6b41}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Development Effort" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmenteffort" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_developmenteffort" disabled="false" />
+                      </cell>
+                      <cell id="{728a9bdc-79ff-4b3f-8566-04b23ba6b671}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Chargeback Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_datechargeback" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_datechargeback" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f7e0ddce-dce3-4303-bc65-684731494a1a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Finance POC" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_financepoc" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_financepoc" disabled="false" />
+                      </cell>
+                      <cell id="{e36e70d6-f459-4a76-83b9-02bfcc888c07}" locklevel="0" colspan="1" rowspan="1" showlabel="true" visible="true">
+                        <labels>
+                          <label description="Next chargeback date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_nextchargebackdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_nextchargebackdate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{03cc3ae1-420f-42b0-ad2f-43829caa5f17}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Fee" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_fee" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="bdgas_fee" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{f07c50b3-4bfa-4424-986e-710bd6b0fce3}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9810D489-A0FE-4271-B464-8B36786AEC9C}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                      <cell locklevel="0" id="{7a8ea340-5c90-4839-91f5-fa17ce1f883c}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{615a2edd-03ba-4ab1-bbfb-a2f3e3f7afee}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{5803e542-ca84-428b-a597-ebc7d70dc925}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{a3554024-cf0e-4916-b8ff-6108ba8cfc47}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{2a89558c-ede9-4829-be36-669934664847}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d467d7b6-4e5d-4313-971d-bce4d0d52f9f}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Request Intake Id" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_requestintakeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_requestintakeid" disabled="false" />
+            </cell>
+            <cell id="{ff06cc11-b977-4024-8ba0-13890cc6e76e}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Status Reason" languagecode="1033" />
+              </labels>
+              <control id="header_statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{b906d4d8-3082-4456-964e-7044fec0d87a}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{86c44261-4e6f-452c-a0cd-820aa4bf9350}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{061fc825-456d-49fd-b491-4c983f083074}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d1d98554-a91f-4fe7-9d95-265520dc5660}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <formLibraries>
+        <Library name="bdgas_BudgetRequest" libraryUniqueId="{a8badfb7-3f2e-448c-ba05-ccf70161ed4f}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="BudgetRequest.onLoad" libraryName="bdgas_BudgetRequest" handlerUniqueId="{a4090e3d-d559-43c3-98da-cae281ecd409}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+      <Navigation>
+        <NavBar />
+        <NavBarAreas>
+          <NavBarArea Id="Info">
+            <Titles>
+              <Title LCID="1033" Text="Common" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Sales">
+            <Titles>
+              <Title LCID="1033" Text="Sales" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Service">
+            <Titles>
+              <Title LCID="1033" Text="Service" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Marketing">
+            <Titles>
+              <Title LCID="1033" Text="Marketing" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="ProcessCenter">
+            <Titles>
+              <Title LCID="1033" Text="Process Sessions" />
+            </Titles>
+          </NavBarArea>
+        </NavBarAreas>
+      </Navigation>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

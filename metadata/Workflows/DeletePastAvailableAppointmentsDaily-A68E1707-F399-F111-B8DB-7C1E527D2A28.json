@@ -1,0 +1,200 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "type": "Recurrence",
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "timeZone": "Central America Standard Time",
+            "startTime": "2026-08-17T16:00:00Z",
+            "schedule": {
+              "hours": [
+                "1"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "dc696eee-f667-4524-99e1-33bda14ed6ad"
+          }
+        }
+      },
+      "actions": {
+        "Scope_-_Try": {
+          "type": "Scope",
+          "actions": {
+            "List_rows_-_SRA_Appointments": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "appointments",
+                  "fetchXml": "<fetch>\n  <entity name='appointment'>\n    <attribute name='activityid' />\n    <filter>\n      <condition attribute='scheduledstart' operator='le' value='@{utcNow()}'/>\n      <condition attribute='bdgas_sratemplate' operator='eq' value='1' />\n <condition attribute='bdgas_slotstatus' operator='in'>\n        <value>0</value>\n        <value>1</value>\n        <value>6</value>\n      </condition>\n    </filter>\n  </entity>\n</fetch>"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "475b38ff-b127-4fd3-abc9-4f5f9ece4886"
+              }
+            },
+            "For_each_-_SRA_Appointment": {
+              "type": "Foreach",
+              "foreach": "@outputs('List_rows_-_SRA_Appointments')?['body/value']",
+              "actions": {
+                "Delete_a_row_-_SRA_Appointment": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "appointments",
+                      "recordId": "@items('For_each_-_SRA_Appointment')?['activityid']"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "operationId": "DeleteRecord",
+                      "connectionName": "shared_commondataserviceforapps"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "39f228fb-6b2c-48ac-9fde-af38270ee632"
+                  }
+                }
+              },
+              "runAfter": {
+                "List_rows_-_SRA_Appointments": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "7b44bd7c-8964-43af-b8f0-b6633e81d038"
+              }
+            }
+          },
+          "runAfter": {}
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Deletion Past Available Appointments Daily] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Scope_-_Try": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,279 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "ARGO Application URL (bdgas_ARGOApplicationURL)": {
+          "defaultValue": "https://org6547479b.crm.dynamics.com/main.aspx?appid=cebc59c4-bf80-f111-ab0f-000d3a11e677&forceUCI=1",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bdgas_ARGOApplicationURL"
+          }
+        },
+        "ARGO notification flows (bdgas_ARGOnotificationflows)": {
+          "defaultValue": {
+            "Recipients": "temmy.raharjo@bd.com;jordan.cheng@bd.com;muhammad.zhafari@bd.com;"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_ARGOnotificationflows"
+          }
+        }
+      },
+      "triggers": {
+        "When_Project_Milestone_row_is_modified": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "bdgas_projectmilestone",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "bdgas_fileattachment",
+              "subscriptionRequest/name": "2fb03e27-e69a-f111-b8dc-000d3a11e677"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "db3f953a-b588-43bd-8eb6-703e747764e6"
+          }
+        }
+      },
+      "actions": {
+        "Try_Scope": {
+          "type": "Scope",
+          "actions": {
+            "Condition_File_Contains_Data": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@triggerBody()",
+                      "bdgas_fileattachment"
+                    ]
+                  }
+                ]
+              },
+              "actions": {},
+              "else": {
+                "actions": {
+                  "Terminate": {
+                    "type": "Terminate",
+                    "inputs": {
+                      "runStatus": "Cancelled"
+                    },
+                    "metadata": {
+                      "operationMetadataId": "79e4d230-10ea-4335-a4c2-04b3050b6111"
+                    }
+                  }
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "d61ffd3c-3e75-4f34-8724-aa29464a2334"
+              }
+            },
+            "Get_Project_Milestone_row_by_ID": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_projectmilestones",
+                  "recordId": "@triggerOutputs()?['body/bdgas_projectmilestoneid']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Condition_File_Contains_Data": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "861c2563-db46-4464-9279-ae25c15cec44"
+              }
+            },
+            "Download_a_file_or_an_image_File_Attachment": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_projectmilestones",
+                  "recordId": "@triggerOutputs()?['body/bdgas_projectmilestoneid']",
+                  "fileImageFieldName": "bdgas_fileattachment"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetEntityFileImageFieldContent",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Get_Project_Milestone_row_by_ID": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f44a818e-8ed6-43db-864b-847285fe8efa"
+              }
+            },
+            "Run_a_Child_Flow": {
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "fbb25a8c-af97-f111-8076-6045bded11bb"
+                },
+                "body": {
+                  "text": "@outputs('Get_Project_Milestone_row_by_ID')?['body/_bdgas_requestintakeid_value']",
+                  "file": {
+                    "name": "@outputs('Get_Project_Milestone_row_by_ID')?['body/bdgas_fileattachment_name']",
+                    "contentBytes": "@base64(body('Download_a_file_or_an_image_File_Attachment'))"
+                  }
+                }
+              },
+              "runAfter": {
+                "Download_a_file_or_an_image_File_Attachment": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2f4a9c50-45b8-49a9-8817-de90e07018dc"
+              }
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "0a73074a-d280-4201-9e6b-66cfe9dc8784"
+          }
+        },
+        "CatchScope": {
+          "type": "Scope",
+          "actions": {
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@body('Parse_JSON')?['Recipients']",
+                  "emailMessage/Subject": "[Upload Project Milestone File Attachment] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br><b><strong class=\"editor-text-bold\">Flow Name:</strong></b> @{outputs('Get_Workflow_Details')?['tags']?['flowDisplayName']}</p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Flow URL:</strong></b> <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a></p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Current Event: </strong></b><a href=\"@{outputs('Record_URL')}\" class=\"editor-link\">View Record</a><br><br>Kindly contact IT Support for further assistance.<br><br><i><b><strong class=\"editor-text-bold editor-text-italic\">Do not reply to this email as it was automatically generated by the system.</strong></b></i><br><br>Thank you,<br>ARGO System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "503d7713-0632-47ae-87e7-eecda3637bbf"
+              }
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "https://make.powerautomate.com/environments/@{outputs('Get_Workflow_Details')?['tags']?['environmentName']}/flows/@{outputs('Get_Workflow_Details')?['name']}/runs/@{outputs('Get_Workflow_Details')?['run']['name']}",
+              "runAfter": {
+                "Get_Workflow_Details": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5dac59e2-9883-49ed-882e-6b8d857bf307"
+              }
+            },
+            "Get_Workflow_Details": {
+              "type": "Compose",
+              "inputs": "@workflow()",
+              "metadata": {
+                "operationMetadataId": "b7f5e576-5cae-4bae-b2b6-2c889e0abe66"
+              }
+            },
+            "Record_URL": {
+              "type": "Compose",
+              "inputs": "@{parameters('ARGO Application URL (bdgas_ARGOApplicationURL)')}&pagetype=entityrecord&etn=bdgas_projectmilestone&id=@{triggerOutputs()?['body/bdgas_projectmilestoneid']}",
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "e831bff2-d815-4134-977f-935d4a1a423e"
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('ARGO notification flows (bdgas_ARGOnotificationflows)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Recipients": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Record_URL": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "e4876d0d-06e3-4c7a-9375-8e672043a21e"
+              }
+            }
+          },
+          "runAfter": {
+            "Try_Scope": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0523e571-68ec-4397-9fb8-b467e2c6089a"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{64655f2c-1bad-f111-aaab-000d3a11e677}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" preview="1" icon="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="186" />
+          <cell name="sortdate" width="100" />
+          <cell name="bdgas_slotnumber" width="112" />
+          <cell name="regardingobjectid" width="100" />
+          <cell name="bdgas_requestname" width="123" />
+          <cell name="instancetypecode" width="100" ishidden="1" />
+          <cell name="bdgas_documentid" width="117" />
+          <cell name="bdgas_documentstatusid" width="137" />
+          <cell name="bdgas_presenter" width="100" />
+          <cell name="bdgas_registrant" width="100" />
+          <cell name="bdgas_businesspartner" width="134" />
+          <cell name="bdgas_validationlead" width="130" />
+          <cell name="bdgas_validationlead2" width="140" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="instancetypecode" />
+          <attribute name="regardingobjectid" />
+          <attribute name="bdgas_requestname" />
+          <attribute name="activityid" />
+          <attribute name="bdgas_slotnumber" />
+          <attribute name="sortdate" />
+          <order attribute="sortdate" descending="false" />
+          <attribute name="bdgas_presenter" />
+          <attribute name="bdgas_registrant" />
+          <attribute name="bdgas_businesspartner" />
+          <attribute name="bdgas_validationlead" />
+          <attribute name="bdgas_validationlead2" />
+          <attribute name="bdgas_documentid" />
+          <attribute name="bdgas_documentstatusid" />
+          <filter type="and">
+            <condition attribute="bdgas_sratemplate" operator="eq" value="1" />
+            <condition attribute="scheduledstart" operator="today" />
+            <condition attribute="bdgas_slotstatus" operator="in">
+              <value>2</value>
+              <value>3</value>
+              <value>4</value>
+            </condition>
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Today's SRA Meeting" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

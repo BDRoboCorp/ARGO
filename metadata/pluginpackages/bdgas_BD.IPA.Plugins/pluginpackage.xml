@@ -1,0 +1,9 @@
+<pluginpackage uniquename="bdgas_BD.IPA.Plugins">
+  <exportkeyversion>1</exportkeyversion>
+  <iscustomizable>1</iscustomizable>
+  <name>bdgas_BD.IPA.Plugins</name>
+  <package mimetype="application/octet-stream">bdgas_BD.IPA.Plugins.nupkg</package>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <version>1.0.0</version>
+</pluginpackage>

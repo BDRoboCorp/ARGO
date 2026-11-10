@@ -1,0 +1,898 @@
+{
+  "appId": "cebc59c4-bf80-f111-ab0f-000d3a11e677",
+  "iframe": {
+    "url": "/webresources/bdgas_argoprojectcenter.html"
+  },
+  "simpleNavigation": {
+    "backLabel": "Back",
+    "description": "Select a process to open its workflow.",
+    "enabled": true,
+    "items": [
+      {
+        "buttonLabel": "Open QPA",
+        "description": "Register a Quick Process Automation use case and track your projects.",
+        "icon": "QPA",
+        "id": "qpa",
+        "items": [
+          {
+            "action": "List",
+            "buttonLabel": "View My Projects",
+            "description": "View and follow up on projects assigned to you.",
+            "icon": "MP",
+            "label": "My Projects",
+            "pageType": "webresource",
+            "webresourceName": "bdgas_argoprojectcenter.html"
+          },
+          {
+            "action": "Create",
+            "buttonLabel": "Register a QPA",
+            "description": "Register a new Quick Process Automation use case.",
+            "entityName": "bdgas_requestintake",
+            "formId": "557c5ae5-f899-f111-b8dc-000d3a11e677",
+            "icon": "QPA",
+            "label": "Register a QPA",
+            "pageType": "entityrecord"
+          }
+        ],
+        "label": "QPA Process",
+        "pageDescription": "What would you like to do today?",
+        "pageTitle": "QPA Process"
+      },
+      {
+        "buttonLabel": "Open SRA",
+        "description": "Create and manage SRAs, schedule RA meetings, and complete Assigned Actions item.",
+        "icon": "SRA",
+        "id": "sra",
+        "items": [
+          {
+            "action": "Create",
+            "buttonLabel": "Create SRA",
+            "description": "Start a new SRA.",
+            "entityName": "appointment",
+            "icon": "SRA",
+            "iconUrl": "/WebResources/bdgas_CreateSRA",
+            "label": "Create SRA",
+            "pageType": "entityrecord"
+          },
+          {
+            "action": "List",
+            "buttonLabel": "Book RA Meeting",
+            "description": "Schedule a meeting with the Regulatory Assessment team.",
+            "icon": "RM",
+            "iconUrl": "/WebResources/bdgas_BookRAMeeting",
+            "label": "Book RA Meeting",
+            "pageType": "webresource",
+            "webresourceName": "bdgas_ArgoSRAAppointment"
+          },
+          {
+            "action": "List",
+            "buttonLabel": "Edit SRAs",
+            "description": "Open and update existing SRAs.",
+            "entityName": "appointment",
+            "icon": "MS",
+            "iconUrl": "/WebResources/bdgas_EditSRA",
+            "label": "Edit SRAs",
+            "pageType": "entitylist",
+            "viewId": "c369ac1c-1cad-f111-aaab-6045bded11bb",
+            "viewType": "savedquery"
+          },
+          {
+            "action": "List",
+            "buttonLabel": "Complete Action Items",
+            "description": "Review and complete the action items.",
+            "icon": "MT",
+            "iconUrl": "/WebResources/bdgas_AssignedActionsItems",
+            "label": "Assigned Action Items",
+            "pageType": "webresource",
+            "webresourceName": "bdgas_argotask"
+          }
+        ],
+        "label": "SRA Process",
+        "pageDescription": "What would you like to do today?",
+        "pageTitle": "SRA Process"
+      }
+    ],
+    "onlyWhenSoleMatchedTeam": true,
+    "teamId": "7810d6c2-02ac-f111-aaab-6045bded11bb",
+    "teamName": "End User (SRA, QPA)",
+    "title": "Welcome to Automations and Regulatory Governance Office (ARGO)"
+  },
+  "teams": [
+    {
+      "items": [
+        {
+          "action": "Create",
+          "category": "SRA",
+          "description": "Create SRA",
+          "entityName": "appointment",
+          "icon": "DS",
+          "label": "Create SRA",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "Create",
+          "category": "Administration",
+          "description": "CI Creation intake form",
+          "icon": "CI",
+          "label": "Application CI Intake Request",
+          "openInNewWindow": true,
+          "url": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=fObDlC2eAEimt2Ndl4ghZYgZEsyrB5FPnQ4lxQtT6VtUN1IyUjhMUENTNjlUMVpYNEFZSFlDODNaMSQlQCN0PWcu"
+        },
+        {
+          "action": "List",
+          "category": "SRA",
+          "description": "Create, delete, or cancel Regulatory Assessment Schedulers",
+          "icon": "SM",
+          "label": "RA Scheduler",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_ArgoSRAAppointment"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "Create",
+          "category": "QPA",
+          "description": "Register a QPA use case",
+          "entityName": "bdgas_requestintake",
+          "formId": "557c5ae5-f899-f111-b8dc-000d3a11e677",
+          "icon": "QPA",
+          "label": "Register a QPA",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "Create",
+          "category": "Governance",
+          "description": "Submit this request if you are using any AI capability",
+          "icon": "RAI",
+          "label": "Responsible AI Risk Profiler",
+          "openInNewWindow": true,
+          "url": "https://maxwell.bd.com/sites/digital-transformation/SitePageModern/729089/responsible-ai-risk-profiler"
+        },
+        {
+          "action": "List",
+          "category": "Tasks and Approvals",
+          "description": "Open assigned tasks",
+          "icon": "MT",
+          "label": "My Tasks",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argotask"
+        },
+        {
+          "action": "List",
+          "category": "Tasks and Approvals",
+          "description": "Review pending approvals",
+          "entityName": "bdgas_projectmilestoneapprover",
+          "icon": "AP",
+          "label": "My Approvals",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "SRA",
+          "description": "My SRA(s)",
+          "entityName": "appointment",
+          "icon": "SRA",
+          "label": "SRA",
+          "pageType": "entitylist",
+          "viewId": "c369ac1c-1cad-f111-aaab-6045bded11bb",
+          "viewType": "savedquery"
+        }
+      ],
+      "role": "End User (SRA, QPA)",
+      "teamId": "7810d6c2-02ac-f111-aaab-6045bded11bb",
+      "teamName": "End User (SRA, QPA)"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "SRA",
+          "description": "Regulatory Assessment tracker",
+          "entityName": "appointment",
+          "icon": "RT",
+          "label": "RA Tracker",
+          "pageType": "entitylist",
+          "viewId": "21b5627b-a098-f111-b8dc-6045bdf09dc3",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Administration",
+          "description": "list of all maintain public holiday dates used by the SRA appointment scheduler",
+          "entityName": "bdgas_publicholiday",
+          "icon": "PH",
+          "label": "Public Holiday",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Administration",
+          "description": "Create a public holiday dates used by the SRA appointment scheduler",
+          "entityName": "bdgas_publicholiday",
+          "icon": "PH",
+          "label": "Create Public Holiday",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "List",
+          "category": "SRA",
+          "description": "Open the Regulatory Assessment tracker",
+          "entityName": "appointment",
+          "icon": "RT",
+          "label": "RA Tracker",
+          "pageType": "entitylist",
+          "viewId": "21b5627b-a098-f111-b8dc-6045bdf09dc3",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "SRA",
+          "description": "SRA Dashboard",
+          "icon": "SRA",
+          "label": "SRA Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        }
+      ],
+      "role": "Regulatory Admin / Validation COE Admin",
+      "teamId": "ded7f41a-d5a5-f111-b8de-7ced8dcba28c",
+      "teamName": "Regulatory Admin/Validation COE Admin"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Home page table with full access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "0a71be38-1b5f-4f39-af46-37cf3fa51523",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Enable or disable bots and view bot triggers and runs",
+          "icon": "WLM",
+          "label": "WLM",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/e54563d1-9ed6-4a70-8c08-42caab4a72a0/a/3ecddc3f-ffc9-4c19-a5f9-c7e4fff17231?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165&hint=2df35461-1da8-48d1-844e-4acc2ee4d22d&sourcetime=1783081345665"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Production configuration",
+          "icon": "PRD",
+          "label": "PRD Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/e54563d1-9ed6-4a70-8c08-42caab4a72a0/a/b2127265-c782-4382-bdea-1dbf71c57ea6?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Development configuration",
+          "icon": "DEV",
+          "label": "DEV Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/0e77f916-e79c-44d8-9ad1-ea359aed9bd0/a/5cb2a6f4-4ef4-4b82-90ab-0e180db8d745?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Process Automation Dashboard",
+          "icon": "PAD",
+          "label": "Process Automation Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Chargeback Dashboard",
+          "icon": "CBD",
+          "label": "Chargeback Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "SRA",
+          "description": "SRA Dashboard",
+          "icon": "SRA",
+          "label": "SRA Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Bot Runs and Transaction",
+          "icon": "BRT",
+          "label": "Bot Runs and Transaction",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "QPA",
+          "description": "QPA Dashboard",
+          "icon": "QPA",
+          "label": "QPA Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Developer tracking items",
+          "entityName": "bdgas_devtask",
+          "icon": "DT",
+          "label": "Developer Tracking",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Chargeback History records",
+          "entityName": "bdgas_budgetrequesthistory",
+          "icon": "CB",
+          "label": "Chargebacks",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Product pricing records",
+          "entityName": "bdgas_productpricing",
+          "icon": "PP",
+          "label": "Product Pricing",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Chargebacks",
+          "description": "Create a product pricing record",
+          "entityName": "bdgas_productpricing",
+          "icon": "PP",
+          "label": "Create Product Pricing",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "List",
+          "category": "Administration",
+          "description": "Application records",
+          "entityName": "bdgas_application",
+          "icon": "APP",
+          "label": "Applications",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Administration",
+          "description": "Create an application record",
+          "entityName": "bdgas_application",
+          "icon": "APP",
+          "label": "Create Application",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Project Milestones",
+          "entityName": "bdgas_projectmilestone",
+          "icon": "PM",
+          "label": "Project Milestones",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Administration",
+          "description": "Milestone Types",
+          "entityName": "bdgas_milestonetype",
+          "icon": "MT",
+          "label": "Milestone Types",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Administration",
+          "description": "Create a milestone type",
+          "entityName": "bdgas_milestonetype",
+          "icon": "MT",
+          "label": "Create Milestone Type",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "List",
+          "category": "Administration",
+          "description": "Fiscal year records",
+          "entityName": "bdgas_fiscalyear",
+          "icon": "FY",
+          "label": "Fiscal Year",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Administration",
+          "description": "Create a fiscal year record",
+          "entityName": "bdgas_fiscalyear",
+          "icon": "FY",
+          "label": "Add New Fiscal Year",
+          "pageType": "entityrecord"
+        },
+        {
+          "action": "List",
+          "category": "Administration",
+          "description": "Team records",
+          "entityName": "team",
+          "icon": "TM",
+          "label": "Teams",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Governance",
+          "description": "Governance Request records",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Governance Request",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Governance",
+          "description": "Create a governance request",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Create Governance Request",
+          "pageType": "entityrecord"
+        }
+      ],
+      "role": "Process Automation Admin",
+      "teamId": "6a5d72a4-18af-f111-aaab-000d3a11e677",
+      "teamName": "Process Automation Admin"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "RPA projects, view access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "52d57da3-00b3-f111-aaac-7c1e527d2a28",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Production configuration",
+          "icon": "PRD",
+          "label": "PRD Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/e54563d1-9ed6-4a70-8c08-42caab4a72a0/a/b2127265-c782-4382-bdea-1dbf71c57ea6?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Development configuration",
+          "icon": "DEV",
+          "label": "DEV Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/0e77f916-e79c-44d8-9ad1-ea359aed9bd0/a/5cb2a6f4-4ef4-4b82-90ab-0e180db8d745?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Process Automation Dashboard",
+          "icon": "BI",
+          "label": "Process Automation Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Chargeback Dashboard",
+          "icon": "CBD",
+          "label": "Chargeback Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Bot Runs and Transaction",
+          "icon": "BRT",
+          "label": "Bot Runs and Transaction",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Developer tracking items",
+          "entityName": "bdgas_devtask",
+          "icon": "DT",
+          "label": "Developer Tracking",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Governance",
+          "description": "Governance Request records",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Governance Request",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Governance",
+          "description": "Create a governance request",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Create Governance Request",
+          "pageType": "entityrecord"
+        }
+      ],
+      "role": "Process Automation BA",
+      "teamId": "2efc686a-e9af-f111-aaab-000d3a11e677",
+      "teamName": "Process Automation BA"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "RPA projects, view access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "52d57da3-00b3-f111-aaac-7c1e527d2a28",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Production configuration",
+          "icon": "PRD",
+          "label": "PRD Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/e54563d1-9ed6-4a70-8c08-42caab4a72a0/a/b2127265-c782-4382-bdea-1dbf71c57ea6?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Development configuration",
+          "icon": "DEV",
+          "label": "DEV Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/0e77f916-e79c-44d8-9ad1-ea359aed9bd0/a/5cb2a6f4-4ef4-4b82-90ab-0e180db8d745?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Process Automation Dashboard",
+          "icon": "BI",
+          "label": "Process Automation Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Chargeback Dashboard",
+          "icon": "CBD",
+          "label": "Chargeback Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Bot Runs and Transaction",
+          "icon": "BRT",
+          "label": "Bot Runs and Transaction",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Developer tracking items assigned to me",
+          "entityName": "bdgas_devtask",
+          "icon": "DT",
+          "label": "Developer Tracking",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Governance",
+          "description": "Governance Request records",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Governance Request",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Governance",
+          "description": "Create a governance request",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Create Governance Request",
+          "pageType": "entityrecord"
+        }
+      ],
+      "role": "Process Automation Developer",
+      "teamId": "3a648779-e9af-f111-aaab-000d3a11e677",
+      "teamName": "Process Automation Developer"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "RPA projects, full access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "52d57da3-00b3-f111-aaac-7c1e527d2a28",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Enable or disable bots and view bot triggers and runs",
+          "icon": "WLM",
+          "label": "WLM",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/e54563d1-9ed6-4a70-8c08-42caab4a72a0/a/3ecddc3f-ffc9-4c19-a5f9-c7e4fff17231?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165&hint=2df35461-1da8-48d1-844e-4acc2ee4d22d&sourcetime=1783081345665"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Production configuration",
+          "icon": "PRD",
+          "label": "PRD Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/e54563d1-9ed6-4a70-8c08-42caab4a72a0/a/b2127265-c782-4382-bdea-1dbf71c57ea6?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Development configuration",
+          "icon": "DEV",
+          "label": "DEV Config",
+          "openInNewWindow": true,
+          "url": "https://apps.powerapps.com/play/e/0e77f916-e79c-44d8-9ad1-ea359aed9bd0/a/5cb2a6f4-4ef4-4b82-90ab-0e180db8d745?tenantId=94c3e67c-9e2d-4800-a6b7-635d97882165"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Process Automation Dashboard",
+          "icon": "BI",
+          "label": "Process Automation Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Chargeback Dashboard",
+          "icon": "CBD",
+          "label": "Chargeback Dashboard",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Process Automation",
+          "description": "Bot Runs and Transaction",
+          "icon": "BRT",
+          "label": "Bot Runs and Transaction",
+          "openInNewWindow": true,
+          "url": "https://app.powerbi.com/Redirect?action=OpenReport&appId=c5454f78-4b42-4334-9b95-c290cc806a4a&reportObjectId=fb4c0e3e-1974-4abf-86f1-9b162c26ad09&ctid=94c3e67c-9e2d-4800-a6b7-635d97882165&reportPage=ReportSection1ff2f798719d00bc9b9a"
+        },
+        {
+          "action": "List",
+          "category": "Governance",
+          "description": "Governance Request records",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Governance Request",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "Create",
+          "category": "Governance",
+          "description": "Create a governance request",
+          "entityName": "bdgas_governancerequest",
+          "icon": "GR",
+          "label": "Create Governance Request",
+          "pageType": "entityrecord"
+        }
+      ],
+      "role": "Process Automation AMO",
+      "teamId": "350da486-e9af-f111-aaab-000d3a11e677",
+      "teamName": "Process Automation AMO"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "PEGA use cases, full access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "a86774cb-01b3-f111-aaab-3833c5eb9a4c",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Developer tracking for PEGA use cases",
+          "entityName": "bdgas_devtask",
+          "icon": "DT",
+          "label": "Developer Tracking",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Administration",
+          "description": "Application records",
+          "entityName": "bdgas_application",
+          "icon": "APP",
+          "label": "Applications",
+          "pageType": "entitylist"
+        },
+        {
+          "action": "List",
+          "category": "Chargebacks",
+          "description": "Chargebacks for PEGA use cases",
+          "entityName": "bdgas_budgetrequest",
+          "icon": "CB",
+          "label": "Chargebacks",
+          "pageType": "entitylist"
+        }
+      ],
+      "role": "Pega Admin",
+      "teamId": "7bbdc3b1-18af-f111-aaab-000d3a11e677",
+      "teamName": "PEGA Admin"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "PEGA projects, view access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "a86774cb-01b3-f111-aaab-3833c5eb9a4c",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Developer tracking items",
+          "entityName": "bdgas_devtask",
+          "icon": "DT",
+          "label": "Developer Tracking",
+          "pageType": "entitylist"
+        }
+      ],
+      "role": "Pega BA",
+      "teamId": "55397be1-02ac-f111-aaab-6045bded11bb",
+      "teamName": "PEGA BA"
+    },
+    {
+      "items": [
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "PEGA use cases, view access",
+          "entityName": "bdgas_requestintake",
+          "icon": "AP",
+          "label": "All Projects",
+          "pageType": "entitylist",
+          "viewId": "a86774cb-01b3-f111-aaab-3833c5eb9a4c",
+          "viewType": "savedquery"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Projects assigned to me",
+          "icon": "MP",
+          "label": "My Projects",
+          "pageType": "webresource",
+          "webresourceName": "bdgas_argoprojectcenter.html"
+        },
+        {
+          "action": "List",
+          "category": "Projects",
+          "description": "Developer tracking items assigned to me",
+          "entityName": "bdgas_devtask",
+          "icon": "DT",
+          "label": "Developer Tracking",
+          "pageType": "entitylist"
+        }
+      ],
+      "role": "Pega Developer",
+      "teamId": "af2ccbb7-18af-f111-aaab-000d3a11e677",
+      "teamName": "PEGA Developer"
+    }
+  ],
+  "emailTo": "GMB-ARGO-SUPPORT@bd.com"
+}

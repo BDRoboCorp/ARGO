@@ -1,0 +1,84 @@
+var DevTask = DevTask || {};
+
+DevTask.onLoad = async function (executionContext) {
+    try {
+        var formContext = executionContext.getFormContext();
+		
+		//Regulatory Lock 
+		/*await RegulatoryLock.apply(
+            formContext,
+            "bdgas_requestintakeid"
+        );*/
+		
+        // Create form only
+        if (formContext.ui.getFormType() !== 1) {
+            return;
+        }
+
+        var assigneeAttr = formContext.getAttribute("bdgas_assignee");
+
+        if (!assigneeAttr) {
+            console.warn("Field bdgas_assignee not found on form.");
+            return;
+        }
+
+        // Populate assignee only if blank
+        if (assigneeAttr.getValue() === null) {
+
+            var userSettings = Xrm.Utility.getGlobalContext().userSettings;
+
+            assigneeAttr.setValue([
+                {
+                    id: userSettings.userId,
+                    name: userSettings.userName,
+                    entityType: "systemuser"
+                }
+            ]);
+
+            assigneeAttr.setSubmitMode("always");
+        }
+
+        // Default Start Date to today
+        var startDateAttr = formContext.getAttribute("bdgas_startdate");
+        if (startDateAttr && startDateAttr.getValue() === null) {
+            startDateAttr.setValue(new Date());
+            startDateAttr.setSubmitMode("always");
+        }
+
+        // Auto-generate Dev Task Name
+        var requestIntakeAttr = formContext.getAttribute("bdgas_requestintakeid");
+
+        if (requestIntakeAttr && requestIntakeAttr.getValue()) {
+
+            var requestIntakeId = requestIntakeAttr.getValue()[0].id.replace(/[{}]/g, "");
+
+            var requestIntake = await Xrm.WebApi.retrieveRecord(
+                "bdgas_requestintake",
+                requestIntakeId,
+                "?$select=bdgas_digitalproductname"
+            );
+
+            var digitalProductName = requestIntake.bdgas_digitalproductname || "";
+
+            var today = new Date();
+
+            var formattedDate =
+                today.getFullYear().toString() +
+                ("0" + (today.getMonth() + 1)).slice(-2) +
+                ("0" + today.getDate()).slice(-2);
+
+            var nameAttr = formContext.getAttribute("bdgas_name");
+
+            if (nameAttr) {
+                nameAttr.setValue(
+                    digitalProductName + "_" + formattedDate
+                );
+                nameAttr.setSubmitMode("always");
+            }
+        }
+
+    }
+    catch (e) {
+        console.error("DevTask.onLoad Error: " + e.message);
+    }
+};

@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Assign SRA Task</title>
+    <style>
+      :root {
+        --blue: #0f6cbd;
+        --blue-soft: #eef6fc;
+        --border: #d1d1d1;
+        --border-soft: #e5e5e5;
+        --text: #242424;
+        --muted: #616161;
+        --page: #f5f5f5;
+        --surface: #ffffff;
+        --error: #a4262c;
+        --success: #107c10;
+      }
+
+      * { box-sizing: border-box; }
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--page);
+        font: 14px/1.4 "Segoe UI", "SegoeUI", sans-serif;
+      }
+      button, input, textarea { font: inherit; }
+      .shell {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+      }
+      .command-bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .brand-mark {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--blue);
+        border-radius: 2px;
+        font-weight: 600;
+      }
+      h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .content {
+        width: 100%;
+        height: calc(100% - 40px);
+        padding: 16px;
+        overflow: hidden;
+      }
+      .heading h2 { margin: 0; font-size: 20px; font-weight: 600; }
+      .heading p { margin: 3px 0 14px; color: var(--muted); }
+      .form-panel {
+        padding: 16px;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 1fr);
+        gap: 0 20px;
+      }
+      .field { margin-bottom: 16px; }
+      .field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+      .required { color: var(--error); }
+      .field input,
+      .field textarea {
+        width: 100%;
+        padding: 7px 9px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+      }
+      .field textarea { min-height: 110px; resize: vertical; }
+      .user-search { margin-bottom: 8px; }
+      .selected-count {
+        margin-left: 6px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 400;
+      }
+      .selected-users {
+        max-height: 76px;
+        overflow-y: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0 0 8px;
+      }
+      .selected-user {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        max-width: 100%;
+        padding: 5px 8px;
+        border: 1px solid #b7d6f2;
+        border-radius: 2px;
+        background: var(--blue-soft);
+      }
+      .selected-user-details { min-width: 0; }
+      .selected-user-name,
+      .selected-user-email {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .selected-user-name { font-weight: 600; }
+      .selected-user-email { color: var(--muted); font-size: 12px; }
+      .remove-user-button {
+        padding: 0 3px;
+        border: 0;
+        color: var(--blue);
+        background: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1;
+      }
+      .user-list {
+        max-height: 150px;
+        overflow: auto;
+        border: 1px solid var(--border);
+      }
+      .user-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 9px;
+        border-bottom: 1px solid var(--border-soft);
+        cursor: pointer;
+      }
+      .user-option:last-child { border-bottom: 0; }
+      .user-option:hover { background: var(--blue-soft); }
+      .user-option input { width: auto; }
+      .user-name { font-weight: 600; }
+      .user-email { color: var(--muted); font-size: 12px; }
+      .user-meta { color: var(--muted); font-size: 12px; }
+      .help-text { margin-top: 5px; color: var(--muted); font-size: 12px; }
+      .actions { display: flex; gap: 8px; align-items: center; }
+      .primary-button,
+      .secondary-button {
+        min-height: 34px;
+        padding: 6px 14px;
+        border: 1px solid var(--blue);
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      .primary-button { color: #fff; background: var(--blue); }
+      .secondary-button { color: var(--text); border-color: var(--border); background: var(--surface); }
+      button:disabled { cursor: wait; opacity: .65; }
+      .message {
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border-left: 4px solid var(--blue);
+        background: var(--surface);
+      }
+      .message.error { border-left-color: var(--error); }
+      .message.success { border-left-color: var(--success); }
+      .message strong { display: block; margin-bottom: 3px; }
+      @media (max-width: 640px) {
+        .content { padding: 8px; }
+        .form-panel { padding: 12px; }
+        .form-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="command-bar">
+        <div class="brand-mark" aria-hidden="true">P</div>
+        <h1>Assign SRA Task</h1>
+      </header>
+      <section class="content" aria-live="polite">
+        <div class="heading">
+          <h2>Last Assigned Task</h2>
+          <p>Select users and provide the task details before saving.</p>
+        </div>
+        <div id="messageRoot"></div>
+        <form class="form-panel" id="assignmentForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="userSearch">
+                Assigned Users <span class="required">*</span>
+                <span class="selected-count" id="selectedUserCount">0 selected</span>
+              </label>
+              <input
+                class="user-search"
+                id="userSearch"
+                type="search"
+                placeholder="Search users"
+                autocomplete="off"
+              />
+              <div class="selected-users" id="selectedUsers" aria-live="polite"></div>
+              <div class="user-list" id="userList">Loading users...</div>
+              <div class="help-text">Select at least one user.</div>
+            </div>
+            <div>
+              <div class="field">
+                <label for="assignedSubject">Assigned Subject <span class="required">*</span></label>
+                <input id="assignedSubject" type="text" required />
+              </div>
+              <div class="field">
+                <label for="assignedDueDate">Assigned Due Date <span class="required">*</span></label>
+                <input id="assignedDueDate" type="date" required />
+                <div class="help-text">Default: today plus two weeks.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="assignedDescription">Assigned Description <span class="required">*</span></label>
+            <textarea id="assignedDescription" required></textarea>
+          </div>
+          <div class="actions">
+            <button class="primary-button" id="saveButton" type="submit">Save</button>
+            <button class="secondary-button" id="clearButton" type="button">Clear</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var elements = {
+          form: document.getElementById("assignmentForm"),
+          userSearch: document.getElementById("userSearch"),
+          selectedUserCount: document.getElementById("selectedUserCount"),
+          selectedUsers: document.getElementById("selectedUsers"),
+          userList: document.getElementById("userList"),
+          subject: document.getElementById("assignedSubject"),
+          dueDate: document.getElementById("assignedDueDate"),
+          description: document.getElementById("assignedDescription"),
+          save: document.getElementById("saveButton"),
+          clear: document.getElementById("clearButton"),
+          message: document.getElementById("messageRoot"),
+        };
+        var users = [];
+        var selectedUserIds = {};
+        var selectedUsers = {};
+        var existingAssignmentUserIds = {};
+        var userSearchRequestId = 0;
+
+        elements.form.addEventListener("submit", saveAssignment);
+        elements.clear.addEventListener("click", clearForm);
+        elements.userSearch.addEventListener("input", searchUsers);
+        setDefaultDueDate();
+        loadUsers();
+
+        function getXrm() {
+          var current = window;
+          while (true) {
+            try {
+              if (current.Xrm && current.Xrm.WebApi && current.Xrm.Navigation && current.Xrm.Utility) {
+                return current.Xrm;
+              }
+            } catch (error) {
+              // Cross-origin frame; can't inspect it, keep walking up.
+            }
+
+            if (!current.parent || current.parent === current) { break; }
+            current = current.parent;
+          }
+
+          throw new Error("This web resource must be opened inside a model-driven app.");
+        }
+
+        async function loadUsers() {
+          try {
+            var xrm = getXrm();
+            await loadExistingAssignments(xrm);
+            renderUsers([]);
+          } catch (error) {
+            elements.userList.textContent = "Unable to load users.";
+            showMessage("Unable to load users", error.message || String(error), "error");
+          }
+        }
+
+        async function loadExistingAssignments(xrm) {
+          var appointmentId = getAppointmentId();
+          if (!appointmentId) {
+            return;
+          }
+
+          var query =
+            "?$select=_bdgas_touser_value&$filter=_bdgas_sraappointmentid_value eq " +
+            appointmentId;
+          var result = await xrm.WebApi.retrieveMultipleRecords(
+            "bdgas_sraappointmentassignment",
+            query,
+          );
+          var userIds = (result.entities || [])
+            .map(function (assignment) {
+              return cleanGuid(assignment._bdgas_touser_value);
+            })
+            .filter(Boolean);
+
+          userIds.forEach(function (userId) {
+            existingAssignmentUserIds[userId] = true;
+            selectedUserIds[userId] = true;
+            var user = users.find(function (candidate) {
+              return cleanGuid(candidate.systemuserid) === userId;
+            });
+            if (user) {
+              selectedUsers[userId] = user;
+            }
+          });
+
+          var missingUserIds = userIds.filter(function (userId) {
+            return !selectedUsers[userId];
+          });
+          for (var index = 0; index < missingUserIds.length; index += 1) {
+            var missingUser = await retrieveUser(xrm, missingUserIds[index]);
+            if (missingUser) {
+              users.push(missingUser);
+              selectedUsers[missingUserIds[index]] = missingUser;
+            }
+          }
+        }
+
+        async function retrieveUser(xrm, userId) {
+          var result = await xrm.WebApi.retrieveRecord(
+            "systemuser",
+            userId,
+            "?$select=systemuserid,fullname,internalemailaddress,title,_positionid_value",
+          );
+          return result;
+        }
+
+        async function searchUsers() {
+          var search = elements.userSearch.value.trim();
+          var requestId = ++userSearchRequestId;
+          if (!search) {
+            renderUsers([]);
+            return;
+          }
+
+          elements.userList.textContent = "Searching users...";
+          try {
+            var matchingUsers = await retrieveMatchingUsers(getXrm(), search);
+            if (requestId === userSearchRequestId) {
+              renderUsers(matchingUsers);
+            }
+          } catch (error) {
+            if (requestId === userSearchRequestId) {
+              elements.userList.textContent = "Unable to search users.";
+              showMessage("Unable to search users", error.message || String(error), "error");
+            }
+          }
+        }
+
+        async function retrieveMatchingUsers(xrm, search) {
+          var escapedSearch = escapeODataString(search);
+          var query =
+            "?$select=systemuserid,fullname,internalemailaddress,title,_positionid_value" +
+            "&$filter=isdisabled eq false and (contains(fullname,'" +
+            escapedSearch +
+            "') or contains(internalemailaddress,'" +
+            escapedSearch +
+            "') or contains(title,'" +
+            escapedSearch +
+            "'))&$orderby=fullname asc&$top=10";
+          var result = await xrm.WebApi.retrieveMultipleRecords(
+            "systemuser",
+            query,
+          );
+          return result.entities || [];
+        }
+
+        function renderUsers(visibleUsers) {
+          clearChildren(elements.userList);
+          renderSelectedUsers();
+          updateSelectedUserCount();
+
+          if (!visibleUsers.length) {
+            elements.userList.textContent = elements.userSearch.value.trim()
+              ? "No users found."
+              : "Type a name, email, title, or position to search users.";
+            return;
+          }
+
+          visibleUsers.forEach(function (user) {
+            var label = document.createElement("label");
+            label.className = "user-option";
+            var checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = cleanGuid(user.systemuserid);
+            checkbox.checked = !!selectedUserIds[checkbox.value];
+            checkbox.addEventListener("change", function () {
+              if (checkbox.checked) {
+                selectedUserIds[checkbox.value] = true;
+                selectedUsers[checkbox.value] = user;
+              } else {
+                delete selectedUserIds[checkbox.value];
+                delete selectedUsers[checkbox.value];
+              }
+              renderSelectedUsers();
+              updateSelectedUserCount();
+            });
+            var details = document.createElement("span");
+            var name = document.createElement("span");
+            name.className = "user-name";
+            name.textContent = user.fullname || "Unnamed user";
+            details.appendChild(name);
+            if (user.internalemailaddress) {
+              var email = document.createElement("span");
+              email.className = "user-email";
+              email.textContent = " - " + user.internalemailaddress;
+              details.appendChild(email);
+            }
+            var position = getFormattedValue(user, "_positionid_value");
+            if (user.title || position) {
+              var metadata = document.createElement("span");
+              metadata.className = "user-meta";
+              metadata.textContent =
+                " - " + [user.title, position].filter(Boolean).join(" / ");
+              details.appendChild(metadata);
+            }
+            label.appendChild(checkbox);
+            label.appendChild(details);
+            elements.userList.appendChild(label);
+          });
+        }
+
+        function getSelectedUserIds() {
+          return Object.keys(selectedUserIds);
+        }
+
+        function updateSelectedUserCount() {
+          var count = getSelectedUserIds().length;
+          elements.selectedUserCount.textContent =
+            count + " selected";
+        }
+
+        function renderSelectedUsers() {
+          clearChildren(elements.selectedUsers);
+          Object.keys(selectedUsers).forEach(function (userId) {
+            var user = selectedUsers[userId];
+            var selectedUser = document.createElement("div");
+            selectedUser.className = "selected-user";
+
+            var details = document.createElement("span");
+            details.className = "selected-user-details";
+            var name = document.createElement("span");
+            name.className = "selected-user-name";
+            name.textContent = user.fullname || "Unnamed user";
+            details.appendChild(name);
+            if (user.internalemailaddress) {
+              var email = document.createElement("span");
+              email.className = "selected-user-email";
+              email.textContent = user.internalemailaddress;
+              details.appendChild(email);
+            }
+
+            var removeButton = document.createElement("button");
+            removeButton.className = "remove-user-button";
+            removeButton.type = "button";
+            removeButton.title = "Remove " + (user.fullname || "user");
+            removeButton.setAttribute("aria-label", "Remove " + (user.fullname || "user"));
+            removeButton.textContent = "x";
+            removeButton.addEventListener("click", function () {
+              delete selectedUserIds[userId];
+              delete selectedUsers[userId];
+              renderUsers(getVisibleUsers());
+            });
+
+            selectedUser.appendChild(details);
+            selectedUser.appendChild(removeButton);
+            elements.selectedUsers.appendChild(selectedUser);
+          });
+        }
+
+        function getVisibleUsers() {
+          var search = elements.userSearch.value.trim().toLowerCase();
+          return users.filter(function (user) {
+            var position = getFormattedValue(user, "_positionid_value").toLowerCase();
+            return (
+              !search ||
+              String(user.fullname || "").toLowerCase().indexOf(search) !== -1 ||
+              String(user.internalemailaddress || "").toLowerCase().indexOf(search) !== -1 ||
+              String(user.title || "").toLowerCase().indexOf(search) !== -1 ||
+              position.indexOf(search) !== -1
+            );
+          });
+        }
+
+        async function saveAssignment(event) {
+          event.preventDefault();
+          clearMessage();
+
+          var selectedUserIds = getSelectedUserIds();
+          var subject = elements.subject.value.trim();
+          var dueDate = elements.dueDate.value;
+          var description = elements.description.value.trim();
+          var appointmentId = getAppointmentId();
+
+          if (!selectedUserIds.length || !subject || !dueDate || !description || !appointmentId) {
+            showMessage(
+              "Required information missing",
+              "Select at least one user and complete all fields before saving.",
+              "error",
+            );
+            return;
+          }
+
+          elements.save.disabled = true;
+          try {
+            var xrm = getXrm();
+            for (var index = 0; index < selectedUserIds.length; index += 1) {
+              if (existingAssignmentUserIds[selectedUserIds[index]]) {
+                continue;
+              }
+              await createAssignmentRecord(
+                xrm,
+                selectedUserIds[index],
+                appointmentId,
+              );
+            }
+
+            await xrm.WebApi.updateRecord("appointment", appointmentId, {
+              bdgas_assignedsubject: subject,
+              bdgas_assignedduedate: dueDate + "T00:00:00Z",
+              bdgas_assigneddescription: description,
+            });
+
+            showMessage("Saved", "The task assignment and appointment details were saved.", "success");
+            clearForm();
+          } catch (error) {
+            showMessage("Unable to save", error.message || String(error), "error");
+          } finally {
+            elements.save.disabled = false;
+          }
+        }
+
+        async function createAssignmentRecord(xrm, userId, appointmentId) {
+          var directLookupPayload = {
+            "bdgas_touser@odata.bind": "/systemusers(" + userId + ")",
+            "bdgas_sraappointmentid@odata.bind":
+              "/appointments(" + appointmentId + ")",
+          };
+
+          try {
+            await xrm.WebApi.createRecord(
+              "bdgas_sraappointmentassignment",
+              directLookupPayload,
+            );
+            return;
+          } catch (directLookupError) {
+            var relationshipPayload = {
+              "bdgas_sraappointmentassignment_touser_systemuser@odata.bind":
+                "/systemusers(" + userId + ")",
+              "bdgas_sraappointmentassignment_sraappointmentid_appointment@odata.bind":
+                "/appointments(" + appointmentId + ")",
+            };
+
+            try {
+              await xrm.WebApi.createRecord(
+                "bdgas_sraappointmentassignment",
+                relationshipPayload,
+              );
+            } catch (relationshipError) {
+              throw new Error(
+                "Could not create the assignment using either Dataverse lookup format. " +
+                  "Direct lookup: " +
+                  (directLookupError.message || String(directLookupError)) +
+                  " Relationship lookup: " +
+                  (relationshipError.message || String(relationshipError)),
+              );
+            }
+          }
+        }
+
+        function getAppointmentId() {
+          var xrm = window.Xrm || (window.parent && window.parent.Xrm);
+          var page = xrm && xrm.Page;
+          var id = page && page.data && page.data.entity
+            ? page.data.entity.getId()
+            : "";
+          return cleanGuid(id);
+        }
+
+        function clearForm() {
+          elements.subject.value = "";
+          elements.description.value = "";
+          setDefaultDueDate();
+          selectedUserIds = {};
+          selectedUsers = {};
+          existingAssignmentUserIds = {};
+          elements.userSearch.value = "";
+          renderUsers(users);
+        }
+
+        function setDefaultDueDate() {
+          var date = new Date();
+          date.setDate(date.getDate() + 14);
+          elements.dueDate.value = toDateInputValue(date);
+        }
+
+        function toDateInputValue(date) {
+          var year = date.getFullYear();
+          var month = String(date.getMonth() + 1).padStart(2, "0");
+          var day = String(date.getDate()).padStart(2, "0");
+          return year + "-" + month + "-" + day;
+        }
+
+        function getQueryOptions(nextLink) {
+          if (!nextLink) return null;
+          var queryStart = nextLink.indexOf("?");
+          return queryStart === -1 ? null : nextLink.substring(queryStart);
+        }
+
+        function escapeODataString(value) {
+          return String(value).replace(/'/g, "''");
+        }
+
+        function cleanGuid(value) {
+          return String(value || "").replace(/[{}]/g, "").toLowerCase();
+        }
+
+        function getFormattedValue(record, attributeName) {
+          return (
+            record[attributeName + "@OData.Community.Display.V1.FormattedValue"] ||
+            ""
+          );
+        }
+
+        function escapeHtml(value) {
+          return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        }
+
+        function showMessage(title, body, type) {
+          clearMessage();
+          var message = document.createElement("div");
+          message.className = "message " + type;
+          var heading = document.createElement("strong");
+          heading.textContent = title;
+          var text = document.createElement("span");
+          text.textContent = body;
+          message.appendChild(heading);
+          message.appendChild(text);
+          elements.message.appendChild(message);
+        }
+
+        function clearMessage() {
+          clearChildren(elements.message);
+        }
+
+        function clearChildren(element) {
+          while (element.firstChild) element.removeChild(element.firstChild);
+        }
+      })();
+    </script>
+  </body>
+</html>

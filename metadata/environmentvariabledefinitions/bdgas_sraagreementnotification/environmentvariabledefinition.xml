@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_sraagreementnotification">
+  <defaultvalue>&lt;p&gt;      By creating a &lt;strong&gt;System Regulatory Assessment (SRA) Record&lt;/strong&gt;, you acknowledge and agree that the information provided is accurate and complete to the best of your knowledge.  &lt;/p&gt;</defaultvalue>
+  <displayname default="SRA Agreement notification">
+    <label description="SRA Agreement notification" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

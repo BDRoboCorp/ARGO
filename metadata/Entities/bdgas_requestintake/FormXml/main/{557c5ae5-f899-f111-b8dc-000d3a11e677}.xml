@@ -1,0 +1,1693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{557c5ae5-f899-f111-b8dc-000d3a11e677}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{A36615B7-18D7-4A3F-99C4-AEC3DB0669C4}" IsUserDefined="1" name="tab_general" labelid="{b0bcfad2-eada-48b8-8eaa-e39d58ba97c1}">
+          <labels>
+            <label description="In Queue" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{21027169-F848-4C18-B905-51E28FA6051B}" columns="11" name="General" labelid="{1934efee-3789-4c6f-be79-302d551798a3}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{e002d3d5-d796-436f-bcaa-e11503d69b0c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request Name" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_digitalproductname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_digitalproductname" disabled="false" />
+                      </cell>
+                      <cell id="{cbb653c5-fec8-4c5d-aecb-febbb816e4ac}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0b81d3fa-4cd5-401f-b63d-ffaaf9e33202}" locklevel="0" colspan="1" rowspan="3" labelid="{22438669-7567-4937-93bb-5b43b86b35d3}">
+                        <labels>
+                          <label description="Description" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="bdgas_description" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{16a9e787-3825-487d-8289-41754f91229b}" labelid="{059690bd-181c-450f-ae87-d1c1bae3ff35}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{08101fc7-2b01-464c-8421-c37d094ab351}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{43793e3a-7e26-45da-8570-f35f4a764ff2}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bfed8bf2-4db4-4c82-8b8f-efdad1718eaa}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Base Technology" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_applicationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_applicationid" disabled="false" />
+                      </cell>
+                      <cell id="{e10c6574-63c7-4150-aeab-5feeba971dbf}" locklevel="0" colspan="1" rowspan="1" labelid="{f9b5ed4b-b99b-45a4-a69b-ebdd54926097}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_sra" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_sra" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d715524f-e7b6-43d4-b333-277abca6c15d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Triaged Technology" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_triagedtechnology" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_triagedtechnology" disabled="false" />
+                      </cell>
+                      <cell id="{f5459beb-bd99-415e-a5ee-09ff90b00999}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Enhancement of Existing Bot" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_enhancementofexistingbot" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_enhancementofexistingbot" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{4bf7a1b2-e1d5-4863-af7d-29de2161d4a9}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{5e920786-48cc-470a-ad3e-34e3e25e041a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Parent Request Number" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_parentrequestintake" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_parentrequestintake" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{31e45877-1a98-41e4-a340-58e2a58747d5}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{4fcd1400-a3fe-458e-95c8-24c4407e334e}" locklevel="0" colspan="1" rowspan="1" labelid="{8c9f7bad-d721-4f77-b605-21a8448d1fe1}">
+                        <labels>
+                          <label description="SRA" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_sraid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_sraid" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{9d7904b2-cc5d-41ec-b35b-a517df8d8f36}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{3fa7c6ea-3d3c-45d9-b92f-1999bf79437e}" locklevel="0" colspan="1" rowspan="1" labelid="{14b58cfd-16c1-4214-a640-d3d046d2ca91}">
+                        <labels>
+                          <label description="SRA Assessment Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_sraassessmentstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_sraassessmentstatus" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{8d40c1c3-891d-4398-a803-74dda9a31af1}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{a50f8d35-5e6f-4918-9bdd-99efcf24fa78}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="BD Remarks" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdremarks" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_bdremarks" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{806e39ce-e980-4e59-9dbc-cedf09a3edc2}" locklevel="0" colspan="1" rowspan="1" visible="false" labelid="{4deb7cb9-dd3a-48fc-ad9d-62d8008713a2}">
+                        <labels>
+                          <label description="State Code" languagecode="1033" />
+                        </labels>
+                        <control id="statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                      </cell>
+                      <cell id="{b0511ddb-8c2a-4f71-be70-f74daf1e1683}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{E235B30D-6C2D-4985-A3DB-897902A75975}" visible="false" labelid="{3ed443e4-8920-4d7a-9959-fd37051ae64e}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                      <cell locklevel="0" id="{c6bf014a-a81d-4480-96ad-645672937c5d}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_general_section_5" id="9a9d01e8-a73a-45cf-8f83-dc0ab40069f8" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2940fd8a-7489-429e-8d4a-ded803601dd0}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{e44eb824-ef09-404b-a90e-5ad3c27e0baf}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{581683dd-f08f-401f-b74b-2b13760b30e0}" locklevel="0" colspan="1" rowspan="1" labelid="{56043c5a-e249-4b81-a1ed-6cd1da640aa0}">
+                        <labels>
+                          <label description="BOT Owner" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_botowner" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_botowner" disabled="false" />
+                      </cell>
+                      <cell id="{acde995e-8f8e-4883-85f9-112623dca0c0}" locklevel="0" colspan="1" rowspan="1" labelid="{3f3474be-3cbc-4dd2-baf9-1cf1245e79a2}">
+                        <labels>
+                          <label description="Assignee (BA)" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_assigneeba" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_assigneeba" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{01629637-ee69-4660-9e1f-be44eaa3ae81}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="BOT Informed" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_botinformedid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_botinformedid" disabled="false" />
+                      </cell>
+                      <cell id="{15195348-dc35-40c0-a29a-c5a2aa90537b}" locklevel="0" colspan="1" rowspan="1" labelid="{fa38e000-a221-4a80-bcaa-fdc3ae88c062}">
+                        <labels>
+                          <label description="Business Partner" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_businesspartner" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_businesspartner" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{45899fcf-6716-491b-abb2-d778142bc8e1}" locklevel="0" colspan="1" rowspan="1" labelid="{ca0ef147-ba0e-42cd-b8c9-4e6338dc7518}">
+                        <labels>
+                          <label description="BOT VP" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_botvp" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_botvp" disabled="false" />
+                      </cell>
+                      <cell id="{69b6c451-8bf3-456d-8b69-91408ca76f3c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Domain Owner" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_domainownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_domainownerid" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_general_section_7" id="9cea3ddd-e12a-4575-a766-a8a860b4ea9d" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{10d63e7e-7446-485e-9522-e3c15284b0cf}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{3f1796fb-30c9-4f3b-878c-792a850758ab}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fa803e4d-07bd-42f9-bd32-b508a24fdc4c}" locklevel="0" colspan="1" rowspan="1" labelid="{108a3a1e-0169-49e1-a6f6-db0af9664a97}">
+                        <labels>
+                          <label description="Planview ID" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_planviewid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_planviewid" disabled="false" />
+                      </cell>
+                      <cell id="{0d18ce97-1a13-4490-b2a3-56c689f65964}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Demand Number" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_demandnumber" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_demandnumber" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f3ee5e28-4332-4ddf-9fb6-0a822a7a3518}" locklevel="0" colspan="1" rowspan="1" labelid="{73520db1-19fd-4224-b5fd-d478b7012e81}">
+                        <labels>
+                          <label description="Planview/Request Creation Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_planviewrequestcreationdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_planviewrequestcreationdate" disabled="false" />
+                      </cell>
+                      <cell id="{e3e06a30-933b-4fbe-ae19-9ff6df2ab514}" locklevel="0" colspan="1" rowspan="1" labelid="{02c7d31a-d2c4-4562-9a1a-248f04f286c7}">
+                        <labels>
+                          <label description="Development Team" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmentteamid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_developmentteamid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f8d5d913-2540-4442-8c63-b75e33593b2c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Planview Days Open" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_planviewdaysopen" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="bdgas_planviewdaysopen" disabled="false" />
+                      </cell>
+                      <cell id="{67f11b8a-db49-4596-941b-636971d1fb16}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="L1" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_l1option" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_l1option" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_general_section_8" id="f575e6e7-9e06-48f5-85e1-2ad6de1e5406" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{7dfaa836-a41d-44f0-b5d8-0f8dfc9d1b93}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{51797bff-fd83-4357-96f3-6287fe144c66}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a7e22641-a313-45fb-8128-32dfe4b4d895}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="AI Used" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_isaiassessment" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_isaiassessment" disabled="false" />
+                      </cell>
+                      <cell id="{bc21220d-0b92-42ac-9782-e3b5da1438a8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Responsible AI Submitted" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_responsibleaisubmitted" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_responsibleaisubmitted" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_general_section_8" id="902633e1-f81a-4632-b99c-0ebf68aef8ad" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{21f65c02-0cac-4fa4-ba42-b53b9fe59fb4}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{c2d100d7-7bf6-4025-9617-1e4775143228}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{fa7afade-54b4-4eb8-ba0f-45cfdb7db0a0}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{41615e1a-9aef-4918-a9df-91d5e5c530c8}" locklevel="0" colspan="1" rowspan="1" labelid="{20ca0b92-fb6b-4e46-b4a1-fab44a02d6e7}">
+                        <labels>
+                          <label description="FTE Benefit" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_ftebenefit" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_ftebenefit" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5c13f72f-05e7-4f85-8aea-7bc62269236d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="On Hold Removal Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_onholdremovaldate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_onholdremovaldate" disabled="false" />
+                      </cell>
+                      <cell id="{349a7dd5-af92-468c-98b9-52f084cf0df9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Estimated FTE Savings" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_estimatedftesavings" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="bdgas_estimatedftesavings" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_general_section_9" id="de1d85f8-891e-42fd-b3aa-e73cc3d7ae4e" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{a53d22a0-1c49-4c58-bc1f-525aa6b63576}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Entity" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdintelligenceentity" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bdintelligenceentity" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{A41E35CB-94BC-F111-AAAF-6045BDED11BB}</DefaultViewId>
+                            <AvailableViewIds>{A41E35CB-94BC-F111-AAAF-6045BDED11BB}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{ccdf1b27-949f-4ef2-bf43-e9d4a634b7a2}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Function" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdintelligencefunction" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bdintelligencefunction" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bd244b2e-0f9e-4044-8969-7e440de8d2e4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Business Unit" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdintelligencebuid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bdintelligencebuid" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{0AD18998-61A7-F111-B8DE-7CED8D23115E}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{f1c6d45d-6123-4ed6-874b-133de21da87b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Region" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdintelligenceregion" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bdintelligenceregion" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DefaultViewId>{F804D59C-88B2-F111-AAAB-000D3A11E677}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{132d4057-45f5-4b86-8e03-df9dffe1e783}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Project Center" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestintake" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_requestintake" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{2201eeb3-5969-4e5f-9815-4bb4898aa9f4}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_concept_approva" id="c387ac37-a984-45f1-93d6-99c0351069d1" IsUserDefined="0" locklevel="0" showlabel="true">
+          <labels>
+            <label description="Concept Approval" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_7_section_3" id="927897d7-3c9e-4e0b-b4e0-77e9582d9cfb" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4edf7713-ff88-4cd4-875b-3e0d308ea1fc}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{168834d2-b255-4f3e-a88f-4b65070e632b}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{165288f6-1bb1-4532-8a52-7c4d1d3a4b4c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Automation Charter Completed &amp; Attached" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_automationchartercompletedattached" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_automationchartercompletedattached" disabled="false" />
+                      </cell>
+                      <cell id="{a8078fbd-8144-4a6e-8f70-51dedeef772d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Manual Estimate Reviewed By" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_manualestimatereviewedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_manualestimatereviewedby" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{413d78a6-ffd2-4ec6-9ce4-1aa09c6e269f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Development Size" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmentsizeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_developmentsizeid" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{488742D9-90AA-F111-AAAB-000D3A11E677}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{78825db5-1c82-4d5e-adba-1a40751914c6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Estimated Hours" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_estimatedhours" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="bdgas_estimatedhours" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{56031984-4a1d-4f30-8b7a-80e7a49b63da}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Configuration Item Link" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_configurationitemlink" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_configurationitemlink" disabled="false" />
+                      </cell>
+                      <cell id="{2278d85e-a978-43dd-91e3-9f503688a142}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Estimation Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_estimationstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_estimationstatus" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_concept_approva_section_3" id="29009e8f-9408-42a1-81e4-7247007c481a" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="SRA Requirements" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{93f01f93-849e-4621-a28d-4de668c1587f}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{d43ed952-916d-44a6-b649-cec5e77adf36}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9d5bb3a8-eaee-48cb-a2ce-ffd6938638d4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="GxP Applicable" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_gxpapplicableid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_gxpapplicableid" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{DFBF89BA-77A6-F111-B8DF-6045BDED11BB}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{043cf9b5-ad3c-4189-b8d8-bb11df41a79f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Privacy Applicability" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_privacyapplicabilityid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_privacyapplicabilityid" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{91064C50-78A6-F111-B8DE-7CED8D23115E}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c26654c8-04d3-4ceb-ae57-82af502f5217}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="System Category" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_systemcategoryid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_systemcategoryid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{B285BD79-77A6-F111-B8DE-7CED8D23115E}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{8978fd37-f12b-4854-84e7-264b9e04b39e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Disaster Recovery" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_drplanstatusid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_drplanstatusid" disabled="false">
+                          <parameters>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DisableMru>true</DisableMru>
+                            <DefaultViewId>{053ADB9E-78A6-F111-B8DE-7C1E527D2A28}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d037f327-14f7-4c26-aee0-0d0d6d89a852}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="SOX Applicable" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_soxapplicableid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_soxapplicableid" disabled="false">
+                          <parameters>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{6436BE1B-78A6-F111-B8DE-000D3A11E677}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{ba34b566-521a-4236-8631-3cde68f54720}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Other Regulations" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdgas_otherregulationsorlegalconstraintim" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bdgas_otherregulationsorlegalconstraintim" disabled="false">
+                          <parameters>
+                            <DefaultViewId>{6961985C-78A6-F111-B8DD-70A8A593A821}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{A41E35CB-94BC-F111-AAAF-6045BDED11BB},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{BB65F3F6-94BC-F111-AAAF-7C1E527D2A28},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_concept_approva_section_4" id="6f4abf87-d0cd-4c87-b6de-b4b3cdd14a42" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{83ee301a-1230-4be0-9d16-f06cd98b54fc}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{59a4c9d8-ab37-4b83-9583-ee4234bc0e27}" rowspan="4" colspan="1" auto="true">
+                        <labels>
+                          <label description="Applications Involved" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_8" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Auto</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_requestintakeapplication_requestintakeid_bdgas_requestintake</RelationshipName>
+                            <TargetEntityType>bdgas_requestintakeapplication</TargetEntityType>
+                            <ViewId>{3318A9B6-0ED3-48C9-BC03-D2AA00843B8A}</ViewId>
+                            <ViewIds>{3318A9B6-0ED3-48C9-BC03-D2AA00843B8A}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row height="auto" />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_8" id="b50a7d44-872b-4bf2-878a-fcccbf88c157" IsUserDefined="0" locklevel="0" showlabel="true" visible="false">
+          <labels>
+            <label description="Solution Design" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_8_section_1" id="ef9db23c-2bd0-4291-a027-fcf16fbcdcd9" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{a82609c3-3403-4bda-8834-2281696343c4}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell locklevel="0" id="{6678ac06-62a9-4295-a768-e5be5ba420f5}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3df0184c-525e-4b2c-843b-c2a233a0d270}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Lead Developer" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_leaddeveloperid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_leaddeveloperid" disabled="false" />
+                      </cell>
+                      <cell id="{e7978d9c-25b3-44b8-b141-636ba3a68022}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Change Ticket #" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_changeticket" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_changeticket" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a9665dc0-a150-493e-9c2c-f9c1de5c8c02}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Credential Manager Entry" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_credentialmanagerentry" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_credentialmanagerentry" disabled="false" />
+                      </cell>
+                      <cell id="{20927757-f16c-4d01-8468-056b7a00aeac}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="ARDS Signoff Received &amp; Attached" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_ardssignoff" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_ardssignoff" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1cef47f5-1da2-4098-a78d-6d3581989ce7}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Service Account Used" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_serviceaccountused" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_serviceaccountused" disabled="false" />
+                      </cell>
+                      <cell id="{b6b21378-6693-44b2-a9ad-ca798f6d07fb}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Automation URS Received &amp; Attached" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_automationursreceivedattached" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_automationursreceivedattached" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{55c40cfd-af2f-485b-b56d-57ad73dfb36b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Auto Generate Service Account" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_autogenerateserviceaccount" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_autogenerateserviceaccount" disabled="false" />
+                      </cell>
+                      <cell id="{b6b7d513-42be-43d5-b584-d306540366de}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="URS Approval Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_ursapprovalstatus1" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_ursapprovalstatus1" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_8_section_3" id="54152f43-0fa5-46ab-ac13-2da7fb96304a" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="ERP" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{847e1634-42b2-4e91-a5b5-bc545929c5a5}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{4988545b-a525-422f-95bd-aa51b456d1c6}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2c6f24c4-e7d5-4f86-91d3-d7b99755071d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="ERP Request" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_erprequest" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_erprequest" disabled="false" />
+                      </cell>
+                      <cell id="{84f14d5e-80ac-4f20-a6e1-f21adb964414}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="T-Codes" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_tcodes" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_tcodes" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b36c41b5-82b3-4130-937c-2d4326feac36}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="ERP Environment" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_erpenvironment" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_erpenvironment" disabled="false" />
+                      </cell>
+                      <cell id="{2a5f26e9-b207-48a8-944b-9ae45795444c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="ERP Codes" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_erpcodes" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_erpcodes" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_8_section_4" id="d44f229c-f316-458a-80ca-2a13e3a55f70" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2f94d22c-d9d7-45ac-ad88-41395cba985a}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{63a6e78c-d791-48b9-ab9c-b591645167e6}" rowspan="4" colspan="1" auto="false">
+                        <labels>
+                          <label description="Timeline Estimation" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_10" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_devestimation_requestintakeid_bdgas_requestintake</RelationshipName>
+                            <TargetEntityType>bdgas_devestimation</TargetEntityType>
+                            <ViewId>{F13A62C0-72C3-4502-BD88-39FA04117678}</ViewId>
+                            <ViewIds>{F13A62C0-72C3-4502-BD88-39FA04117678}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="tab_8_section_5" id="c450eb94-f26c-4382-80be-c14888ac94f0" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{ddffdb9f-5e67-463e-9321-a948ee1c22e4}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{94e2faa2-ffa9-4499-9982-930caa004ade}" rowspan="4" colspan="1" auto="false">
+                        <labels>
+                          <label description="Resources Allocation" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_11" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_resourceallocation_requestintakeid_bdgas_requestintake</RelationshipName>
+                            <TargetEntityType>bdgas_resourceallocation</TargetEntityType>
+                            <ViewId>{E9BC80BF-EF71-4B92-9802-1496ED3E920E}</ViewId>
+                            <ViewIds>{E9BC80BF-EF71-4B92-9802-1496ED3E920E}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_devqa" id="72c98422-7581-434a-b6d2-6d91678371cb" IsUserDefined="0" locklevel="0" showlabel="true" labelid="{d5780de7-661b-4195-9446-55ef726170ef}">
+          <labels>
+            <label description="DEV &amp; QA" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_devqa_section_3" id="55e4ec5b-24fa-4c37-a5d8-1f25018d3722" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115" labelid="{74cf8883-f769-4cf6-b764-011cc794b649}">
+                  <labels>
+                    <label description="Dev" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{5dcb6d2f-7288-4e76-b2b9-d4f19e476be7}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{42014ccc-a699-4632-88d3-35781e87c2ea}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{91ee20b7-8d8a-425a-b1be-9593791b82c4}" locklevel="0" colspan="1" rowspan="1" labelid="{b167a843-8455-4a38-b6f9-a3de1968bca7}">
+                        <labels>
+                          <label description="Development Start Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmentstartdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_developmentstartdate" disabled="false" />
+                      </cell>
+                      <cell id="{7bbdcf5b-effc-478a-b110-55ddd59606bd}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1c5e42ef-eb2e-4423-ac71-23f585788d0f}" locklevel="0" colspan="1" rowspan="1" labelid="{d8e3a98c-ca31-4b26-91cc-28eab35be4d8}">
+                        <labels>
+                          <label description="Code Review Performed By" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_finalcodereviewperformedby" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_finalcodereviewperformedby" disabled="false" />
+                      </cell>
+                      <cell id="{aee28aff-3858-4786-bd35-55ba634347d3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Development End Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmentenddate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_developmentenddate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e4860899-4bc0-4a7f-a79b-f6fd4ccfd745}" locklevel="0" colspan="1" rowspan="1" labelid="{1ca449b5-dcca-4569-bc58-05665836f1fc}">
+                        <labels>
+                          <label description="DEV Link" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_devlink" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_devlink" disabled="false" />
+                      </cell>
+                      <cell id="{8f5cb140-5347-45f6-b78f-71972344184c}" locklevel="0" colspan="1" rowspan="1" labelid="{d62e052c-38fb-470d-bc5d-9c9e09b9e972}">
+                        <labels>
+                          <label description="Code Review Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_finalcodereviewdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_finalcodereviewdate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{9c173eec-5baf-4a5e-ac69-3474d37d75d8}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{0eef6a40-020a-4417-a542-4fed4d80921e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Code Review Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_codereviewstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_codereviewstatus" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_devqa_section_4" id="1206cf37-30fc-4812-904a-693a3a2e7fad" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="QA" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{3c454ba5-73c2-41e4-82bf-d02787329046}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{087c396c-0706-4a0c-8035-917e6e3f2a44}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6f933ce3-a7d0-4bfa-ad99-256a69d2d7c8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="UAT Start Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_uatstartdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_uatstartdate" disabled="false" />
+                      </cell>
+                      <cell id="{4ca4a34b-a100-4d96-8f73-cc9592e2b89d}" locklevel="0" colspan="1" rowspan="1" labelid="{b5ffeb5d-f362-48b6-b618-60601307a83e}">
+                        <labels>
+                          <label description="UAT End Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_uatcompletedate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_uatcompletedate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fc9875b9-df60-437f-8ee2-6966028f517d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="CSV-Computer Validation Form Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_csvcomputervalidationformstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_csvcomputervalidationformstatus" disabled="false" />
+                      </cell>
+                      <cell id="{835f01c2-3f1b-47d5-9c32-f1be0f40411e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="UAT Approval Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_uatapprovalstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_uatapprovalstatus" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6242163f-e73b-483f-a083-a3e8d01c24f4}" locklevel="0" colspan="1" rowspan="1" labelid="{b63768e0-48ca-4c3f-ba03-e33bd12d738d}">
+                        <labels>
+                          <label description="QA Link" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_qalink" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_qalink" disabled="false" />
+                      </cell>
+                      <cell id="{13c25e76-82d0-4b7b-bd94-5dcead0af5bb}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Change Ticket #" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_changeticketnumber" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_changeticketnumber" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_devqa_section_3" id="2e0ed709-b17c-480c-a8b1-d21ddea1f1e1" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115" labelid="{b97b3b67-290f-4673-9b56-1a408d76dbf6}">
+                  <labels>
+                    <label description="Dev Activities" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{43481c2a-8ca4-4aef-89fb-7ce5324dc22e}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{4c0846f6-b4d1-4efc-bc8c-d189527eea48}" rowspan="4" colspan="1" auto="false" showlabel="false" labelid="{84e79acd-aad9-419e-b4db-5fa81b11f0fb}">
+                        <labels>
+                          <label description="New SG control 1786328103423" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_5" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_devtask_requestintakeid_bdgas_requestintake</RelationshipName>
+                            <TargetEntityType>bdgas_devtask</TargetEntityType>
+                            <ViewId>{DBB15B7F-2AE4-4EEC-A6B9-50AA175A327B}</ViewId>
+                            <ViewIds>{DBB15B7F-2AE4-4EEC-A6B9-50AA175A327B}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_4" id="d0fa0c61-0952-4d1c-a5dc-f18f46b10271" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false" labelid="{a7e5b086-3164-43f8-8341-26d9b781a869}">
+          <labels>
+            <label description="Production" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_4_section_1" id="ddde6fdc-9f0e-4447-9fb0-e6efe71435a3" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115" labelid="{328cd60d-3621-451a-99a6-28550fee25bd}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{5e6acfec-05bd-46de-8352-17cc32783b6b}" locklevel="0" colspan="1" rowspan="1" labelid="{6a6a987d-7ea7-4681-9554-f625a05d8fec}">
+                        <labels>
+                          <label description="BOT Business Criticality" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_botbusinesscriticality" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_botbusinesscriticality" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{ec28f621-866d-413d-aaef-2572afb2a175}" labelid="{08dbf458-d535-43bf-9168-5492e667dcb4}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{677c984d-dd2b-44d2-be34-841e114b08c5}" locklevel="0" colspan="1" rowspan="1" labelid="{ec4825df-140c-4592-9d43-4587c0191c9b}">
+                        <labels>
+                          <label description="Trigger Path" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_triggerpath" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_triggerpath" disabled="false" />
+                      </cell>
+                      <cell id="{d113f303-9e97-451e-ad6d-c1dd941ea1fc}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9a641be1-97ee-4c1c-9033-9b2e91815c9e}" locklevel="0" colspan="1" rowspan="1" labelid="{4fb3ba95-934c-449c-9d65-420a0b46a78d}">
+                        <labels>
+                          <label description="Schedule Notes" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_schedulenotes" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_schedulenotes" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{1d27db80-d02f-4170-8180-224587894aa2}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{09be86e0-1323-4614-ac90-7e28470dc633}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{2510afc6-ef79-41fc-8d98-63056e595c75}" locklevel="0" colspan="1" rowspan="1" labelid="{bc944229-02cb-4f92-8ad4-33b15518cd3b}">
+                        <labels>
+                          <label description="Schedule or Trigger" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_scheduleortrigger" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_scheduleortrigger" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{172e534e-f00c-4304-a10d-59b054c0ba4e}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{b6f4e5fd-749c-4e7a-8461-5c68ec403ef9}" locklevel="0" colspan="1" rowspan="1" labelid="{478b1743-07d1-41cf-abed-91f2b17d8e53}">
+                        <labels>
+                          <label description="PROD Link" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_prodlink" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_prodlink" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{52795879-fa5c-43e8-a310-700b79b9e45c}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{70c957e4-23a4-40a2-ac06-03b419c065c5}" locklevel="0" colspan="1" rowspan="1" labelid="{7c5b856d-2887-4bcd-a1ac-26347302aca2}">
+                        <labels>
+                          <label description="PROD Code Release Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_prodcodereleasedate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_prodcodereleasedate" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_4_section_3" id="6b580a40-b5e4-4475-acab-7899f2b74304" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{490df48f-ff9f-49f4-b98e-49726cbb392d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="BOT is in HyperCare ?" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_botisinhypercare1" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_botisinhypercare1" disabled="false" />
+                      </cell>
+                      <cell id="{371fcf11-c352-4d50-9162-bd01739683b4}" locklevel="0" colspan="1" rowspan="1" labelid="{5e7c6811-a1d9-402d-a0db-97a0265c055b}">
+                        <labels>
+                          <label description="AMO Lead" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_amoleadid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_amoleadid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9fea615d-e2b2-4013-9446-ff074d81cbb1}" locklevel="0" colspan="1" rowspan="1" labelid="{30699329-9cdf-4bec-8df9-214ef8b94eb3}">
+                        <labels>
+                          <label description="Hypercare exit Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_golivedate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_golivedate" disabled="false" />
+                      </cell>
+                      <cell id="{298ce994-ba2e-4085-ac24-bf4965e85805}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="AMO Support Team" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_amosupportteamid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_amosupportteamid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{24f9e5f2-9bf0-4e96-9e4c-28e40db50170}" locklevel="0" colspan="1" rowspan="1" labelid="{b9207cf3-dd4f-428d-984c-c152d147f5ef}">
+                        <labels>
+                          <label description="BOT Deactivation Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_botdeactivationdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_botdeactivationdate" disabled="false" />
+                      </cell>
+                      <cell id="{b999d4c2-db5f-468e-af82-8a5354db9921}" locklevel="0" colspan="1" rowspan="1" labelid="{e367bd29-0a96-4db1-a0cf-d655a8331022}">
+                        <labels>
+                          <label description="KT to AMO" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_kttoamo" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="bdgas_kttoamo" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{4ebf5d79-a166-4d57-9c1f-1e4c3ce33d7c}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{8217d5c7-5a88-4cd8-a9dd-61acad945e17}" locklevel="0" colspan="1" rowspan="1" labelid="{3a75677e-676d-4eca-b94e-658b6a1f581d}">
+                        <labels>
+                          <label description="KT Approval Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_ktapprovaldate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bdgas_ktapprovaldate" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_11" id="8ea3d2de-2a14-46ac-9c62-1371c5d93d12" IsUserDefined="0" locklevel="0" showlabel="true" labelid="{347b2f93-549c-4355-9b96-9c3b6e727317}">
+          <labels>
+            <label description="Project Milestones" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_11_section_1" id="9e2cbd33-7d0e-47a4-9e84-a195e59d0277" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115" labelid="{d38ee2b7-8bfa-41cb-bd7f-ffdf378c7edb}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{aea228ff-07d9-4c4d-b78e-17288f6a2913}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{e5df1daa-e183-4f36-8afa-2e58219206d4}" rowspan="4" colspan="1" auto="false" showlabel="false" labelid="{82ec1ce2-0403-4954-a4ac-a897e270f5ab}">
+                        <labels>
+                          <label description="New SG control 1786411185128" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_7" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_projectmilestone_requestintakeid_bdgas_requestintake</RelationshipName>
+                            <TargetEntityType>bdgas_projectmilestone</TargetEntityType>
+                            <ViewId>{DD6B681A-AB97-F111-8076-6045BDD77D4F}</ViewId>
+                            <ViewIds>{25623874-5C12-4DE5-9417-F7F077B53D1A},{DD6B681A-AB97-F111-8076-6045BDD77D4F}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_9" id="fa4ed387-cadd-44ed-8979-a403dce2e71d" IsUserDefined="0" locklevel="0" showlabel="true" labelid="{820e9abf-0bac-4424-a220-b637f4555f75}">
+          <labels>
+            <label description="Planview" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section name="tab_inqueue_section_5" id="3f2ee15a-f37b-4327-9639-01f06783c4ad" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115" labelid="{f1ae9814-25c6-4a08-8c14-d750e4d87d81}">
+                  <labels>
+                    <label description="Feasibility Assessment" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{ef1e2c23-7322-442a-baca-3c07bcc73167}" labelid="{ce82beeb-b6ed-4ee3-925a-d4d26515720b}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3a14b7c3-1c96-4451-a656-b0b908f79aa2}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Business Value Score" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_businessvaluescoreid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_businessvaluescoreid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bb6133c6-735d-4802-96a3-1b7902760312}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Development Size" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmentsizeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_developmentsizeid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{488742D9-90AA-F111-AAAB-000D3A11E677}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0ee89c07-aa64-44d4-a1c1-4090daed3d85}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Reusability Score" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_reusabilityscoreid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_reusabilityscoreid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{55e42e1a-423e-4165-b736-c7a024689360}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Value Realization Score" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_valuerealizationscoreid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_valuerealizationscoreid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8b05809a-d27c-4bde-adc8-89354033be37}" locklevel="0" colspan="1" rowspan="1" labelid="{c3abd227-e123-40b4-9076-0c4ccc4bd079}">
+                        <labels>
+                          <label description="Opportunity Score" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_opportunityscore" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="bdgas_opportunityscore" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8c30d401-2cc9-40b4-9ab2-485222827c5e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Business Capability Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_businesscapabilitystatusid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_businesscapabilitystatusid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5631109e-49cf-410c-901e-c5529be84dae}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Delivery Model" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_deliverymodelid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_deliverymodelid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="_section_505" id="3b4e5d0a-bf04-438d-8f89-377dbebd369f" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115" labelid="{d79fa168-8f42-467b-9776-cdbd5585f0cc}">
+                  <labels>
+                    <label description="Shaping" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{8c04148b-b200-404e-b4e4-726e02c3a923}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7afd8fc0-9ad8-4d7f-8ad7-eee35cf46869}" locklevel="0" colspan="1" rowspan="1" labelid="{452363cf-7778-4553-abd7-8404b63ab7f7}">
+                        <labels>
+                          <label description="Benefits Anticipated" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_benefitsanticipated" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="bdgas_benefitsanticipated" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0e483a06-bf64-4105-bace-b34d4489a3f8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="BD Strategy Alignment" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bdstrategyalignmentid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bdstrategyalignmentid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{B7D70427-C0AA-F111-AAAC-7C1E527D2A28}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7ad845fd-6648-46e3-bec1-0cd933bfc2de}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Benefit Type (P)" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_benefittypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_benefittypeid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{C1101740-C0AA-F111-AAAB-6045BDED11BB}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{237a7b74-3377-4d01-83f9-dd432939ef81}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Roadmap Alignment" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_roadmapalignmentid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_roadmapalignmentid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{5161035C-C0AA-F111-AAAB-6045BDED11BB}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5bab3a44-f1ad-44e4-be1e-a9ea79d68e19}" locklevel="0" colspan="1" rowspan="1" labelid="{ac56a7ad-5b55-447a-9d08-c1872108861b}">
+                        <labels>
+                          <label description="Success Criteria KPIs" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_successcriteriakpis" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="bdgas_successcriteriakpis" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_credoai" id="1906411c-9683-49a2-9745-68f681771b29" IsUserDefined="0" locklevel="0" showlabel="true" labelid="{e1c584df-6fd4-45dc-97d6-e996077fb581}">
+          <labels>
+            <label description="CREDO AI" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_10_section_1" id="06117102-079e-43ca-8535-0842479e34c6" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115" labelid="{bb8f3678-9d00-4982-b785-d23e7adaf286}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{4fbafb1a-6f3a-4df3-9f8c-d442affe11be}" labelid="{f4675d37-bd71-45c9-84e9-462dcd714fea}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell locklevel="0" id="{aa47c62b-5a29-4856-8f88-590c3ea47c91}" labelid="{22db26c7-e8fc-43dc-a2b1-7002dc2f5a51}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4a606dc1-7905-42aa-b3ee-5e3f8052f564}" locklevel="0" colspan="1" rowspan="1" labelid="{84f149d3-3229-45d3-bf0d-2abaacba50a7}">
+                        <labels>
+                          <label description="CREDO AI Id" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_credoaiid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_credoaiid" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{433eefd1-33be-483d-8cb1-bf23df5f18e4}" labelid="{1055f4ec-f3a5-4b72-a067-ffbc0c9e1ca6}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4fd49c74-0916-459d-9ddb-b1fe24906c9b}" locklevel="0" colspan="1" rowspan="1" labelid="{aee68e99-8844-460a-96a4-70e049e43aec}">
+                        <labels>
+                          <label description="CREDO AI Status" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_credoaistatus" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_credoaistatus" disabled="true" />
+                      </cell>
+                      <cell locklevel="0" id="{5d0f3223-0463-452a-a2b4-f88d242b4160}" labelid="{f83b9671-142a-4f6e-b68a-6be52380178f}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{5ed8f6ed-0fd5-4b58-91a6-9ccf0f03a345}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{9eee4ab0-3628-4a68-9fd7-63384c310210}" showlabel="false" labelid="{107d2519-1558-4492-9744-32df1b11f95e}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ffb6be69-d80c-40b0-bc56-ce0b50744f97}" showlabel="false" labelid="{2fa76dac-0d7e-4c3a-a52d-418f507d41a6}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{019fabf1-1572-4de2-affa-a388102b5f62}" showlabel="false" labelid="{f839f96c-d8ef-4c8a-aac7-6bde406f4932}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b2bfd4c7-7897-49fe-ae91-4f6aea57bb5f}" locklevel="0" colspan="1" rowspan="1" labelid="{382a2a57-21e9-490c-aead-e6633e89bcdf}">
+              <labels>
+                <label description="Fiscal Year" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_fiscalyear" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_fiscalyear" disabled="false" />
+            </cell>
+            <cell id="{d95594fb-3469-44e1-aaf8-5c5ecb843274}" locklevel="0" colspan="1" rowspan="1" labelid="{4c732844-9c8c-4413-85f9-2903eef8f8c0}">
+              <labels>
+                <label description="Request Intake Type" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_requestintaketype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="bdgas_requestintaketype" disabled="true" />
+            </cell>
+            <cell id="{e0dbda56-7a26-4cc5-86ab-f68dd1889b4a}" locklevel="0" colspan="1" rowspan="1" labelid="{119a5b36-8276-46ef-88db-dd9573b19a5e}">
+              <labels>
+                <label description="Status Code" languagecode="1033" />
+              </labels>
+              <control id="header_statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{2ed99d56-a686-4efc-bffc-89f24856f43c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{becd07a3-ff95-420c-90ef-39f56abac9d6}" showlabel="false" labelid="{88cbd334-63d1-44d3-bf7e-a2eeb04ddbc2}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3b929978-4547-4205-a83c-c919c660c607}" showlabel="false" labelid="{677c241e-9253-4647-8cff-c1bbf63ae534}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f2ce0e60-0424-4f1a-b618-63933aa3c570}" showlabel="false" labelid="{9a4f8753-09ab-4189-a0c1-a5e08cc27c30}">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <controlDescriptions />
+      <formLibraries>
+        <Library name="bdgas_RequestIntake" libraryUniqueId="{65e1f250-0968-423b-bf10-481fa7b58c08}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="RequestIntake.Events.onLoad" libraryName="bdgas_RequestIntake" handlerUniqueId="{d777f73e-1821-4068-ac9c-fbfbfa3a5b91}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="bdgas_requestintaketype">
+          <Handlers>
+            <Handler functionName="RequestIntake.Events.onChange" libraryName="bdgas_RequestIntake" handlerUniqueId="{57dcee7b-ec23-4015-a6a6-3c7874af0790}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+      <Navigation>
+        <NavBar>
+          <NavBarByRelationshipItem RelationshipName="bdgas_devtask_requestintakeid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_devtask_requestintakeid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Dev Tasks" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_valuedriversassignment_projectcenterid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_valuedriversassignment_projectcenterid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Value Drivers Assignments" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_resourceallocation_requestintakeid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_resourceallocation_requestintakeid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Resource Allocations" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_budgetrequesthistory_projectcenterid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_budgetrequesthistory_projectcenterid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Budget Request Histories" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_requestintake_parentrequestintake_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_requestintake_parentrequestintake_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Project Centers" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_appointment_requestintake_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_appointment_requestintake_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="SRA Appointments" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_requestintakeapplication_requestintakeid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_requestintakeapplication_requestintakeid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Impacted Applications" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_budgetrequest_requestintakeid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_budgetrequest_requestintakeid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Budget Requests" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_devestimation_requestintakeid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_devestimation_requestintakeid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Project Estimations" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bpf_bdgas_requestintake_bdgas_rpabpf" Sequence="10000" Area="Info" Id="nav_bpf_bdgas_requestintake_bdgas_rpabpf" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="RPA BPF" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bpf_bdgas_requestintake_bdgas_qpabpf" Sequence="10000" Area="Info" Id="nav_bpf_bdgas_requestintake_bdgas_qpabpf" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="QPA BPFS" />
+            </Titles>
+          </NavBarByRelationshipItem>
+          <NavBarByRelationshipItem RelationshipName="bdgas_projectmilestone_requestintakeid_bdgas_requestintake" Sequence="10000" Area="Info" Id="nav_bdgas_projectmilestone_requestintakeid_bdgas_requestintake" Show="false">
+            <Titles>
+              <Title LCID="1033" Text="Project Milestones" />
+            </Titles>
+          </NavBarByRelationshipItem>
+        </NavBar>
+        <NavBarAreas>
+          <NavBarArea Id="Info">
+            <Titles>
+              <Title LCID="1033" Text="Common" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Sales">
+            <Titles>
+              <Title LCID="1033" Text="Sales" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Service">
+            <Titles>
+              <Title LCID="1033" Text="Service" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Marketing">
+            <Titles>
+              <Title LCID="1033" Text="Marketing" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="ProcessCenter">
+            <Titles>
+              <Title LCID="1033" Text="Process Sessions" />
+            </Titles>
+          </NavBarArea>
+        </NavBarAreas>
+      </Navigation>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+        <Role Id="{E99CD260-0784-4B9E-9F91-03DC1011671E}" />
+        <Role Id="{8B2AD5D0-6C78-4F09-911D-0A034A78B2A7}" />
+        <Role Id="{817D162C-8272-48E9-8E97-ADFDDF180B1C}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="QPA Form" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

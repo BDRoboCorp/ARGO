@@ -1,0 +1,346 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "NotificationConfiguration (bdgas_NotificationConfiguration)": {
+          "defaultValue": {
+            "DurationHours": 1,
+            "Teams": true,
+            "Email": true
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_NotificationConfiguration",
+            "description": "Controls the notification duration and whether Microsoft Teams and email notifications are enabled."
+          }
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "type": "Recurrence",
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2026-09-09T02:00:00Z",
+            "schedule": {
+              "hours": [
+                "8"
+              ]
+            },
+            "timeZone": "Eastern Standard Time"
+          },
+          "metadata": {
+            "operationMetadataId": "880b3250-08ee-4e12-be89-27ed7316dd54"
+          }
+        }
+      },
+      "actions": {
+        "Compose_-_Reminder_Configuration": {
+          "type": "Compose",
+          "inputs": "@parameters('NotificationConfiguration (bdgas_NotificationConfiguration)')",
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "ceb5ba0c-6c8f-4dc8-ad2c-ed184fb472a1"
+          }
+        },
+        "Parse_JSON_-_Reminder_Configuration": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@outputs('Compose_-_Reminder_Configuration')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "DurationHours": {
+                  "type": "integer"
+                },
+                "Teams": {
+                  "type": "boolean"
+                },
+                "Email": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Compose_-_Reminder_Configuration": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "04ccfbda-7b7d-44ca-9d7f-98e2a7c03327"
+          }
+        },
+        "Compose_-_Reminder_Cutoff_UTC": {
+          "type": "Compose",
+          "inputs": "@addHours(\r\n  utcNow(),\r\n  mul(\r\n    int(outputs('Compose_-_Duration_Hours')),\r\n    -1\r\n  )\r\n)",
+          "runAfter": {
+            "Compose_-_Duration_Hours": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compose_-_Duration_Hours": {
+          "type": "Compose",
+          "inputs": "@int(\r\n body('Parse_JSON_-_Reminder_Configuration')?['DurationHours']\r\n)",
+          "runAfter": {
+            "Parse_JSON_-_Reminder_Configuration": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compose_-_Reminder_Cutoff_Formatted": {
+          "type": "Compose",
+          "inputs": "@formatDateTime(\r\n  outputs('Compose_-_Reminder_Cutoff_UTC'),\r\n  'yyyy-MM-ddTHH:mm:ssZ'\r\n)",
+          "runAfter": {
+            "Compose_-_Reminder_Cutoff_UTC": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Creation Daily Reminder Email] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Scope_-_Try": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          }
+        },
+        "Scope_-_Try": {
+          "type": "Scope",
+          "actions": {
+            "List_rows_-_Open_Tasks": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "tasks",
+                  "$filter": "@concat(\r\n  '_bdgas_appointment_value ne null and statecode eq 0 and modifiedon le ',\r\n  outputs('Compose_-_Reminder_Cutoff_Formatted')\r\n)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            },
+            "Apply_to_each_-_Open_Task": {
+              "type": "Foreach",
+              "foreach": "@outputs('List_rows_-_Open_Tasks')?['body/value']",
+              "actions": {
+                "Get_EmailTo": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "bdgas_taskassignments",
+                      "fetchXml": "<fetch>\n  <entity name='bdgas_taskassignment'>\n    <link-entity name='task' to='bdgas_taskid' from='activityid' alias='task' link-type='inner' />\n    <link-entity name='systemuser' to='bdgas_userid' from='systemuserid' alias='user1' link-type='inner'>\n      <attribute name='internalemailaddress' />\n    </link-entity>\n    <filter>\n      <condition attribute='bdgas_taskid' operator='eq' value='@{items('Apply_to_each_-_Open_Task')?['activityid']}' />\n    </filter>\n  </entity>\n</fetch>"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "operationId": "ListRecords",
+                      "connectionName": "shared_commondataserviceforapps"
+                    }
+                  },
+                  "runAfter": {
+                    "Set_variable": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "99bde264-23ef-46ba-9c6e-820f3a1c9cc1"
+                  }
+                },
+                "For_each": {
+                  "type": "Foreach",
+                  "foreach": "@outputs('Get_EmailTo')?['body/value']",
+                  "actions": {
+                    "Append_to_array_variable": {
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "EmailTo",
+                        "value": "@items('For_each')?['user1.internalemailaddress']"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Get_EmailTo": [
+                      "Succeeded"
+                    ]
+                  }
+                },
+                "Run_a_Child_Flow": {
+                  "type": "Workflow",
+                  "inputs": {
+                    "host": {
+                      "workflowReferenceName": "20d1c063-a69a-f111-b8dc-7ced8d23115e"
+                    },
+                    "body": {
+                      "text": "<fetch>\n  <entity name='task'>\n    <attribute name='activityid' />\n    <attribute name='subject' />\n    <link-entity name='appointment' to='bdgas_appointment' from='activityid' alias='appointment' link-type='inner'>\n      <attribute name='bdgas_requestname' />\n    </link-entity>\n    <filter>\n      <condition attribute='activityid' operator='eq' value='@{items('Apply_to_each_-_Open_Task')?['activityid']}' />\n    </filter>\n  </entity>\n</fetch>",
+                      "text_1": "Task Reminder Email Template",
+                      "boolean": false,
+                      "boolean_1": true,
+                      "boolean_2": true,
+                      "text_2": "@join(variables('EmailTo'), ';')"
+                    }
+                  },
+                  "runAfter": {
+                    "For_each": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "f1bdd248-de0a-4a89-a369-a070585d5c5a"
+                  }
+                },
+                "Set_variable": {
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "EmailTo",
+                    "value": []
+                  }
+                }
+              },
+              "runAfter": {
+                "List_rows_-_Open_Tasks": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Email": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Email": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EmailTo",
+                "type": "array"
+              }
+            ]
+          },
+          "runAfter": {
+            "Compose_-_Reminder_Cutoff_Formatted": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9ccc9166-0106-420c-b8a2-6aa543111dd5"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

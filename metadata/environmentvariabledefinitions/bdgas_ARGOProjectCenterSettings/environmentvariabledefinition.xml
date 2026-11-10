@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOProjectCenterSettings">
+  <defaultvalue>[     {         "Name": "DIR Team",         "TeamId": "af2ccbb7-18af-f111-aaab-000d3a11e677",         "Types": [             "100000004",             "100000005"         ]     },     {         "Name": "PEGA Team",         "TeamId": "7bbdc3b1-18af-f111-aaab-000d3a11e677",         "Types": [             "100000002",             "100000003"         ]     },     {         "Name": "RPA Team",         "TeamId": "6a5d72a4-18af-f111-aaab-000d3a11e677",         "Types": [             "100000000",             "100000001"         ]     } ]</defaultvalue>
+  <displayname default="ARGO Project Center Settings">
+    <label description="ARGO Project Center Settings" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

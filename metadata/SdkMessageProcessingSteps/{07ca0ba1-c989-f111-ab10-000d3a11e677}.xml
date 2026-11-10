@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="BD.IPA.Plugins.PreProjectMilestoneApprovalOnUpdate: Update of bdgas_projectmilestoneapprover" SdkMessageProcessingStepId="{07ca0ba1-c989-f111-ab10-000d3a11e677}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeExportKey>9605809182CF1FBD8C4AD75C1DA5B80DC06A63F13ACE599FDC8BD592E5FAF797</PluginTypeExportKey>
+  <PrimaryEntity>bdgas_projectmilestoneapprover</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>BD.IPA.Plugins.PreProjectMilestoneApprovalOnUpdate: Update of bdgas_projectmilestoneapprover</Description>
+  <FilteringAttributes>statuscode</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

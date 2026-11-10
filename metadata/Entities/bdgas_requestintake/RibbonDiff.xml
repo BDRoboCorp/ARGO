@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RibbonDiffXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomActions>
+    <HideCustomAction HideActionId="bdgas.AccessChecker.OpenDialog.bdgas_requestintake.Button.Hide" Location="AccessChecker.OpenDialog.bdgas_requestintake.Button" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddAppointment.Hide" Location="Mscrm.Form.bdgas_requestintake.AddAppointment" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddCampaignResponse.Hide" Location="Mscrm.Form.bdgas_requestintake.AddCampaignResponse" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddConnection.Hide" Location="Mscrm.Form.bdgas_requestintake.AddConnection" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddEmail.Hide" Location="Mscrm.Form.bdgas_requestintake.AddEmail" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddFax.Hide" Location="Mscrm.Form.bdgas_requestintake.AddFax" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddFile.Hide" Location="Mscrm.Form.bdgas_requestintake.AddFile" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddLetter.Hide" Location="Mscrm.Form.bdgas_requestintake.AddLetter" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddNote.Hide" Location="Mscrm.Form.bdgas_requestintake.AddNote" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddOtherActivities.Hide" Location="Mscrm.Form.bdgas_requestintake.AddOtherActivities" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddPhone.Hide" Location="Mscrm.Form.bdgas_requestintake.AddPhone" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddRecurringAppointment.Hide" Location="Mscrm.Form.bdgas_requestintake.AddRecurringAppointment" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddServiceActivity.Hide" Location="Mscrm.Form.bdgas_requestintake.AddServiceActivity" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddTask.Hide" Location="Mscrm.Form.bdgas_requestintake.AddTask" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.AddToQueue.Hide" Location="Mscrm.Form.bdgas_requestintake.AddToQueue" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Assign.Hide" Location="Mscrm.Form.bdgas_requestintake.Assign" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Close.Hide" Location="Mscrm.Form.bdgas_requestintake.Close" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Convert.Case.Hide" Location="Mscrm.Form.bdgas_requestintake.Convert.Case" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Convert.Opportunity.Hide" Location="Mscrm.Form.bdgas_requestintake.Convert.Opportunity" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.CopySelected.Hide" Location="Mscrm.Form.bdgas_requestintake.CopySelected" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Flows.RefreshCommandBar.Flows.Hide" Location="Mscrm.Form.bdgas_requestintake.Flows.RefreshCommandBar.Flows" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Flows.RefreshCommandBar.Hide" Location="Mscrm.Form.bdgas_requestintake.Flows.RefreshCommandBar" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.MailMerge.Hide" Location="Mscrm.Form.bdgas_requestintake.MailMerge" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Permissions.Grant.Hide" Location="Mscrm.Form.bdgas_requestintake.Permissions.Grant" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Permissions.GrantUCI.Hide" Location="Mscrm.Form.bdgas_requestintake.Permissions.GrantUCI" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Permissions.Hide" Location="Mscrm.Form.bdgas_requestintake.Permissions" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Permissions.Sharing.Hide" Location="Mscrm.Form.bdgas_requestintake.Permissions.Sharing" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.PromoteToResponse.Hide" Location="Mscrm.Form.bdgas_requestintake.PromoteToResponse" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.QueueItemDetail.Hide" Location="Mscrm.Form.bdgas_requestintake.QueueItemDetail" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.Reports.Hide" Location="Mscrm.Form.bdgas_requestintake.Reports" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.RunScript.Hide" Location="Mscrm.Form.bdgas_requestintake.RunScript" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.RunWorkflow.Hide" Location="Mscrm.Form.bdgas_requestintake.RunWorkflow" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.SendSelected.Hide" Location="Mscrm.Form.bdgas_requestintake.SendSelected" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.SuggestProduct.Hide" Location="Mscrm.Form.bdgas_requestintake.SuggestProduct" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.ViewHierarchy.Hide" Location="Mscrm.Form.bdgas_requestintake.ViewHierarchy" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.bdgas_requestintake.WordTemplate.Hide" Location="Mscrm.Form.bdgas_requestintake.WordTemplate" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Assign.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Assign" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Delete.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Delete" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Edit.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Edit" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Expand.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Expand" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Export.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Export" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Import.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Import" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.New.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.New" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.RefreshButton.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.RefreshButton" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.SaveCopy.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.SaveCopy" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Chart.Share.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Chart.Share" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.Charts.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.Charts" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.bdgas_requestintake.MBPF.ConvertTo.Hide" Location="Mscrm.HomepageGrid.bdgas_requestintake.MBPF.ConvertTo" />
+  </CustomActions>
+  <Templates>
+    <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
+  </Templates>
+  <CommandDefinitions />
+  <RuleDefinitions>
+    <TabDisplayRules />
+    <DisplayRules />
+    <EnableRules />
+  </RuleDefinitions>
+  <LocLabels />
+</RibbonDiffXml>

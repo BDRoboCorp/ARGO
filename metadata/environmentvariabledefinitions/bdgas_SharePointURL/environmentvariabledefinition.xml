@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_SharePointURL">
+  <defaultvalue>https://devsharepoint.bdx.com/sites/ARGOSRA</defaultvalue>
+  <displayname default="SharePoint URL">
+    <label description="SharePoint URL" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

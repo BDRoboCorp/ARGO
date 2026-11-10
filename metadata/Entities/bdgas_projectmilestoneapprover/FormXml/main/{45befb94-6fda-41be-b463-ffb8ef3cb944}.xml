@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{45befb94-6fda-41be-b463-ffb8ef3cb944}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{a5409f26-8ae6-4d25-a293-dcdfe26deaad}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{b36bb1a9-141d-4bf4-bbdc-bf285d6c94bf}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{982dcd3a-5d56-40bc-8ac4-311278510b5c}" visible="false">
+                        <labels>
+                          <label description="Approver No." languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_approverno" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="bdgas_approverno" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{797af262-a6cb-400b-9bc9-f4f2e0b87df8}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8a7fd561-4e6c-4d66-a420-6af5e1b7dd26}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Status Reason" languagecode="1033" />
+                        </labels>
+                        <control id="statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1accc9cc-8d87-4c69-8042-d75b5343e1d2}" locklevel="0" colspan="1" rowspan="1" visible="false">
+                        <labels>
+                          <label description="Comments" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_comments" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="bdgas_comments" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell rowspan="15" id="{1be18d16-6908-441d-81f2-b1694056e695}" showlabel="false" colspan="1" auto="true">
+                        <labels>
+                          <label description="ARGOProjectMilestoneApproval" languagecode="1033" />
+                        </labels>
+                        <control id="WebResource_new_1" classid="{9FDF5F91-88B1-47F4-AD53-C11EFC01A01D}">
+                          <parameters>
+                            <Url>bdgas_ARGOProjectMilestoneApproval</Url>
+                            <PassParameters>false</PassParameters>
+                            <Security>false</Security>
+                            <Scrolling>auto</Scrolling>
+                            <Border>false</Border>
+                            <ShowOnMobileClient>false</ShowOnMobileClient>
+                            <WebResourceId>{f1920537-87b8-f111-aaac-7c1e527d2a28}</WebResourceId>
+                          </parameters>
+                        </control>
+                        <events>
+                          <event name="onload" application="false" active="false" />
+                        </events>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{76c5afdf-05b4-4d78-af6f-7c184b052d05}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{358492a5-5c3e-47f1-9d8a-40fe9ba2b4c7}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{eb97bb69-1b9a-4c5f-a885-8c889273f1bf}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{aac667f9-cafe-4c61-9068-facdd5996ee8}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{794994a6-cf83-491c-8dfb-a617419f1683}" visible="true" colspan="1" rowspan="1">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+            </cell>
+            <cell id="{7012af85-2686-48ec-9ad9-a9f56ad0b6a5}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Project Milestone" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_projectmilestoneid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_projectmilestoneid" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{c4672dd8-cdba-414c-9a9b-9bcc5b4df42e}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{a283da2c-b121-44f9-bd41-49dcd716e44a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{c2b5cb00-aa4e-418e-b2a4-1f318faea091}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b552346a-7b2b-4838-8255-acd8f900a32e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="bdgas_ProjectMilestoneApproval" libraryUniqueId="{df82db64-61ba-4879-9e9a-ee962d41dae2}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="ProjectMilestoneApproval.onLoad" libraryName="bdgas_ProjectMilestoneApproval" handlerUniqueId="{2357d028-f16b-4b75-8339-a9e8936b4b37}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

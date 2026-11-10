@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{68706b99-27c3-43c8-9d3d-5660a0e59bd6}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_preferredname" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_keycontactid">
+          <cell name="bdgas_resource" width="100" />
+          <cell name="bdgas_preferredname" width="300" />
+          <cell name="bdgas_emailaddress" width="150" />
+          <cell name="bdgas_contactnumber" width="150" />
+          <cell name="bdgas_umtshiftschedule" width="150" />
+          <cell name="bdgas_position" width="150" />
+          <cell name="bdgas_team" width="150" />
+          <cell name="bdgas_developmentteam" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_keycontact">
+          <attribute name="bdgas_keycontactid" />
+          <attribute name="bdgas_preferredname" />
+          <attribute name="createdon" />
+          <order attribute="bdgas_preferredname" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_emailaddress" />
+          <attribute name="bdgas_contactnumber" />
+          <attribute name="bdgas_umtshiftschedule" />
+          <attribute name="bdgas_position" />
+          <attribute name="bdgas_team" />
+          <attribute name="bdgas_resource" />
+          <attribute name="bdgas_developmentteam" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Key Contacts" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

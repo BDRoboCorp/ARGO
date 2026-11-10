@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_projectlifecyclenotificationconfiguration">
+  <defaultvalue>[{"Type": 100000000, "Statuses": [100000005, 100000006, 100000012]}, {"Type": 100000001, "Statuses": [100000005, 100000006, 100000012]}]</defaultvalue>
+  <displayname default="Project Lifecycle Notification Configuration">
+    <label description="Project Lifecycle Notification Configuration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.1.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

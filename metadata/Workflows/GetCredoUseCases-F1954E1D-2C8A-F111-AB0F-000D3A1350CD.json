@@ -1,0 +1,354 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "type": "Recurrence",
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "timeZone": "Singapore Standard Time",
+            "startTime": "2026-07-28T02:00:00Z",
+            "schedule": {
+              "hours": [
+                "10"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "1cf7a02a-8b77-42eb-969f-02b602329a5a"
+          }
+        }
+      },
+      "actions": {
+        "Get_Token": {
+          "type": "Http",
+          "inputs": {
+            "uri": "https://api.credo.ai/api/v1/integration/auth/token",
+            "method": "POST",
+            "headers": {
+              "X-API-Key": "CMZTOruzdFekfpzecwy8J3LMWnsL6cy1kHRRdlZNQkcu1a8pDqZ9SiJsVWTnnlxd",
+              "X-Tenant": "becton_dickinson_sb",
+              "accept": "application/json"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "ee99f5fa-8822-4c03-a075-7b2f5bb01231"
+          }
+        },
+        "Get_JSON_Token": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@body('Get_Token')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Get_Token": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e1cbff63-cd98-4682-ac33-0d2c9a318fc3"
+          }
+        },
+        "Get_Use_Case": {
+          "type": "Http",
+          "inputs": {
+            "uri": "https://api.credo.ai/api/v1/integration/use_cases",
+            "method": "GET",
+            "headers": {
+              "X-Tenant": "becton_dickinson_sb",
+              "Authorization": "Bearer @{body('Get_JSON_Token')?['access_token']}",
+              "accept": "application/json"
+            }
+          },
+          "runAfter": {
+            "Get_JSON_Token": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "50a515c8-caaa-471b-baa8-d2621610e332"
+          }
+        },
+        "Parse_JSON_UseCases": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@body('Get_Use_Case')",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {},
+                      "questionnaire_ids": {
+                        "type": "array"
+                      },
+                      "creator_id": {
+                        "type": "string"
+                      },
+                      "workflow_stage_id": {
+                        "type": "string"
+                      },
+                      "workflow_stage_step": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "description",
+                      "questionnaire_ids",
+                      "creator_id",
+                      "workflow_stage_id",
+                      "workflow_stage_step"
+                    ]
+                  }
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "next_cursor": {
+                      "type": "string"
+                    },
+                    "has_more": {
+                      "type": "boolean"
+                    },
+                    "total_count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Get_Use_Case": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d2833f2a-7307-4cae-8e53-84fa41bd3713"
+          }
+        },
+        "Retrieve_Request_Intake_CREDO_AI_Is_null_and_Status_Code_is_Concept_Approval": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "bdgas_requestintakes",
+              "$select": "bdgas_digitalproductname,bdgas_description,bdgas_isaiassessment,bdgas_credoaiid,bdgas_credoaistatus",
+              "$filter": "((bdgas_isaiassessment eq true and bdgas_responsibleaisubmitted eq true and bdgas_credoaiid eq null) or (statuscode eq 1 and statuscode eq 100000001 and statuscode eq 100000002))"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Parse_JSON_UseCases": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4dc020c1-5586-44dd-a23a-9c309d1e84c7"
+          }
+        },
+        "Each_Request_Intake": {
+          "type": "Foreach",
+          "foreach": "@outputs('Retrieve_Request_Intake_CREDO_AI_Is_null_and_Status_Code_is_Concept_Approval')?['body/value']",
+          "actions": {
+            "Each_CREDO_Item": {
+              "type": "Foreach",
+              "foreach": "@body('Parse_JSON_UseCases')?['items']",
+              "actions": {
+                "Predict": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "recordId": "572f57a7-7a8f-49fc-adb4-331e02c509a6",
+                      "item/requestv2/inputText": "Compare these two records and determine whether they represent the same or substantially similar application, product, initiative, project, or request.\n\nRecord A\nName: @{items('Each_Request_Intake')?['bdgas_digitalproductname']}\nDescription: @{items('Each_Request_Intake')?['bdgas_description']}\n\nRecord B\nName: @{items('Each_CREDO_Item')?['name']}\nDescription: @{items('Each_CREDO_Item')?['description']}\n\nInstructions:\n- Compare both Name and Description.\n- Consider semantic meaning, business purpose, functionality, objectives, and keywords.\n- Similar wording is not required. Match based on meaning.\n- Return a SimilarityScore from 0 to 100:\n  - 90-100 = Essentially the same item\n  - 70-89 = Highly similar\n  - 50-69 = Possibly related\n  - 0-49 = Different\n- Set IsMatch to true only when SimilarityScore is 70 or above.\n- Response must be valid JSON.\n- Do not include explanations, markdown, code fences, comments, or any text before or after the JSON.\n- Return exactly this structure and nothing else:\n{\n  \"SimilarityScore\": <integer>,\n  \"IsMatch\": <boolean>\n}",
+                      "item/source": {
+                        "consumptionSource": "PowerAutomate",
+                        "partnerSource": "AIBuilder",
+                        "consumptionSourceVersion": "Flow",
+                        "partnerSourceVersion": "131c01d6-2302-96ab-34b9-77566412c4bc"
+                      }
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "operationId": "aibuilderpredict",
+                      "connectionName": "shared_commondataserviceforapps"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "640fc988-9ad3-4f0b-948f-49a512ae5262",
+                    "flowSystemMetadata": {
+                      "portalOperationId": "aibuilderpredict",
+                      "portalOperationGroup": "aibuilder",
+                      "portalOperationApiDisplayNameOverride": "AI Builder",
+                      "portalOperationIconOverride": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aibuilderIcon2026.8e878397.png",
+                      "portalOperationBrandColorOverride": "#0A76C4",
+                      "portalOperationApiTierOverride": "Standard"
+                    }
+                  }
+                },
+                "Prediction_success": {
+                  "type": "If",
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@empty(outputs('Predict')?['body/responsev2/predictionOutput/text'])",
+                          "@false"
+                        ]
+                      }
+                    ]
+                  },
+                  "actions": {
+                    "Parse_JSON_Predict": {
+                      "type": "ParseJson",
+                      "inputs": {
+                        "content": "@outputs('Predict')?['body/responsev2/predictionOutput/text']",
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "SimilarityScore": {
+                              "type": "integer"
+                            },
+                            "IsMatch": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      },
+                      "metadata": {
+                        "operationMetadataId": "0a3f70b6-23cb-4fe1-80aa-8f94cfbba680"
+                      }
+                    },
+                    "Condition": {
+                      "type": "If",
+                      "expression": {
+                        "and": [
+                          {
+                            "equals": [
+                              "@body('Parse_JSON_Predict')?['IsMatch']",
+                              "@true"
+                            ]
+                          },
+                          {
+                            "or": [
+                              {
+                                "greaterOrEquals": [
+                                  "@body('Parse_JSON_Predict')?['SimilarityScore']",
+                                  60
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "actions": {
+                        "Update_a_row": {
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "bdgas_requestintakes",
+                              "recordId": "@items('Each_Request_Intake')?['bdgas_requestintakeid']",
+                              "item/bdgas_credoaiid": "@items('Each_CREDO_Item')?['id']",
+                              "item/bdgas_credoaistatus": "@items('Each_CREDO_Item')?['workflow_stage_step']"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "operationId": "UpdateOnlyRecord",
+                              "connectionName": "shared_commondataserviceforapps"
+                            }
+                          },
+                          "metadata": {
+                            "operationMetadataId": "1196e516-795e-4d6e-ae86-9820bfd0dfb4"
+                          }
+                        }
+                      },
+                      "else": {
+                        "actions": {}
+                      },
+                      "runAfter": {
+                        "Parse_JSON_Predict": [
+                          "SUCCEEDED"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "16c2d6ec-7a85-4b7e-b5fc-a8732bd342d4"
+                      }
+                    }
+                  },
+                  "else": {
+                    "actions": {}
+                  },
+                  "runAfter": {
+                    "Predict": [
+                      "Succeeded"
+                    ]
+                  }
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "d85aaca0-9297-462e-9ccf-978804227c18"
+              }
+            }
+          },
+          "runAfter": {
+            "Retrieve_Request_Intake_CREDO_AI_Is_null_and_Status_Code_is_Concept_Approval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3fe26f0f-f35a-42ad-ba4c-39fc3f3f4145"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

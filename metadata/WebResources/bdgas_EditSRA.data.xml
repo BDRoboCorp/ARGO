@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{48cba7e5-14d1-f111-a059-7c1e520ad15a}</WebResourceId>
+  <Name>bdgas_EditSRA</Name>
+  <DisplayName>EditSRA</DisplayName>
+  <WebResourceType>5</WebResourceType>
+  <IntroducedVersion>1.1.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/bdgas_EditSRA48CBA7E5-14D1-F111-A059-7C1E520AD15A</FileName>
+</WebResource>

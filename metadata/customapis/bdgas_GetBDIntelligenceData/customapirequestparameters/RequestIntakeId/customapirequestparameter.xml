@@ -1,0 +1,9 @@
+<customapirequestparameter uniquename="RequestIntakeId">
+  <displayname default="GetBDIntelligenceData-In-RequestIntakeId">
+    <label description="GetBDIntelligenceData-In-RequestIntakeId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>GetBDIntelligenceData-In-RequestIntakeId</name>
+  <type>12</type>
+</customapirequestparameter>

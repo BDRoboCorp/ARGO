@@ -1,0 +1,18 @@
+<customapi uniquename="bdgas_GenerateArgoWordTemplate">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="GenerateArgoWordTemplate">
+    <label description="GenerateArgoWordTemplate" languagecode="1033" />
+  </description>
+  <displayname default="GenerateArgoWordTemplate">
+    <label description="GenerateArgoWordTemplate" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>GenerateArgoWordTemplate</name>
+  <plugintypeid>
+    <plugintypeexportkey>DF43F025FDABDFC73371FED3481D25F95411CCA34B7CC73C3CFC11FE967846CA</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

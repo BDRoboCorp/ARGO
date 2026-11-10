@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{6bb0481d-8870-4c13-9fa6-bb53f7bf7c6e}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{E23EA252-13EE-4B92-A49A-953EFA813F9E}" IsUserDefined="1" name="General">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{7CFD26EC-DD6C-46A0-AFD6-7F928B09F728}" name="General" columns="1">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{6daa294c-254e-473d-b163-02b66eb64373}">
+                        <labels>
+                          <label description="Description" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_description" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_description" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fe35f178-93a5-4a14-b4a8-55d48ebcec45}">
+                        <labels>
+                          <label description="Development Effort" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmenteffort" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_developmenteffort" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7356AD9B-AA88-4047-88E4-A29664DF2C19}" visible="false" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_development" id="902a0116-fc4e-473c-9432-9fc5ed5bd53a" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Development Cost" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{4f05d455-919c-4524-8a73-d785dec2865a}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Number of Format" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_numberofformat" classid="{c6d124ca-7eda-4a60-aea9-7fb8d318b68f}" datafieldname="bdgas_numberofformat" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8b0b11fd-acde-4ccb-8f72-b9bac80b24d2}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Total Number of Pages" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_totalnumberofpages" classid="{c6d124ca-7eda-4a60-aea9-7fb8d318b68f}" datafieldname="bdgas_totalnumberofpages" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a19f7d92-ef15-44c7-9fb9-19c25295ef9e}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Development Cost" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_developmentcost" classid="{533b9e00-756b-4312-95a0-dc888637ac78}" datafieldname="bdgas_developmentcost" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_operation" id="4240af8a-a326-4301-bc67-305e69cd50f6" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Operation Cost" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{68930a51-5480-4e3a-aad6-a217235879a7}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Pages per Month" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_pagespermonth" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="bdgas_pagespermonth" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a27c3a9d-60a5-4a71-a8d5-ee3a6671b8ec}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Operations Cost" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_operationscost" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="bdgas_operationscost" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{6f6f1981-56e3-48f1-bf0f-521cc04691b0}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{254ac301-2136-4722-ae77-38d43b6651e9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{018cfdd2-cc29-47df-be31-027f9c3e75b2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{5c8d3874-0e5a-49d4-8da1-101247b20fa1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{8f37eba6-27a6-42a8-b88e-fe3fdf7293f7}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Application" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_application" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_application" disabled="false" />
+            </cell>
+            <cell id="{3ef78ce8-c90b-402a-befa-6c7249842afb}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Pricing Code" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_productpricing" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_productpricing" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{aa3795e4-fb29-45a7-bf26-fe08e23b7e61}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{e8b26de5-16ab-443f-9ce5-0e3b748220f1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{71d467d5-6d16-4c7e-9214-7b2a690ff0ed}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{1e83cb2a-f56a-4409-b828-445c49c27fab}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="bdgas_ProductPricing" libraryUniqueId="{cc1f327a-61f0-4472-94ca-23f9033a6da0}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="ProductPricing.onLoad" libraryName="bdgas_ProductPricing" handlerUniqueId="{df985068-ae8e-45ba-b68e-94d2d5c1dac8}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

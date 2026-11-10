@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chargeback Approval</title>
+    <style>
+      :root {
+        --blue: #0f6cbd;
+        --border: #d1d1d1;
+        --border-soft: #e5e5e5;
+        --text: #242424;
+        --muted: #616161;
+        --page: #f5f5f5;
+        --surface: #ffffff;
+        --focus: #000000;
+        --error: #a4262c;
+        --error-soft: #fdf3f4;
+        --success: #107c10;
+        --success-soft: #f1faf1;
+        --warning: #8a6100;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--page);
+        font:
+          14px/1.4 "Segoe UI",
+          "SegoeUI",
+          sans-serif;
+      }
+
+      button,
+      textarea {
+        font: inherit;
+      }
+
+      .content {
+        width: 100%;
+        max-width: 960px;
+        padding: 16px;
+      }
+
+      .panel {
+        margin-bottom: 12px;
+        padding: 16px;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+
+      .decision {
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border-left: 4px solid var(--success);
+        background: var(--success-soft);
+      }
+
+      .decision.rejected {
+        border-left-color: var(--error);
+        background: var(--error-soft);
+      }
+
+      .decision strong {
+        display: block;
+      }
+
+      .decision p {
+        margin: 2px 0 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .required {
+        color: var(--error);
+      }
+
+      .field textarea {
+        width: 100%;
+        min-height: 110px;
+        padding: 7px 9px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+        resize: vertical;
+      }
+
+      .field textarea:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 1px;
+      }
+
+      .field textarea[aria-invalid="true"] {
+        border-color: var(--error);
+      }
+
+      .field-hint {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        min-height: 18px;
+        margin: 4px 0 0;
+        font-size: 12px;
+      }
+
+      .field-error {
+        color: var(--error);
+      }
+
+      .char-count {
+        margin-left: auto;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .button {
+        min-height: 32px;
+        min-width: 110px;
+        padding: 5px 16px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      .button:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+
+      .button.approve {
+        border-color: var(--success);
+        background: var(--success);
+      }
+
+      .button.approve:hover:not(:disabled) {
+        background: #0e6b0e;
+      }
+
+      .button.reject {
+        border-color: var(--error);
+        background: var(--error);
+      }
+
+      .button.reject:hover:not(:disabled) {
+        background: #8f1d24;
+      }
+
+      .message {
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border-left: 4px solid var(--blue);
+        background: var(--surface);
+      }
+
+      .message.warning {
+        border-left-color: var(--warning);
+      }
+
+      .message.error {
+        border-left-color: var(--error);
+      }
+
+      .message strong {
+        display: block;
+        margin-bottom: 2px;
+      }
+
+      .loading {
+        color: var(--muted);
+      }
+
+      @media (max-width: 640px) {
+        .content {
+          padding: 12px;
+        }
+
+        .actions .button {
+          flex: 1 1 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="content" aria-live="polite">
+      <div id="root"><p class="loading">Loading approval…</p></div>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var ENTITY_NAME = "bdgas_budgetrequesthistory";
+
+        // Each approver role writes its own approval flag and comment.
+        var ROLES = [
+          {
+            name: "Bot Owner",
+            userField: "bdgas_botowner",
+            approvalField: "bdgas_approvalbotowner",
+            commentField: "bdgas_descriptionbotowner",
+            maxLength: 100,
+          },
+          {
+            name: "Finance POC",
+            userField: "bdgas_financepoc",
+            approvalField: "bdgas_approvalfinancepoc",
+            commentField: "bdgas_descriptionfinancepoc",
+            maxLength: 250,
+          },
+        ];
+
+        var root = document.getElementById("root");
+        var state = {
+          xrm: null,
+          userId: "",
+          recordId: "",
+          isSubmitting: false,
+        };
+
+        init();
+
+        async function init() {
+          try {
+            state.xrm = getXrm();
+            state.userId = cleanGuid(
+              state.xrm.Utility.getGlobalContext().userSettings.userId,
+            );
+            state.recordId = getRecordId();
+
+            if (!state.recordId) {
+              throw new Error(
+                getHostFormPage()
+                  ? "Save the record first, then approve or reject it here."
+                  : "No budget request history record was provided.",
+              );
+            }
+
+            await loadRecord();
+          } catch (error) {
+            renderFatal(error);
+          }
+        }
+
+        // ---------- Context ----------
+
+        function getXrm() {
+          var current = window;
+          while (true) {
+            try {
+              if (
+                current.Xrm &&
+                current.Xrm.WebApi &&
+                current.Xrm.Navigation &&
+                current.Xrm.Utility
+              ) {
+                return current.Xrm;
+              }
+            } catch (error) {
+              // Cross-origin frame; keep walking up.
+            }
+
+            if (!current.parent || current.parent === current) {
+              break;
+            }
+            current = current.parent;
+          }
+
+          throw new Error(
+            "This web resource must be opened inside a model-driven app.",
+          );
+        }
+
+        // The record id can come from the URL (?id= or ?data=, which ARGO
+        // Navigation appends for web resources) or from the hosting form.
+        function getRecordId() {
+          var parameters = new URLSearchParams(window.location.search);
+          var candidates = [
+            parameters.get("id"),
+            parseDataId(parameters.get("data")),
+            getHostFormRecordId(),
+          ];
+
+          for (var index = 0; index < candidates.length; index += 1) {
+            var id = cleanGuid(candidates[index]);
+            if (isGuid(id)) {
+              return id;
+            }
+          }
+
+          return "";
+        }
+
+        function parseDataId(data) {
+          if (!data) {
+            return "";
+          }
+
+          try {
+            var parsed = JSON.parse(data);
+            if (typeof parsed === "string") {
+              return parsed;
+            }
+            return (
+              (parsed &&
+                (parsed.id ||
+                  parsed.recordId ||
+                  parsed.entityId ||
+                  parsed.bdgas_budgetrequesthistoryid)) ||
+              ""
+            );
+          } catch (error) {
+            var dataParameters = new URLSearchParams(data);
+            return dataParameters.get("id") || data;
+          }
+        }
+
+        function getHostFormPage() {
+          try {
+            var page = window.parent && window.parent.Xrm && window.parent.Xrm.Page;
+            if (
+              page &&
+              page.data &&
+              page.data.entity &&
+              page.data.entity.getEntityName() === ENTITY_NAME
+            ) {
+              return page;
+            }
+          } catch (error) {
+            // Not hosted on a form.
+          }
+
+          return null;
+        }
+
+        function getHostFormRecordId() {
+          var page = getHostFormPage();
+          return page ? page.data.entity.getId() : "";
+        }
+
+        // ---------- Approval ----------
+
+        async function loadRecord() {
+          await assertColumnsExist();
+
+          var select = [];
+          ROLES.forEach(function (role) {
+            select.push(
+              "_" + role.userField + "_value",
+              role.approvalField,
+              role.commentField,
+            );
+          });
+
+          var record = await state.xrm.WebApi.retrieveRecord(
+            ENTITY_NAME,
+            state.recordId,
+            "?$select=" + select.join(","),
+          );
+
+          render(record);
+        }
+
+        // Dataverse rejects the whole query with "invalid attributes in
+        // columnSet" if any column is missing, so name the missing ones.
+        async function assertColumnsExist() {
+          if (state.columnsChecked) {
+            return;
+          }
+
+          var columns = [];
+          ROLES.forEach(function (role) {
+            columns.push(role.userField, role.approvalField, role.commentField);
+          });
+
+          var metadata = await state.xrm.Utility.getEntityMetadata(
+            ENTITY_NAME,
+            columns,
+          );
+          var missing = columns.filter(function (column) {
+            try {
+              return !metadata.Attributes.get(column);
+            } catch (error) {
+              return true;
+            }
+          });
+
+          if (missing.length) {
+            throw new Error(
+              "These columns don't exist on " +
+                ENTITY_NAME +
+                " in this environment: " +
+                missing.join(", ") +
+                ".",
+            );
+          }
+
+          state.columnsChecked = true;
+        }
+
+        function getUserRoles(record) {
+          return ROLES.filter(function (role) {
+            return cleanGuid(record["_" + role.userField + "_value"]) === state.userId;
+          });
+        }
+
+        // The approval flags default to false, so a role only has a decision
+        // to show once its comment has been filled in.
+        function isDecided(record, role) {
+          return Boolean(String(record[role.commentField] || "").trim());
+        }
+
+        function render(record) {
+          clearChildren(root);
+
+          var roles = getUserRoles(record);
+          if (!roles.length) {
+            root.appendChild(
+              createMessage(
+                "warning",
+                "You can't act on this approval",
+                "Only the Bot Owner (" +
+                  (formatted(record, "_bdgas_botowner_value") || "not set") +
+                  ") or Finance POC (" +
+                  (formatted(record, "_bdgas_financepoc_value") || "not set") +
+                  ") can approve or reject it.",
+              ),
+            );
+            return;
+          }
+
+          roles.forEach(function (role) {
+            if (isDecided(record, role) || record[role.approvalField] === true) {
+              root.appendChild(renderDecision(record, role, roles.length > 1));
+            }
+          });
+
+          // Once a role has approved it's final; a rejection can still be
+          // changed to an approval later.
+          var openRoles = roles.filter(function (role) {
+            return record[role.approvalField] !== true;
+          });
+          if (openRoles.length) {
+            root.appendChild(renderForm(openRoles));
+          }
+        }
+
+        function renderDecision(record, role, showRoleName) {
+          var isApproved = record[role.approvalField] === true;
+          var box = document.createElement("div");
+          box.className = "decision" + (isApproved ? "" : " rejected");
+
+          var title = document.createElement("strong");
+          title.textContent =
+            (isApproved ? "Approved" : "Rejected") +
+            (showRoleName ? " as " + role.name : "");
+
+          var comment = document.createElement("p");
+          comment.textContent = record[role.commentField] || "No comment.";
+
+          box.appendChild(title);
+          box.appendChild(comment);
+          return box;
+        }
+
+        function renderForm(pendingRoles) {
+          // One comment covers every pending role, so it must fit the
+          // smallest comment column.
+          var maxLength = Math.min.apply(
+            null,
+            pendingRoles.map(function (role) {
+              return role.maxLength;
+            }),
+          );
+
+          var panel = document.createElement("section");
+          panel.className = "panel";
+
+          var field = document.createElement("div");
+          field.className = "field";
+
+          var label = document.createElement("label");
+          label.setAttribute("for", "comments");
+          label.textContent = "Comments ";
+          var required = document.createElement("span");
+          required.className = "required";
+          required.textContent = "*";
+          required.setAttribute("aria-label", "required");
+          label.appendChild(required);
+
+          var textarea = document.createElement("textarea");
+          textarea.id = "comments";
+          textarea.maxLength = maxLength;
+          textarea.placeholder = "Explain your decision";
+          textarea.setAttribute("aria-describedby", "commentsError");
+
+          var hint = document.createElement("div");
+          hint.className = "field-hint";
+          var error = document.createElement("span");
+          error.className = "field-error";
+          error.id = "commentsError";
+          var count = document.createElement("span");
+          count.className = "char-count";
+
+          function updateCount() {
+            count.textContent = textarea.value.length + " / " + maxLength;
+          }
+          updateCount();
+
+          textarea.addEventListener("input", function () {
+            updateCount();
+            if (textarea.value.trim()) {
+              error.textContent = "";
+              textarea.removeAttribute("aria-invalid");
+            }
+          });
+
+          hint.appendChild(error);
+          hint.appendChild(count);
+          field.appendChild(label);
+          field.appendChild(textarea);
+          field.appendChild(hint);
+          panel.appendChild(field);
+
+          var actions = document.createElement("div");
+          actions.className = "actions";
+
+          var approveButton = createButton("Approve", "approve");
+          var rejectButton = createButton("Reject", "reject");
+          var controls = {
+            textarea: textarea,
+            error: error,
+            buttons: [approveButton, rejectButton],
+          };
+
+          approveButton.addEventListener("click", function () {
+            submitDecision(true, pendingRoles, controls);
+          });
+          rejectButton.addEventListener("click", function () {
+            submitDecision(false, pendingRoles, controls);
+          });
+
+          actions.appendChild(approveButton);
+          actions.appendChild(rejectButton);
+          panel.appendChild(actions);
+
+          return panel;
+        }
+
+        async function submitDecision(isApproved, pendingRoles, controls) {
+          if (state.isSubmitting) {
+            return;
+          }
+
+          var actionLabel = isApproved ? "Approve" : "Reject";
+          var comments = controls.textarea.value.trim();
+          if (!comments) {
+            controls.error.textContent =
+              "Enter a comment before you " + actionLabel.toLowerCase() + ".";
+            controls.textarea.setAttribute("aria-invalid", "true");
+            controls.textarea.focus();
+            return;
+          }
+
+          var confirmation = await state.xrm.Navigation.openConfirmDialog({
+            title: actionLabel,
+            text:
+              "Are you sure you want to " +
+              actionLabel.toLowerCase() +
+              (pendingRoles.length > 1
+                ? " as " +
+                  pendingRoles
+                    .map(function (role) {
+                      return role.name;
+                    })
+                    .join(" and ")
+                : "") +
+              "?",
+            confirmButtonLabel: actionLabel,
+            cancelButtonLabel: "Cancel",
+          });
+          if (!confirmation.confirmed) {
+            return;
+          }
+
+          // A user holding both roles decides once; both parts are updated.
+          var update = {};
+          pendingRoles.forEach(function (role) {
+            update[role.approvalField] = isApproved;
+            update[role.commentField] = comments;
+          });
+
+          setSubmitting(true, controls);
+          var step = "save";
+          try {
+            // Save straight to the record rather than through the hosting
+            // form. The form isn't refreshed: the approval fields are hidden
+            // there, and the form's own re-read fails on this table.
+            await state.xrm.WebApi.updateRecord(ENTITY_NAME, state.recordId, update);
+            step = "reload after save";
+            await loadRecord();
+          } catch (error) {
+            setSubmitting(false, controls);
+            console.error("Approval failed during " + step + ".", error);
+            await showError(
+              new Error(
+                "Failed during " +
+                  step +
+                  ": " +
+                  ((error && error.message) || String(error)),
+              ),
+            );
+          } finally {
+            state.isSubmitting = false;
+          }
+        }
+
+        function setSubmitting(isSubmitting, controls) {
+          state.isSubmitting = isSubmitting;
+          controls.textarea.disabled = isSubmitting;
+          controls.buttons.forEach(function (button) {
+            button.disabled = isSubmitting;
+          });
+        }
+
+
+        async function showError(error) {
+          try {
+            await state.xrm.Navigation.openErrorDialog({
+              message: (error && error.message) || String(error),
+            });
+          } catch (dialogError) {
+            console.error(error);
+          }
+        }
+
+        function renderFatal(error) {
+          clearChildren(root);
+          root.appendChild(
+            createMessage(
+              "error",
+              "Unable to load the approval",
+              (error && error.message) || String(error),
+            ),
+          );
+        }
+
+        // ---------- Helpers ----------
+
+        function createButton(label, variant) {
+          var button = document.createElement("button");
+          button.type = "button";
+          button.className = "button " + variant;
+          button.textContent = label;
+          return button;
+        }
+
+        function createMessage(type, titleText, bodyText) {
+          var message = document.createElement("div");
+          message.className = "message " + type;
+          var title = document.createElement("strong");
+          title.textContent = titleText;
+          var body = document.createElement("span");
+          body.textContent = bodyText;
+          message.appendChild(title);
+          message.appendChild(body);
+          return message;
+        }
+
+        function formatted(entity, field) {
+          return (
+            (entity &&
+              entity[field + "@OData.Community.Display.V1.FormattedValue"]) ||
+            ""
+          );
+        }
+
+        function cleanGuid(value) {
+          return String(value || "")
+            .replace(/[{}]/g, "")
+            .toLowerCase();
+        }
+
+        function isGuid(value) {
+          return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(
+            value,
+          );
+        }
+
+        function clearChildren(element) {
+          while (element.firstChild) {
+            element.removeChild(element.firstChild);
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

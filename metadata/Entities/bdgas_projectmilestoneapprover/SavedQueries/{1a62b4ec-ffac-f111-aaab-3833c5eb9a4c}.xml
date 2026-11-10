@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{1a62b4ec-ffac-f111-aaab-3833c5eb9a4c}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_approverno" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_projectmilestoneapproverid">
+          <cell name="bdgas_approverno" width="118" />
+          <cell name="statuscode" width="119" />
+          <cell name="bdgas_comments" width="300" />
+          <cell name="createdon" width="105" />
+          <cell name="ownerid" width="100" />
+          <cell name="a_15c2f8411188407ab8d590aed07a2b1b.bdgas_milestonetypeid" width="240" />
+          <cell name="a_15c2f8411188407ab8d590aed07a2b1b.bdgas_requestintakeid" width="97" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" distinct="true">
+        <entity name="bdgas_projectmilestoneapprover">
+          <attribute name="bdgas_projectmilestoneapproverid" />
+          <attribute name="ownerid" />
+          <attribute name="createdon" />
+          <attribute name="statuscode" />
+          <attribute name="bdgas_comments" />
+          <link-entity alias="a_15c2f8411188407ab8d590aed07a2b1b" name="bdgas_projectmilestone" to="bdgas_projectmilestoneid" from="bdgas_projectmilestoneid" link-type="outer" visible="false">
+            <attribute name="bdgas_requestintakeid" />
+            <attribute name="bdgas_milestonetypeid" />
+          </link-entity>
+          <attribute name="bdgas_approverno" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Grid Project Milestone Approvals" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

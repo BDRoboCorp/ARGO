@@ -1,0 +1,227 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "undefined",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "type": "Recurrence",
+          "recurrence": {
+            "frequency": "Month",
+            "interval": 1,
+            "timeZone": "Singapore Standard Time",
+            "startTime": "2026-10-02T16:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "164a586e-8cc1-49bc-94c3-43a65f6794dc"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "bdgas_budgetrequests",
+              "$filter": "statuscode eq 100000001"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {}
+        },
+        "Filter_array": {
+          "type": "Query",
+          "inputs": {
+            "from": "@outputs('List_rows')?['body/value']",
+            "where": "@equals(\n   formatDateTime(\n      coalesce(item()?['bdgas_nextchargebackdate'],'1900-01-01'),\n      'yyyy-MM'\n   ),\n   formatDateTime(\n      utcNow(),\n      'yyyy-MM'\n   )\n)"
+          },
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Apply_to_each": {
+          "type": "Foreach",
+          "foreach": "@body('Filter_array')",
+          "actions": {
+            "Get_Project_Centers_entity": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_requestintakes",
+                  "recordId": "@items('Apply_to_each')?['_bdgas_requestintakeid_value']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            },
+            "Add_a_new_row": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_budgetrequesthistories",
+                  "item/bdgas_approveddate": "@utcNow()",
+                  "item/bdgas_botowner@odata.bind": "@concat(\r\n  '/systemusers(',\r\n  outputs('Get_Project_Centers_entity')?['body/_bdgas_botowner_value'],\r\n  ')'\r\n)",
+                  "item/bdgas_budgetrequest@odata.bind": "@concat(\r\n  '/bdgas_budgetrequests(',\r\n  items('Apply_to_each')?['bdgas_budgetrequestid'],\r\n  ')'\r\n)",
+                  "item/bdgas_costcenter": "@items('Apply_to_each')?['bdgas_costcenter']",
+                  "item/bdgas_fee": "@items('Apply_to_each')?['bdgas_fee']",
+                  "item/bdgas_financepoc@odata.bind": "@concat(\r\n  '/systemusers(',\r\n  items('Apply_to_each')?['_bdgas_financepoc_value'],\r\n  ')'\r\n)",
+                  "item/bdgas_projectcenterid@odata.bind": "@concat(\r\n   '/bdgas_requestintakes(',\r\n   body('Get_Project_Centers_entity')?['bdgas_requestintakeid'],\r\n   ')'\r\n)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Compose": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Compose": {
+              "type": "Compose",
+              "inputs": "@items('Apply_to_each')?['_bdgas_requestintakeid_value']",
+              "runAfter": {
+                "Get_Project_Centers_entity": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Filter_array": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_-_catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Creation Budget Request History] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Apply_to_each": [
+              "TIMEDOUT",
+              "SKIPPED",
+              "FAILED"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

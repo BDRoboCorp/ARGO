@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOConfigurationItemURL">
+  <defaultvalue>https://bdprod.service-now.com/now/nav/ui/classic/params/target/u_bots_list.do?sysparm_first_row=1&amp;sysparm_query=GOTOname%3e%3d{name}&amp;sysparm_query_encoded=GOTOname%3e%3{name}&amp;sysparm_view=</defaultvalue>
+  <displayname default="ARGO Configuration Item URL">
+    <label description="ARGO Configuration Item URL" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

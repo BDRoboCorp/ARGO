@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{e23a350a-0859-4dca-b0ac-85fc40714c99}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{494EFD08-1954-46EF-B3D3-2A9A83DAA697}" IsUserDefined="1">
+          <labels>
+            <label description="" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{CD910272-8D36-40DF-9CFA-5008018E879F}">
+                  <labels>
+                    <label description="GENERAL" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{7300F270-18DC-459D-81AA-D7B7C10E2E6B}" visible="false">
+                        <labels>
+                          <label description="Project Center" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestintake" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="bdgas_requestintake" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{D0ED0AF9-943F-4338-A4B2-796EA6E33429}" showlabel="true" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{438043c5-3fba-4568-b234-a4b4779d33ea}" rowspan="4" colspan="1" auto="false" showlabel="true">
+                        <labels>
+                          <label description="Applications" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_requestintakeapplication_requestintakeid_bdgas_requestintake</RelationshipName>
+                            <TargetEntityType>bdgas_requestintakeapplication</TargetEntityType>
+                            <ViewId>{3318A9B6-0ED3-48C9-BC03-D2AA00843B8A}</ViewId>
+                            <ViewIds>{3318A9B6-0ED3-48C9-BC03-D2AA00843B8A}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{6d3f1609-0a19-451d-a852-ced964fbced5}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{DE23C53E-50A9-4232-8D1D-E01C1892D358}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{0779CC3C-FDFD-4810-B4ED-1D1B969A9E16}" name="General" columns="11">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{94521505-B43C-4F02-8E64-8044740F2AC3}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e723f972-2ea3-4aed-8f1b-674a7653404a}" locklevel="0" colspan="1" rowspan="1" visible="true">
+                        <labels>
+                          <label description="Fiscal Year" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_fiscalyear" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_fiscalyear" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{5f8682e2-0b41-4d9b-89df-f2dba548ef13}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4cd00f1c-f73f-4b23-9e98-34ea0ec992f5}">
+                        <labels>
+                          <label description="Start Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_startdate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_startdate" />
+                      </cell>
+                      <cell locklevel="0" id="{d1d37bf3-75d1-4fb8-89bb-2500feb40375}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a5f2f38c-f94b-4a7b-8a6b-2bc5ddbee82a}">
+                        <labels>
+                          <label description="End Date" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_enddate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_enddate" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{a2c8b530-5de8-4179-ac9b-5d2d8897dd5e}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{aae2312d-2470-40ec-8905-b8e04e87b8af}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{4d860a51-49fa-4486-9279-ef7d3993f5f0}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b53f7a89-f4c8-4d2d-b0ed-6ee8a3f8b8f2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{b16dbb02-44c6-4e81-91e2-d3516300bd8f}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{a3e687c9-31f3-4313-862d-bedac4906241}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{9885a2a5-d1fc-4254-91ec-5e8388687fa6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{287271dd-51e0-4c8a-95a2-f51c44dcf6af}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

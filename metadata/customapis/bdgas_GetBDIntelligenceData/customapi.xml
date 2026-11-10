@@ -1,0 +1,18 @@
+<customapi uniquename="bdgas_GetBDIntelligenceData">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="GetBDIntelligenceData">
+    <label description="GetBDIntelligenceData" languagecode="1033" />
+  </description>
+  <displayname default="GetBDIntelligenceData">
+    <label description="GetBDIntelligenceData" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>GetBDIntelligenceData</name>
+  <plugintypeid>
+    <plugintypeexportkey>A3A3824081B51840D47118B69081E2FE2235A549D34F757C6ED321C887EEA02A</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

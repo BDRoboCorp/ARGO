@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0379f9b5-4590-4ef3-a6d4-a40dd8d15aa8}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{F6D911E0-DCEC-4E32-B65B-85429EA95AF6}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{060AF642-78AB-4685-8CA8-1FE0AB59D54C}" name="General" columns="11">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{9391E360-B6B8-4D2B-9801-9781EE878D10}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                      <cell id="{e3df6051-e8ba-40a4-8f8b-2145f3197f73}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Connection Type" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b720487f-6351-41ac-ac24-946a1235031c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Application" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_application" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_application" disabled="false">
+                          <parameters>
+                            <IsInlineNewEnabled>false</IsInlineNewEnabled>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{1a63d418-8211-4603-8cae-0d118e66ac4b}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Directionality (Inbound/Outbound)" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_directionality" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_directionality" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0b13e462-49fa-4068-80ee-2af35243a273}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Serial No." languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestintakeapplication" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_requestintakeapplication" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{20c9ec26-5448-4e65-821c-2d1ef3c2fa68}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Location" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_location" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_location" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{ac2a617e-0312-4262-9948-67803107bae3}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{41904e4f-1b03-4b21-abae-696b2aecfe44}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{3a2ef890-f570-4d67-bc80-279e2e7acb93}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{1322693b-afa1-4364-b735-ea0e8bcba3b5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{993104a5-12f9-4d0b-97ab-493c70a687c2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{5c2486fc-bed0-4e2c-8090-2bf2e3e80856}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Project Center Id" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_requestintakeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_requestintakeid" disabled="false" />
+            </cell>
+            <cell id="{e98c5445-78dd-4923-abdb-01eb91b00ddd}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="SRA Appointment" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_appointmentid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_appointmentid" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{bdc9f7ff-70ba-455d-b10c-a8b53c3a20f7}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{c27854e9-d615-4998-b1a0-daa4f0c59edf}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{9b8ae700-9a5f-44d0-bc62-05534e97c652}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d570c3c6-03e7-4dd5-bc41-2656abac7620}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="bdgas_impactedapplication" libraryUniqueId="{9db56d65-5fea-4190-afc2-c878648441b5}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="impactedApplication.formOnLoad" libraryName="bdgas_impactedapplication" handlerUniqueId="{371f3c1e-2520-49b7-ba6a-07eb059c8d2d}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

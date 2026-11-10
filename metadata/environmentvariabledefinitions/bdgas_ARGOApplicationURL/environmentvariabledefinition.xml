@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOApplicationURL">
+  <defaultvalue>https://org6547479b.crm.dynamics.com/main.aspx?appid=cebc59c4-bf80-f111-ab0f-000d3a11e677&amp;forceUCI=1</defaultvalue>
+  <displayname default="ARGO Application URL">
+    <label description="ARGO Application URL" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOProjectEstimation">
+  <defaultvalue>[   {     "Stage": "DEV",     "IsDev": true,     "Sequence": 1   },   {     "Stage": "QA/UAT",     "Durations": 40,     "Sequence": 2   },   {     "Stage": "PROD",     "Durations": 8,     "Sequence": 3   },   {     "Stage": "Hypercare",     "Durations": 80,     "Sequence": 4   } ]</defaultvalue>
+  <displayname default="ARGO Project Estimation">
+    <label description="ARGO Project Estimation" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

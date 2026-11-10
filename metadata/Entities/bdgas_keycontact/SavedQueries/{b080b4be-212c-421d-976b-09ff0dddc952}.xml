@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{b080b4be-212c-421d-976b-09ff0dddc952}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_preferredname" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_keycontactid">
+          <cell name="bdgas_preferredname" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_keycontact">
+          <attribute name="bdgas_keycontactid" />
+          <attribute name="bdgas_preferredname" />
+          <attribute name="createdon" />
+          <order attribute="bdgas_preferredname" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Key Contact Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

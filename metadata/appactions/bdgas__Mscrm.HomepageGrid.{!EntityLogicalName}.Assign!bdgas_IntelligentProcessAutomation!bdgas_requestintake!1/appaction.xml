@@ -1,0 +1,41 @@
+<appaction uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1">
+  <appmoduleid>
+    <uniquename>bdgas_IntelligentProcessAutomation</uniquename>
+  </appmoduleid>
+  <buttonaccessibilitytext default="Assign">
+    <label description="Assign" languagecode="1033" />
+  </buttonaccessibilitytext>
+  <buttonlabeltext default="Assign">
+    <label description="Assign" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Make someone else the owner of these {EntityLogicalNameCollectionMarker}. &lt;br&gt;&lt;br&gt;If you want to keep ownership of the {EntityLogicalNameCollectionMarker}, yet let someone else work with them, select Share instead.">
+    <label description="Make someone else the owner of these {EntityLogicalNameCollectionMarker}. &lt;br&gt;&lt;br&gt;If you want to keep ownership of the {EntityLogicalNameCollectionMarker}, yet let someone else work with them, select Share instead." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Assign">
+    <label description="Assign" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>bdgas_requestintake</logicalname>
+  </contextentity>
+  <contextvalue>bdgas_requestintake</contextvalue>
+  <fonticon>$clientsvg:FollowUser</fonticon>
+  <hidden>1</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>1</location>
+  <name>Mscrm.HomepageGrid.{!EntityLogicalName}.Assign</name>
+  <onclickeventjavascriptfunctionname>XrmCore.Commands.Assign.assignSelectedRecords</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":12,"value":null},{"type":24,"value":null},{"type":8,"value":null}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>adea1aea-b2aa-e611-80d6-00155d88c343</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>2</origin>
+  <sequence>1000300040.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>2</visibilitytype>
+</appaction>

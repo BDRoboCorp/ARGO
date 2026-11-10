@@ -1,0 +1,179 @@
+var ProjectMilestone = window.ProjectMilestone || {};
+
+(function (pm) {
+    "use strict";
+
+    const MILESTONE_TYPE = "bdgas_milestonetypeid";
+	const FILE_ATTACHMENT = "bdgas_fileattachment";
+
+    // Initializes the Project Milestone form by applying Code Review visibility,
+    // File Attachment requirements, and the Milestone Type entity name.
+    // Reapplies the relevant logic whenever the Milestone Type changes.
+    pm.onLoad = async function (executionContext) {
+
+        var formContext = executionContext.getFormContext();
+		
+        toggleCodeReviewSection(formContext);
+		toggleFileAttachmentRequirement(formContext);
+		setMilestoneTypeEntityName(formContext);
+		
+        formContext.getAttribute(MILESTONE_TYPE)
+            ?.addOnChange(function () {
+                toggleCodeReviewSection(formContext);
+				toggleFileAttachmentRequirement(formContext);
+                setMilestoneTypeEntityName(formContext);
+            });
+        
+    };
+
+    // Handles the Project Milestone save event and displays a confirmation
+    // message when the record status changes to Submitted.
+    // Skips the notification during Auto Save.
+    pm.onSave = function (executionContext) {
+        var eventArgs = executionContext.getEventArgs();
+
+        if (eventArgs.getSaveMode() === 70) {
+            return;
+        }
+
+        var formContext = executionContext.getFormContext();
+
+        var statusAttr = formContext.getAttribute("statuscode");
+
+        if (!statusAttr) {
+            return;
+        }
+
+        var currentValue = statusAttr.getValue();
+        var initialValue = statusAttr.getInitialValue();
+
+        if (
+            currentValue === 100000001 &&
+            initialValue !== 100000001
+        ) {
+            Xrm.Navigation.openAlertDialog({
+                title: "Project Milestone Submitted",
+                text: "The Project Milestone record has been submitted."
+            });
+        }
+    };
+
+    //Controls the visibility of the Code Review section based on the
+    //Code Review setting config*red for the selected Milestone Type.
+    function toggleCodeReviewSection(formContext) {
+
+        var section = formContext.ui.tabs
+            .get("General")
+            ?.sections.get("General_section_code_review");
+
+        if (!section) {
+            return;
+        }
+
+        var milestoneType = formContext
+            .getAttribute(MILESTONE_TYPE)
+            ?.getValue();
+
+        if (!milestoneType || milestoneType.length === 0) {
+            section.setVisible(false);
+            return;
+        }
+
+        var milestoneTypeId = milestoneType[0].id
+            .replace("{", "")
+            .replace("}", "");
+
+        Xrm.WebApi.retrieveRecord(
+            "bdgas_milestonetype",
+            milestoneTypeId,
+            "?$select=bdgas_iscodereview"
+        ).then(
+            function (result) {
+
+                section.setVisible(
+                    result.bdgas_iscodereview === true
+                );
+
+            },
+            function (error) {
+
+                console.error(
+                    "Failed retrieving Milestone Type:",
+                    error.message
+                );
+
+                section.setVisible(false);
+            }
+        );
+    }
+	
+    //Controls whether the File Attachment field is required based on the
+    //File Attachment requirement configured for the selected Milestone Type.
+	function toggleFileAttachmentRequirement(formContext) {
+		var milestoneType = formContext
+			.getAttribute(MILESTONE_TYPE)
+			?.getValue();
+
+		var fileAttachmentAttr =
+			formContext.getAttribute(FILE_ATTACHMENT);
+
+		if (!fileAttachmentAttr) {
+			return;
+		}
+
+		if (!milestoneType || milestoneType.length === 0) {
+			fileAttachmentAttr.setRequiredLevel("none");
+			return;
+		}
+
+		var milestoneTypeId = milestoneType[0].id
+			.replace("{", "")
+			.replace("}", "");
+
+		Xrm.WebApi.retrieveRecord(
+			"bdgas_milestonetype",
+			milestoneTypeId,
+			"?$select=bdgas_isfileattachmentneeded"
+		).then(
+			function (result) {
+				fileAttachmentAttr.setRequiredLevel(
+					result.bdgas_isfileattachmentneeded === true
+						? "required"
+						: "none"
+				);
+			},
+			function (error) {
+				console.error(
+					"Failed retrieving Milestone Type:",
+					error.message
+				);
+
+				fileAttachmentAttr.setRequiredLevel("none");
+			}
+		);
+	}
+
+    //Retrieves the selected Milestone Type name and uses it as the displayed entity name on the Project Milestone form.
+    async function setMilestoneTypeEntityName(formContext) {
+            var milestoneTypeAttr = formContext.getAttribute("bdgas_milestonetypeid");
+            var milestoneType = milestoneTypeAttr && milestoneTypeAttr.getValue();
+            if (!milestoneType || !milestoneType.length) {
+                return;
+            }
+    
+            try {
+                var result = await Xrm.WebApi.retrieveRecord(
+                    "bdgas_milestonetype",
+                    milestoneType[0].id.replace(/[{}]/g, ""),
+                    "?$select=bdgas_milestonetype"
+                );
+    
+                if (result.bdgas_milestonetype) {
+                    formContext.ui.setFormEntityName(result.bdgas_milestonetype);
+                }
+            } catch (error) {
+                console.error("Unable to retrieve the milestone type.", error);
+            }
+        }
+
+})(ProjectMilestone);

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EmailTemplates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{5d78c3f3-5aab-f111-aaab-000d3a11e677}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>Budget Request History Notification</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{09a426a9-27cd-f111-a05a-70a8a58e14df}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>Project Center Lifecycle Notification</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{4401b0f4-b696-f111-8076-7ced8d23115e}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>Project Milestone Approval</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{7ffc6db5-13b0-f111-aaac-7ced8d23115e}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>QPA Create Email Template</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{90f3d48d-a29f-f111-b8dc-000d3a11e677}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>SRA Appointment Email Template</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{738a9a44-6eb5-f111-aaac-000d3a11e677}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>Task Create Email Template</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+  <emailtemplate>
+    <IsCustomizable>1</IsCustomizable>
+    <templateid>{75d859e2-6eb5-f111-aaac-000d3a11e677}</templateid>
+    <subject></subject>
+    <subjectpresentationxml></subjectpresentationxml>
+    <templatetypecode>2</templatetypecode>
+    <body></body>
+    <title>Task Reminder Email Template</title>
+    <presentationxml></presentationxml>
+    <languagecode>1033</languagecode>
+    <generationtypecode>0</generationtypecode>
+    <IntroducedVersion>1.0</IntroducedVersion>
+  </emailtemplate>
+</EmailTemplates>

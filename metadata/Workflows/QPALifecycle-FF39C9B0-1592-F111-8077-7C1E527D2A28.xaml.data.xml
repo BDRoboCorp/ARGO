@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{ff39c9b0-1592-f111-8077-7c1e527d2a28}" Name="QPA Lifecycle" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <XamlFileName>/Workflows/QPALifecycle-FF39C9B0-1592-F111-8077-7C1E527D2A28.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>4</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>1</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <processorder>0</processorder>
+  <RunAs>1</RunAs>
+  <UniqueName>bdgas_qpabpf</UniqueName>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ProcessTriggerScope>1</ProcessTriggerScope>
+  <ModernFlowType>0</ModernFlowType>
+  <PrimaryEntity>bdgas_requestintake</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="QPA Lifecycle" />
+  </LocalizedNames>
+  <labels>
+    <steplabels id="{d6f83d31-ff53-4dfd-bd5f-c7980fc51db7}">
+      <label languagecode="1033" description="In Queue" />
+    </steplabels>
+    <steplabels id="{08ab88ab-318d-4182-9e9b-a878f0042543}">
+      <label languagecode="1033" description="Request Type" />
+    </steplabels>
+    <steplabels id="{679f7497-3d48-489b-8afb-425e7660cd51}">
+      <label languagecode="1033" description="Description" />
+    </steplabels>
+    <steplabels id="{1a33e3ca-97be-4064-83ab-f3183b4e9dd3}">
+      <label languagecode="1033" description="BOT Owner" />
+    </steplabels>
+    <steplabels id="{f16b8262-db16-4b99-b11c-76c8749a7bd9}">
+      <label languagecode="1033" description="Concept Approval" />
+    </steplabels>
+    <steplabels id="{e040a703-7231-429d-a7e3-ea112ef2c166}">
+      <label languagecode="1033" description="Business Owner" />
+    </steplabels>
+    <steplabels id="{82c29fac-2ae6-4c59-be9f-0b884cb26f79}">
+      <label languagecode="1033" description="Domain Owner" />
+    </steplabels>
+    <steplabels id="{d12e1bb2-a7fa-413d-876e-0ae75cc60787}">
+      <label languagecode="1033" description="Information Owner" />
+    </steplabels>
+    <steplabels id="{db60fe0a-ec20-4f75-a6bc-818427559e5d}">
+      <label languagecode="1033" description="Estimated $ Savings" />
+    </steplabels>
+    <steplabels id="{ade5314d-e62b-4c6e-872f-11bb92a896af}">
+      <label languagecode="1033" description="Estimated FTE Savings" />
+    </steplabels>
+    <steplabels id="{a121a821-bd64-48cb-9d2d-16c31bb7837d}">
+      <label languagecode="1033" description="GxP Level" />
+    </steplabels>
+    <steplabels id="{9fdddc4b-dde9-4cc8-b519-41f695d7641f}">
+      <label languagecode="1033" description="SOX Assessment" />
+    </steplabels>
+    <steplabels id="{20beef4d-0958-4b5f-a315-f33bef86f155}">
+      <label languagecode="1033" description="Privacy Assessment" />
+    </steplabels>
+    <steplabels id="{823cd74d-3491-4a6e-b926-aedce8f9df60}">
+      <label languagecode="1033" description="Information Security Assessment" />
+    </steplabels>
+    <steplabels id="{a033bd62-1666-4a42-9272-17bee3ce16b3}">
+      <label languagecode="1033" description="SRA Assessment Status" />
+    </steplabels>
+    <steplabels id="{7744c1a9-ca6c-4828-aa3d-afac267906f5}">
+      <label languagecode="1033" description="Registered Meeting Date &amp; Schedule No" />
+    </steplabels>
+    <steplabels id="{e21eb5e0-bd96-4f39-881e-b23d4d38bdd1}">
+      <label languagecode="1033" description="DEV" />
+    </steplabels>
+    <steplabels id="{dbe34d87-9772-4016-9b6d-0b6a09ff21e5}">
+      <label languagecode="1033" description="FIM Managed SG" />
+    </steplabels>
+    <steplabels id="{0e8b5698-bcca-4c4e-b93f-50410400c973}">
+      <label languagecode="1033" description="Credential Manager Entry" />
+    </steplabels>
+    <steplabels id="{6dbabe1b-6f87-4efb-aba6-e65a8a063670}">
+      <label languagecode="1033" description="Development Start Date" />
+    </steplabels>
+    <steplabels id="{a28c575c-cf25-4791-96c8-4c271e75002b}">
+      <label languagecode="1033" description="Final Code Review Date" />
+    </steplabels>
+    <steplabels id="{f1833946-a43d-409e-87f2-27ea8ee3fd2e}">
+      <label languagecode="1033" description="Final Code Review Performed By" />
+    </steplabels>
+    <steplabels id="{626ab086-7aaf-4c6d-aff5-07c7e2c0f508}">
+      <label languagecode="1033" description="QA" />
+    </steplabels>
+    <steplabels id="{31be8c1d-9b0b-4ba5-ba8d-023fa94ad3ac}">
+      <label languagecode="1033" description="UAT Complete Date" />
+    </steplabels>
+    <steplabels id="{4994df7b-b865-4cc5-8353-8de5089b784f}">
+      <label languagecode="1033" description="Change Ticket #" />
+    </steplabels>
+    <steplabels id="{2eda3e63-48d6-4398-9732-6750d9460619}">
+      <label languagecode="1033" description="Hypercare" />
+    </steplabels>
+    <steplabels id="{5a8c7e9e-fff3-4dd8-bb51-344ebd53c530}">
+      <label languagecode="1033" description="KT to AMO" />
+    </steplabels>
+    <steplabels id="{ee81a6e7-f608-4713-87b4-8ccaf0c7be99}">
+      <label languagecode="1033" description="KT Approval Date" />
+    </steplabels>
+    <steplabels id="{ed813318-88c3-4f29-acb4-8e386adaa44f}">
+      <label languagecode="1033" description="Support Group" />
+    </steplabels>
+    <steplabels id="{b4a1788e-494f-4536-ab84-99ec866d7ef9}">
+      <label languagecode="1033" description="Support Group Members" />
+    </steplabels>
+    <steplabels id="{fd0b26b6-88f2-4725-a87f-61c797bce1fe}">
+      <label languagecode="1033" description="BOT is in HyperCare?" />
+    </steplabels>
+    <steplabels id="{452509d9-a46d-4130-ada9-5c19496590ce}">
+      <label languagecode="1033" description="PROD" />
+    </steplabels>
+    <steplabels id="{c2daf0f5-3d80-4c0e-b43f-84187bec977c}">
+      <label languagecode="1033" description="PROD Code Release Date" />
+    </steplabels>
+    <steplabels id="{359f969d-cf34-4508-a6d7-fb8e27ccae48}">
+      <label languagecode="1033" description="Go-Live Date" />
+    </steplabels>
+    <steplabels id="{6990217b-aaef-4fbe-99d0-44e9c3185ddb}">
+      <label languagecode="1033" description="Visibility" />
+    </steplabels>
+    <steplabels id="{28c48aff-bb82-4488-88bc-8ce51a2827aa}">
+      <label languagecode="1033" description="BOT is in HyperCare?" />
+    </steplabels>
+    <steplabels id="{cfc6de83-c96c-48e7-8e36-76d5a374acf5}">
+      <label languagecode="1033" description="Chargeable" />
+    </steplabels>
+  </labels>
+</Workflow>

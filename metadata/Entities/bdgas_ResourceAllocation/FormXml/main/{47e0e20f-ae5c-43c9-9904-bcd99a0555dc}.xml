@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{47e0e20f-ae5c-43c9-9904-bcd99a0555dc}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{DA1639EF-543E-4D78-BF24-424E9C36D503}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{2D65B4CC-3759-4FFA-B241-F23154BFD65A}" columns="1" name="General">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{22189681-1520-4619-B012-1158382E5F4F}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_resourceallocation" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="bdgas_ResourceAllocation" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4A0E24A1-5EFC-4782-9967-30C4BFA8DA18}" visible="false">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{eca42add-2a2d-4bc0-850c-60de46b28747}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="PIC" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_pic" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_pic" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9f089758-6624-4b47-b783-083428b86fe5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Application" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_application" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_application" disabled="false">
+                          <parameters />
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1261236f-9fc5-4125-aa48-7e7b6acb7404}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Percentage" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_percentage" classid="{c3efe0c3-0ec6-42be-8349-cbd9079dfd8e}" datafieldname="bdgas_percentage" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{b6224b50-6e40-409d-9744-8a8af62b4ae2}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{f6070d0c-af5a-4c95-9f75-f1066e6a106b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e3e9e6a1-87c0-4dd4-abcb-d52ce32ca5fd}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b74db1b4-c2de-4418-87eb-116895875195}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{24075c78-9e6f-4718-93c1-b891584b286a}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Request Intake Id" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_requestintakeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_requestintakeid" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{4a9220d9-bc68-4c30-83ed-ad460e0ccead}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{937dadc6-c885-4e60-a4a0-d7eb41c9d34f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{fa77e9f0-e58d-4d5b-8519-383767aa2e29}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ad09a967-b53b-4d95-9306-c01c91584a8d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

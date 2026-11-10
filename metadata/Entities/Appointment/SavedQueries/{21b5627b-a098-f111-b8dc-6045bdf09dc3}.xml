@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{21b5627b-a098-f111-b8dc-6045bdf09dc3}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" preview="1" icon="1">
+        <row name="result" id="activityid">
+          <cell name="bdgas_requestname" width="100" />
+          <cell name="scheduledstart" width="117" />
+          <cell name="bdgas_configurationitemserialnumber" width="234" />
+          <cell name="bdgas_configurationitemname" width="185" />
+          <cell name="bdgas_presenter" width="100" />
+          <cell name="bdgas_businesspartner" width="222" />
+          <cell name="bdgas_validationlead" width="130" />
+          <cell name="bdgas_documentid" width="117" />
+          <cell name="bdgas_documentstatusid" width="137" />
+          <cell name="subject" width="186" />
+          <cell name="bdgas_notes" width="100" />
+          <cell name="statecode" width="100" />
+          <cell name="bdgas_slotstatus" width="101" />
+          <cell name="requiredattendees" width="151" />
+          <cell name="optionalattendees" width="149" />
+          <cell name="bdgas_businessowner" width="132" />
+          <cell name="bdgas_technicalowner" width="136" />
+          <cell name="bdgas_chmdmndritmplanviewnumber" width="224" />
+          <cell name="bdgas_srarequesttypeid" width="148" />
+          <cell name="bdgas_internaltypeid" width="115" />
+          <cell name="bdgas_gxpapplicableid" width="130" />
+          <cell name="bdgas_soxapplicableid" width="133" />
+          <cell name="bdgas_securityassessed" width="142" />
+          <cell name="bdgas_privacyassessed" width="138" />
+          <cell name="bdgas_fundedbyid" width="102" />
+          <cell name="bdgas_chargebackcategoryid" width="168" />
+          <cell name="bdgas_eventid" width="100" />
+          <cell name="statuscode" width="119" />
+          <cell name="modifiedon" width="113" />
+          <cell name="onlinemeetingid" width="144" />
+          <cell name="onlinemeetingjoinurl" width="178" />
+          <cell name="instancetypecode" width="100" ishidden="1" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="scheduledstart" />
+          <attribute name="statecode" />
+          <attribute name="instancetypecode" />
+          <attribute name="bdgas_slotstatus" />
+          <attribute name="statuscode" />
+          <order attribute="scheduledstart" descending="false" />
+          <attribute name="activityid" />
+          <attribute name="bdgas_businesspartner" />
+          <attribute name="bdgas_businessowner" />
+          <attribute name="bdgas_technicalowner" />
+          <attribute name="bdgas_configurationitemname" />
+          <attribute name="bdgas_configurationitemserialnumber" />
+          <attribute name="bdgas_chmdmndritmplanviewnumber" />
+          <attribute name="bdgas_securityassessed" />
+          <attribute name="bdgas_privacyassessed" />
+          <attribute name="modifiedon" />
+          <attribute name="onlinemeetingjoinurl" />
+          <attribute name="bdgas_srarequesttypeid" />
+          <attribute name="bdgas_gxpapplicableid" />
+          <attribute name="bdgas_soxapplicableid" />
+          <attribute name="bdgas_internaltypeid" />
+          <attribute name="bdgas_validationlead" />
+          <attribute name="bdgas_notes" />
+          <attribute name="bdgas_documentstatusid" />
+          <attribute name="requiredattendees" />
+          <attribute name="optionalattendees" />
+          <attribute name="bdgas_documentid" />
+          <attribute name="bdgas_fundedbyid" />
+          <attribute name="bdgas_chargebackcategoryid" />
+          <attribute name="onlinemeetingid" />
+          <attribute name="bdgas_eventid" />
+          <attribute name="bdgas_requestname" />
+          <attribute name="bdgas_presenter" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="RA Tracker" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

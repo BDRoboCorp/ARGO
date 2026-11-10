@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModuleSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SiteMapUniqueName>bdgas_IntelligentProcessAutomation</SiteMapUniqueName>
+  <EnableCollapsibleGroups>False</EnableCollapsibleGroups>
+  <ShowHome>True</ShowHome>
+  <ShowPinned>True</ShowPinned>
+  <ShowRecents>True</ShowRecents>
+  <SiteMap IntroducedVersion="7.0.0.0">
+    <Area Id="area_0e2ed9df" ResourceId="SitemapDesigner.NewTitle" DescriptionResourceId="SitemapDesigner.NewTitle" ShowGroups="true" IntroducedVersion="7.0.0.0">
+      <Titles>
+        <Title LCID="1033" Title="Area1" />
+      </Titles>
+      <Group Id="group_9873ee98" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" Url="https://app.powerbi.com/reportEmbed?reportId=acdf49ce-e0b4-4414-b580-2cc87a1d8032&amp;autoAuth=true&amp;ctid=94c3e67c-9e2d-4800-a6b7-635d97882165" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Dashboard" />
+        </Titles>
+      </Group>
+      <Group Id="group_d638e12b" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
+        <Titles>
+          <Title LCID="1033" Title="Project Delivery" />
+        </Titles>
+        <SubArea Id="subarea_8385b40b" ResourceId="SitemapDesigner.NewSubArea" Icon="/_imgs/imagestrips/transparent_spacer.gif" Url="$webresource:bdgas_argonavigation" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
+          <Titles>
+            <Title LCID="1033" Title="Argo Homepage" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="subarea_cb41da4b" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="activitypointer" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_6770aa64" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_application" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_650548d7" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_budgetrequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_2b1e1324" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_budgetrequesthistory" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_1a228ce2" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_devtask" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_6a576352" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_fiscalyear" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_1f5c662c" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_requestintakeapplication" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_9ff0ee23" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_keycontact" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_e8fb883d" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_milestonetype" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_da22b564" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_productpricing" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_06388b49" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_requestintake" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_4546676f" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_devestimation" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_afd33aff" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_projectmilestoneapprover" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_56a67fa0" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_regulatoryassessmentmaster" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_bf340525" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_resourceallocation" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_f387e623" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_rpabpf" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_4461bed7" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_serviceprovider" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_52e1da84" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="appointment" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_2e549ec1" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="task" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_3c7c1898" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="team" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_4c051b0a" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="systemuser" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_cf393e3c" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_vendor" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_e4ee51c1" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_milestonetype" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_f8a9ef6c" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_governancerequest" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_38a4cf90" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_publicholiday" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_22ae2f11" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="bdgas_argoconfig" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+        <SubArea Id="subarea_19b03bc4" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="template" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
+      </Group>
+    </Area>
+  </SiteMap>
+  <LocalizedNames>
+    <LocalizedName description="Intelligent Process Automation" languagecode="1033" />
+  </LocalizedNames>
+</AppModuleSiteMap>

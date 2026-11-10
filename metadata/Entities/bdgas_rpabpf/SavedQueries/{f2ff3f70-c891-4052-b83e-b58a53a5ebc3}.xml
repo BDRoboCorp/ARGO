@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{f2ff3f70-c891-4052-b83e-b58a53a5ebc3}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bpf_name" select="1" icon="1" preview="1">
+        <row name="result" id="businessprocessflowinstanceid">
+          <cell name="bpf_bdgas_requestintakeid" width="300" />
+          <cell name="activestageid" width="150" />
+          <cell name="statuscode" width="150" />
+          <cell name="createdon" width="150" />
+          <cell name="bpf_duration" width="150" />
+          <cell name="processid" width="300" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_rpabpf">
+          <attribute name="businessprocessflowinstanceid" />
+          <attribute name="bpf_name" />
+          <attribute name="createdon" />
+          <attribute name="bpf_bdgas_requestintakeid" />
+          <attribute name="activestageid" />
+          <attribute name="statecode" />
+          <attribute name="statuscode" />
+          <attribute name="createdby" />
+          <attribute name="bpf_duration" />
+          <attribute name="processid" />
+          <order attribute="bpf_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive RPA BPF" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

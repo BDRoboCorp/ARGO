@@ -1,0 +1,408 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "appointment",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "bdgas_requiredemails,bdgas_slotstatus,regardingobjectid,bdgas_mydigitalsraid",
+              "subscriptionRequest/filterexpression": "(bdgas_requiredemails ne null or bdgas_optionalemails ne null) and bdgas_slotstatus eq 2"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "36a7da3f-f2ff-4c62-8080-11ec3a6b618b"
+          }
+        }
+      },
+      "actions": {
+        "Condition": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@outputs('Compose_-_Slot_Status')",
+                  2
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Patch_Event": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "Uri": "https://graph.microsoft.com/v1.0/me/calendars/Calendar/events/@{triggerOutputs()?['body/bdgas_eventid']}",
+                  "Method": "PATCH",
+                  "Body": "{\n \"attendees\": @{variables('varAttendees')},\n \"subject\": \"@{variables('varSubject')}\",\n \"body\": @{variables('varContent')}\n}",
+                  "ContentType": "application/json"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "HttpRequest",
+                  "connectionName": "shared_office365"
+                }
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "For_each": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3ff77a4e-3c10-4f1e-bbcf-03ce5eb6cd59"
+          }
+        },
+        "Compose_-_StateCode": {
+          "type": "Compose",
+          "inputs": "@triggerOutputs()?['body/statecode']",
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "9a96ae15-6f49-4bd6-b4bb-09880c2a30cd"
+          }
+        },
+        "Compose_-_Slot_Status": {
+          "type": "Compose",
+          "inputs": "@triggerOutputs()?['body/bdgas_slotstatus']",
+          "runAfter": {
+            "Compose_-_StateCode": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d2f21831-7d83-4485-b97d-9a563b442554"
+          }
+        },
+        "Get_Event": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "Uri": "https://graph.microsoft.com/v1.0/me/calendars/Calendar/events/@{triggerOutputs()?['body/bdgas_eventid']}",
+              "Method": "GET",
+              "ContentType": "application/json"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "operationId": "HttpRequest",
+              "connectionName": "shared_office365"
+            }
+          },
+          "runAfter": {
+            "Compose_-_Slot_Status": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_variable_Meeting": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varAttendees",
+                "type": "array",
+                "value": "@body('Get_Event')?['attendees']"
+              }
+            ]
+          },
+          "runAfter": {
+            "Get_Event": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_variable_CRM": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EmailArray",
+                "type": "array",
+                "value": "@split(concat(triggerOutputs()?['body/bdgas_requiredemails'], ';', triggerOutputs()?['body/bdgas_optionalemails']), ';')"
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_variable_Meeting_Subject": [
+              "Succeeded"
+            ]
+          }
+        },
+        "For_each": {
+          "type": "Foreach",
+          "foreach": "@variables('EmailArray')",
+          "actions": {
+            "Is_Not_Empty": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@empty(items('For_each'))",
+                      "@false"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Append_to_array_variable": {
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "varAttendees",
+                    "value": {
+                      "type": "required",
+                      "status": {
+                        "response": "none",
+                        "time": "0001-01-01T00:00:00Z"
+                      },
+                      "emailAddress": {
+                        "name": "@{items('For_each')}",
+                        "address": "@{items('For_each')}"
+                      }
+                    }
+                  }
+                }
+              },
+              "else": {
+                "actions": {}
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_-_varContent": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_variable_Meeting_Body": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varBody",
+                "type": "string",
+                "value": "@body('Get_Event')?['body']?['content']"
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_variable_Meeting": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_variable_Meeting_Subject": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varSubject",
+                "type": "string",
+                "value": "@body('Get_Event')?['subject']"
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_variable_Meeting_Body": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Perform_an_unbound_action": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "actionName": "bdgas_GetEmailContent",
+              "item/FetchXml": "<fetch top=\"1\">\n  <entity name=\"appointment\">\n    <attribute name=\"activityid\" />\n <attribute name=\"subject\" />\n\t<attribute name=\"bdgas_requestname\" />\n\t<attribute name=\"bdgas_requiredemails\" />\n <attribute name=\"bdgas_optionalemails\" />\n <attribute name=\"onlinemeetingjoinurl\" />\n <link-entity name='systemuser' to='bdgas_businesspartner' from='systemuserid' alias='systemuser' link-type='outer'>\n<attribute name='fullname' />\n</link-entity>\n\t<attribute name=\"bdgas_configurationitemname\" />\n\t<attribute name=\"bdgas_configurationitemserialnumber\" />\n\t<attribute name=\"bdgas_notes\" />\n    <filter>\n      <condition\n        attribute=\"activityid\"\n        operator=\"eq\"\n        value=\"@{triggerOutputs()?['body/activityid']}\" />\n    </filter>\n  </entity>\n</fetch>",
+              "item/TempateName": "SRA Appointment Email Template",
+              "item/StripHtml": false
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_CRM": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Parse_JSON": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@outputs('Perform_an_unbound_action')?['body/Result']",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Subject": {
+                  "type": "string"
+                },
+                "Body": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Perform_an_unbound_action": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Initialize_variable_-_varContent": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varContent",
+                "type": "object",
+                "value": {
+                  "contentType": "html",
+                  "content": "@{body('Parse_JSON')?['Body']}"
+                }
+              }
+            ]
+          },
+          "runAfter": {
+            "Parse_JSON": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)_2": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[UpdateCredoStatuses] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Condition": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

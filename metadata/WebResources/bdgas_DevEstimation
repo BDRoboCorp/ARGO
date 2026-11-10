@@ -1,0 +1,17 @@
+var DevEstimation = DevEstimation || {};
+DevEstimation.Events = DevEstimation.Events || {};
+
+(function () {
+
+    this.onLoad = async function (executionContext) {
+
+        var formContext =
+            executionContext.getFormContext();
+
+        /*await RegulatoryLock.apply(
+            formContext,
+            "bdgas_requestintakeid"
+        );*/
+    };
+
+}).apply(DevEstimation.Events);

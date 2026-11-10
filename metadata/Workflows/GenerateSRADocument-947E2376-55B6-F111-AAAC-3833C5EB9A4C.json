@@ -1,0 +1,736 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_sharepointonline": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsharepointonline_e886e"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      },
+      "shared_wordonlinebusiness": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedwordonlinebusiness_fe3b2"
+        },
+        "api": {
+          "name": "shared_wordonlinebusiness"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "ARGO Application URL (bdgas_ARGOApplicationURL)": {
+          "defaultValue": "https://org6547479b.crm.dynamics.com/main.aspx?appid=cebc59c4-bf80-f111-ab0f-000d3a11e677&forceUCI=1",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bdgas_ARGOApplicationURL"
+          }
+        },
+        "ARGO notification flows (bdgas_ARGOnotificationflows)": {
+          "defaultValue": {
+            "Recipients": "temmy.raharjo@bd.com;jordan.cheng@bd.com;muhammad.zhafari@bd.com;"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_ARGOnotificationflows"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "5c1c1d2b-6d80-4100-b465-bd3294ea05b9"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "AppointmentId": {
+                  "type": "string"
+                }
+              }
+            },
+            "method": "POST",
+            "triggerAuthenticationType": "All"
+          }
+        }
+      },
+      "actions": {
+        "Initialize_variable_varFileSchema": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "e7bd0929-13af-4119-aba9-756a02977440"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varFileSchema",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Try_Scope": {
+          "actions": {
+            "Perform_an_unbound_action": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0b937762-9a7e-46d5-8a65-c51b3310ae50"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "actionName": "bdgas_GenerateArgoWordTemplate",
+                  "item/AppointmentId": "@triggerBody()?['AppointmentId']"
+                },
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "PerformUnboundAction",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Download_a_file_or_an_image_5": {
+              "runAfter": {
+                "Perform_an_unbound_action": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "22d05a4c-901a-444a-8ca7-0274b1102a24"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "appointments",
+                  "recordId": "@triggerBody()?['AppointmentId']",
+                  "fileImageFieldName": "bdgas_sradocumentupload"
+                },
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetEntityFileImageFieldContent",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Create_file_1": {
+              "runAfter": {
+                "Get_a_SRA_by_ID": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c67f55b2-aff1-4ec7-a726-91919187474b"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://bd1.sharepoint.com/sites/glauto",
+                  "folderPath": "/bdgas_requestintake",
+                  "name": "@outputs('Get_a_SRA_by_ID')?['body/bdgas_sradocumentupload_name']",
+                  "body": "@body('Download_a_file_or_an_image_5')"
+                },
+                "host": {
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "CreateFile",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition_1": {
+              "actions": {
+                "Download_a_file_or_an_image": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "9171ad9f-4abc-4b76-ae83-afb08e337973"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "appointments",
+                      "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                      "fileImageFieldName": "bdgas_networkdataflowdiagram",
+                      "size": "full"
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetEntityFileImageFieldContent",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Append_to_array_variable": {
+                  "runAfter": {
+                    "Download_a_file_or_an_image": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "aa91d1c0-6665-45da-8985-c5d05ee00d9f"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "varFileSchema",
+                    "value": "\"-452940137\": {\n    \"$content-type\": \"@{if(\n  startsWith(\n    body('Download_a_file_or_an_image')?['$content'],\n    '/9j/'\n  ),\n  'image/jpeg',\n  'image/png'\n)}\",\n    \"$content\": \"@{body('Download_a_file_or_an_image')?['$content']}\"\n}"
+                  }
+                }
+              },
+              "runAfter": {
+                "Create_file_1": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@body('Get_a_SRA_by_ID')",
+                      "bdgas_networkdataflowdiagram"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "db45e4ea-1988-42f5-80b9-527c91bc801e"
+              },
+              "type": "If"
+            },
+            "Condition_2": {
+              "actions": {
+                "Download_a_file_or_an_image_1": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "e265d1b8-2d2e-4065-a07e-325f8d24d894"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "appointments",
+                      "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                      "fileImageFieldName": "bdgas_networkdataflowdiagram2",
+                      "size": "full"
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetEntityFileImageFieldContent",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Append_to_array_variable_1": {
+                  "runAfter": {
+                    "Download_a_file_or_an_image_1": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "81219610-c153-4c63-9250-ca80907aa4e7"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "varFileSchema",
+                    "value": "\"1533083816\": {\n    \"$content-type\": \"@{if(\n  startsWith(\n    body('Download_a_file_or_an_image_1')?['$content'],\n    '/9j/'\n  ),\n  'image/jpeg',\n  'image/png'\n)}\",\n    \"$content\": \"@{body('Download_a_file_or_an_image_1')?['$content']}\"\n}"
+                  }
+                }
+              },
+              "runAfter": {
+                "Condition_1": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@body('Get_a_SRA_by_ID')",
+                      "bdgas_networkdataflowdiagram2"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "e47a5a69-2680-402d-9efc-65bead8470f6"
+              },
+              "type": "If"
+            },
+            "Condition_3": {
+              "actions": {
+                "Download_a_file_or_an_image_2": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "47a3afb9-cc39-4307-8e2b-7681d2c7d988"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "appointments",
+                      "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                      "fileImageFieldName": "bdgas_networkdataflowdiagram3",
+                      "size": "full"
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetEntityFileImageFieldContent",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Append_to_array_variable_2": {
+                  "runAfter": {
+                    "Download_a_file_or_an_image_2": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "ed0e156b-6539-4b05-8239-5be6bb26ade6"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "varFileSchema",
+                    "value": "\"772514242\": {\n    \"$content-type\": \"@{if(\n  startsWith(\n    body('Download_a_file_or_an_image_2')?['$content'],\n    '/9j/'\n  ),\n  'image/jpeg',\n  'image/png'\n)}\",\n    \"$content\": \"@{body('Download_a_file_or_an_image_2')?['$content']}\"\n  }"
+                  }
+                }
+              },
+              "runAfter": {
+                "Condition_2": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@body('Get_a_SRA_by_ID')",
+                      "bdgas_networkdataflowdiagram3"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "36260959-aae7-4c76-9ec8-93da18dc07d4"
+              },
+              "type": "If"
+            },
+            "Condition_4": {
+              "actions": {
+                "Download_a_file_or_an_image_3": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "dbf44da3-dddc-46e3-869c-2398ea03da99"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "appointments",
+                      "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                      "fileImageFieldName": "bdgas_networkdataflowdiagram4",
+                      "size": "full"
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetEntityFileImageFieldContent",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Append_to_array_variable_3": {
+                  "runAfter": {
+                    "Download_a_file_or_an_image_3": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "983fe37e-ed33-4903-ac42-3474bd84460a"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "varFileSchema",
+                    "value": "\"2043469201\": {\n    \"$content-type\": \"@{if(\n  startsWith(\n    body('Download_a_file_or_an_image_3')?['$content'],\n    '/9j/'\n  ),\n  'image/jpeg',\n  'image/png'\n)}\",\n    \"$content\": \"@{body('Download_a_file_or_an_image_3')?['$content']}\"\n  }"
+                  }
+                }
+              },
+              "runAfter": {
+                "Condition_3": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@body('Get_a_SRA_by_ID')",
+                      "bdgas_networkdataflowdiagram4"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "09607f87-be28-4cc1-9d87-ebc52e4a80a3"
+              },
+              "type": "If"
+            },
+            "Condition_5": {
+              "actions": {
+                "Download_a_file_or_an_image_4": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "c36af51a-11f9-4be2-ab6e-653338eb3fb6"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "appointments",
+                      "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                      "fileImageFieldName": "bdgas_networkdataflowdiagram5",
+                      "size": "full"
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetEntityFileImageFieldContent",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Append_to_array_variable_4": {
+                  "runAfter": {
+                    "Download_a_file_or_an_image_4": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "83e6f017-3693-4fcc-98ed-7d3ca04db70b"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "varFileSchema",
+                    "value": "\"1854686739\": {\n    \"$content-type\": \"@{if(\n  startsWith(\n    body('Download_a_file_or_an_image_4')?['$content'],\n    '/9j/'\n  ),\n  'image/jpeg',\n  'image/png'\n)}\",\n    \"$content\": \"@{body('Download_a_file_or_an_image_4')?['$content']}\"\n  }"
+                  }
+                }
+              },
+              "runAfter": {
+                "Condition_4": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@body('Get_a_SRA_by_ID')",
+                      "bdgas_networkdataflowdiagram5"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "d6586b5b-563e-4500-b3a2-b55f9e4b19fc"
+              },
+              "type": "If"
+            },
+            "Compose_DynamicFileSchema": {
+              "runAfter": {
+                "Condition_5": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "1fe523f3-bddd-425f-9e80-633907dd49c6"
+              },
+              "type": "Compose",
+              "inputs": "@json(\r\n  concat(\r\n   '{',\r\n   join(variables('varFileSchema'), ','),\r\n   '}'\r\n  )\r\n)"
+            },
+            "Populate_a_Microsoft_Word_template": {
+              "runAfter": {
+                "Compose_DynamicFileSchema": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "01PKQKFL4DP3YZX4C2YJE2OIVSE7MOGBAH": "/SRA Template Dev v2.0.docx",
+                "operationMetadataId": "cdb46cdc-5425-4939-b896-61a9bf6c6f74",
+                "01PKQKFL2F7QYNAWWDZBBIBR2J6MKIT2AD": "/SRA Template Dev v2.0.docx",
+                "01PKQKFL26QAKLK2RUQVD2OVKBAFV4665A": "/Enhancement of BOT - NAMBDIInvoiceCare14_SRA.docx",
+                "01PKQKFLZROCEYUHHRG5HLUAY3PP3GLLFE": "/Enhancement of BOT - NAMBDIInvoiceCare14_SRA.docx"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "source": "sites/bd1.sharepoint.com,1163e177-d806-4295-926f-73886bb773f6,13021659-7aee-4f93-9a89-1694bc1e63fb",
+                  "drive": "b!d-FjEQbYlUKSb3OIa7dz9lkWAhPuepNPmokWlLweY_vePTF1XT-_SZZwIvR-KHCj",
+                  "file": "@outputs('Create_file_1')?['body/DisplayName']",
+                  "dynamicFileSchema": "@outputs('Compose_DynamicFileSchema')"
+                },
+                "host": {
+                  "connectionName": "shared_wordonlinebusiness",
+                  "operationId": "CreateFileItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Upload_a_file_or_an_image": {
+              "runAfter": {
+                "Populate_a_Microsoft_Word_template": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "67b46f14-39fe-4c7e-a619-3235335aa253"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "x-ms-file-name": "@outputs('Get_a_SRA_by_ID')?['body/bdgas_sradocumentupload_name']",
+                  "entityName": "appointments",
+                  "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                  "fileImageFieldName": "bdgas_sradocumentupload",
+                  "item": "@body('Populate_a_Microsoft_Word_template')"
+                },
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateEntityFileImageFieldContent",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Delete_file": {
+              "runAfter": {
+                "Populate_a_Microsoft_Word_template": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "925a05a6-01d2-4e2d-85c0-04d2bccde2ac"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "https://bd1.sharepoint.com/sites/glauto",
+                  "id": "@outputs('Create_file_1')?['body/Id']"
+                },
+                "host": {
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "DeleteFile",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Response": {
+              "runAfter": {
+                "Delete_file": [
+                  "Succeeded"
+                ],
+                "Upload_a_file_or_an_image": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "982e6d39-c269-48c2-9b2e-095fbd2ab164"
+              },
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                "statusCode": 200,
+                "body": {
+                  "FileName": "@{outputs('Get_a_SRA_by_ID')?['body/bdgas_sradocumentupload_name']}",
+                  "File": "@body('Populate_a_Microsoft_Word_template')"
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "FileName": {
+                      "type": "string"
+                    },
+                    "File": {
+                      "type": "object",
+                      "properties": {
+                        "$content-type": {
+                          "type": "string"
+                        },
+                        "$content": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Get_a_SRA_by_ID": {
+              "runAfter": {
+                "Download_a_file_or_an_image_5": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "abbd7982-cf1d-44de-be0f-5a36deecc312"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "appointments",
+                  "recordId": "@triggerBody()?['AppointmentId']"
+                },
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_varFileSchema": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6300a3ed-2f2c-4176-8966-ec29a381580c"
+          },
+          "type": "Scope"
+        },
+        "CatchScope": {
+          "actions": {
+            "Send_an_email_(V2)": {
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "503d7713-0632-47ae-87e7-eecda3637bbf"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "@body('Parse_JSON')?['Recipients']",
+                  "emailMessage/Subject": "[ARGO System Notification] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br><b><strong class=\"editor-text-bold\">Flow Name:</strong></b> @{outputs('Get_Workflow_Details')?['tags']?['flowDisplayName']}</p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Flow URL:</strong></b> <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a></p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Current Event: </strong></b><a href=\"@{outputs('Record_URL')}\" class=\"editor-link\">View Record</a><br><br>Kindly contact IT Support for further assistance.<br><br><i><b><strong class=\"editor-text-bold editor-text-italic\">Do not reply to this email as it was automatically generated by the system.</strong></b></i><br><br>Thank you,<br>ARGO System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Flow_URL": {
+              "runAfter": {
+                "Get_Workflow_Details": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5dac59e2-9883-49ed-882e-6b8d857bf307"
+              },
+              "type": "Compose",
+              "inputs": "https://make.powerautomate.com/environments/@{outputs('Get_Workflow_Details')?['tags']?['environmentName']}/flows/@{outputs('Get_Workflow_Details')?['name']}/runs/@{outputs('Get_Workflow_Details')?['run']['name']}"
+            },
+            "Get_Workflow_Details": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "b7f5e576-5cae-4bae-b2b6-2c889e0abe66"
+              },
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Record_URL": {
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a616b9bd-dca8-4d7a-afd6-0cce2c319ebd"
+              },
+              "type": "Compose",
+              "inputs": "@{parameters('ARGO Application URL (bdgas_ARGOApplicationURL)')}&pagetype=entityrecord&etn=appointment&id="
+            },
+            "Parse_JSON": {
+              "runAfter": {
+                "Record_URL": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "36a6fe62-613a-46c2-8845-dd9b8135fee5"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('ARGO notification flows (bdgas_ARGOnotificationflows)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Recipients": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Try_Scope": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0523e571-68ec-4397-9fb8-b467e2c6089a"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

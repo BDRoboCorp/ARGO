@@ -1,0 +1,2811 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ARGO: Automations and Regulatory Governance Office</title>
+    <style>
+      :root {
+        --crm-blue: #0f6cbd;
+        --crm-blue-strong: #115ea3;
+        --crm-border: #d1d1d1;
+        --crm-border-soft: #e5e5e5;
+        --crm-text: #242424;
+        --crm-muted: #616161;
+        --crm-surface: #ffffff;
+        --crm-page: #f5f5f5;
+        --crm-hover: #f3f9ff;
+        --crm-focus: #000000;
+        --crm-success: #107c10;
+        --crm-warning: #8a6100;
+        --nav-surface: #ffffff;
+        --nav-surface-strong: #0f6cbd;
+        --nav-surface-hover: #f3f9ff;
+        --nav-border: #e5e5e5;
+        --nav-text: #242424;
+        --nav-muted: #616161;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        margin: 0;
+        color: var(--crm-text);
+        background: var(--crm-page);
+        font:
+          14px/1.4 "Segoe UI",
+          "SegoeUI",
+          sans-serif;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .shell {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .command-bar {
+        flex: 0 0 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--crm-border-soft);
+        background: var(--crm-surface);
+      }
+
+      .brand-logo {
+        height: 24px;
+        width: auto;
+        display: block;
+        flex: 0 0 auto;
+      }
+
+      .page-title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .user-greeting {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--crm-text);
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .user-teams-label {
+        color: var(--crm-muted);
+        font-weight: 400;
+      }
+
+      .user-team-link {
+        color: var(--crm-blue-strong);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .user-team-list {
+        display: inline-flex;
+        gap: 0;
+      }
+
+      .user-team-link:hover {
+        text-decoration: underline;
+      }
+
+      .user-team-link + .user-team-link::before {
+        color: var(--crm-muted);
+        content: ", ";
+        font-weight: 400;
+      }
+
+      .content {
+        width: 100%;
+        height: calc(100vh - 40px);
+        flex: 0 0 calc(100vh - 40px);
+        min-height: 0;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .workspace {
+        min-height: 0;
+        height: 100%;
+        display: grid;
+        grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+        gap: 0;
+        align-items: stretch;
+      }
+
+      .workspace.is-navigation-hidden {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .navigation-panel {
+        min-height: 0;
+        height: 100%;
+        overflow: auto;
+        border: 0;
+        border-right: 1px solid var(--crm-border-soft);
+        background: var(--nav-surface);
+      }
+
+      .work-area {
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .form-command-bar {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 12px;
+        border-bottom: 1px solid var(--crm-border-soft);
+        background: var(--nav-surface);
+      }
+
+      .form-command-separator {
+        margin: 0 4px;
+        color: var(--crm-muted);
+        user-select: none;
+      }
+
+      .form-command-bar[hidden],
+      .command-button[hidden] {
+        display: none;
+      }
+
+      .command-button {
+        min-height: 32px;
+        padding: 5px 12px;
+        border: 1px solid var(--crm-border);
+        border-radius: 4px;
+        color: var(--crm-text);
+        background: var(--crm-surface);
+        cursor: pointer;
+        transition:
+          background-color 120ms ease,
+          border-color 120ms ease,
+          box-shadow 120ms ease,
+          color 120ms ease;
+      }
+
+      .command-button:hover:not(:disabled) {
+        border-color: var(--crm-blue);
+        background: var(--nav-surface-hover);
+        box-shadow: 0 1px 2px rgb(0 0 0 / 12%);
+      }
+
+      .command-button.primary {
+        border-color: var(--crm-blue-strong);
+        color: #ffffff;
+        background: var(--crm-blue);
+      }
+
+      .command-button.primary:hover:not(:disabled) {
+        border-color: var(--crm-blue-strong);
+        color: #ffffff;
+        background: var(--crm-blue-strong);
+      }
+
+      .command-button.danger {
+        color: #a4262c;
+      }
+
+      .command-button.danger:hover:not(:disabled) {
+        border-color: #a4262c;
+        color: #8f1d24;
+        background: #fdf3f4;
+      }
+
+      .command-button:disabled {
+        color: var(--crm-muted);
+        cursor: default;
+      }
+
+      .command-button:focus-visible {
+        outline: 2px solid var(--crm-focus);
+        outline-offset: 2px;
+      }
+
+      .summary {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 12px;
+        margin-bottom: 0;
+        color: var(--crm-text);
+        background: var(--nav-surface);
+        border: 0;
+        border-bottom: 1px solid var(--crm-border-soft);
+      }
+
+      .summary h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--crm-blue-strong);
+      }
+
+      .summary p {
+        margin: 2px 0 0;
+        color: var(--crm-muted);
+      }
+
+      .refresh-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        min-height: 32px;
+        padding: 5px 12px;
+        border: 1px solid var(--crm-blue-strong);
+        border-radius: 2px;
+        color: #ffffff;
+        background: var(--crm-blue);
+        cursor: pointer;
+      }
+
+      .refresh-button:hover {
+        border-color: var(--crm-blue-strong);
+        color: #ffffff;
+        background: var(--crm-blue-strong);
+      }
+
+      .button-icon {
+        display: inline-grid;
+        width: 16px;
+        height: 16px;
+        place-items: center;
+        font-size: 17px;
+        line-height: 1;
+      }
+
+      .summary-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .refresh-button:focus-visible,
+      .tile:focus-visible {
+        outline: 2px solid var(--crm-focus);
+        outline-offset: 2px;
+      }
+
+      .tile-grid {
+        display: block;
+        background: var(--nav-surface);
+      }
+
+      .navigation-category {
+        border-bottom: 1px solid var(--nav-border);
+      }
+
+      .navigation-category > summary {
+        padding: 10px 12px;
+        color: var(--nav-text);
+        background: var(--crm-page);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .navigation-category > summary:focus-visible {
+        outline: 2px solid var(--crm-focus);
+        outline-offset: -2px;
+      }
+
+      .navigation-action-title {
+        margin: 0;
+        padding: 8px 12px 4px;
+        color: var(--nav-muted);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .tile {
+        width: 100%;
+        min-height: 64px;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        align-content: start;
+        gap: 8px;
+        padding: 10px;
+        border: 0;
+        border-bottom: 1px solid var(--nav-border);
+        color: var(--nav-text);
+        background: var(--nav-surface);
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .tile:last-child {
+        border-bottom: 0;
+      }
+
+      .tile:hover {
+        background: var(--nav-surface-hover);
+      }
+
+      .tile-icon {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: 2px;
+        color: var(--nav-surface-strong);
+        background: var(--blue-icon-background, #eef6fc);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0;
+      }
+
+      .tile:nth-child(4n + 2) .tile-icon {
+        color: #c25b00;
+        background: #fff4e5;
+      }
+
+      .tile:nth-child(4n + 3) .tile-icon {
+        color: #087f8c;
+        background: #e7f7f8;
+      }
+
+      .tile:nth-child(4n + 4) .tile-icon {
+        color: #6b2d8b;
+        background: #f4eafa;
+      }
+
+      .tile-title {
+        display: block;
+        margin-top: 1px;
+        font-weight: 600;
+      }
+
+      .tile-description {
+        display: block;
+        margin-top: 4px;
+        color: var(--nav-muted);
+        font-size: 12px;
+      }
+
+      .embedded-page {
+        width: 100%;
+        flex: 1 1 0;
+        min-height: 0;
+        display: block;
+        border: 0;
+        background: var(--crm-surface);
+      }
+
+      .message {
+        border-left: 4px solid var(--crm-blue);
+        padding: 10px 12px;
+        background: var(--crm-surface);
+      }
+
+      .user-profile {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px 16px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border: 1px solid var(--crm-border-soft);
+        background: var(--crm-surface);
+        font-size: 12px;
+      }
+
+      .user-profile strong {
+        font-size: 13px;
+      }
+
+      .user-profile-link {
+        color: var(--crm-blue-strong);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .user-profile-link:hover {
+        text-decoration: underline;
+      }
+
+      .user-profile-link:focus-visible {
+        outline: 2px solid var(--crm-focus);
+        outline-offset: 2px;
+      }
+
+      .user-profile-label {
+        color: var(--crm-muted);
+      }
+
+      .user-profile-teams {
+        flex: 1 1 260px;
+        min-width: 0;
+      }
+
+      .user-team-link + .user-team-link::before {
+        color: var(--crm-muted);
+        content: ", ";
+      }
+
+      .message.warning {
+        border-left-color: var(--crm-warning);
+      }
+
+      .message.success {
+        border-left-color: var(--crm-success);
+      }
+
+      .message h3 {
+        margin: 0 0 6px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .message p {
+        margin: 0;
+        color: var(--crm-muted);
+      }
+
+      .sample-config {
+        max-height: 320px;
+        overflow: auto;
+        margin-top: 12px;
+        padding: 12px;
+        border: 1px solid var(--crm-border-soft);
+        background: #fafafa;
+        color: #323130;
+        font:
+          12px/1.45 Consolas,
+          "Courier New",
+          monospace;
+        white-space: pre;
+      }
+
+      .content.is-simple-navigation .summary {
+        display: none;
+      }
+
+      .content.is-simple-navigation {
+        grid-template-rows: minmax(0, 1fr);
+      }
+
+      .simple-navigation {
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .simple-navigation-body {
+        flex: 1 1 0;
+        min-height: 0;
+        overflow: auto;
+        padding: 32px 48px;
+      }
+
+      .simple-navigation-body.is-showing-work-area {
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .simple-footer {
+        flex: 0 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        padding: 12px 48px;
+        border-top: 1px solid var(--crm-border-soft);
+        background: var(--crm-surface);
+        color: var(--crm-muted);
+        font-size: 12px;
+      }
+
+      .simple-footer a {
+        color: #782578;
+      }
+
+      .simple-footer a:focus-visible {
+        outline: 2px solid var(--crm-focus);
+        outline-offset: 2px;
+      }
+
+      .simple-navigation [hidden] {
+        display: none;
+      }
+
+      .simple-navigation h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+      }
+
+      .simple-description {
+        margin: 0 0 28px;
+        color: var(--crm-muted);
+      }
+
+      .simple-card-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 240px));
+        gap: clamp(8px, 1.5vw, 16px);
+      }
+
+      .simple-card {
+        min-width: 0;
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: clamp(8px, 1.5vw, 20px);
+        border: 1px solid var(--crm-border-soft);
+        border-radius: 6px;
+        background: var(--crm-surface);
+        overflow-wrap: anywhere;
+      }
+
+      .simple-card-icon {
+        display: grid;
+        place-items: center;
+        min-width: 40px;
+        width: max-content;
+        max-width: 100%;
+        min-height: 40px;
+        padding: 8px;
+        border-radius: 5px;
+        color: #782578;
+        background: #f3e7f3;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow-wrap: normal;
+      }
+
+      .simple-card-icon img {
+        display: block;
+        width: 24px;
+        max-width: 100%;
+        height: 24px;
+        object-fit: contain;
+      }
+
+      .simple-card h3 {
+        max-width: 100%;
+        margin: 16px 0 8px;
+        font-size: 16px;
+      }
+
+      .simple-card p {
+        max-width: 100%;
+        margin: 0 0 16px;
+        color: var(--crm-muted);
+      }
+
+      .simple-card-button {
+        width: 100%;
+        margin-top: auto;
+        padding: 8px 4px;
+        border: 0;
+        border-radius: 3px;
+        color: #ffffff;
+        background: #782578;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .simple-card-button:hover {
+        background: #602060;
+      }
+
+      .simple-back {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 36px;
+        margin-bottom: 24px;
+        padding: 7px 14px;
+        border: 1px solid #ddc7dd;
+        border-radius: 6px;
+        color: #782578;
+        background: var(--crm-surface);
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background-color 120ms ease,
+          border-color 120ms ease;
+      }
+
+      .simple-back:hover {
+        border-color: #782578;
+        background: #f3e7f3;
+      }
+
+      .simple-back:active {
+        background: #e8d3e8;
+      }
+
+      .simple-back-icon {
+        width: 16px;
+        height: 16px;
+        background: currentColor;
+        clip-path: polygon(
+          40% 15%, 49% 24%, 29% 44%, 90% 44%,
+          90% 56%, 29% 56%, 49% 76%, 40% 85%, 5% 50%
+        );
+      }
+
+      .form-command-bar .simple-back {
+        align-self: center;
+        min-height: 32px;
+        margin: 0 4px 0 0;
+        padding: 5px 12px;
+      }
+
+      .form-command-bar .simple-back[hidden],
+      .form-command-separator[hidden] {
+        display: none;
+      }
+
+      .simple-card-button:focus-visible,
+      .simple-back:focus-visible {
+        outline: 2px solid var(--crm-focus);
+        outline-offset: 2px;
+      }
+
+      .simple-work-area {
+        height: 100%;
+      }
+
+      @media (max-width: 640px) {
+        .simple-navigation-body {
+          padding: 24px 16px;
+        }
+
+        .simple-footer {
+          padding: 12px 16px;
+        }
+
+        .command-bar {
+          padding: 0 12px;
+        }
+
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+
+        .navigation-panel {
+          height: auto;
+          max-height: 40vh;
+          border-right: 0;
+          border-bottom: 1px solid var(--crm-border-soft);
+        }
+
+        .summary {
+          align-items: stretch;
+        }
+
+        .refresh-button {
+          width: 100%;
+        }
+
+        .tile-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body data-argo-navigation="true">
+    <main class="shell">
+      <header class="command-bar">
+        <img
+          class="brand-logo"
+          src="/WebResources/bdgas_BDLogo"
+          alt="BD"
+        />
+        <h1 class="page-title">
+          ARGO: Automations and Regulatory Governance Office
+        </h1>
+        <div class="user-greeting" id="userGreeting"></div>
+      </header>
+
+      <section class="content" aria-live="polite">
+        <div class="summary">
+          <div>
+            <h2 id="summaryTitle">User Catalog</h2>
+            <p id="summaryText">Checking your team access.</p>
+          </div>
+          <div class="summary-actions">
+            <button
+              class="refresh-button"
+              type="button"
+              id="toggleNavigationButton"
+              aria-controls="navigationGroups"
+              aria-expanded="true"
+            >
+              <span class="button-icon" aria-hidden="true">≡</span>
+              Hide navigation
+            </button>
+            <button class="refresh-button" type="button" id="refreshButton">
+              <span class="button-icon" aria-hidden="true">↻</span>
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div id="navigationRoot"></div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var CONFIG_NAME = "ARGO Navigation";
+        var DEFAULT_APP_ID = "cebc59c4-bf80-f111-ab0f-000d3a11e677";
+        var DEFAULT_IFRAME_URL = "/webresources/bdgas_argoprojectcenter.html";
+        var GENERATE_SRA_FLOW_SCHEMA_NAME = "bdgas_ARGOGenerateSRA";
+        var REGULATORY_LOCK_CONFIG_SCHEMA_NAME =
+          "bdgas_regulatorylockconfiguration";
+        var NAVIGATION_DATA_KEY = "bdgas_sraAppointmentNavigationData";
+
+        var fallbackConfig = { teams: [] };
+        var navigationFrame = null;
+        var appId = DEFAULT_APP_ID;
+        var formCommands = null;
+        var formPollTimer = null;
+        var currentFormKey = "";
+        var isCommandRunning = false;
+        var MAX_LOCATION_HISTORY = 20;
+        var locationHistory = [];
+        var currentLocation = null;
+        var isFrameNavigating = false;
+        var isRegulatoryAdmin = false;
+        var canDeleteCurrentRecord = false;
+        var simpleNavigationState = null;
+
+        var elements = {
+          navigationRoot: document.getElementById("navigationRoot"),
+          toggleNavigationButton: document.getElementById(
+            "toggleNavigationButton",
+          ),
+          refreshButton: document.getElementById("refreshButton"),
+          summaryTitle: document.getElementById("summaryTitle"),
+          summaryText: document.getElementById("summaryText"),
+          userGreeting: document.getElementById("userGreeting"),
+        };
+
+        elements.refreshButton.addEventListener("click", refreshWorkArea);
+        elements.toggleNavigationButton.addEventListener(
+          "click",
+          toggleNavigation,
+        );
+        window.bdgasArgoNavigationHost = {
+          openItem: openNavigationItem,
+        };
+        loadNavigation();
+
+        // Reload only what is shown in the work area; rebuild the whole page
+        // only when there is no work area yet (e.g. navigation failed to load).
+        function refreshWorkArea() {
+          if (!navigationFrame || navigationFrame.hidden) {
+            loadNavigation();
+            return;
+          }
+
+          var page = getFormPage();
+          if (page && page.data.getIsDirty()) {
+            getXrm()
+              .Navigation.openConfirmDialog({
+                title: "Unsaved changes",
+                text: "This form has unsaved changes. Discard them and refresh?",
+                confirmButtonLabel: "Discard changes",
+                cancelButtonLabel: "Stay on form",
+              })
+              .then(function (confirmation) {
+                if (confirmation.confirmed) {
+                  reloadFrame();
+                }
+              });
+            return;
+          }
+
+          reloadFrame();
+        }
+
+        function reloadFrame() {
+          currentFormKey = "";
+          beginFrameNavigation();
+
+          try {
+            navigationFrame.contentWindow.location.reload();
+          } catch (error) {
+            // Cross-origin page: reload it from its last known address.
+            navigationFrame.src = navigationFrame.src;
+          }
+        }
+
+        async function loadNavigation() {
+          isRegulatoryAdmin = false;
+          currentFormKey = "";
+          resetNavigationWorkArea();
+          simpleNavigationState = null;
+          elements.navigationRoot.parentElement.classList.remove(
+            "is-simple-navigation",
+          );
+          elements.toggleNavigationButton.hidden = false;
+          clearChildren(elements.navigationRoot);
+          elements.summaryTitle.textContent = "User Catalog";
+          elements.summaryText.textContent = "Checking your team access.";
+
+          try {
+            var xrm = getXrm();
+            var config = await getNavigationConfig(xrm);
+            appId = config.appId || DEFAULT_APP_ID;
+            var configuredIframe = getIframeConfig(config);
+            DEFAULT_IFRAME_URL = "/webresources/bdgas_argoprojectcenter.html";
+
+            if (hasArgoNavigationParent()) {
+              if (DEFAULT_IFRAME_URL) {
+                window.location.replace(resolveUrl(DEFAULT_IFRAME_URL));
+              }
+              return;
+            }
+
+            var currentUser = await getCurrentUser(xrm);
+            var matchingTeams = findMatchingTeams(config, currentUser.teams);
+            isRegulatoryAdmin = await getRegulatoryAdminAccess(currentUser.teams);
+            renderUserProfile(currentUser, matchingTeams);
+
+            if (matchingTeams.length === 0) {
+              renderEmpty(currentUser.teams, config);
+              return;
+            }
+
+            if (shouldUseSimpleNavigation(config, matchingTeams, currentUser.teams)) {
+              renderSimpleNavigation(config.simpleNavigation, config.emailTo);
+            } else {
+              renderNavigation(matchingTeams, currentUser.teams, config);
+            }
+          } catch (error) {
+            renderError(error);
+          }
+        }
+
+        function getXrm() {
+          var current = window;
+          while (true) {
+            try {
+              if (
+                current.Xrm &&
+                current.Xrm.WebApi &&
+                current.Xrm.Navigation &&
+                current.Xrm.Utility
+              ) {
+                return current.Xrm;
+              }
+            } catch (error) {
+              // Cross-origin frame; can't inspect it, keep walking up.
+            }
+
+            if (!current.parent || current.parent === current) {
+              break;
+            }
+            current = current.parent;
+          }
+
+          throw new Error(
+            "This web resource must be opened inside a model-driven app.",
+          );
+        }
+
+        async function getNavigationConfig(xrm) {
+          var query =
+            "?$select=bdgas_value&$filter=bdgas_name eq '" +
+            CONFIG_NAME +
+            "'&$top=1";
+          var result = await xrm.WebApi.retrieveMultipleRecords(
+            "bdgas_argoconfig",
+            query,
+          );
+
+          if (!result.entities.length) {
+            return fallbackConfig;
+          }
+
+          var configValue = result.entities[0].bdgas_value;
+          if (!configValue) {
+            return fallbackConfig;
+          }
+
+          try {
+            return JSON.parse(configValue);
+          } catch (error) {
+            throw new Error(
+              "ARGO Config '" +
+                CONFIG_NAME +
+                "'" +
+                " contains invalid JSON: " +
+                error.message,
+            );
+          }
+        }
+
+        async function getCurrentUser(xrm) {
+          var userId = cleanGuid(
+            xrm.Utility.getGlobalContext().userSettings.userId,
+          );
+          var result = await xrm.WebApi.retrieveRecord(
+            "systemuser",
+            userId,
+            "?$select=fullname,internalemailaddress&$expand=teammembership_association($select=teamid,name)",
+          );
+
+          return {
+            id: userId,
+            name: result.fullname || "Current user",
+            email: result.internalemailaddress || "",
+            teams: (result.teammembership_association || []).map(
+              function (team) {
+                return {
+                  id: cleanGuid(team.teamid),
+                  name: team.name || "",
+                };
+              },
+            ),
+          };
+        }
+
+        function renderUserProfile(currentUser, matchingTeams) {
+          clearChildren(elements.userGreeting);
+
+          var greeting = document.createElement("span");
+          greeting.textContent = "Hi, " + currentUser.name;
+          elements.userGreeting.appendChild(greeting);
+
+          var matchedUserTeams = getMatchedUserTeams(
+            matchingTeams,
+            currentUser.teams,
+          );
+
+          if (!matchedUserTeams.length) {
+            return;
+          }
+
+          var label = document.createElement("span");
+          label.className = "user-teams-label";
+          label.textContent = "Teams:";
+          elements.userGreeting.appendChild(label);
+
+          var teamList = document.createElement("span");
+          teamList.className = "user-team-list";
+
+          matchedUserTeams.forEach(function (team) {
+            var link = document.createElement("a");
+            link.className = "user-team-link";
+            link.href = "#";
+            link.textContent = team.name;
+            link.addEventListener("click", function (event) {
+              event.preventDefault();
+              openEntityRecord("team", team.id);
+            });
+            teamList.appendChild(link);
+          });
+
+          elements.userGreeting.appendChild(teamList);
+        }
+
+        function getMatchedUserTeams(matchingTeams, userTeams) {
+          var matchedIds = new Set();
+          var matchedNames = new Set();
+
+          matchingTeams.forEach(function (section) {
+            (section.teamIds || (section.teamId ? [section.teamId] : [])).forEach(
+              function (teamId) {
+                matchedIds.add(cleanGuid(teamId));
+              },
+            );
+            (section.teamNames || (section.teamName ? [section.teamName] : [])).forEach(
+              function (teamName) {
+                matchedNames.add(normalize(teamName));
+              },
+            );
+          });
+
+          return userTeams.filter(function (team) {
+            return (
+              matchedIds.has(team.id) ||
+              matchedNames.has(normalize(team.name))
+            );
+          });
+        }
+
+        function openEntityRecord(entityName, entityId) {
+          var pageInput = {
+            pageType: "entityrecord",
+            entityName: entityName,
+            entityId: entityId,
+            label: entityName,
+          };
+
+          if (navigationFrame) {
+            openNavigationItem(pageInput);
+            return;
+          }
+
+          getXrm().Navigation.navigateTo(pageInput, { target: 1 });
+        }
+
+        function findMatchingTeams(config, userTeams) {
+          var sections = Array.isArray(config) ? config : config.teams;
+          var userTeamIds = new Set(
+            userTeams.map(function (team) {
+              return team.id;
+            }),
+          );
+          var userTeamNames = new Set(
+            userTeams.map(function (team) {
+              return normalize(team.name);
+            }),
+          );
+
+          if (!Array.isArray(sections)) {
+            throw new Error(
+              "ARGO Config '" +
+                CONFIG_NAME +
+                "' must be a JSON array or an object with a teams array.",
+            );
+          }
+
+          return sections.filter(function (section) {
+            var configuredIds =
+              section.teamIds || (section.teamId ? [section.teamId] : []);
+            var configuredNames =
+              section.teamNames || (section.teamName ? [section.teamName] : []);
+            var matchesId = configuredIds.some(function (teamId) {
+              return userTeamIds.has(cleanGuid(teamId));
+            });
+            var matchesName = configuredNames.some(function (teamName) {
+              return userTeamNames.has(normalize(teamName));
+            });
+
+            return matchesId || matchesName;
+          });
+        }
+
+        function shouldUseSimpleNavigation(config, matchingTeams, userTeams) {
+          var simple = config.simpleNavigation;
+          if (!simple || !simple.enabled || matchingTeams.length !== 1) {
+            return false;
+          }
+
+          var matchedUserTeams = getMatchedUserTeams(matchingTeams, userTeams);
+          return matchedUserTeams.length === 1 &&
+            findMatchingTeams({ teams: [simple] }, matchedUserTeams).length === 1;
+        }
+
+        function resetNavigationWorkArea() {
+          if (formPollTimer) {
+            window.clearInterval(formPollTimer);
+            formPollTimer = null;
+          }
+          navigationFrame = null;
+          currentFormKey = "";
+          currentLocation = null;
+          locationHistory = [];
+          isFrameNavigating = false;
+        }
+
+        function renderSimpleNavigation(config, emailTo) {
+          if (!Array.isArray(config.items) || !config.items.length ||
+              config.items.some(function (process) {
+                return !process.label || !Array.isArray(process.items) ||
+                  !process.items.length || process.items.some(function (item) {
+                    return !item.label ||
+                      (item.action !== "List" && item.action !== "Create") ||
+                      !(item.url ||
+                        (item.pageType === "webresource" && item.webresourceName) ||
+                        ((item.pageType === "entitylist" ||
+                          item.pageType === "entityrecord") && item.entityName));
+                  });
+              })) {
+            throw new Error(
+              "ARGO simpleNavigation requires processes with valid navigation items.",
+            );
+          }
+
+          elements.navigationRoot.parentElement.classList.add("is-simple-navigation");
+          elements.toggleNavigationButton.hidden = true;
+
+          var root = document.createElement("div");
+          root.className = "simple-navigation";
+          var body = document.createElement("div");
+          body.className = "simple-navigation-body";
+          var cards = document.createElement("div");
+          var workArea = document.createElement("div");
+          workArea.className = "work-area simple-work-area";
+          workArea.hidden = true;
+          body.appendChild(cards);
+          body.appendChild(workArea);
+          root.appendChild(body);
+          root.appendChild(createSimpleNavigationFooter(emailTo));
+          elements.navigationRoot.appendChild(root);
+          simpleNavigationState = {
+            config: config,
+            body: body,
+            cards: cards,
+            workArea: workArea,
+            process: null,
+          };
+          renderSimpleNavigationPage(null, false);
+          openRecordShortcut();
+        }
+
+        function createSimpleNavigationFooter(emailTo) {
+          if (typeof emailTo !== "string" ||
+              !/^[^\s@<>?&#:;,]+@[^\s@<>?&#:;,]+\.[^\s@<>?&#:;,]+$/.test(emailTo.trim())) {
+            throw new Error(
+              "ARGO Navigation emailTo must contain a valid contact email address.",
+            );
+          }
+
+          var footer = document.createElement("footer");
+          footer.className = "simple-footer";
+          var label = document.createElement("span");
+          label.textContent = "ARGO - Automations and Regulatory Governance Office";
+          footer.appendChild(label);
+          var help = document.createElement("span");
+          var prompt = document.createElement("span");
+          prompt.textContent = "Need help? ";
+          help.appendChild(prompt);
+          var contact = document.createElement("a");
+          contact.textContent = "Contact the ARGO Team";
+          contact.href = "mailto:" + encodeURIComponent(emailTo.trim());
+          help.appendChild(contact);
+          footer.appendChild(help);
+          return footer;
+        }
+
+        function renderSimpleNavigationPage(process, focusHeading) {
+          var state = simpleNavigationState;
+          state.process = process;
+          clearChildren(state.cards);
+
+          if (process) {
+            state.cards.appendChild(createSimpleBackButton(function () {
+              renderSimpleNavigationPage(null, true);
+            }));
+          }
+
+          var heading = document.createElement("h2");
+          heading.textContent = process
+            ? process.pageTitle || process.label
+            : state.config.title || "Select a process";
+          heading.tabIndex = -1;
+          state.cards.appendChild(heading);
+          var description = document.createElement("p");
+          description.className = "simple-description";
+          description.textContent = process
+            ? process.pageDescription || ""
+            : state.config.description || "";
+          state.cards.appendChild(description);
+
+          var grid = document.createElement("div");
+          grid.className = "simple-card-grid";
+          var items = process ? process.items : state.config.items;
+          items.forEach(function (item) {
+            var card = document.createElement("article");
+            card.className = "simple-card";
+            var icon = document.createElement("span");
+            icon.className = "simple-card-icon";
+            icon.setAttribute("aria-hidden", "true");
+            icon.textContent = item.icon || getInitials(item.label);
+            if (item.iconUrl) {
+              var image = document.createElement("img");
+              image.alt = "";
+              image.addEventListener("error", function () {
+                console.error("ARGO simple navigation icon failed to load:", item.iconUrl);
+                clearChildren(icon);
+                icon.textContent = item.icon || getInitials(item.label);
+              });
+              clearChildren(icon);
+              icon.appendChild(image);
+              image.src = resolveUrl(item.iconUrl);
+            }
+            card.appendChild(icon);
+            var title = document.createElement("h3");
+            title.textContent = item.label;
+            card.appendChild(title);
+            var text = document.createElement("p");
+            text.textContent = item.description || "";
+            card.appendChild(text);
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "simple-card-button";
+            button.textContent = item.buttonLabel || item.label;
+            button.addEventListener("click", function () {
+              if (process) {
+                openNavigationItem(item);
+              } else {
+                renderSimpleNavigationPage(item, true);
+              }
+            });
+            card.appendChild(button);
+            grid.appendChild(card);
+          });
+          state.cards.appendChild(grid);
+          if (focusHeading) {
+            heading.focus();
+          }
+        }
+
+        function createSimpleBackButton(onClick) {
+          var back = document.createElement("button");
+          back.type = "button";
+          back.className = "simple-back";
+          var icon = document.createElement("span");
+          icon.className = "simple-back-icon";
+          icon.setAttribute("aria-hidden", "true");
+          back.appendChild(icon);
+          var label = document.createElement("span");
+          label.textContent = simpleNavigationState.config.backLabel || "Back";
+          back.appendChild(label);
+          back.addEventListener("click", onClick);
+          return back;
+        }
+
+        async function returnToSimpleNavigation() {
+          if (isCommandRunning) {
+            return;
+          }
+          try {
+            var page = getFormPage();
+            if (page && page.data.getIsDirty()) {
+              var confirmation = await getXrm().Navigation.openConfirmDialog({
+                title: "Unsaved changes",
+                text: "This form has unsaved changes. Discard them and return?",
+                confirmButtonLabel: "Discard changes",
+                cancelButtonLabel: "Stay on form",
+              });
+              if (!confirmation.confirmed) {
+                return;
+              }
+            }
+            showSimpleNavigationCards();
+          } catch (error) {
+            await showCommandError(error);
+          }
+        }
+
+        function showSimpleNavigationCards() {
+          var state = simpleNavigationState;
+          resetNavigationWorkArea();
+          setNavigationData();
+          clearChildren(state.workArea);
+          state.workArea.hidden = true;
+          state.body.classList.remove("is-showing-work-area");
+          state.cards.hidden = false;
+          renderSimpleNavigationPage(state.process, true);
+        }
+
+        function renderNavigation(matchingTeams, userTeams, config) {
+          var iframeConfig = {
+            url: DEFAULT_IFRAME_URL,
+          };
+
+          var navigationItems = getNavigationItems(matchingTeams);
+
+          elements.summaryTitle.textContent = "User Catalog";
+          elements.summaryText.textContent = "";
+
+          var workspace = document.createElement("div");
+          workspace.className = "workspace";
+
+          var navigationGroups = document.createElement("nav");
+          navigationGroups.id = "navigationGroups";
+          navigationGroups.className = "navigation-panel";
+          navigationGroups.setAttribute("aria-label", "Work areas");
+
+          var workArea = document.createElement("div");
+          workArea.className = "work-area";
+
+          setNavigationToggleLabel("Hide navigation");
+          elements.toggleNavigationButton.setAttribute("aria-expanded", "true");
+
+          getNavigationCategories(navigationItems).forEach(function (category) {
+            var group = document.createElement("details");
+            group.className = "navigation-category";
+            group.setAttribute("name", "argo-navigation-category");
+
+            var heading = document.createElement("summary");
+            heading.textContent = category.name;
+            group.appendChild(heading);
+
+            ["List", "Create"].forEach(function (action) {
+              if (!category[action].length) {
+                return;
+              }
+
+              var section = document.createElement("section");
+              section.setAttribute("aria-label", category.name + " - " + action);
+
+              var title = document.createElement("h2");
+              title.className = "navigation-action-title";
+              title.textContent = action;
+              section.appendChild(title);
+
+              var grid = document.createElement("div");
+              grid.className = "tile-grid";
+              category[action].forEach(function (item) {
+                grid.appendChild(createTile(item));
+              });
+              section.appendChild(grid);
+              group.appendChild(section);
+            });
+
+            navigationGroups.appendChild(group);
+          });
+
+          workspace.appendChild(navigationGroups);
+          workspace.appendChild(workArea);
+          elements.navigationRoot.appendChild(workspace);
+
+          if (iframeConfig) {
+            renderEmbeddedPage(iframeConfig, workArea);
+          }
+
+          openRecordShortcut();
+        }
+
+        function openRecordShortcut() {
+          var parameters = new URLSearchParams(window.location.search);
+          var entityName = parameters.get("entity") || parameters.get("etn");
+          var entityId = parameters.get("id");
+          var shortcutData = parameters.get("data");
+
+          if (shortcutData) {
+            try {
+              var parsedData = JSON.parse(shortcutData);
+              entityName =
+                parsedData.entity ||
+                parsedData.entityName ||
+                parsedData.etn ||
+                entityName;
+              entityId =
+                parsedData.id ||
+                parsedData.entityId ||
+                parsedData.recordId ||
+                entityId;
+            } catch (error) {
+              var dataParameters = new URLSearchParams(shortcutData);
+              entityName = dataParameters.get("entity") || entityName;
+              entityId = dataParameters.get("id") || entityId;
+            }
+          }
+
+          if (!entityName || !entityId) {
+            return;
+          }
+
+          entityName = entityName.toLowerCase();
+          entityId = cleanGuid(entityId);
+          if (
+            !/^[0-9a-f]{32}$/.test(entityId) &&
+            !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(
+              entityId,
+            )
+          ) {
+            return;
+          }
+
+          openNavigationItem({
+            pageType: "entityrecord",
+            entityName: entityName,
+            entityId: entityId,
+            label: entityName,
+          });
+        }
+
+        function getNavigationItems(matchingTeams) {
+          var seenItems = new Set();
+
+          return matchingTeams.reduce(function (items, section) {
+            (Array.isArray(section.items) ? section.items : []).forEach(
+              function (item) {
+                var itemKey = getNavigationItemKey(item);
+                if (seenItems.has(itemKey)) {
+                  return;
+                }
+
+                seenItems.add(itemKey);
+                items.push(item);
+              },
+            );
+
+            return items;
+          }, []);
+        }
+
+        function getNavigationCategories(items) {
+          var categories = new Map();
+
+          items.forEach(function (item) {
+            var categoryName =
+              item.category === undefined ? "General" : item.category;
+            var action =
+              item.action === undefined
+                ? item.pageType === "entityrecord" && !item.entityId
+                  ? "Create"
+                  : "List"
+                : item.action;
+
+            if (
+              typeof categoryName !== "string" ||
+              !categoryName.trim() ||
+              (action !== "List" && action !== "Create")
+            ) {
+              throw new Error(
+                "Navigation item '" +
+                  (item.label || item.title || "Open") +
+                  "' must have a non-empty category and a List or Create action.",
+              );
+            }
+
+            categoryName = categoryName.trim();
+            if (!categories.has(categoryName)) {
+              categories.set(categoryName, {
+                name: categoryName,
+                List: [],
+                Create: [],
+              });
+            }
+            categories.get(categoryName)[action].push(item);
+          });
+
+          return Array.from(categories.values()).sort(function (left, right) {
+            return left.name.localeCompare(right.name);
+          });
+        }
+
+        function getNavigationItemKey(item) {
+          return [
+            item.label || item.title || "",
+            item.pageType || "",
+            item.entityName || "",
+            item.webresourceName || "",
+            item.viewId || "",
+            item.url || "",
+          ]
+            .join("|")
+            .toLowerCase();
+        }
+
+        function getIframeConfig(config) {
+          if (!config || Array.isArray(config) || !config.iframe) {
+            return null;
+          }
+
+          if (typeof config.iframe === "string") {
+            return { url: config.iframe };
+          }
+
+          return config.iframe.url ? config.iframe : null;
+        }
+
+        function renderEmbeddedPage(iframeConfig, workArea) {
+          var hasHeading = Boolean(
+            iframeConfig.title || iframeConfig.description,
+          );
+          var iframeUrl = resolveUrl(iframeConfig.url);
+          if (hasHeading) {
+            elements.summaryTitle.textContent = iframeConfig.title || "";
+            elements.summaryText.textContent = iframeConfig.description || "";
+          }
+
+          if (isNavigationUrl(iframeUrl, {})) {
+            return;
+          }
+
+          renderFormCommandBar(workArea);
+
+          var iframe = document.createElement("iframe");
+          iframe.className = "embedded-page";
+          iframe.title = iframeConfig.title || "Work area";
+          iframe.hidden = true;
+          iframe.loading = "eager";
+          iframe.referrerPolicy = "same-origin";
+          iframe.addEventListener("load", function () {
+            if (iframe !== navigationFrame) {
+              return;
+            }
+
+            iframe.hidden = false;
+            isFrameNavigating = false;
+          });
+          navigationFrame = iframe;
+          workArea.appendChild(iframe);
+          iframe.src = iframeUrl;
+        }
+
+        function renderFormCommandBar(workArea) {
+          var bar = document.createElement("div");
+          bar.className = "form-command-bar";
+          bar.hidden = true;
+
+          formCommands = {
+            root: bar,
+            back: createCommandButton("← Back", goBackFromForm),
+            save: createCommandButton("Save", saveForm),
+            saveAndClose: createCommandButton(
+              "Save & Close",
+              saveAndCloseForm,
+            ),
+            remove: createCommandButton("Delete", deleteFormRecord),
+            cancel: createCommandButton("Cancel", cancelAppointment),
+            activate: createCommandButton("Activate", activateProjectMilestone),
+            generate: createCommandButton(
+              "Generate SRA Document",
+              generateSraDocument,
+            ),
+          };
+
+          formCommands.back.classList.add("back-button");
+          formCommands.saveAndClose.classList.add("primary");
+          formCommands.remove.classList.add("danger");
+
+          // Simple navigation uses a single Back button: it steps back inside
+          // the embedded page when possible, otherwise returns to the menu.
+          if (simpleNavigationState) {
+            formCommands.menuBack = createSimpleBackButton(
+              goBackInSimpleNavigation,
+            );
+            bar.appendChild(formCommands.menuBack);
+          }
+
+          bar.appendChild(formCommands.back);
+          var separator = document.createElement("span");
+          separator.className = "form-command-separator";
+          separator.setAttribute("aria-hidden", "true");
+          separator.textContent = "|";
+          formCommands.separator = separator;
+          bar.appendChild(separator);
+          bar.appendChild(formCommands.save);
+          bar.appendChild(formCommands.saveAndClose);
+          bar.appendChild(formCommands.remove);
+          bar.appendChild(formCommands.cancel);
+          bar.appendChild(formCommands.activate);
+          bar.appendChild(formCommands.generate);
+          workArea.appendChild(bar);
+
+          // The embedded Dataverse page navigates inside itself, so the iframe
+          // load event can't tell when a form opens or closes. Poll instead.
+          currentFormKey = "";
+          locationHistory = [];
+          currentLocation = null;
+          isFrameNavigating = true;
+          if (formPollTimer) {
+            window.clearInterval(formPollTimer);
+          }
+          formPollTimer = window.setInterval(syncFormCommandBar, 500);
+        }
+
+        function createCommandButton(label, onClick) {
+          var button = document.createElement("button");
+          button.className = "command-button";
+          button.type = "button";
+          button.hidden = true;
+          button.textContent = label;
+          button.addEventListener("click", onClick);
+          return button;
+        }
+
+        function getFormPage() {
+          if (!navigationFrame || navigationFrame.hidden) {
+            return null;
+          }
+
+          try {
+            var frameWindow = navigationFrame.contentWindow;
+            var page = frameWindow && frameWindow.Xrm && frameWindow.Xrm.Page;
+
+            if (
+              page &&
+              page.data &&
+              page.data.entity &&
+              page.ui &&
+              typeof page.ui.getFormType === "function" &&
+              page.data.entity.getEntityName()
+            ) {
+              return page;
+            }
+          } catch (error) {
+            // Cross-origin or not a form page.
+          }
+
+          return null;
+        }
+
+        function syncFormCommandBar() {
+          if (!formCommands || isCommandRunning) {
+            return;
+          }
+
+          trackLocation();
+          formCommands.back.disabled = !hasBackHistory();
+
+          var page = getFormPage();
+          if (!page) {
+            currentFormKey = "";
+            canDeleteCurrentRecord = false;
+            hideFormCommands();
+            return;
+          }
+
+          var entityName = page.data.entity.getEntityName();
+          var recordId = cleanGuid(page.data.entity.getId());
+          var formType = page.ui.getFormType();
+          var stateAttribute = page.getAttribute("statecode");
+          var statusAttribute = page.getAttribute("statuscode");
+          var stateCode = stateAttribute && stateAttribute.getValue();
+          var statusCode = statusAttribute && statusAttribute.getValue();
+          var meetingLinkAttribute = entityName === "appointment" &&
+            page.getAttribute("onlinemeetingjoinurl");
+          var meetingLink = meetingLinkAttribute && meetingLinkAttribute.getValue();
+          var slotStatusAttribute = entityName === "appointment" &&
+            page.getAttribute("bdgas_slotstatus");
+          var slotStatus = slotStatusAttribute && slotStatusAttribute.getValue();
+          var formKey = [entityName, recordId, formType, stateCode, statusCode, meetingLink, slotStatus].join("|");
+
+          if (formKey === currentFormKey) {
+            return;
+          }
+          currentFormKey = formKey;
+          canDeleteCurrentRecord = false;
+
+          // Form types: 1 = create, 2 = update. Anything else (read-only,
+          // disabled, bulk edit) means the user can't save this record.
+          var canSave = formType === 1 || formType === 2;
+          var isExisting = formType === 2 && Boolean(recordId);
+
+          formCommands.back.hidden = Boolean(formCommands.menuBack);
+          formCommands.save.hidden = !canSave;
+          formCommands.saveAndClose.hidden = !canSave;
+          formCommands.generate.hidden = !(
+            isRegulatoryAdmin &&
+            canSave &&
+            isExisting &&
+            entityName === "appointment"
+          );
+          formCommands.remove.hidden = true;
+          formCommands.remove.disabled = true;
+          formCommands.cancel.hidden = !(
+            entityName === "appointment" &&
+            isExisting &&
+            slotStatus === 2
+          );
+          formCommands.activate.hidden = !(
+            entityName === "bdgas_projectmilestone" &&
+            Boolean(recordId) &&
+            (formType === 2 || formType === 3 || formType === 4) &&
+            stateCode === 1 &&
+            statusCode === 2
+          );
+          updateFormCommandBarVisibility();
+
+          if (!isExisting) {
+            return;
+          }
+
+          Promise.all([
+            canDeleteRecord(entityName, recordId),
+            canDeleteAppointment(entityName, recordId),
+          ])
+            .then(function (access) {
+              if (formKey !== currentFormKey) {
+                return;
+              }
+
+              canDeleteCurrentRecord = access[0] && access[1];
+              formCommands.remove.hidden = !access[0];
+              formCommands.remove.disabled = isCommandRunning || !canDeleteCurrentRecord;
+              updateFormCommandBarVisibility();
+            })
+            .catch(function (error) {
+              console.warn("Unable to check delete access.", error);
+            });
+        }
+
+        // Keep a history of the pages shown in the work area (lists, web
+        // resources and saved records) so Save & Close / Delete can return to
+        // wherever the user came from, e.g. the Project Center record a
+        // milestone was opened from.
+        function trackLocation() {
+          if (isFrameNavigating) {
+            return;
+          }
+
+          var location = getCurrentLocation();
+          if (!location) {
+            return;
+          }
+
+          if (currentLocation && currentLocation.key === location.key) {
+            currentLocation = location;
+            return;
+          }
+
+          // Unsaved create forms can't be reopened, so they're never a
+          // place to return to.
+          var isUnsavedRecord = currentLocation && currentLocation.isRecord && !currentLocation.recordId;
+          var top = locationHistory[locationHistory.length - 1];
+          if (currentLocation && !isUnsavedRecord && (!top || top.key !== currentLocation.key)) {
+            locationHistory.push(currentLocation);
+            if (locationHistory.length > MAX_LOCATION_HISTORY) {
+              locationHistory.shift();
+            }
+          }
+
+          currentLocation = location;
+        }
+
+        function getCurrentLocation() {
+          if (!navigationFrame || navigationFrame.hidden) {
+            return null;
+          }
+
+          var href;
+          try {
+            href = navigationFrame.contentWindow.location.href;
+          } catch (error) {
+            return null; // Cross-origin page.
+          }
+
+          if (!/^https?:/i.test(href)) {
+            return null;
+          }
+
+          var data = sessionStorage.getItem(NAVIGATION_DATA_KEY);
+          var isRecordUrl = /[?&]pagetype=entityrecord(&|$)/i.test(href);
+          if (!isRecordUrl) {
+            return { key: "page|" + href, url: href, data: data, isRecord: false };
+          }
+
+          // Right after a record is clicked the URL switches to the form
+          // before Xrm.Page is ready; wait for the form.
+          var page = getFormPage();
+          if (!page) {
+            return null;
+          }
+
+          var entityName = page.data.entity.getEntityName();
+          var recordId = cleanGuid(page.data.entity.getId());
+
+          // While moving between records, Xrm.Page can still describe the old
+          // one; wait until it matches the URL.
+          var urlId = cleanGuid(new URLSearchParams(href.split("?")[1] || "").get("id"));
+          if (urlId && recordId && urlId !== recordId) {
+            return null;
+          }
+
+          return {
+            key: "record|" + entityName + "|" + recordId,
+            url: recordId
+              ? getNavigationItemUrl(getXrm(), {
+                  pageType: "entityrecord",
+                  entityName: entityName,
+                  entityId: recordId,
+                })
+              : href,
+            data: data,
+            isRecord: true,
+            recordId: recordId,
+          };
+        }
+
+        function beginFrameNavigation() {
+          isFrameNavigating = true;
+        }
+
+        function getFormCommandButtons() {
+          return [
+            formCommands.back,
+            formCommands.save,
+            formCommands.saveAndClose,
+            formCommands.remove,
+            formCommands.cancel,
+            formCommands.activate,
+            formCommands.generate,
+          ];
+        }
+
+        function hideFormCommands() {
+          getFormCommandButtons().forEach(function (button) {
+            button.hidden = true;
+          });
+          updateFormCommandBarVisibility();
+        }
+
+        function updateFormCommandBarVisibility() {
+          var buttons = getFormCommandButtons();
+          if (formCommands.menuBack) {
+            buttons.push(formCommands.menuBack);
+          }
+          formCommands.separator.hidden = formCommands.back.hidden;
+          formCommands.root.hidden = buttons.every(function (button) {
+            return button.hidden;
+          });
+        }
+
+        async function canDeleteRecord(entityName, recordId) {
+          var xrm = getXrm();
+          var globalContext = xrm.Utility.getGlobalContext();
+          var metadata = await xrm.Utility.getEntityMetadata(entityName, []);
+          var target = {
+            "@odata.id": metadata.EntitySetName + "(" + recordId + ")",
+          };
+
+          var response = await fetch(
+            globalContext.getClientUrl() +
+              "/api/data/v9.2/systemusers(" +
+              cleanGuid(globalContext.userSettings.userId) +
+              ")/Microsoft.Dynamics.CRM.RetrievePrincipalAccess(Target=@target)" +
+              "?@target=" +
+              encodeURIComponent(JSON.stringify(target)),
+            {
+              credentials: "same-origin",
+              headers: {
+                Accept: "application/json",
+                "OData-MaxVersion": "4.0",
+                "OData-Version": "4.0",
+              },
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              "RetrievePrincipalAccess failed with status " + response.status,
+            );
+          }
+
+          var result = await response.json();
+          return String(result.AccessRights || "").indexOf("DeleteAccess") !== -1;
+        }
+
+        async function canDeleteAppointment(entityName, recordId) {
+          if (entityName !== "appointment" || isRegulatoryAdmin) {
+            return true;
+          }
+
+          var xrm = getXrm();
+          var record = await xrm.WebApi.retrieveRecord(
+            "appointment",
+            recordId,
+            "?$select=onlinemeetingjoinurl,_createdby_value",
+          );
+          var userId = cleanGuid(
+            xrm.Utility.getGlobalContext().userSettings.userId,
+          );
+          return !String(record.onlinemeetingjoinurl || "").trim() &&
+            Boolean(userId) &&
+            cleanGuid(record._createdby_value) === userId;
+        }
+
+        async function getRegulatoryAdminAccess(userTeams) {
+          try {
+            var configValue = await getEnvironmentVariableValue(
+              REGULATORY_LOCK_CONFIG_SCHEMA_NAME,
+            );
+            if (!configValue) {
+              throw new Error("The regulatory lock configuration is not configured.");
+            }
+
+            var config = JSON.parse(configValue);
+            if (!config || typeof config.RegulatoryAdmin !== "string" ||
+                !cleanGuid(config.RegulatoryAdmin).trim()) {
+              throw new Error("The regulatory lock configuration is missing RegulatoryAdmin.");
+            }
+
+            var teamId = cleanGuid(config.RegulatoryAdmin.trim());
+            return userTeams.some(function (team) {
+              return team.id === teamId;
+            });
+          } catch (error) {
+            console.error("Unable to check Regulatory Admin team membership.", error);
+            return false;
+          }
+        }
+
+        function setCommandRunning(isRunning) {
+          isCommandRunning = isRunning;
+          [
+            formCommands.back,
+            formCommands.save,
+            formCommands.saveAndClose,
+            formCommands.remove,
+            formCommands.cancel,
+            formCommands.activate,
+            formCommands.generate,
+          ].forEach(function (button) {
+            button.disabled = isRunning;
+          });
+          if (formCommands.menuBack) {
+            formCommands.menuBack.disabled = isRunning;
+          }
+          formCommands.back.disabled = isRunning || !hasBackHistory();
+          formCommands.remove.disabled =
+            isRunning || !canDeleteCurrentRecord;
+        }
+
+        function hasBackHistory() {
+          return locationHistory.some(function (location) {
+            return !currentLocation || location.key !== currentLocation.key;
+          });
+        }
+
+        async function showCommandError(error) {
+          try {
+            await getXrm().Navigation.openErrorDialog({
+              message: (error && error.message) || String(error),
+            });
+          } catch (dialogError) {
+            console.error(error);
+          }
+        }
+
+        function goBackFromForm() {
+          if (!navigationFrame || navigationFrame.hidden || isCommandRunning || !hasBackHistory()) {
+            return;
+          }
+
+          try {
+            navigationFrame.contentWindow.history.back();
+          } catch (error) {
+            console.warn("Unable to return to the previous page.", error);
+          }
+        }
+
+        async function confirmDiscardChanges(question) {
+          var page = getFormPage();
+          if (!page || !page.data.getIsDirty()) {
+            return true;
+          }
+
+          var confirmation = await getXrm().Navigation.openConfirmDialog({
+            title: "Unsaved changes",
+            text: "This form has unsaved changes. " + question,
+            confirmButtonLabel: "Discard changes",
+            cancelButtonLabel: "Stay on form",
+          });
+          return confirmation.confirmed;
+        }
+
+        // Removes and returns the most recent history entry that isn't the
+        // current page (e.g. the record was opened twice, or just deleted).
+        function popBackTarget() {
+          var currentKey = currentLocation && currentLocation.key;
+          while (locationHistory.length) {
+            var candidate = locationHistory.pop();
+            if (candidate.key !== currentKey) {
+              return candidate;
+            }
+          }
+          return null;
+        }
+
+        function navigateFrameTo(target) {
+          currentFormKey = "";
+          hideFormCommands();
+          // The page being left must not be recorded as a place to come back to.
+          currentLocation = null;
+          beginFrameNavigation();
+          setNavigationData(target.data);
+          navigationFrame.src = target.url;
+        }
+
+        async function goBackInSimpleNavigation() {
+          if (isCommandRunning) {
+            return;
+          }
+
+          if (!navigationFrame || navigationFrame.hidden || !hasBackHistory()) {
+            returnToSimpleNavigation();
+            return;
+          }
+
+          try {
+            if (!(await confirmDiscardChanges("Discard them and go back?"))) {
+              return;
+            }
+
+            // Navigate from our own history instead of the browser's: an
+            // iframe's history.back() walks the whole tab's session history
+            // and leaves locationHistory out of sync.
+            var target = popBackTarget();
+            if (target) {
+              navigateFrameTo(target);
+            } else {
+              showSimpleNavigationCards();
+            }
+          } catch (error) {
+            await showCommandError(error);
+          }
+        }
+
+        function closeForm() {
+          var target = popBackTarget();
+
+          if (target) {
+            navigateFrameTo(target);
+            return;
+          }
+
+          currentFormKey = "";
+          hideFormCommands();
+          currentLocation = null;
+          beginFrameNavigation();
+          setNavigationData();
+
+          if (simpleNavigationState) {
+            showSimpleNavigationCards();
+            return;
+          }
+
+          if (DEFAULT_IFRAME_URL) {
+            navigationFrame.src = resolveUrl(DEFAULT_IFRAME_URL);
+          } else {
+            navigationFrame.hidden = true;
+          }
+        }
+
+        async function saveAndCloseForm() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+
+          setCommandRunning(true);
+          try {
+            // Save through the form so OnSave handlers, required-field
+            // validation and business rules all run.
+            await page.data.save();
+
+            // A blocked save (validation, or an OnSave handler calling
+            // preventDefault) leaves the form dirty: stay on it.
+            if (page.data.getIsDirty()) {
+              return;
+            }
+
+            closeForm();
+          } catch (error) {
+            // The form already shows its own validation and save messages.
+            console.warn("Save was not completed.", error);
+          } finally {
+            setCommandRunning(false);
+          }
+        }
+
+        async function saveForm() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+
+          setCommandRunning(true);
+          try {
+            await page.data.save();
+          } catch (error) {
+            console.warn("Save was not completed.", error);
+          } finally {
+            setCommandRunning(false);
+          }
+        }
+
+        /*async function cancelAppointment() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+
+          setCommandRunning(true);
+          try {
+            var slotStatus = page.getAttribute("bdgas_slotstatus");
+            if (
+              page.data.entity.getEntityName() !== "appointment" ||
+              page.ui.getFormType() !== 2 ||
+              !cleanGuid(page.data.entity.getId()) ||
+              !slotStatus ||
+              slotStatus.getValue() !== 2
+            ) {
+              throw new Error("Only saved Reserved appointments can be canceled.");
+            }
+
+            slotStatus.setValue(6);
+            slotStatus.fireOnChange();
+            await page.data.save();
+          } catch (error) {
+            await showCommandError(error);
+          } finally {
+            currentFormKey = "";
+            setCommandRunning(false);
+            syncFormCommandBar();
+          }
+        }*/
+        async function cancelAppointment() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+          setCommandRunning(true);
+          var slotStatus = null;
+          var originalValue = null;
+          try {
+            slotStatus = page.getAttribute("bdgas_slotstatus");
+            if (
+              page.data.entity.getEntityName() !== "appointment" ||
+              page.ui.getFormType() !== 2 ||
+              !cleanGuid(page.data.entity.getId()) ||
+              !slotStatus ||
+              slotStatus.getValue() !== 2
+            ) {
+              throw new Error("Only saved Reserved appointments can be canceled.");
+            }
+
+            // Confirm first. Nothing on the form changes until the user clicks Yes.
+            var confirmation = await getXrm().Navigation.openConfirmDialog(
+              {
+                title: "Confirm Cancellation",
+                text: "Are you sure you want to cancel this SRA Appointment slot?",
+                confirmButtonLabel: "Yes",
+                cancelButtonLabel: "No",
+              },
+              { height: 200, width: 450 },
+            );
+            if (!confirmation.confirmed) {
+              return;
+            }
+
+            originalValue = slotStatus.getValue();
+            slotStatus.setValue(6);
+            slotStatus.setSubmitMode("always");
+            // Runs SRAAppointment.onSlotStatusChange, which clears the
+            // mandatory fields before the save below starts.
+            slotStatus.fireOnChange();
+            await page.data.save();
+          } catch (error) {
+            // If the save fails, put Slot Status back so the form is not left
+            // half-cancelled and dirty.
+            if (slotStatus && originalValue !== null && slotStatus.getValue() === 6) {
+              slotStatus.setValue(originalValue);
+              slotStatus.fireOnChange();
+            }
+            await showCommandError(error);
+          } finally {
+            currentFormKey = "";
+            setCommandRunning(false);
+            syncFormCommandBar();
+          }
+        }
+
+        async function activateProjectMilestone() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+
+          var entityName = page.data.entity.getEntityName();
+          var recordId = cleanGuid(page.data.entity.getId());
+          if (entityName !== "bdgas_projectmilestone" || !recordId) {
+            await showCommandError(
+              new Error("Only saved project milestones can be activated."),
+            );
+            return;
+          }
+
+          setCommandRunning(true);
+          try {
+            if (page.data.getIsDirty()) {
+              throw new Error("Save or discard your changes before activating this milestone.");
+            }
+
+            var xrm = getXrm();
+            var confirmation = await xrm.Navigation.openConfirmDialog({
+              title: "Activate Project Milestone",
+              text: "Return this approved milestone to Active / In Queue? You will need to submit it again to rerun approval.",
+              confirmButtonLabel: "Activate",
+              cancelButtonLabel: "Cancel",
+            });
+            if (!confirmation.confirmed) {
+              return;
+            }
+
+            var record = await xrm.WebApi.retrieveRecord(
+              entityName,
+              recordId,
+              "?$select=statecode,statuscode",
+            );
+            if (record.statecode !== 1 || record.statuscode !== 2) {
+              throw new Error("Only approved project milestones can be activated.");
+            }
+
+            await xrm.WebApi.updateRecord(entityName, recordId, {
+              statecode: 0,
+              statuscode: 1,
+            });
+            await page.data.refresh(false);
+            currentFormKey = "";
+          } catch (error) {
+            await showCommandError(error);
+          } finally {
+            setCommandRunning(false);
+            syncFormCommandBar();
+          }
+        }
+
+        async function deleteFormRecord() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+
+          var entityName = page.data.entity.getEntityName();
+          var recordId = cleanGuid(page.data.entity.getId());
+          var xrm = getXrm();
+
+          setCommandRunning(true);
+          try {
+            if (!(await canDeleteAppointment(entityName, recordId))) {
+              throw new Error(
+                "Appointments can only be deleted by a Regulatory Admin, or by their creator when there is no meeting link.",
+              );
+            }
+
+            var confirmation = await xrm.Navigation.openConfirmDialog({
+              title: "Confirm Deletion",
+              text: "Are you sure you want to delete this record? This action cannot be undone.",
+              confirmButtonLabel: "Delete",
+              cancelButtonLabel: "Cancel",
+            });
+
+            if (!confirmation.confirmed) {
+              return;
+            }
+
+            if (!(await canDeleteAppointment(entityName, recordId))) {
+              throw new Error(
+                "This appointment is no longer eligible for deletion. Only a Regulatory Admin, or its creator when there is no meeting link, can delete it.",
+              );
+            }
+
+            await xrm.WebApi.deleteRecord(entityName, recordId);
+            closeForm();
+          } catch (error) {
+            await showCommandError(error);
+          } finally {
+            setCommandRunning(false);
+          }
+        }
+
+        async function generateSraDocument() {
+          var page = getFormPage();
+          if (!page || isCommandRunning) {
+            return;
+          }
+
+          if (!isRegulatoryAdmin) {
+            await showCommandError(
+              new Error("Only members of the configured Regulatory Admin team can generate SRA documents."),
+            );
+            return;
+          }
+
+          var appointmentId = cleanGuid(page.data.entity.getId());
+          if (!appointmentId) {
+            await showCommandError(
+              new Error("Save the appointment before generating an SRA document."),
+            );
+            return;
+          }
+
+          setCommandRunning(true);
+          try {
+            var flowUrl = await getEnvironmentVariableValue(
+              GENERATE_SRA_FLOW_SCHEMA_NAME,
+            );
+            if (!flowUrl) {
+              throw new Error(
+                "The Generate SRA flow URL is not configured.",
+              );
+            }
+
+            var response = await fetch(flowUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                AppointmentId: appointmentId,
+              }),
+            });
+            if (!response.ok) {
+              throw new Error(
+                "Generate SRA flow failed with status " + response.status + ".",
+              );
+            }
+
+            var result = await response.json();
+            downloadSraDocument(result);
+          } catch (error) {
+            await showCommandError(error);
+          } finally {
+            setCommandRunning(false);
+          }
+        }
+
+        async function getEnvironmentVariableValue(schemaName) {
+          var xrm = getXrm();
+          var escapedSchemaName = String(schemaName).replace(/'/g, "''");
+          var query =
+            "?$select=defaultvalue&$filter=schemaname eq '" +
+            escapedSchemaName +
+            "'&$expand=environmentvariabledefinition_environmentvariablevalue" +
+            "($select=value,createdon;$orderby=createdon desc;$top=1)";
+          var result = await xrm.WebApi.retrieveMultipleRecords(
+            "environmentvariabledefinition",
+            query,
+          );
+
+          if (!result.entities.length) {
+            return "";
+          }
+
+          var definition = result.entities[0];
+          var values =
+            definition.environmentvariabledefinition_environmentvariablevalue ||
+            [];
+          return values.length && values[0].value
+            ? values[0].value
+            : definition.defaultvalue || "";
+        }
+
+        function downloadSraDocument(result) {
+          var file = result && result.File;
+          var content = file && file.$content;
+          if (!content) {
+            throw new Error("Generate SRA flow did not return a document file.");
+          }
+
+          var fileName = String((result && result.FileName) || "SRA Document");
+          if (!/\.[^./\\]+$/.test(fileName)) {
+            fileName += ".docx";
+          }
+
+          var base64Content = String(content).replace(/^data:[^;]+;base64,/, "");
+          var binaryContent = window.atob(base64Content);
+          var bytes = new Uint8Array(binaryContent.length);
+          for (var index = 0; index < binaryContent.length; index += 1) {
+            bytes[index] = binaryContent.charCodeAt(index);
+          }
+
+          var blob = new Blob([bytes], {
+            type:
+              file["$content-type"] ||
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          });
+          var downloadUrl = window.URL.createObjectURL(blob);
+          var link = document.createElement("a");
+          link.href = downloadUrl;
+          link.download = fileName;
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          window.URL.revokeObjectURL(downloadUrl);
+        }
+
+        function hasArgoNavigationParent() {
+          var current = window;
+
+          try {
+            while (current.parent && current.parent !== current) {
+              current = current.parent;
+
+              if (
+                current.document &&
+                current.document.querySelector(
+                  'body[data-argo-navigation="true"]',
+                )
+              ) {
+                return true;
+              }
+            }
+          } catch (error) {
+            return false;
+          }
+
+          return false;
+        }
+
+        function resolveUrl(url) {
+          if (url.charAt(0) !== "/") {
+            return url;
+          }
+
+          return getXrm().Utility.getGlobalContext().getClientUrl() + url;
+        }
+
+        function createTile(item) {
+          var button = document.createElement("button");
+          button.className = "tile";
+          button.type = "button";
+          button.addEventListener("click", function () {
+            openNavigationItem(item);
+          });
+
+          var icon = document.createElement("span");
+          icon.className = "tile-icon";
+          icon.textContent = item.icon || getInitials(item.label);
+          button.appendChild(icon);
+
+          var text = document.createElement("span");
+          var title = document.createElement("span");
+          title.className = "tile-title";
+          title.textContent = item.label || item.title || "Open";
+          text.appendChild(title);
+
+          if (item.description) {
+            var description = document.createElement("span");
+            description.className = "tile-description";
+            description.textContent = item.description;
+            text.appendChild(description);
+          }
+
+          button.appendChild(text);
+          return button;
+        }
+
+        function openNavigationItem(item) {
+          var page = getFormPage();
+
+          if (page && page.data.getIsDirty()) {
+            getXrm()
+              .Navigation.openConfirmDialog({
+                title: "Unsaved changes",
+                text: "This form has unsaved changes. Discard them and continue?",
+                confirmButtonLabel: "Discard changes",
+                cancelButtonLabel: "Stay on form",
+              })
+              .then(function (confirmation) {
+                if (confirmation.confirmed) {
+                  showNavigationItem(item);
+                }
+              });
+            return;
+          }
+
+          showNavigationItem(item);
+        }
+
+        function showNavigationItem(item) {
+          var xrm = getXrm();
+          var url = getNavigationItemUrl(xrm, item);
+          if (!url) {
+            throw new Error(
+              "The selected navigation item cannot be displayed in the work area.",
+            );
+          }
+
+          if (item.openInNewWindow) {
+            window.open(url, "_blank", "noopener,noreferrer");
+            return;
+          }
+
+          if (simpleNavigationState && !navigationFrame) {
+            renderEmbeddedPage(
+              { url: "about:blank" },
+              simpleNavigationState.workArea,
+            );
+            updateFormCommandBarVisibility();
+          }
+
+          if (!navigationFrame) {
+            throw new Error(
+              "The selected navigation item cannot be displayed in the work area.",
+            );
+          }
+
+          if (simpleNavigationState) {
+            simpleNavigationState.cards.hidden = true;
+            simpleNavigationState.workArea.hidden = false;
+            simpleNavigationState.body.classList.add("is-showing-work-area");
+          }
+
+          navigationFrame.title = item.label || item.title || "Work area";
+          // Record where the user is now before leaving it, so Save & Close
+          // on the new page can come back here.
+          trackLocation();
+          beginFrameNavigation();
+
+          navigationFrame.hidden = false;
+          setNavigationData(item.data);
+          navigationFrame.src = url;
+          navigationFrame.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+
+        function setNavigationData(data) {
+          if (data === undefined || data === null || data === "") {
+            sessionStorage.removeItem(NAVIGATION_DATA_KEY);
+            return;
+          }
+
+          sessionStorage.setItem(NAVIGATION_DATA_KEY, String(data));
+        }
+
+        function getNavigationItemUrl(xrm, item) {
+          if (item.url) {
+            return resolveUrl(item.url);
+          }
+
+          var clientUrl = xrm.Utility.getGlobalContext().getClientUrl();
+          if (item.pageType === "webresource") {
+            return appendDataParameter(
+              xrm.Utility.getGlobalContext().getWebResourceUrl(
+                item.webresourceName,
+              ),
+              item.data,
+            );
+          }
+
+          if (item.pageType === "entitylist") {
+            return appendDataParameter(
+              clientUrl +
+                "/main.aspx?appid=" +
+                appId +
+                "&cmdbar=false&navbar=off&pagetype=entitylist&etn=" +
+                encodeURIComponent(item.entityName) +
+                (item.viewId
+                  ? "&viewid=" + encodeURIComponent(item.viewId)
+                  : ""),
+              item.data,
+            );
+          }
+
+          if (item.pageType === "entityrecord") {
+            return appendDataParameter(
+              clientUrl +
+                "/main.aspx?appid=" +
+                appId +
+                "&cmdbar=false&navbar=off&pagetype=entityrecord&etn=" +
+                encodeURIComponent(item.entityName) +
+                (item.entityId
+                  ? "&id=" + encodeURIComponent(item.entityId)
+                  : "") +
+                (item.formId
+                  ? "&formid=" + encodeURIComponent(item.formId)
+                  : ""),
+              item.data,
+            );
+          }
+
+          return "";
+        }
+
+        function appendDataParameter(url, data) {
+          if (data === undefined || data === null || data === "") {
+            return url;
+          }
+
+          return (
+            url +
+            (url.indexOf("?") === -1 ? "?" : "&") +
+            "data=" +
+            encodeURIComponent(getDataParameterValue(data))
+          );
+        }
+
+        function getDataParameterValue(data) {
+          if (typeof data !== "string") {
+            return JSON.stringify(data);
+          }
+
+          try {
+            JSON.parse(data);
+            return data;
+          } catch (error) {
+            return JSON.stringify(data);
+          }
+        }
+
+        function isNavigationUrl(url, item) {
+          var webResourceName = String(
+            item.webresourceName || "",
+          ).toLowerCase();
+          return (
+            webResourceName.indexOf("argonavigation") !== -1 ||
+            String(url || "")
+              .toLowerCase()
+              .indexOf("argonavigation") !== -1
+          );
+        }
+
+        function toggleNavigation() {
+          var navigationGroups = document.getElementById("navigationGroups");
+          if (!navigationGroups) {
+            return;
+          }
+
+          var isHidden = navigationGroups.hidden;
+          navigationGroups.hidden = !isHidden;
+          navigationGroups.parentElement.classList.toggle(
+            "is-navigation-hidden",
+            !isHidden,
+          );
+          setNavigationToggleLabel(
+            isHidden ? "Hide navigation" : "Show navigation",
+          );
+          elements.toggleNavigationButton.setAttribute(
+            "aria-expanded",
+            String(isHidden),
+          );
+        }
+
+        function setNavigationToggleLabel(label) {
+          clearChildren(elements.toggleNavigationButton);
+
+          var icon = document.createElement("span");
+          icon.className = "button-icon";
+          icon.setAttribute("aria-hidden", "true");
+          icon.textContent = "≡";
+          elements.toggleNavigationButton.appendChild(icon);
+          elements.toggleNavigationButton.appendChild(
+            document.createTextNode(label),
+          );
+        }
+
+        function buildPageInput(item) {
+          if (!item.pageType) {
+            throw new Error(
+              "Navigation item '" +
+                (item.label || item.title || "Open") +
+                "' must define pageType or url.",
+            );
+          }
+
+          var pageInput = {
+            pageType: item.pageType,
+          };
+
+          [
+            "entityName",
+            "entityId",
+            "viewId",
+            "viewType",
+            "dashboardId",
+            "webresourceName",
+            "name",
+            "recordId",
+            "data",
+            "formId",
+            "tabName",
+          ].forEach(function (propertyName) {
+            if (
+              item[propertyName] !== undefined &&
+              item[propertyName] !== null &&
+              item[propertyName] !== ""
+            ) {
+              pageInput[propertyName] = item[propertyName];
+            }
+          });
+
+          return pageInput;
+        }
+
+        function renderEmpty(userTeams, config) {
+          elements.summaryTitle.textContent = "No matching work areas";
+          elements.summaryText.textContent =
+            "The current user is not in a configured navigation team.";
+
+          var message = createMessage(
+            "warning",
+            "No matching team",
+            "Configured teams did not match the current user's Dataverse teams.",
+          );
+
+          if (config === fallbackConfig) {
+            var sample = document.createElement("pre");
+            sample.className = "sample-config";
+            sample.textContent = JSON.stringify(fallbackConfig, null, 2);
+            message.appendChild(sample);
+          }
+
+          elements.navigationRoot.appendChild(message);
+        }
+
+        function renderError(error) {
+          elements.summaryTitle.textContent = "Navigation unavailable";
+          elements.summaryText.textContent =
+            "The web resource could not load the configured actions.";
+          elements.navigationRoot.appendChild(
+            createMessage(
+              "warning",
+              "Unable to load navigation",
+              error.message || String(error),
+            ),
+          );
+        }
+
+        function createMessage(type, titleText, bodyText) {
+          var message = document.createElement("div");
+          message.className = "message " + type;
+
+          var title = document.createElement("h3");
+          title.textContent = titleText;
+          message.appendChild(title);
+
+          var body = document.createElement("p");
+          body.textContent = bodyText;
+          message.appendChild(body);
+
+          return message;
+        }
+
+        function getInitials(value) {
+          return String(value || "Open")
+            .split(/\s+/)
+            .filter(Boolean)
+            .slice(0, 2)
+            .map(function (part) {
+              return part.charAt(0).toUpperCase();
+            })
+            .join("");
+        }
+
+        function cleanGuid(value) {
+          return String(value || "")
+            .replace(/[{}]/g, "")
+            .toLowerCase();
+        }
+
+        function normalize(value) {
+          return String(value || "")
+            .trim()
+            .toLowerCase();
+        }
+
+        function clearChildren(element) {
+          while (element.firstChild) {
+            element.removeChild(element.firstChild);
+          }
+        }
+
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<customapirequestparameter uniquename="AppointmentId">
+  <displayname default="GenerateArgoWordTemplate-In-AppointmentId">
+    <label description="GenerateArgoWordTemplate-In-AppointmentId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>GenerateArgoWordTemplate-In-AppointmentId</name>
+  <type>12</type>
+</customapirequestparameter>

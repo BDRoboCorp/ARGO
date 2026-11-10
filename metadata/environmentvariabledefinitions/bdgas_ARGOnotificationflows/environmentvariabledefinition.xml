@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOnotificationflows">
+  <defaultvalue>{ 	"Recipients": "temmy.raharjo@bd.com;jordan.cheng@bd.com;muhammad.zhafari@bd.com;" }</defaultvalue>
+  <displayname default="ARGO notification flows">
+    <label description="ARGO notification flows" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="bdgas_NotificationConfiguration">
+  <defaultvalue>{   "DurationHours": 1,   "Teams": true,   "Email": true }</defaultvalue>
+  <description default="Controls the notification duration and whether Microsoft Teams and email notifications are enabled.">
+    <label description="Controls the notification duration and whether Microsoft Teams and email notifications are enabled." languagecode="1033" />
+  </description>
+  <displayname default="NotificationConfiguration">
+    <label description="NotificationConfiguration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

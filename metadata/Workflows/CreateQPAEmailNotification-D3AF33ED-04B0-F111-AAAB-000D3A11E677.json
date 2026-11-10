@@ -1,0 +1,245 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "bdgas_requestintake",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "bdgas_requestintaketype eq 100000001 and statuscode eq 1 and _bdgas_botvp_value ne null and _bdgas_botowner_value ne null and _createdby_value ne null\n"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "8f8146f0-83ea-47fb-89b0-267cf7109bd2"
+          }
+        }
+      },
+      "actions": {
+        "Scope_-_Try": {
+          "type": "Scope",
+          "actions": {
+            "List_rows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_requestintakes",
+                  "fetchXml": "@variables('FetchXml')"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Set_FetchXml": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Run_a_Child_Flow": {
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "20d1c063-a69a-f111-b8dc-7ced8d23115e"
+                },
+                "body": {
+                  "text": "@variables('FetchXml')",
+                  "text_1": "QPA Create Email Template",
+                  "boolean": false,
+                  "boolean_1": true,
+                  "boolean_2": true,
+                  "text_2": "@variables('SendTo')"
+                }
+              },
+              "runAfter": {
+                "Set_SendTo": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Set_FetchXml": {
+              "type": "SetVariable",
+              "inputs": {
+                "name": "FetchXml",
+                "value": "<fetch xmlns:generator='MarkMpn.SQL4CDS'>\n  <entity name='bdgas_requestintake'>\n    <attribute name='bdgas_requestintakeid' />\n    <attribute name='bdgas_requestintake' />\n    <attribute name='bdgas_digitalproductname' />\n    <attribute name='bdgas_description' />\n    <link-entity name='systemuser' to='bdgas_botowner' from='systemuserid' alias='botowner' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n    <link-entity name='systemuser' to='createdby' from='systemuserid' alias='createdby' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n    <link-entity name='systemuser' to='bdgas_botvp' from='systemuserid' alias='botvp' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n<link-entity name='systemuser' to='bdgas_botinformedid' from='systemuserid' alias='botinformed' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n<link-entity name='systemuser' to='bdgas_assigneeba' from='systemuserid' alias='assigneeba' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n<link-entity name='systemuser' to='bdgas_businesspartner' from='systemuserid' alias='businesspartner' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n<link-entity name='systemuser' to='ownerid' from='systemuserid' alias='domainowner' link-type='outer'>\n      <attribute name='fullname' />\n      <attribute name='internalemailaddress' />\n    </link-entity>\n    <filter>\n      <condition attribute='bdgas_requestintakeid' operator='eq' value='@{triggerOutputs()?['body/bdgas_requestintakeid']}' />\n    </filter>\n  </entity>\n</fetch>"
+              }
+            },
+            "Set_SendTo": {
+              "type": "SetVariable",
+              "inputs": {
+                "name": "SendTo",
+                "value": "@concat(\r\nfirst(outputs('List_rows')?['body/value'])?['botowner.internalemailaddress'], ';',\r\nfirst(outputs('List_rows')?['body/value'])?['createdby.internalemailaddress'], ';',\r\nfirst(outputs('List_rows')?['body/value'])?['botvp.internalemailaddress']\r\n)"
+              },
+              "runAfter": {
+                "List_rows": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_SendTo": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Creation QPA Email Notification] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Scope_-_Try": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          }
+        },
+        "Initialize_FetchXml": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "FetchXml",
+                "type": "string"
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Initialize_SendTo": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "SendTo",
+                "type": "string"
+              }
+            ]
+          },
+          "runAfter": {
+            "Initialize_FetchXml": [
+              "Succeeded"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

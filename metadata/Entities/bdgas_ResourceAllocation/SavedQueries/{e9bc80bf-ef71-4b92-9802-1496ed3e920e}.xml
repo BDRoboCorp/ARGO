@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{e9bc80bf-ef71-4b92-9802-1496ed3e920e}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_resourceallocation" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_resourceallocationid">
+          <cell name="bdgas_resourceallocation" width="186" />
+          <cell name="bdgas_requestintakeid" width="139" />
+          <cell name="bdgas_application" width="107" />
+          <cell name="bdgas_pic" width="100" />
+          <cell name="bdgas_percentage" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_resourceallocation">
+          <attribute name="bdgas_resourceallocationid" />
+          <attribute name="bdgas_resourceallocation" />
+          <attribute name="createdon" />
+          <order attribute="bdgas_resourceallocation" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_percentage" />
+          <attribute name="bdgas_pic" />
+          <attribute name="bdgas_application" />
+          <attribute name="bdgas_requestintakeid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Resource Allocations" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

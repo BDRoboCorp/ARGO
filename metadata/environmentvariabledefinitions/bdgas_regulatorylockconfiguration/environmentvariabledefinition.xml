@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_regulatorylockconfiguration">
+  <defaultvalue>{ "RegulatoryAdmin": "ded7f41a-d5a5-f111-b8de-7ced8dcba28c", "LockingHours": 0.5 }</defaultvalue>
+  <displayname default="Regulatory Lock Configuration">
+    <label description="Regulatory Lock Configuration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

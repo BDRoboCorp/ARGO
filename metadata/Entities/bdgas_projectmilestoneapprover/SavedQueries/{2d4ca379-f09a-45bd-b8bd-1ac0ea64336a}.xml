@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{2d4ca379-f09a-45bd-b8bd-1ac0ea64336a}</savedqueryid>
+    <layoutxml>
+      <grid name="bdgas_projectmilestoneapprovers" jump="bdgas_approverno" select="1" icon="1" preview="1">
+        <row name="bdgas_projectmilestoneapprover" id="bdgas_projectmilestoneapproverid">
+          <cell name="bdgas_approverno" width="118" />
+          <cell name="statuscode" width="119" />
+          <cell name="bdgas_comments" width="300" />
+          <cell name="createdon" width="105" />
+          <cell name="ownerid" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_projectmilestoneapprover">
+          <attribute name="bdgas_projectmilestoneapproverid" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ownerid" />
+          <attribute name="statuscode" />
+          <attribute name="bdgas_comments" />
+          <attribute name="bdgas_approverno" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Project Milestone Approvals Associated View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

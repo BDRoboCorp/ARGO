@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{c1c773de-3da7-f111-b8de-7ced8d23115e}</formid>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{9d0cd230-8377-4422-8b5d-d340e39de639}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{b617f0bd-0880-4eae-9514-5758eea1eab6}">
+                  <labels>
+                    <label description="Tasks" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="C0550AC7-0F44-45A4-8EF5-D2911C0689D9" labelid="{ca4762e6-e9f5-4fb2-ad9c-9eb3e5f3bea3}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{dfe2dad5-358d-4e73-9889-39dcb18efdd5}" rowspan="4" colspan="1" auto="false" showlabel="false" labelid="{68761391-8077-4150-a339-00965e80a904}">
+                        <labels>
+                          <label description="New SG control 1788401924926" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_requestintake_Tasks</RelationshipName>
+                            <TargetEntityType>task</TargetEntityType>
+                            <ViewId>{2B5F5A5D-2D23-4FE7-AA58-E77995368AE7}</ViewId>
+                            <ViewIds>{6CF285AA-EB20-4277-925A-3E9735411FF0},{2B5F5A5D-2D23-4FE7-AA58-E77995368AE7}</ViewIds>
+                            <VisualizationId>{9E6A8B06-6D14-46E6-BBF5-95C388C6EB7A}</VisualizationId>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+        <Role Id="{e99cd260-0784-4b9e-9f91-03dc1011671e}" />
+        <Role Id="{8b2ad5d0-6c78-4f09-911d-0a034a78b2a7}" />
+        <Role Id="{817d162c-8272-48e9-8e97-adfddf180b1c}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Project Center Tasks" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

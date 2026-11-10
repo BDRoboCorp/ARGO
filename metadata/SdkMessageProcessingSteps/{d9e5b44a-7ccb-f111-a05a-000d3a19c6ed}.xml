@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="BD.IPA.Plugins.PreRequestIntakeApplicationCreate: Create of bdgas_requestintakeapplication" SdkMessageProcessingStepId="{d9e5b44a-7ccb-f111-a05a-000d3a19c6ed}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeExportKey>227ACA61905C8CA63A1D00616786176C7BF57C26CA32AC06BBC55EA26ABA2802</PluginTypeExportKey>
+  <PrimaryEntity>bdgas_requestintakeapplication</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>BD.IPA.Plugins.PreRequestIntakeApplicationCreate: Create of bdgas_requestintakeapplication</Description>
+  <FilteringAttributes>bdgas_application</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

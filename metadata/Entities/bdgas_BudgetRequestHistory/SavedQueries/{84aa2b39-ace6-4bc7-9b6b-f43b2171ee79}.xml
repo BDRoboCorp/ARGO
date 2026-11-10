@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{84aa2b39-ace6-4bc7-9b6b-f43b2171ee79}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_budgetrequesthistory" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_budgetrequesthistoryid">
+          <cell name="bdgas_budgetrequesthistory" width="300" />
+          <cell name="a_3fb9125bc99e49c8ada695d2f8f2a480.bdgas_chargebacktype" width="240" />
+          <cell name="bdgas_descriptionbotowner" width="150" />
+          <cell name="bdgas_costcenter" width="150" />
+          <cell name="bdgas_approveddate" width="150" />
+          <cell name="bdgas_fee" width="150" />
+          <cell name="bdgas_projectcenterid" width="121" />
+          <cell name="a_bec6c28189374c379464ddd1fcb21fbd.bdgas_digitalproductname" width="216" />
+          <cell name="createdon" width="105" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_budgetrequesthistory">
+          <attribute name="bdgas_budgetrequesthistoryid" />
+          <attribute name="bdgas_budgetrequesthistory" />
+          <attribute name="createdon" />
+          <attribute name="bdgas_costcenter" />
+          <attribute name="bdgas_descriptionbotowner" />
+          <attribute name="bdgas_approveddate" />
+          <attribute name="bdgas_fee" />
+          <attribute name="bdgas_projectcenterid" />
+          <link-entity alias="a_bec6c28189374c379464ddd1fcb21fbd" name="bdgas_requestintake" to="bdgas_projectcenterid" from="bdgas_requestintakeid" link-type="outer" visible="false">
+            <attribute name="bdgas_digitalproductname" />
+          </link-entity>
+          <link-entity alias="a_3fb9125bc99e49c8ada695d2f8f2a480" name="bdgas_budgetrequest" to="bdgas_budgetrequest" from="bdgas_budgetrequestid" link-type="outer" visible="false">
+            <attribute name="bdgas_chargebacktype" />
+          </link-entity>
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Budget Request History Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

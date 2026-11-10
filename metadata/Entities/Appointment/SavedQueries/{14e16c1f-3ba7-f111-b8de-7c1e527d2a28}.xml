@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{14e16c1f-3ba7-f111-b8de-7c1e527d2a28}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" icon="1" preview="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="300" />
+          <cell name="scheduledstart" width="100" />
+          <cell name="bdgas_slotnumber" width="112" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="activityid" />
+          <filter type="and">
+            <condition attribute="bdgas_sratemplate" operator="eq" value="1" />
+            <condition attribute="bdgas_slotstatus" operator="eq" value="0" />
+          </filter>
+          <attribute name="scheduledstart" />
+          <attribute name="bdgas_slotnumber" />
+          <order attribute="scheduledstart" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Available SRA View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOBDIntelligence">
+  <defaultvalue>{ 	"StrategicAlignmentId": "d0578be2-85b2-f111-aaac-000d3a1db6ab", 	"ValueDriversId": [ 	   "5dd2960c-0ea8-f111-b8dd-6045bdd37769" 	], 	"TechnologiesUsedId": "fe578be2-85b2-f111-aaac-000d3a1db6ab", 	"AvailabilityId": "d6578be2-85b2-f111-aaac-000d3a1db6ab", 	"IntegrationTypeId": "de578be2-85b2-f111-aaac-000d3a1db6ab", 	"ProductTypeId": "e2578be2-85b2-f111-aaac-000d3a1db6ab" }</defaultvalue>
+  <displayname default="ARGO BD Intelligence">
+    <label description="ARGO BD Intelligence" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

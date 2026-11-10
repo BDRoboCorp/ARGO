@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{dd6b681a-ab97-f111-8076-6045bdd77d4f}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_number" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_projectmilestoneid">
+          <cell name="bdgas_requestintakeid" width="124" />
+          <cell name="a_d1e40b14056a4a638fa1e943b9f3cd61.bdgas_digitalproductname" width="219" />
+          <cell name="bdgas_milestonetypeid" width="128" />
+          <cell name="bdgas_description" width="300" />
+          <cell name="statuscode" width="108" />
+          <cell name="createdon" width="125" />
+          <cell name="bdgas_sequence" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_projectmilestone">
+          <attribute name="bdgas_projectmilestoneid" />
+          <attribute name="createdon" />
+          <attribute name="bdgas_milestonetypeid" />
+          <attribute name="bdgas_requestintakeid" />
+          <attribute name="bdgas_description" />
+          <attribute name="statuscode" />
+          <link-entity alias="a_d1e40b14056a4a638fa1e943b9f3cd61" name="bdgas_requestintake" to="bdgas_requestintakeid" from="bdgas_requestintakeid" link-type="outer" visible="false">
+            <attribute name="bdgas_digitalproductname" />
+          </link-entity>
+          <attribute name="bdgas_sequence" />
+          <order attribute="bdgas_sequence" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="All Project Milestones" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

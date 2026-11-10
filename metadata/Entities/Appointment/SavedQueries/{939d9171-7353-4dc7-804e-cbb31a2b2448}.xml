@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{939d9171-7353-4dc7-804e-cbb31a2b2448}</savedqueryid>
+    <queryapi></queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" preview="1" icon="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="186" />
+          <cell name="scheduledstart" width="157" />
+          <cell name="regardingobjectid" width="100" />
+          <cell name="bdgas_requestname" width="123" />
+          <cell name="instancetypecode" width="100" ishidden="1" />
+          <cell name="bdgas_slotstatus" width="101" />
+          <cell name="onlinemeetingjoinurl" width="178" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="scheduledstart" />
+          <attribute name="instancetypecode" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <link-entity name="activityparty" from="activityid" to="activityid" alias="aa">
+            <filter type="and">
+              <condition attribute="partyid" operator="eq-userid" />
+              <condition attribute="participationtypemask" operator="in">
+                <value>7</value>
+                <value>9</value>
+                <value>5</value>
+                <value>6</value>
+              </condition>
+            </filter>
+          </link-entity>
+          <attribute name="bdgas_slotstatus" />
+          <attribute name="onlinemeetingjoinurl" />
+          <attribute name="regardingobjectid" />
+          <attribute name="bdgas_requestname" />
+          <order attribute="scheduledstart" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="My Completed Appointments" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Displays completed Appointments the current user owns." languagecode="1033" />
+    </Descriptions>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_qpaagreement">
+  <defaultvalue>&lt;ol&gt;      &lt;li&gt;          Please go through the QPA procedure          (&lt;strong&gt;procedure link&lt;/strong&gt;)      &lt;/li&gt;      &lt;li&gt;          Accept the QPA Terms and Conditions in the procedure.      &lt;/li&gt;  &lt;/ol&gt;  &lt;br&gt;</defaultvalue>
+  <displayname default="QPA Agreement">
+    <label description="QPA Agreement" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

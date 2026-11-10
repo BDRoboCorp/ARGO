@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{94db6013-c565-4a0e-b9ea-25293d655613}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_application" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_applicationid">
+          <cell name="bdgas_application" width="175" />
+          <cell name="bdgas_applicationname" width="252" />
+          <cell name="bdgas_description" width="300" />
+          <cell name="bdgas_parentapplicationid" width="146" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_application">
+          <attribute name="bdgas_applicationid" />
+          <attribute name="bdgas_application" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="bdgas_applicationname" />
+          <attribute name="bdgas_description" />
+          <attribute name="bdgas_parentapplicationid" />
+          <order attribute="bdgas_application" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Applications" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

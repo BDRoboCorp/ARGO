@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="bdgas_piijustification" localizedName="PII Justification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <ExternalTypeName></ExternalTypeName>
+  <displaynames>
+    <displayname description="PII Justification" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="" languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="0" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="1 - Application is impacting the processing of a personally identifiable information – A RITA Assessment is required" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="1" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="2 - Application is impacting the processing of a personally identifiable information – A RITA Assessment is required" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="2" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="3 - Application is Not impacting the processing of Personal Identifiable Information (PII) - Privacy" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="3" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="4 - This Change impacts the previous Privacy Assessment – Existing RITA /Alpha Rita Needs to be updated" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="4" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="5 - This Change does not impact the previous Privacy Assessment – No need for Changes in the existing RITA/RITA Alpha Assessments." languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="5" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="6 - Infrastructure Change Only - Privacy Assessment not Required" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="6" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="7 - Other" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+  </options>
+</optionset>

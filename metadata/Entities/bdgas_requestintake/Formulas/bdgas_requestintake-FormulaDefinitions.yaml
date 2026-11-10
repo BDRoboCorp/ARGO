@@ -1,0 +1,1 @@
+bdgas_planviewdaysopen: =DateDiff(bdgas_planviewrequestcreationdate, UTCNow(), TimeUnit.Days)    

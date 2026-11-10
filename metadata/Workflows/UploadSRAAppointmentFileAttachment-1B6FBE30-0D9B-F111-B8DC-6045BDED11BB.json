@@ -1,0 +1,276 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_b44f2"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "ARGO Application URL (bdgas_ARGOApplicationURL)": {
+          "defaultValue": "https://org6547479b.crm.dynamics.com/main.aspx?appid=cebc59c4-bf80-f111-ab0f-000d3a11e677&forceUCI=1",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bdgas_ARGOApplicationURL"
+          }
+        },
+        "ARGO notification flows (bdgas_ARGOnotificationflows)": {
+          "defaultValue": {
+            "Recipients": "temmy.raharjo@bd.com;jordan.cheng@bd.com"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_ARGOnotificationflows"
+          }
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "appointment",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "bdgas_uploadsradocument"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_variable_varFieldName": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varFieldName",
+                "type": "string"
+              }
+            ]
+          },
+          "runAfter": {}
+        },
+        "Try_Scope": {
+          "type": "Scope",
+          "actions": {
+            "Condition_Upload_SRA_Attachment": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "contains": [
+                      "@triggerBody()",
+                      "bdgas_uploadsradocument"
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Set_variable": {
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varFieldName",
+                    "value": "bdgas_uploadsradocument"
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Terminate": {
+                    "type": "Terminate",
+                    "inputs": {
+                      "runStatus": "Cancelled"
+                    }
+                  }
+                }
+              }
+            },
+            "Download_a_file_or_an_image": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "appointments",
+                  "recordId": "@outputs('Get_a_SRA_by_ID')?['body/activityid']",
+                  "fileImageFieldName": "@variables('varFieldName')"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetEntityFileImageFieldContent",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Get_a_SRA_by_ID": [
+                  "SUCCEEDED"
+                ]
+              }
+            },
+            "Run_a_Child_Flow": {
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "fbb25a8c-af97-f111-8076-6045bded11bb"
+                },
+                "body": {
+                  "text": "@if(\r\n  and(\r\n    equals(triggerOutputs()?['body/bdgas_sratemplate'], true),\r\n    contains(triggerBody(), '_regardingobjectid_value')\r\n  ),\r\n  triggerOutputs()?['body/_regardingobjectid_value'],\r\n  ''\r\n)",
+                  "file": {
+                    "name": "@outputs('Get_a_SRA_by_ID')?[concat('body/', variables('varFieldName'), '_name')]",
+                    "contentBytes": "@base64(body('Download_a_file_or_an_image'))"
+                  },
+                  "text_1": "@if(\r\n  and(\r\n    equals(triggerOutputs()?['body/bdgas_sratemplate'], true),\r\n    contains(triggerBody(), '_regardingobjectid_value')\r\n  ),\r\n  '',\r\n  triggerOutputs()?['body/activityid']\r\n)"
+                }
+              },
+              "runAfter": {
+                "Download_a_file_or_an_image": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_a_SRA_by_ID": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "appointments",
+                  "recordId": "@triggerOutputs()?['body/activityid']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Condition_Upload_SRA_Attachment": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable_varFieldName": [
+              "Succeeded"
+            ]
+          }
+        },
+        "CatchScope": {
+          "type": "Scope",
+          "actions": {
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@body('Parse_JSON')?['Recipients']",
+                  "emailMessage/Subject": "[ARGO System Notification] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br><b><strong class=\"editor-text-bold\">Flow Name:</strong></b> @{outputs('Get_Workflow_Details')?['tags']?['flowDisplayName']}</p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Flow URL:</strong></b> <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a></p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">IH Event: </strong></b><a href=\"@{outputs('Record_URL')}\" class=\"editor-link\">View Record</a><br><br>Kindly contact IT Support for further assistance.<br><br><i><b><strong class=\"editor-text-bold editor-text-italic\">Do not reply to this email as it was automatically generated by the system.</strong></b></i><br><br>Thank you,<br>ARGO System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "503d7713-0632-47ae-87e7-eecda3637bbf"
+              }
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "https://make.powerautomate.com/environments/@{outputs('Get_Workflow_Details')?['tags']?['environmentName']}/flows/@{outputs('Get_Workflow_Details')?['name']}/runs/@{outputs('Get_Workflow_Details')?['run']['name']}",
+              "runAfter": {
+                "Get_Workflow_Details": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5dac59e2-9883-49ed-882e-6b8d857bf307"
+              }
+            },
+            "Get_Workflow_Details": {
+              "type": "Compose",
+              "inputs": "@workflow()",
+              "metadata": {
+                "operationMetadataId": "b7f5e576-5cae-4bae-b2b6-2c889e0abe66"
+              }
+            },
+            "Record_URL": {
+              "type": "Compose",
+              "inputs": "@{parameters('ARGO Application URL (bdgas_ARGOApplicationURL)')}&pagetype=entityrecord&etn=appointment&id=@{triggerOutputs()?['body/activityid']}",
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('ARGO notification flows (bdgas_ARGOnotificationflows)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Recipients": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Record_URL": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Try_Scope": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0523e571-68ec-4397-9fb8-b467e2c6089a"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

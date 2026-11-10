@@ -1,0 +1,118 @@
+var BudgetRequestHistory = BudgetRequestHistory || {};
+
+//Initializes the Budget Request History form.
+//Controls field visibility and requirement levels based on the current user.
+BudgetRequestHistory.onLoad = async function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    await BudgetRequestHistory.controlVisibility(formContext);
+};
+
+//Controls the visibility and requirement level of BOT Owner and Finance POC fields.
+//Only displays and requires the relevant fields when the current user matches
+//the configured BOT Owner or Finance POC.
+BudgetRequestHistory.controlVisibility = async function (formContext) {
+
+    var currentUserId = Xrm.Utility.getGlobalContext().userSettings.userId
+        .replace("{", "")
+        .replace("}", "")
+        .toLowerCase();
+
+    var botOwner = formContext.getAttribute("bdgas_botowner")?.getValue();
+
+    /*
+        Replace this field with your actual Finance POC lookup field schema name.
+    */
+    var financePoc = formContext.getAttribute("bdgas_financepoc")?.getValue();
+
+    // Hide everything first
+    BudgetRequestHistory.setFieldState(
+        formContext,
+        "bdgas_descriptionbotowner",
+        false,
+        "none"
+    );
+
+    BudgetRequestHistory.setFieldState(
+        formContext,
+        "bdgas_approvalbotowner",
+        false,
+        "none"
+    );
+
+    BudgetRequestHistory.setFieldState(
+        formContext,
+        "bdgas_descriptionfinancepoc",
+        false,
+        "none"
+    );
+
+    BudgetRequestHistory.setFieldState(
+        formContext,
+        "bdgas_approvalfinancepoc",
+        false,
+        "none"
+    );
+
+    // BOT OWNER
+    if (
+        botOwner &&
+        botOwner.length > 0 &&
+        botOwner[0].id.replace("{", "").replace("}", "").toLowerCase() === currentUserId
+    ) {
+        BudgetRequestHistory.setFieldState(
+            formContext,
+            "bdgas_descriptionbotowner",
+            true,
+            "required"
+        );
+
+        BudgetRequestHistory.setFieldState(
+            formContext,
+            "bdgas_approvalbotowner",
+            true,
+            "required"
+        );
+    }
+
+    // FINANCE POC
+    if (
+        financePoc &&
+        financePoc.length > 0 &&
+        financePoc[0].id.replace("{", "").replace("}", "").toLowerCase() === currentUserId
+    ) {
+        BudgetRequestHistory.setFieldState(
+            formContext,
+            "bdgas_descriptionfinancepoc",
+            true,
+            "required"
+        );
+
+        BudgetRequestHistory.setFieldState(
+            formContext,
+            "bdgas_approvalfinancepoc",
+            true,
+            "required"
+        );
+    }
+};
+
+//Sets the visibility and requirement level of a specified form field.
+//Used as a reusable helper for controlling field behavior.
+BudgetRequestHistory.setFieldState = function (
+    formContext,
+    fieldName,
+    visible,
+    requirementLevel
+) {
+    var control = formContext.getControl(fieldName);
+    var attribute = formContext.getAttribute(fieldName);
+
+    if (control) {
+        control.setVisible(visible);
+    }
+
+    if (attribute) {
+        attribute.setRequiredLevel(requirementLevel);
+    }
+};

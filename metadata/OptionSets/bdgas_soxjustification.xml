@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="bdgas_soxjustification" localizedName="SOX Justification" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <ExternalTypeName></ExternalTypeName>
+  <displaynames>
+    <displayname description="SOX Justification" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="" languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="0" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="1 - (Not SOX applicable) The system is not in-scope for SOX, and this change does not have any impact on SOX controls." languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="1" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="2 - (SOX applicable having no impact) While the system is in-scope for SOX, this change does not have any impact on SOX controls related to the system. As a result, no SOX assessment is required." languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="2" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="3 - (SOX applicable having impact) The system is in-scope for SOX or impacts SOX systems, and change may have impact on SOX controls related to the system. SOX assessment is required." languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+  </options>
+</optionset>

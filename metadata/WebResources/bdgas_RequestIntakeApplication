@@ -1,0 +1,17 @@
+var RequestIntakeApplication = RequestIntakeApplication || {};
+RequestIntakeApplication.Events = RequestIntakeApplication.Events || {};
+
+(function () {
+
+    this.onLoad = async function (executionContext) {
+
+        var formContext =
+            executionContext.getFormContext();
+
+       /* await RegulatoryLock.apply(
+            formContext,
+            "bdgas_requestintakeid"
+        );*/
+    };
+
+}).apply(RequestIntakeApplication.Events);

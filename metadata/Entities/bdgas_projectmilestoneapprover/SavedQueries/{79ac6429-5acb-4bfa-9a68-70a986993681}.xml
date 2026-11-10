@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{79ac6429-5acb-4bfa-9a68-70a986993681}</savedqueryid>
+    <layoutxml>
+      <grid name="bdgas_projectmilestoneapprovers" jump="bdgas_approverno" select="1" icon="1" preview="0">
+        <row name="bdgas_projectmilestoneapprover" id="bdgas_projectmilestoneapproverid">
+          <cell name="bdgas_approverno" width="118" />
+          <cell name="statuscode" width="119" />
+          <cell name="bdgas_comments" width="300" />
+          <cell name="createdon" width="105" />
+          <cell name="ownerid" width="100" />
+          <cell name="a_15c2f8411188407ab8d590aed07a2b1b.bdgas_milestonetypeid" width="240" />
+          <cell name="a_15c2f8411188407ab8d590aed07a2b1b.bdgas_requestintakeid" width="97" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>64</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_projectmilestoneapprover">
+          <attribute name="bdgas_projectmilestoneapproverid" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ownerid" />
+          <attribute name="statuscode" />
+          <attribute name="bdgas_comments" />
+          <link-entity alias="a_15c2f8411188407ab8d590aed07a2b1b" name="bdgas_projectmilestone" to="bdgas_projectmilestoneid" from="bdgas_projectmilestoneid" link-type="outer" visible="false">
+            <attribute name="bdgas_requestintakeid" />
+            <attribute name="bdgas_milestonetypeid" />
+          </link-entity>
+          <attribute name="bdgas_approverno" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Project Milestone Approvals Lookup View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

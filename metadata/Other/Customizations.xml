@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26101.184" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26101.00184">
+  <Entities />
+  <Roles />
+  <Workflows />
+  <FieldSecurityProfiles />
+  <Templates />
+  <EntityImageConfigs>
+    <EntityImageConfig>
+      <parententitylogicalname>appointment</parententitylogicalname>
+      <primaryimageattribute>bdgas_networkdataflowdiagram</primaryimageattribute>
+    </EntityImageConfig>
+  </EntityImageConfigs>
+  <AttributeImageConfigs>
+    <AttributeImageConfig>
+      <attributelogicalname>bdgas_networkdataflowdiagram2</attributelogicalname>
+      <parententitylogicalname>appointment</parententitylogicalname>
+      <canstorefullimage>1</canstorefullimage>
+    </AttributeImageConfig>
+    <AttributeImageConfig>
+      <attributelogicalname>bdgas_networkdataflowdiagram4</attributelogicalname>
+      <parententitylogicalname>appointment</parententitylogicalname>
+      <canstorefullimage>1</canstorefullimage>
+    </AttributeImageConfig>
+    <AttributeImageConfig>
+      <attributelogicalname>bdgas_networkdataflowdiagram5</attributelogicalname>
+      <parententitylogicalname>appointment</parententitylogicalname>
+      <canstorefullimage>1</canstorefullimage>
+    </AttributeImageConfig>
+    <AttributeImageConfig>
+      <attributelogicalname>bdgas_networkdataflowdiagram3</attributelogicalname>
+      <parententitylogicalname>appointment</parententitylogicalname>
+      <canstorefullimage>1</canstorefullimage>
+    </AttributeImageConfig>
+    <AttributeImageConfig>
+      <attributelogicalname>bdgas_networkdataflowdiagram</attributelogicalname>
+      <parententitylogicalname>appointment</parententitylogicalname>
+      <canstorefullimage>1</canstorefullimage>
+    </AttributeImageConfig>
+  </AttributeImageConfigs>
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <WebResources />
+  <CustomControls />
+  <SdkMessageProcessingSteps />
+  <AppModuleSiteMaps />
+  <AppModules />
+  <EntityDataProviders />
+  <CanvasApps />
+  <appaction_appactionrule_classicrulesset>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.CreatePrimaryEntityPermission!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.AssignSelectedEntityPermission!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsValidForHierarchyPageInUC!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsValidForHierarchyView!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.SelectionCountAtLeastOne!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.DisplayCharts!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.EnableOnHomePageAspxOrOutlook!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsDeleteVisualizationEnabled!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsEntityEnabledForCharts!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.userqueryvisualization.Delete!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneRuntimeMode!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.DisplayCharts!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsChartSelected!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsDefaultVisualizationModule!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsEntityEnabledForCharts!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsFetchxmlQuery!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsParentChartLoaded!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.userqueryvisualization.Write!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.UserVisualizationSelected!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneRuntimeMode!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsNavigateToInUCIEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.ShowOnDashboardPageUCI!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.ShowOnlyOnModern!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.SelectedEntityIsBPFEntity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.SelectionCountExactlyOne!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.EnableSaveButton!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.GridFiltersEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsCustomizable!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.OpenCustomizations!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.savedquery.Update!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.SystemQuerySelected!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.WriteCustomization!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.HybridDialogShareEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.IsValidForHierarchyView!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.SelectionCountAtLeastOne!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.ShareSelectedEntityPermission!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.ShareValid!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.ShowOnNonModernAndModernIfAllowed!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+  </appaction_appactionrule_classicrulesset>
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_02992">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-02992</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_07e94">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-07e94</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_1b092">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-1b092</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_2567e">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-2567e</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_2f277">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-2f277</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_3ed94">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-3ed94</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_52065">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-52065</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_55b6e">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-55b6e</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_591b5">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-591b5</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedcommondataserviceforapps_a29ee">
+      <connectionreferencedisplayname>Microsoft Dataverse RITM3372825_IntelligentProcessAutomation-a29ee</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedexcelonlinebusiness_ecfd3">
+      <connectionreferencedisplayname>Excel Online (Business) RITM3372825_IntelligentProcessAutomation-ecfd3</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedteams_f8bc1">
+      <connectionreferencedisplayname>Microsoft Teams RITM3372825_IntelligentProcessAutomation-f8bc1</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_teams</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_shareduiflow_e4001">
+      <connectionreferencedisplayname>Desktop flows RITM3372825_IntelligentProcessAutomation-e4001</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_uiflow</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="bdgas_sharedwordonlinebusiness_fe3b2">
+      <connectionreferencedisplayname>Word Online (Business) RITM3372825_IntelligentProcessAutomation-fe3b2</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_31dae">
+      <connectionreferencedisplayname>Microsoft Dataverse</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_ae6e7">
+      <connectionreferencedisplayname>Microsoft Dataverse Default-ae6e7</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_b7289">
+      <connectionreferencedisplayname>Microsoft Dataverse</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedconversionservice_5562a">
+      <connectionreferencedisplayname>Content Conversion</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_conversionservice</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedoffice365_28f0a">
+      <connectionreferencedisplayname>Office 365 Outlook</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedoffice365_b44f2">
+      <connectionreferencedisplayname>Office 365 Outlook</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedoffice365users_67afa">
+      <connectionreferencedisplayname>Office 365 Users</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365users</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedsharepointonline_9d2ce">
+      <connectionreferencedisplayname>SharePoint</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedsharepointonline_e886e">
+      <connectionreferencedisplayname>SharePoint</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedteams_410ae">
+      <connectionreferencedisplayname>Microsoft Teams</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_teams</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

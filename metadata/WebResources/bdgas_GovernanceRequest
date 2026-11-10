@@ -1,0 +1,97 @@
+"use strict";
+
+var GovernanceRequest = GovernanceRequest || {};
+GovernanceRequest.Events = GovernanceRequest.Events || {};
+GovernanceRequest.Business = GovernanceRequest.Business || {};
+
+(function () {
+    const CREATE_FORM_TYPE = 1;
+
+    //Automatically sets the BD Developer field to the currently logged-in user
+    //when creating a new Governance Request record.
+    this.SetBDDeveloper = function (executionContext) {
+        const formContext = executionContext.getFormContext();
+        const formType = formContext.ui.getFormType();
+        if (formType !== CREATE_FORM_TYPE) return;
+        const bdDeveloperCtrl = formContext.getControl("bdgas_bddeveloperid");
+        if (bdDeveloperCtrl == null) return;
+
+        const currentUserLogin = Xrm.Utility.getGlobalContext().userSettings;
+        const newBDDeveloper = [
+            {
+                entityType: "systemuser",
+                id: currentUserLogin.userId.replace(/[{}]/g, ""),
+                name: currentUserLogin.userName,
+            },
+        ];
+
+        bdDeveloperCtrl.getAttribute().setValue(newBDDeveloper);
+    };
+
+    // Retrieves the Request Name from the selected Request Intake record
+    //and automatically populates the Governance Request Name field.
+    this.PopulateRequestName = async function (executionContext) {
+        var formContext = executionContext.getFormContext();
+
+        var requestIntake = formContext.getAttribute("bdgas_requestintakeid").getValue();
+
+        if (!requestIntake || requestIntake.length === 0) {
+            formContext.getAttribute("bdgas_requestname").setValue(null);
+            return;
+        }
+
+        try {
+            var requestIntakeId = requestIntake[0].id.replace(/[{}]/g, "");
+
+            var result = await Xrm.WebApi.retrieveRecord(
+                "bdgas_requestintake",
+                requestIntakeId,
+                "?$select=bdgas_requestname"
+            );
+
+            formContext.getAttribute("bdgas_requestname")
+                .setValue(result.bdgas_requestname || null);
+
+        } catch (e) {
+            console.error("Error retrieving Request Intake:", e);
+        }
+    };
+}).apply(GovernanceRequest.Business);
+
+(function () {
+    //Initializes the Governance Request form by setting the current user
+    //as the BD Developer and populating the Request Name from Request Intake.
+    this.OnLoad = function (executionContext) {
+        GovernanceRequest.Business.SetBDDeveloper(executionContext);
+        GovernanceRequest.Business.PopulateRequestName(executionContext);
+    };
+    // Displays an attachment reminder after save only when
+    // no document has been attached.
+    this.OnSave = function (executionContext) {
+        var formContext = executionContext.getFormContext();
+
+        setTimeout(function () {
+            var attachmentAttr =
+                formContext.getAttribute("bdgas_attachment");
+
+            if (!attachmentAttr) {
+                console.warn("bdgas_attachment field not found.");
+                return;
+            }
+
+            var attachmentValue = attachmentAttr.getValue();
+
+            // Attachment exists - do not show reminder
+            if (attachmentValue) {
+                return;
+            }
+
+            // No attachment - show reminder
+            Xrm.Navigation.openAlertDialog({
+                title: "Attachment Reminder",
+                text: "Please attach file if required."
+            });
+
+        }, 500);
+    };
+}).apply(GovernanceRequest.Events);

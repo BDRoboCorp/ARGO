@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{0eb9cc62-23ad-f111-aaab-3833c5eb9a4c}</WebResourceId>
+  <Name>bdgas_ArgoSRAAppointment</Name>
+  <DisplayName>ArgoSRAAppointment</DisplayName>
+  <LanguageCode>0</LanguageCode>
+  <WebResourceType>1</WebResourceType>
+  <IntroducedVersion>1.0.0.1</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/bdgas_ArgoSRAAppointment0EB9CC62-23AD-F111-AAAB-3833C5EB9A4C</FileName>
+</WebResource>

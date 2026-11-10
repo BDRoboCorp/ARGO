@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{2cd69f32-a9a5-40e9-bcfa-2402dd45c35f}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_name" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_publicholidayid">
+          <cell name="bdgas_name" width="300" />
+          <cell name="bdgas_date" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_publicholiday">
+          <attribute name="bdgas_publicholidayid" />
+          <attribute name="bdgas_name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="bdgas_name" operator="like" value="{0}" />
+          </filter>
+          <attribute name="bdgas_date" />
+          <order attribute="bdgas_name" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active ARGO Public Holidays" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOGenerateSRA">
+  <defaultvalue>https://0e77f916e79c44d89ad1ea359aed9b.d0.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/26/workflows/44cb6e9804a542758e6bb5f76cc2211f/triggers/manual/paths/invoke?api-version=1&amp;sp=%2Ftriggers%2Fmanual%2Frun&amp;sv=1.0&amp;sig=DR1A0rqfqdBtGNsX_SnBm4VtmnAhPwe2msreVGw7aus</defaultvalue>
+  <displayname default="ARGO Generate SRA">
+    <label description="ARGO Generate SRA" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

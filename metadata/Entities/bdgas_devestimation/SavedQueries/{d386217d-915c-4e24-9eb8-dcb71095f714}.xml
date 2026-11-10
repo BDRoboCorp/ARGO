@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{d386217d-915c-4e24-9eb8-dcb71095f714}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_name" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_devestimationid">
+          <cell name="bdgas_requestintakeid" width="139" />
+          <cell name="bdgas_applicationid" width="107" />
+          <cell name="bdgas_name" width="300" />
+          <cell name="bdgas_description" width="150" />
+          <cell name="bdgas_planstartdate" width="150" />
+          <cell name="bdgas_planenddate" width="150" />
+          <cell name="bdgas_totaldays" width="101" />
+          <cell name="bdgas_sequence" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_devestimation">
+          <attribute name="bdgas_devestimationid" />
+          <attribute name="bdgas_name" />
+          <attribute name="bdgas_description" />
+          <attribute name="bdgas_planstartdate" />
+          <attribute name="bdgas_planenddate" />
+          <attribute name="bdgas_sequence" />
+          <attribute name="bdgas_applicationid" />
+          <attribute name="bdgas_requestintakeid" />
+          <attribute name="bdgas_totaldays" />
+          <order attribute="bdgas_requestintakeid" descending="false" />
+          <order attribute="bdgas_sequence" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Dev Estimation Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

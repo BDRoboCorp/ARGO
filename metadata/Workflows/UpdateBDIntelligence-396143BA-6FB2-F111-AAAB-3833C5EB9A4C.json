@@ -1,0 +1,435 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_sharepointonline-1": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsharepointonline_e886e"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_excelonlinebusiness": {
+        "api": {
+          "name": "shared_excelonlinebusiness"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedexcelonlinebusiness_ecfd3"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "ARGO Application URL (bdgas_ARGOApplicationURL)": {
+          "defaultValue": "https://org6547479b.crm.dynamics.com/main.aspx?appid=cebc59c4-bf80-f111-ab0f-000d3a11e677&forceUCI=1",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bdgas_ARGOApplicationURL"
+          }
+        },
+        "ARGO notification flows (bdgas_ARGOnotificationflows)": {
+          "defaultValue": {
+            "Recipients": "temmy.raharjo@bd.com;jordan.cheng@bd.com;muhammad.zhafari@bd.com;"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_ARGOnotificationflows"
+          }
+        },
+        "BD Intelligence Configuration (bdgas_BDIntelligenceConfiguration)": {
+          "defaultValue": {
+            "BDIntelligenceSharePointURL": "https://bd1.sharepoint.com/sites/BDIntelligence280",
+            "BDIntelligenceFilePath": "/Shared Documents/General/Power Automate Apps/BD Intelligence Product Data - Updated 1.xlsx",
+            "BDIntelligenceTableName": "tableAutomation"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_BDIntelligenceConfiguration"
+          }
+        }
+      },
+      "triggers": {
+        "When_a_Project_Center_modified": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "bdgas_requestintake",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "bdgas_requestintaketype eq 100000000 and statuscode eq 100000006"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "6ec496e0-e536-406d-9d46-eb989ef5b7e7"
+          }
+        }
+      },
+      "actions": {
+        "Try_Scope": {
+          "type": "Scope",
+          "actions": {
+            "Perform_an_unbound_action_GetBDIntelligenceDataApi": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "actionName": "bdgas_GetBDIntelligenceData",
+                  "item/RequestIntakeId": "@triggerOutputs()?['body/bdgas_requestintakeid']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "PerformUnboundAction",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "0a52330a-d116-43b6-923f-d09aeade99c7"
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@outputs('Perform_an_unbound_action_GetBDIntelligenceDataApi')?['body/Result']",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "DigitalProductName": {
+                      "type": "string"
+                    },
+                    "BusinessUnit": {
+                      "type": "string"
+                    },
+                    "Function": {
+                      "type": "string"
+                    },
+                    "Region": {
+                      "type": "string"
+                    },
+                    "StrategicAlignment": {
+                      "type": "string"
+                    },
+                    "ValueDrivers": {
+                      "type": "string"
+                    },
+                    "TechnologiesUsed": {
+                      "type": "string"
+                    },
+                    "Availability": {
+                      "type": "string"
+                    },
+                    "IntegrationType": {
+                      "type": "string"
+                    },
+                    "AccessUrl": {
+                      "type": "string"
+                    },
+                    "ProductType": {
+                      "type": "string"
+                    },
+                    "ProductOwner": {
+                      "type": "string"
+                    },
+                    "ProductOwnerEmail": {
+                      "type": "string"
+                    },
+                    "ShortDescription": {
+                      "type": "string"
+                    },
+                    "LongDescription": {
+                      "type": "string"
+                    },
+                    "RequestLinkUrl": {
+                      "type": "string"
+                    },
+                    "DemoVideo": {
+                      "type": "string"
+                    },
+                    "VideoUrl": {
+                      "type": "string"
+                    },
+                    "PlaybookInstructionGuide": {
+                      "type": "string"
+                    },
+                    "MaxwellUrl": {
+                      "type": "string"
+                    },
+                    "IsActive": {
+                      "type": "string"
+                    },
+                    "ProductCategory": {
+                      "type": "string"
+                    },
+                    "Bookmarked": {
+                      "type": "string"
+                    },
+                    "TrainingUrl": {
+                      "type": "string"
+                    },
+                    "WhitepaperUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Perform_an_unbound_action_GetBDIntelligenceDataApi": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f06c0746-ef93-4243-89a6-553f10e4ffc8"
+              }
+            },
+            "Compose_Row_Object": {
+              "type": "Compose",
+              "inputs": {
+                "Digital Product Name": "@body('Parse_JSON')?['DigitalProductName']",
+                "Business Unit": "@body('Parse_JSON')?['BusinessUnit']",
+                "Function": "@body('Parse_JSON')?['Function']",
+                "Region": "@body('Parse_JSON')?['Region']",
+                "Strategic Alignment": "@body('Parse_JSON')?['StrategicAlignment']",
+                "Value Drivers": "@body('Parse_JSON')?['ValueDrivers']",
+                "Technologies Used": "@body('Parse_JSON')?['TechnologiesUsed']",
+                "Availability": "@body('Parse_JSON')?['Availability']",
+                "Integration Type": "@body('Parse_JSON')?['IntegrationType']",
+                "Access URL*": "@body('Parse_JSON')?['AccessUrl']",
+                "Product Type(Free~1Paid for user)": "@body('Parse_JSON')?['ProductType']",
+                "Product Owner": "@body('Parse_JSON')?['ProductOwner']",
+                "Product Owner Email": "@body('Parse_JSON')?['ProductOwnerEmail']",
+                "Short Description": "@body('Parse_JSON')?['ShortDescription']",
+                "Long Description": "@body('Parse_JSON')?['LongDescription']",
+                "Request Link URL": "@body('Parse_JSON')?['RequestLinkUrl']",
+                "Demo Video(Upload send seperate)": "@body('Parse_JSON')?['DemoVideo']",
+                "Video URL": "@body('Parse_JSON')?['VideoUrl']",
+                "Playbook~1Instructrion Guide": "@body('Parse_JSON')?['PlaybookInstructionGuide']",
+                "Maxwell URL": "@body('Parse_JSON')?['MaxwellUrl']",
+                "Is Active": "@body('Parse_JSON')?['IsActive']",
+                "Product Category": "@body('Parse_JSON')?['ProductCategory']",
+                "Bookmarked": "@body('Parse_JSON')?['Bookmarked']",
+                "Training URL": "@body('Parse_JSON')?['TrainingUrl']",
+                "Whitepaper URL": "@body('Parse_JSON')?['WhitepaperUrl']"
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f208ed9c-3ba8-4a30-96e4-835fbf853936"
+              }
+            },
+            "Get_file_metadata_using_path": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "dataset": "@body('Parse_JSON_Env_Variable')?['BDIntelligenceSharePointURL']",
+                  "path": "@body('Parse_JSON_Env_Variable')?['BDIntelligenceFilePath']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "operationId": "GetFileMetadataByPath",
+                  "connectionName": "shared_sharepointonline-1"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON_Env_Variable": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "da5b0aea-0825-4153-b948-7ea026bb8070"
+              }
+            },
+            "Add_a_row_into_a_table": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "source": "@body('Parse_JSON_Env_Variable')?['BDIntelligenceSharePointURL']",
+                  "drive": "b!5FeajHDU30CU9K7y2gnebo_ruMmWr2tIq8mR7o_xxJT2TIbt-Dr9SLEcGPkYU0W5",
+                  "file": "@outputs('Get_file_metadata_using_path')?['body/Id']",
+                  "table": "@body('Parse_JSON_Env_Variable')?['BDIntelligenceTableName']",
+                  "item": "@outputs('Compose_Row_Object')"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+                  "operationId": "AddRowV2",
+                  "connectionName": "shared_excelonlinebusiness"
+                }
+              },
+              "runAfter": {
+                "Get_file_metadata_using_path": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "01M56QW6NOCMFO2IBBLNH3T537ZYSDWHQ6": "/General/Power Automate Apps/BD Intelligence Product Data - Updated 1.xlsx",
+                "tableId": "@body('Parse_JSON_Env_Variable')?['BDIntelligenceTableName']",
+                "operationMetadataId": "ea6e9fc6-4c32-429f-90db-974c9cae68e6"
+              }
+            },
+            "Parse_JSON_Env_Variable": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('BD Intelligence Configuration (bdgas_BDIntelligenceConfiguration)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "BDIntelligenceSharePointURL": {
+                      "type": "string"
+                    },
+                    "BDIntelligenceFilePath": {
+                      "type": "string"
+                    },
+                    "BDIntelligenceTableName": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Compose_Row_Object": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ab9b7740-5c52-450c-a93d-1d6f6d98330d"
+              }
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "6d51566d-611d-483e-8414-dbcb8d164a21"
+          }
+        },
+        "CatchScope": {
+          "type": "Scope",
+          "actions": {
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@body('Parse_JSON_1')?['Recipients']",
+                  "emailMessage/Subject": "[ARGO System Notification] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br><b><strong class=\"editor-text-bold\">Flow Name:</strong></b> @{outputs('Get_Workflow_Details')?['tags']?['flowDisplayName']}</p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Flow URL:</strong></b> <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a></p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Current Event: </strong></b><a href=\"@{outputs('Record_URL')}\" class=\"editor-link\">View Record</a><br><br>Kindly contact IT Support for further assistance.<br><br><i><b><strong class=\"editor-text-bold editor-text-italic\">Do not reply to this email as it was automatically generated by the system.</strong></b></i><br><br>Thank you,<br>ARGO System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON_1": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "503d7713-0632-47ae-87e7-eecda3637bbf"
+              }
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "https://make.powerautomate.com/environments/@{outputs('Get_Workflow_Details')?['tags']?['environmentName']}/flows/@{outputs('Get_Workflow_Details')?['name']}/runs/@{outputs('Get_Workflow_Details')?['run']['name']}",
+              "runAfter": {
+                "Get_Workflow_Details": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5dac59e2-9883-49ed-882e-6b8d857bf307"
+              }
+            },
+            "Get_Workflow_Details": {
+              "type": "Compose",
+              "inputs": "@workflow()",
+              "metadata": {
+                "operationMetadataId": "b7f5e576-5cae-4bae-b2b6-2c889e0abe66"
+              }
+            },
+            "Record_URL": {
+              "type": "Compose",
+              "inputs": "@{parameters('ARGO Application URL (bdgas_ARGOApplicationURL)')}&pagetype=entityrecord&etn=bdgas_requestintake&id=@{triggerOutputs()?['body/bdgas_requestintakeid']}",
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "37c06449-01e7-4cf6-954e-8371b1be04ae"
+              }
+            },
+            "Parse_JSON_1": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('ARGO notification flows (bdgas_ARGOnotificationflows)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Recipients": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Record_URL": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "29e96a0a-c364-4c34-acdb-01d92a8d6760"
+              }
+            }
+          },
+          "runAfter": {
+            "Try_Scope": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0523e571-68ec-4397-9fb8-b467e2c6089a"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

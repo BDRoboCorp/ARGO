@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Projects</title>
+    <style>
+      :root {
+        --blue: #0f6cbd;
+        --blue-soft: #eef6fc;
+        --border: #d1d1d1;
+        --border-soft: #e5e5e5;
+        --text: #242424;
+        --muted: #616161;
+        --page: #f5f5f5;
+        --surface: #ffffff;
+        --error: #a4262c;
+        --success: #107c10;
+        --warning: #8a6100;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--page);
+        font: 14px/1.4 "Segoe UI", "SegoeUI", sans-serif;
+      }
+      button, input { font: inherit; }
+      .shell { min-height: 100vh; }
+      .command-bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .brand-mark {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--blue);
+        border-radius: 2px;
+        font-weight: 600;
+      }
+      h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .status { margin-left: auto; color: var(--muted); font-size: 12px; }
+      .content { padding: 12px; }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .toolbar h2 { margin: 0; font-size: 20px; font-weight: 600; }
+      .toolbar p { margin: 2px 0 0; color: var(--muted); }
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 8px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .filter-field {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 260px;
+        flex: 1;
+      }
+      .filter-field label {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .filter-field input {
+        min-height: 32px;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+      }
+      .action-button {
+        min-height: 32px;
+        padding: 5px 12px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+        cursor: pointer;
+      }
+      .action-button:hover { border-color: var(--blue); color: var(--blue); }
+      .action-button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .action-button:disabled:hover {
+        border-color: var(--border);
+        color: var(--text);
+      }
+      .action-button:focus-visible,
+      a:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+      .message {
+        padding: 12px;
+        border-left: 4px solid var(--blue);
+        background: var(--surface);
+      }
+      .message.error { border-left-color: var(--error); }
+      .message strong { display: block; margin-bottom: 4px; }
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 960px;
+      }
+      th:nth-child(1), td:nth-child(1) { width: 22%; }
+      th:nth-child(2), td:nth-child(2) { width: 12%; }
+      th:nth-child(3), td:nth-child(3) { width: 15%; }
+      th:nth-child(4), td:nth-child(4) { width: 21%; }
+      th:nth-child(5), td:nth-child(5) { width: 10%; }
+      th:nth-child(6), td:nth-child(6) { width: 10%; }
+      th:nth-child(7), td:nth-child(7) { width: 10%; }
+      th, td {
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border-soft);
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      th {
+        color: var(--muted);
+        background: #fafafa;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      tbody tr:last-child td { border-bottom: 0; }
+      tbody tr { cursor: pointer; }
+      tbody tr:hover { background: #f8fbfd; }
+      a { color: var(--blue); }
+      .description-toggle {
+        width: 100%;
+        display: -webkit-box;
+        min-height: 40px;
+        max-height: 40px;
+        overflow: hidden;
+        padding: 0;
+        border: 0;
+        color: inherit;
+        background: transparent;
+        cursor: pointer;
+        font: inherit;
+        line-height: 20px;
+        text-align: left;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      .description-toggle.is-expanded {
+        display: block;
+        max-height: none;
+      }
+      .description-toggle:focus-visible {
+        outline: 2px solid #000;
+        outline-offset: 2px;
+      }
+      .muted { color: var(--muted); }
+      .status-pill {
+        display: inline-block;
+        padding: 2px 6px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .pager {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .pager-info { color: var(--muted); font-size: 12px; margin-right: auto; }
+      @media (max-width: 640px) {
+        .content { padding: 8px; }
+        .toolbar { align-items: stretch; flex-direction: column; }
+        .status { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="command-bar">
+        <div class="brand-mark" aria-hidden="true">P</div>
+        <h1>My Projects</h1>
+      </header>
+      <section class="content" aria-live="polite">
+        <div class="toolbar">
+          <div>
+            <h2>My Projects</h2>
+            <p id="summaryText">Loading your requests.</p>
+          </div>
+        </div>
+        <form class="filters" id="filterForm">
+          <div class="filter-field">
+            <label for="searchInput">Search</label>
+            <input
+              id="searchInput"
+              name="search"
+              type="search"
+              placeholder="Search by request name, description, or digital product name"
+            />
+          </div>
+          <button class="action-button" type="submit">Search</button>
+          <button class="action-button" id="refreshButton" type="button">
+            Refresh
+          </button>
+        </form>
+        <div id="requestsRoot"></div>
+        <div class="pager" id="pager" hidden>
+          <span class="pager-info" id="pagerInfo"></span>
+          <button class="action-button" id="prevPageButton" type="button">
+            Previous
+          </button>
+          <button class="action-button" id="nextPageButton" type="button">
+            Next
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var DEFAULT_PAGE_SIZE = 25;
+        var STATUSCODE_CLASS_MAP = {};
+        var TEAM_SETTINGS_SCHEMA_NAME = "bdgas_ARGOProjectCenterSettings";
+
+        // Base filter: requests where the current user has any related role, plus any
+        // request types their teams are configured to see (via TEAM_SETTINGS_SCHEMA_NAME).
+        function buildBaseOrFilter(extraTypeCondition) {
+          return (
+            '<filter type="or">' +
+            '<condition attribute="bdgas_botowner" operator="eq-userid" />' +
+            '<condition attribute="bdgas_botinformedid" operator="eq-userid" />' +
+            '<condition attribute="bdgas_botvp" operator="eq-userid" />' +
+            '<condition attribute="bdgas_assigneeba" operator="eq-userid" />' +
+            '<condition attribute="bdgas_businesspartner" operator="eq-userid" />' +
+            '<condition attribute="bdgas_domainownerid" operator="eq-userid" />' +
+            '<condition attribute="bdgas_manualestimatereviewedby" operator="eq-userid" />' +
+            '<condition attribute="bdgas_leaddeveloperid" operator="eq-userid" />' +
+            '<condition attribute="createdby" operator="eq-userid" />' +
+            '<condition attribute="bdgas_requestedby" operator="eq-userid" />' +
+            '<condition attribute="bdgas_amoleadid" operator="eq-userid" />' +
+            (extraTypeCondition || "") +
+            "</filter>"
+          );
+        }
+
+        var elements = {
+          summaryText: document.getElementById("summaryText"),
+          filterForm: document.getElementById("filterForm"),
+          searchInput: document.getElementById("searchInput"),
+          refreshButton: document.getElementById("refreshButton"),
+          requestsRoot: document.getElementById("requestsRoot"),
+          pager: document.getElementById("pager"),
+          pagerInfo: document.getElementById("pagerInfo"),
+          prevPageButton: document.getElementById("prevPageButton"),
+          nextPageButton: document.getElementById("nextPageButton"),
+        };
+
+        var state = {
+          pageSize: DEFAULT_PAGE_SIZE,
+          currentPage: 1,
+          // Maps page number -> paging cookie required to fetch that page.
+          pageCookies: { 1: null },
+          hasNextPage: false,
+          extraTypeCondition: "",
+          search: "",
+          isLoading: false,
+        };
+
+        document.addEventListener("DOMContentLoaded", init);
+
+        async function init() {
+          try {
+            var xrm = getXrm();
+            state.pageSize = await getPageSize(xrm);
+            state.extraTypeCondition = await getTeamTypeCondition(xrm);
+            wireEvents();
+            await loadPage(1);
+          } catch (error) {
+            renderMessage("Unable to load Project Center", error.message || String(error), true);
+          }
+        }
+
+        function wireEvents() {
+          elements.filterForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            state.search = elements.searchInput.value.trim();
+            state.pageCookies = { 1: null };
+            loadPage(1);
+          });
+
+          elements.refreshButton.addEventListener("click", function () {
+            state.pageCookies = { 1: null };
+            loadPage(state.currentPage);
+          });
+
+          elements.prevPageButton.addEventListener("click", function () {
+            if (state.currentPage > 1) {
+              loadPage(state.currentPage - 1);
+            }
+          });
+
+          elements.nextPageButton.addEventListener("click", function () {
+            if (state.hasNextPage) {
+              loadPage(state.currentPage + 1);
+            }
+          });
+        }
+
+        async function getPageSize(xrm) {
+          try {
+            var userId = cleanGuid(xrm.Utility.getGlobalContext().userSettings.userId);
+            var settings = await xrm.WebApi.retrieveRecord(
+              "usersettings",
+              userId,
+              "?$select=paginglimit"
+            );
+            var limit = settings && settings.paginglimit;
+            return limit && limit > 0 ? limit : DEFAULT_PAGE_SIZE;
+          } catch (error) {
+            console.warn("Unable to read user paging limit, using default.", error);
+            return DEFAULT_PAGE_SIZE;
+          }
+        }
+
+        async function getEnvironmentVariableValue(xrm, schemaName) {
+          var escapedSchemaName = schemaName.replace(/'/g, "''");
+          var query =
+            "?$select=defaultvalue&$filter=schemaname eq '" +
+            escapedSchemaName +
+            "'" +
+            "&$expand=environmentvariabledefinition_environmentvariablevalue" +
+            "($select=value,createdon;$orderby=createdon desc;$top=1)";
+
+          var result = await xrm.WebApi.retrieveMultipleRecords(
+            "environmentvariabledefinition",
+            query
+          );
+
+          if (!result.entities.length) { return null; }
+
+          var definition = result.entities[0];
+          var values =
+            definition.environmentvariabledefinition_environmentvariablevalue || [];
+
+          if (
+            values.length &&
+            values[0].value !== null &&
+            values[0].value !== undefined &&
+            String(values[0].value).trim() !== ""
+          ) {
+            return values[0].value;
+          }
+
+          return definition.defaultvalue || null;
+        }
+
+        async function getUserTeamIds(xrm) {
+          var userId = cleanGuid(xrm.Utility.getGlobalContext().userSettings.userId);
+          var user = await xrm.WebApi.retrieveRecord(
+            "systemuser",
+            userId,
+            "?$select=systemuserid&$expand=teammembership_association($select=teamid)"
+          );
+          return (user.teammembership_association || []).map(function (team) {
+            return cleanGuid(team.teamid);
+          });
+        }
+
+        // Builds an extra "bdgas_requestintaketype in (...)" condition covering every type
+        // configured for a team the current user belongs to (union across matching teams).
+        async function getTeamTypeCondition(xrm) {
+          try {
+            var config = await getEnvironmentVariableValue(xrm, TEAM_SETTINGS_SCHEMA_NAME);
+            if (!config) { return ""; }
+
+            var settings = JSON.parse(config);
+            if (!Array.isArray(settings) || !settings.length) { return ""; }
+
+            var userTeamIds = await getUserTeamIds(xrm);
+            var types = {};
+            settings.forEach(function (entry) {
+              var teamId = cleanGuid(entry.TeamId);
+              if (userTeamIds.indexOf(teamId) === -1) { return; }
+              (entry.Types || []).forEach(function (type) { types[type] = true; });
+            });
+
+            var typeValues = Object.keys(types);
+            if (!typeValues.length) { return ""; }
+
+            var valueElements = typeValues
+              .map(function (type) { return "<value>" + escapeXml(type) + "</value>"; })
+              .join("");
+
+            return (
+              '<condition attribute="bdgas_requestintaketype" operator="in">' +
+              valueElements +
+              "</condition>"
+            );
+          } catch (error) {
+            console.warn("Unable to apply team request type access.", error);
+            return "";
+          }
+        }
+
+        function buildFetchXml(page, pagingCookie, search) {
+          var searchFilter = "";
+          if (search) {
+            var likeValue = "%" + escapeXml(search) + "%";
+            searchFilter =
+              '<filter type="or">' +
+              '<condition attribute="bdgas_requestintake" operator="like" value="' + likeValue + '" />' +
+              '<condition attribute="bdgas_description" operator="like" value="' + likeValue + '" />' +
+              '<condition attribute="bdgas_digitalproductname" operator="like" value="' + likeValue + '" />' +
+              "</filter>";
+          }
+
+          var pagingAttributes =
+            ' count="' + state.pageSize + '" page="' + page + '"' +
+            (pagingCookie ? ' paging-cookie="' + escapeXml(pagingCookie) + '"' : "");
+
+          return (
+            '<fetch version="1.0" mapping="logical" no-lock="false"' +
+            pagingAttributes +
+            '>' +
+            '<entity name="bdgas_requestintake">' +
+            '<attribute name="statecode" />' +
+            '<attribute name="bdgas_requestintakeid" />' +
+            '<attribute name="bdgas_requestintake" />' +
+            '<attribute name="createdon" />' +
+            '<attribute name="bdgas_requestintaketype" />' +
+            '<attribute name="bdgas_digitalproductname" />' +
+            '<attribute name="bdgas_description" />' +
+            '<attribute name="bdgas_planviewid" />' +
+            '<attribute name="statuscode" />' +
+            '<attribute name="bdgas_triagedtechnology" />' +
+            '<order attribute="createdon" descending="true" />' +
+            '<order attribute="bdgas_requestintakeid" descending="true" />' +
+            buildBaseOrFilter(state.extraTypeCondition) +
+            searchFilter +
+            "</entity>" +
+            "</fetch>"
+          );
+        }
+
+        function decodePagingCookie(fetchXmlPagingCookie) {
+          if (!fetchXmlPagingCookie) { return null; }
+
+          var document = new DOMParser().parseFromString(
+            fetchXmlPagingCookie,
+            "text/xml"
+          );
+          var cookieElement = document.documentElement;
+          var encodedCookie =
+            cookieElement &&
+            cookieElement.nodeName === "cookie" &&
+            cookieElement.getAttribute("pagingcookie");
+
+          if (!encodedCookie) {
+            throw new Error("Dataverse returned an invalid FetchXML paging cookie.");
+          }
+
+          return decodeURIComponent(decodeURIComponent(encodedCookie));
+        }
+
+        async function loadPage(page) {
+          if (state.isLoading) { return; }
+          state.isLoading = true;
+          renderMessage("Loading requests", "Please wait\u2026", false);
+
+          try {
+            var xrm = getXrm();
+            var pagingCookie = state.pageCookies[page] || null;
+            var fetchXml = buildFetchXml(page, pagingCookie, state.search);
+
+            var result = await xrm.WebApi.online.retrieveMultipleRecords(
+              "bdgas_requestintake",
+              "?fetchXml=" + encodeURIComponent(fetchXml)
+            );
+
+            var entities = result.entities || [];
+            var nextPagingCookie = decodePagingCookie(result.fetchXmlPagingCookie);
+
+            state.currentPage = page;
+            state.hasNextPage =
+              Boolean(nextPagingCookie) &&
+              entities.length === state.pageSize;
+            state.pageCookies[page + 1] = nextPagingCookie;
+
+            renderResults(entities);
+            updatePager();
+
+            elements.summaryText.textContent =
+              entities.length + " request" + (entities.length === 1 ? "" : "s") +
+              (state.search ? ' matching "' + state.search + '"' : "") +
+              " on page " + state.currentPage;
+
+          } catch (error) {
+            renderMessage("Unable to load requests", error.message || String(error), true);
+          } finally {
+            state.isLoading = false;
+          }
+        }
+
+        function renderResults(entities) {
+          if (!entities.length) {
+            renderMessage(
+              "No requests found",
+              state.search
+                ? 'No requests match "' + state.search + '".'
+                : "No requests are associated with you.",
+              false
+            );
+            return;
+          }
+
+          var table = document.createElement("table");
+          var thead = document.createElement("thead");
+          thead.innerHTML =
+            "<tr>" +
+            "<th>Request#</th>" +
+            "<th>Type</th>" +
+            "<th>Project Name</th>" +
+            "<th>Description</th>" +
+            "<th>PlanView ID</th>" +
+            "<th>Status</th>" +
+            "<th>Created On</th>" +
+            "</tr>";
+          table.appendChild(thead);
+
+          var tbody = document.createElement("tbody");
+          entities.forEach(function (entity) {
+            tbody.appendChild(createRow(entity));
+          });
+          table.appendChild(tbody);
+
+          var wrap = document.createElement("div");
+          wrap.className = "table-wrap";
+          wrap.appendChild(table);
+
+          clearChildren(elements.requestsRoot);
+          elements.requestsRoot.appendChild(wrap);
+        }
+
+        function createRow(entity) {
+          var tr = document.createElement("tr");
+          tr.tabIndex = 0;
+          tr.setAttribute("role", "button");
+
+          tr.appendChild(createCell(entity.bdgas_requestintake));
+          tr.appendChild(createCell(getFormattedValue(entity, "bdgas_requestintaketype")));
+          tr.appendChild(createCell(entity.bdgas_digitalproductname));
+          tr.appendChild(createDescriptionCell(entity.bdgas_description));
+          tr.appendChild(createCell(entity.bdgas_planviewid));
+          tr.appendChild(createStatusCell(entity));
+          tr.appendChild(createCell(getFormattedValue(entity, "createdon")));
+
+          var open = function () {
+            openRequestIntake(entity.bdgas_requestintakeid);
+          };
+          tr.addEventListener("click", open);
+          tr.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              open();
+            }
+          });
+
+          return tr;
+        }
+
+        function createCell(value) {
+          var td = document.createElement("td");
+          td.textContent = value || "\u2014";
+          return td;
+        }
+
+        function createDescriptionCell(value) {
+          var td = document.createElement("td");
+          var description = String(value || "\u2014");
+          var toggle = document.createElement("button");
+          toggle.className = "description-toggle";
+          toggle.type = "button";
+          toggle.textContent = description;
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Expand description: " + description);
+          toggle.addEventListener("click", function (event) {
+            event.stopPropagation();
+            var expanded = toggle.getAttribute("aria-expanded") === "true";
+            toggle.setAttribute("aria-expanded", String(!expanded));
+            toggle.classList.toggle("is-expanded", !expanded);
+            toggle.setAttribute(
+              "aria-label",
+              (expanded ? "Expand" : "Collapse") + ": " + description,
+            );
+          });
+          td.appendChild(toggle);
+          return td;
+        }
+
+        function createStatusCell(entity) {
+          var td = document.createElement("td");
+          var pill = document.createElement("span");
+          var statusText = getFormattedValue(entity, "statuscode") || "\u2014";
+          pill.className = "status-pill";
+          pill.textContent = statusText;
+          td.appendChild(pill);
+          return td;
+        }
+
+        function getFormattedValue(entity, attributeName) {
+          var formattedKey = attributeName + "@OData.Community.Display.V1.FormattedValue";
+          return entity[formattedKey] || entity[attributeName] || "";
+        }
+
+        function openRequestIntake(recordId) {
+          var pageInput = {
+            pageType: "entityrecord",
+            entityName: "bdgas_requestintake",
+            entityId: recordId,
+          };
+
+          if (openInNavigationHost(pageInput, "Request Intake")) {
+            return;
+          }
+
+          getXrm().Navigation.navigateTo(pageInput, { target: 1 });
+        }
+
+        function openInNavigationHost(pageInput, title) {
+          try {
+            if (
+              window.parent &&
+              window.parent !== window &&
+              window.parent.bdgasArgoNavigationHost &&
+              typeof window.parent.bdgasArgoNavigationHost.openItem === "function"
+            ) {
+              pageInput.label = title;
+              window.parent.bdgasArgoNavigationHost.openItem(pageInput);
+              return true;
+            }
+          } catch (error) {
+            return false;
+          }
+
+          return false;
+        }
+
+        function updatePager() {
+          elements.pager.hidden = false;
+          elements.pagerInfo.textContent = "Page " + state.currentPage;
+          elements.prevPageButton.disabled = state.currentPage <= 1;
+          elements.nextPageButton.disabled = !state.hasNextPage;
+        }
+
+        function renderMessage(title, description, isError) {
+          var message = document.createElement("div");
+          message.className = "message" + (isError ? " error" : "");
+          var strong = document.createElement("strong");
+          strong.textContent = title;
+          var text = document.createElement("span");
+          text.textContent = description;
+          message.appendChild(strong);
+          message.appendChild(text);
+
+          clearChildren(elements.requestsRoot);
+          elements.requestsRoot.appendChild(message);
+          elements.pager.hidden = true;
+        }
+
+        function clearChildren(element) {
+          while (element.firstChild) { element.removeChild(element.firstChild); }
+        }
+
+        function cleanGuid(value) {
+          return String(value || "").replace(/[{}]/g, "");
+        }
+
+        function escapeXml(value) {
+          return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&apos;");
+        }
+
+        function getXrm() {
+          // Walk up the frame chain: works whether opened directly in an MDA (window.Xrm),
+          // or nested inside another web resource's iframe (e.g. ArgoNavigation embeds this page).
+          var current = window;
+          while (true) {
+            try {
+              if (current.Xrm && current.Xrm.WebApi && current.Xrm.Navigation && current.Xrm.Utility) {
+                return current.Xrm;
+              }
+            } catch (error) {
+              // Cross-origin frame; can't inspect it, keep walking up.
+            }
+
+            if (!current.parent || current.parent === current) { break; }
+            current = current.parent;
+          }
+
+          throw new Error("This web resource must be opened inside a model-driven app.");
+        }
+      })();
+    </script>
+  </body>
+</html>

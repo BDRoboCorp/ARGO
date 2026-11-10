@@ -1,0 +1,260 @@
+// Reads the audit change history of a record and flattens it into
+// { changedBy, changedOn, operation, action, changes } rows.
+var AuditHistory = (function () {
+    "use strict";
+    var FORMATTED = "@OData.Community.Display.V1.FormattedValue";
+    function retrieveChangeHistory(entityLogicalName, primaryIdAttribute, recordId, count) {
+        var target = { "@odata.type": "Microsoft.Dynamics.CRM." + entityLogicalName };
+        target[primaryIdAttribute] = recordId;
+        var request = {
+            Target: target,
+            PagingInfo: { Count: count || 50, PageNumber: 1 },
+            getMetadata: function () {
+                return {
+                    boundParameter: null,
+                    parameterTypes: {
+                        Target: { typeName: "mscrm.crmbaseentity", structuralProperty: 5 },
+                        PagingInfo: { typeName: "mscrm.PagingInfo", structuralProperty: 5 }
+                    },
+                    operationType: 1, operationName: "RetrieveRecordChangeHistory"
+                };
+            }
+        };
+        return Xrm.WebApi.execute(request)
+            .then(function (response) { return response.json(); })
+            .then(function (body) {
+                return (body.AuditDetailCollection && body.AuditDetailCollection.AuditDetails) || [];
+            });
+    }
+    // Audit entities expose lookups as "_name_value"; normalize back to the logical name.
+    function normalizeName(key) {
+        var match = /^_(.+)_value$/.exec(key);
+        return match ? match[1] : key;
+    }
+    // Picks the formatted (display) value when the annotation exists, otherwise the raw value.
+    function readValue(entity, attributeName) {
+        if (!entity) { return ""; }
+        var keys = [attributeName, "_" + attributeName + "_value"];
+        for (var i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            if (entity[key + FORMATTED] !== undefined) { return entity[key + FORMATTED]; }
+            var value = entity[key];
+            if (value === null || value === undefined) { continue; }
+            if (typeof value === "object") { return value.name || value.id || JSON.stringify(value); }
+            return String(value);
+        }
+        return "";
+    }
+    function collectAttributeNames(oldValue, newValue, primaryIdAttribute) {
+        var names = {};
+        [oldValue, newValue].forEach(function (entity) {
+            Object.keys(entity || {}).forEach(function (key) {
+                if (key.indexOf("@") >= 0) { return; }
+                if (key === "logicalName" || key === "id" || key === "entityType") { return; }
+                var name = normalizeName(key);
+                if (name === primaryIdAttribute) { return; }
+                // Skip long free-text fields; they clutter the audit summary.
+                if (name.toLowerCase().indexOf("text") >= 0) { return; }
+                names[name] = true;
+            });
+        });
+        return Object.keys(names);
+    }
+    // Skip GUIDs, long tokens, and URLs; they're noise to a business user reading the summary.
+    function isNoisyValue(value) {
+        if (!value) { return false; }
+        var guidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (guidPattern.test(value)) { return true; }
+        if (value.length > 60 && value.indexOf(" ") === -1) { return true; }
+        return false;
+    }
+    function mapAuditDetail(detail, labels, primaryIdAttribute) {
+        var auditRecord = detail.AuditRecord || {};
+        var fieldNames = collectAttributeNames(detail.OldValue, detail.NewValue, primaryIdAttribute)
+            .map(function (name) {
+                var oldValue = readValue(detail.OldValue, name);
+                var newValue = readValue(detail.NewValue, name);
+                if (isNoisyValue(oldValue) && isNoisyValue(newValue)) { return null; }
+                return labels[name] || name;
+            })
+            .filter(function (label) { return label !== null; });
+        return {
+            changedBy: readValue(auditRecord, "userid") || readValue(auditRecord, "callinguserid"),
+            changedOn: readValue(auditRecord, "createdon"),
+            action: readValue(auditRecord, "action"),
+            operation: readValue(auditRecord, "operation"),
+            fieldNames: fieldNames
+        };
+    }
+    // getEntityMetadata only returns attribute metadata for the names explicitly requested.
+    function buildLabelMap(entityLogicalName, attributeNames) {
+        if (!attributeNames.length) { return Promise.resolve({}); }
+        return Xrm.Utility.getEntityMetadata(entityLogicalName, attributeNames).then(function (metadata) {
+            var labels = {};
+            attributeNames.forEach(function (name) {
+                var attribute = typeof metadata.Attributes.get === "function"
+                    ? metadata.Attributes.get(name)
+                    : metadata.Attributes[name];
+                labels[name] = (attribute && attribute.DisplayName) || name;
+            });
+            return labels;
+        });
+    }
+    function getRecordChangeSummary(entityLogicalName, recordId, count) {
+        return Xrm.Utility.getEntityMetadata(entityLogicalName).then(function (metadata) {
+            var primaryIdAttribute = metadata.PrimaryIdAttribute;
+            return retrieveChangeHistory(entityLogicalName, primaryIdAttribute, recordId, count)
+                .then(function (details) {
+                    var allNames = {};
+                    details.forEach(function (detail) {
+                        collectAttributeNames(detail.OldValue, detail.NewValue, primaryIdAttribute)
+                            .forEach(function (name) { allNames[name] = true; });
+                    });
+                    return buildLabelMap(entityLogicalName, Object.keys(allNames)).then(function (labels) {
+                        return details.map(function (detail) { return mapAuditDetail(detail, labels, primaryIdAttribute); });
+                    });
+                });
+        });
+    }
+    function cleanGuid(value) {
+        return String(value || "").replace(/[{}]/g, "").toLowerCase();
+    }
+    // Only members of the team referenced by the "RegulatoryAdmin" key should see the audit history.
+    async function isRegulatoryAdmin() {
+        var config = await SRAAppointment.getEnvironmentVariable(
+            "bdgas_regulatorylockconfiguration"
+        );
+        if (!config) { return false; }
+        var teamId;
+        try {
+            teamId = cleanGuid(JSON.parse(config).RegulatoryAdmin);
+        } catch (error) {
+            return false;
+        }
+        if (!teamId) { return false; }
+        var userId = cleanGuid(Xrm.Utility.getGlobalContext().userSettings.userId);
+        var user = await Xrm.WebApi.retrieveRecord(
+            "systemuser",
+            userId,
+            "?$select=systemuserid&$expand=teammembership_association($select=teamid)"
+        );
+        return (user.teammembership_association || []).some(function (team) {
+            return cleanGuid(team.teamid) === teamId;
+        });
+    }
+    return {
+        getRecordChangeSummary: getRecordChangeSummary,
+        isRegulatoryAdmin: isRegulatoryAdmin
+    };
+})();
+
+AuditHistory.showRecentAuditHistory =
+async function(executionContext){
+	
+    try{
+
+        var isRegulatoryAdmin =
+            await AuditHistory.isRegulatoryAdmin();
+
+        if(!isRegulatoryAdmin){
+            return;
+        }
+
+        var formContext =
+            executionContext.getFormContext();
+
+        var recordId =
+            formContext.data.entity
+                .getId()
+                .replace("{","")
+                .replace("}","");
+
+		var entityLogicalName = 
+			formContext.data.entity.getEntityName();
+		
+		var hours =
+			await SRAAppointment.getEnvironmentVariable(
+				"bdgas_audithistoryhours"
+			);
+		
+		hours = parseInt(hours, 10);
+		
+		if(isNaN(hours)){
+			hours = 20;
+		}
+		
+        var rows =
+            await AuditHistory.getRecordChangeSummary(
+                entityLogicalName,
+                recordId,
+                20
+            );
+
+		var cutoffDate = new Date();
+		
+		cutoffDate.setHours(
+			cutoffDate.getHours() - hours
+		);
+		
+		rows = rows.filter(function(row){
+			
+			var auditDate = 
+				new Date(row.changedOn);
+				
+			return auditDate >= cutoffDate;
+		});
+
+		// Skip rows where all changed attributes were filtered out (e.g. text-only changes).
+		rows = rows.filter(function(row){
+			return row.fieldNames && row.fieldNames.length > 0;
+		});
+		
+		formContext.ui.clearFormNotification(
+			"AuditHistory"
+		);
+		
+		if(!rows || rows.length === 0){
+			return;
+		};
+		
+		// setFormNotification renders as a single flowing line (no real line breaks), so keep
+		// each event to one short summary instead of listing every field's old/new value.
+		var MAX_FIELDS_SHOWN = 4;
+
+        var message = rows
+		.map(function(row){
+
+			var shown = row.fieldNames.slice(0, MAX_FIELDS_SHOWN).join(", ");
+			var remaining = row.fieldNames.length - MAX_FIELDS_SHOWN;
+			if (remaining > 0) {
+				shown += ", +" + remaining + " more";
+			}
+
+			return row.changedBy +
+				" modified " +
+				row.fieldNames.length +
+				(row.fieldNames.length === 1 ? " field" : " fields") +
+				" on " +
+				row.changedOn +
+				" (" + shown + ")";
+
+		})
+		.join("  |  ");
+		
+		if (!message){
+			return;
+		}
+		
+		formContext.ui.setFormNotification(
+			message,
+			"INFO",
+			"AuditHistory"
+		);
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+};

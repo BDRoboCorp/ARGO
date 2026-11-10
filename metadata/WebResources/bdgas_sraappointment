@@ -1,0 +1,3445 @@
+var SRAAppointment = SRAAppointment || {};
+
+SRAAppointment.onLoad = function (executionContext) {
+    SRAAppointment.onLoadAsync(
+        executionContext
+    ).catch(function (error) {
+        console.error(error);
+
+        Xrm.Navigation.openAlertDialog({
+            text: error.message || String(error)
+        });
+    });
+};
+
+SRAAppointment.onLoadAsync = async function (executionContext) {
+
+    var formContext = executionContext.getFormContext();
+
+    
+
+    try {
+        if (
+            await SRAAppointment.redirectToLatestDigitalSraAppointment(
+                formContext
+            )
+        ) {
+            return;
+        }
+
+        formContext.data.entity.removeOnSave(
+            SRAAppointment.onSave
+        );
+
+        formContext.data.entity.addOnSave(
+            SRAAppointment.onSave
+        );
+
+        formContext.data.entity.removeOnPostSave(
+            SRAAppointment.onPostSave
+        );
+
+        formContext.data.entity.addOnPostSave(
+            SRAAppointment.onPostSave
+        );
+
+        var isCreateForm =
+            formContext.ui.getFormType() === 1;
+
+        var onlineMeetingType =
+            formContext.getAttribute(
+                "onlinemeetingtype"
+            );
+
+        if (onlineMeetingType) {
+            onlineMeetingType.setSubmitMode(
+                "never"
+            );
+        }
+
+        formContext.getControl("bdgas_productiondatawillbeusedid").setLabel("If Proof of Concept or a Non-Production use system, will Production data be used?");
+        var slotStatus = formContext.getAttribute("bdgas_slotstatus");
+
+        if (slotStatus) {
+            slotStatus.removeOnChange(SRAAppointment.onSlotStatusChange);
+            slotStatus.addOnChange(SRAAppointment.onSlotStatusChange);
+        }
+
+        var scheduleSraType =
+            formContext.getAttribute(
+                "bdgas_schedulesratype"
+            );
+
+        if (scheduleSraType) {
+            scheduleSraType.removeOnChange(
+                SRAAppointment.onScheduleSraTypeChange
+            );
+            scheduleSraType.addOnChange(
+                SRAAppointment.onScheduleSraTypeChange
+            );
+        }
+
+        await SRAAppointment.onScheduleSraTypeChange(
+            executionContext
+        );
+
+        [
+            "bdgas_mydigitalsraid"
+        ].forEach(function (fieldName) {
+            var attribute =
+                formContext.getAttribute(
+                    fieldName
+                );
+
+            if (attribute) {
+                attribute.removeOnChange(
+                    SRAAppointment.onRequestSourceChange
+                );
+                attribute.addOnChange(
+                    SRAAppointment.onRequestSourceChange
+                );
+            }
+        });
+
+        var requestnumber = formContext.getAttribute("regardingobjectid");
+        if (requestnumber) {
+            requestnumber.removeOnChange(
+                SRAAppointment.onRegardingChange
+            );
+            requestnumber.addOnChange(
+                SRAAppointment.onRegardingChange
+            );
+
+            SRAAppointment.registerRegardingFilter(
+                formContext
+            );
+        }
+
+        var impactField =
+            formContext.getAttribute(
+                "bdgas_impacttootherapplicationsid"
+            );
+
+        var uploadSraDocument =
+            formContext.getAttribute(
+                "bdgas_uploadsradocument"
+            );
+
+        if (uploadSraDocument) {
+            uploadSraDocument.removeOnChange(
+                SRAAppointment.onUploadSraDocumentChange
+            );
+            uploadSraDocument.addOnChange(
+                SRAAppointment.onUploadSraDocumentChange
+            );
+        }
+
+        if (impactField) {
+            impactField.removeOnChange(
+                SRAAppointment.toggleApplicationInvolvedSection
+            );
+
+            impactField.addOnChange(
+                SRAAppointment.toggleApplicationInvolvedSection
+            );
+        }
+
+        var systemReside =
+            formContext.getAttribute(
+                "bdgas_systemresidetext"
+            );
+
+        if (systemReside) {
+            systemReside.removeOnChange(
+                SRAAppointment.toggleBDControlSegment
+            );
+            systemReside.addOnChange(
+                SRAAppointment.toggleBDControlSegment
+            );
+        }
+
+        var authenticationMethod =
+            formContext.getAttribute(
+                "bdgas_authenticationmethodtext"
+            );
+
+        if (authenticationMethod) {
+            authenticationMethod.removeOnChange(
+                SRAAppointment.onAuthenticationMethodChange
+            );
+            authenticationMethod.addOnChange(
+                SRAAppointment.onAuthenticationMethodChange
+            );
+        }
+
+        var routedFrom =
+            formContext.getAttribute(
+                "bdgas_routedfromid"
+            );
+
+        if (routedFrom) {
+            routedFrom.removeOnChange(
+                SRAAppointment.onRoutedFromChange
+            );
+            routedFrom.addOnChange(
+                SRAAppointment.onRoutedFromChange
+            );
+        }
+
+        var gxpApplicable =
+            formContext.getAttribute(
+                "bdgas_gxpapplicableid"
+            );
+
+        if (gxpApplicable) {
+            gxpApplicable.removeOnChange(
+                SRAAppointment.onGxpApplicableChange
+            );
+            gxpApplicable.addOnChange(
+                SRAAppointment.onGxpApplicableChange
+            );
+        }
+
+        /*
+        * Set the Routed From explanation label on load.
+        * UI-only change; does not modify the field value.
+        */
+        SRAAppointment.updateRoutedFromExplanation(
+            executionContext
+        );
+
+        SRAAppointment.disableLookupMRU(
+            formContext
+        );
+
+        SRAAppointment.toggleApplicationInvolvedSection(
+            executionContext
+        );
+        
+        await SRAAppointment.toggleBDControlSegment(
+            executionContext
+        );
+
+        await SRAAppointment
+        .updateOtherAuthenticationMethodVisibility(
+            formContext
+        );
+
+        SRAAppointment.hideSraMeetingSection(
+            formContext
+        );
+        SRAAppointment.setRescheduleSlotVisibilityOnLoad(
+            formContext
+        );
+        SRAAppointment.lockAlwaysReadOnlyFields(
+            formContext
+        );
+        /*SRAAppointment.populateRegistrantIfAvailable(
+            formContext
+        );*/
+        /*SRAAppointment.lockRegistrant(
+            formContext
+        );*/
+
+        /*await SRAAppointment.populateBusinessOwner(
+        formContext
+        );*/
+
+        await SRAAppointment.updateNavigationParameterAccess(
+            formContext
+        );
+
+        SRAAppointment.updateConditionalMandatoryFields(
+            formContext
+        );
+
+        var agreementAcceptedOnLoad =
+            SRAAppointment.getAttributeValue(
+                formContext,
+                "bdgas_sraagreementaccepted"
+            ) === true;
+
+        if (
+            isCreateForm &&
+            !agreementAcceptedOnLoad &&
+            !SRAAppointment.hasLookupValue(
+                formContext,
+                "regardingobjectid"
+            )
+        ) {
+            var agreementMessage =
+                await SRAAppointment.getEnvironmentVariable(
+                    "bdgas_sraagreementnotification"
+                );
+            if (!agreementMessage) {
+                console.log("Agreement message not found.");
+                return;
+            }
+            sessionStorage.setItem(
+                "bdgas_sraagreementnotification",
+                agreementMessage
+            );
+            console.log("Agreement Message:", agreementMessage);
+
+            var pageInput = {
+                pageType: "webresource",
+                webresourceName: "bdgas_sraAgreement"
+            };
+
+            var navigationOptions = {
+                target: 2,
+                position: 1,
+                width: {
+                    value: 800,
+                    unit: "px"
+                },
+                height: {
+                    value: 650,
+                    unit: "px"
+                },
+                title: "Registration Agreement"
+            };
+
+            sessionStorage.setItem(
+                "bdgas_sraAgreementResult",
+                "cancel"
+            );
+            await Xrm.Navigation.navigateTo(
+                pageInput,
+                navigationOptions
+            );
+            var agreementResult =
+                sessionStorage.getItem(
+                    "bdgas_sraAgreementResult"
+                );
+
+            if (agreementResult !== "agree") {
+                formContext.ui.close();
+                return;
+            }
+
+            var agreementField =
+                formContext.getAttribute(
+                    "bdgas_sraagreementaccepted"
+                );
+
+            if (!agreementField) {
+                console.error(
+                    "Field not found: bdgas_sraagreementaccepted"
+                );
+                return;
+            }
+
+            agreementField.setValue(true);
+            agreementField.setSubmitMode("always");
+
+            formContext.getAttribute("bdgas_systemdesciption").setValue("NA");
+            formContext.getAttribute("bdgas_systemdesciption").setSubmitMode("always");
+
+            var mandatoryLevels = [];
+
+            formContext.data.entity.attributes.forEach(
+                function (attribute) {
+                    var requiredLevel =
+                        attribute.getRequiredLevel();
+
+                    if (requiredLevel !== "none") {
+                        mandatoryLevels.push({
+                            attribute: attribute,
+                            requiredLevel: requiredLevel
+                        });
+
+                        attribute.setRequiredLevel(
+                            "none"
+                        );
+                    }
+                }
+            );
+
+            SRAAppointment.isAgreementAutoSave = true;
+
+            try {
+                var businessPartnerAttr =
+                    formContext.getAttribute(
+                        "bdgas_businesspartner"
+                    );
+
+                if (businessPartnerAttr) {
+                    businessPartnerAttr.setSubmitMode(
+                        "always"
+                    );
+                }
+
+                await formContext.data.save();
+
+                var createdRecordId =
+                    formContext.data.entity.getId();
+
+                if (!createdRecordId) {
+                    throw new Error(
+                        "The SRA Appointment was not created successfully. " +
+                        "No record ID was returned."
+                    );
+                }
+
+                console.log(
+                    "[SRA] Agreement save created record:",
+                    createdRecordId
+                );
+            }
+            finally {
+                SRAAppointment.isAgreementAutoSave = false;
+
+                mandatoryLevels.forEach(
+                    function (mandatoryField) {
+                        mandatoryField.attribute
+                            .setRequiredLevel(
+                                mandatoryField.requiredLevel
+                            );
+                    }
+                );
+
+                await SRAAppointment.updateNavigationParameterAccess(
+                    formContext
+                );
+                SRAAppointment.updateConditionalMandatoryFields(
+                    formContext
+                );
+            }
+        }
+    }
+    catch (error) {
+        console.error(error);
+
+        Xrm.Navigation.openAlertDialog({
+            text: error.message || String(error)
+        });
+    }
+};
+SRAAppointment.showSubmittedDialogAfterSave =
+    false;
+
+SRAAppointment.isAgreementAutoSave =
+    false;
+
+SRAAppointment.reopenAfterSave =
+    false;
+
+SRAAppointment.isCancellationConfirmationOpen =
+    false;
+
+SRAAppointment.isCancellationConfirmed =
+    false;
+
+SRAAppointment.onSave =
+    async function (executionContext) {
+
+        var formContext =
+            executionContext.getFormContext();
+
+        var dirtyFields = [];
+
+        formContext.data.entity.attributes.forEach(
+            function (attribute) {
+                if (attribute.getIsDirty()) {
+                    dirtyFields.push({
+                        name: attribute.getName(),
+                        value: attribute.getValue(),
+                        submitMode: attribute.getSubmitMode()
+                    });
+                }
+            }
+        );
+
+        console.log(
+            "[DIRTY DEBUG] Dirty fields at save:",
+            dirtyFields
+        );
+        
+        var eventArgs =
+            executionContext.getEventArgs();
+
+        var saveMode =
+            eventArgs.getSaveMode();
+
+        SRAAppointment.reopenAfterSave =
+            saveMode === 1 || saveMode === 70;
+
+        var authenticationMethodAttr =
+            formContext.getAttribute(
+                "bdgas_authenticationmethodtext"
+            );
+        
+        // var authenticationMethodValue =
+        //     authenticationMethodAttr
+        //         ? authenticationMethodAttr.getValue()
+        //         : null;
+        //
+        // var hasAuthenticationMethod =
+        //     SRAAppointment.isAgreementAutoSave ||
+        //     !!authenticationMethodValue;
+
+        var authenticationMethodControl =
+            formContext.getControl(
+                "bdgas_authenticationmethodtext"
+            );
+
+        // if (!hasAuthenticationMethod) {
+        //     if (authenticationMethodControl) {
+        //         authenticationMethodControl.setNotification(
+        //             "Authentication Method is required.",
+        //             "authentication_method_required"
+        //         );
+        //     }
+        //
+        //     eventArgs.preventDefault();
+        //
+        //     console.log(
+        //         "[SRA] Save prevented: Authentication Method is empty."
+        //     );
+        //
+        //     return;
+        // }
+
+        if (authenticationMethodControl) {
+            authenticationMethodControl.clearNotification(
+                "authentication_method_required"
+            );
+        }
+
+        var otherAuthenticationMethodAttr =
+            formContext.getAttribute(
+                "bdgas_otherauthenticationmethod"
+            );
+
+        console.log(
+            "[AUTH DEBUG] Authentication Method value:",
+            authenticationMethodAttr
+                ? authenticationMethodAttr.getValue()
+                : null
+        );
+
+        console.log(
+            "[AUTH DEBUG] Authentication Method dirty:",
+            authenticationMethodAttr
+                ? authenticationMethodAttr.getIsDirty()
+                : null
+        );
+
+        console.log(
+            "[AUTH DEBUG] Authentication Method required:",
+            authenticationMethodAttr
+                ? authenticationMethodAttr.getRequiredLevel()
+                : null
+        );
+
+        console.log(
+            "[AUTH DEBUG] Authentication Method submit mode:",
+            authenticationMethodAttr
+                ? authenticationMethodAttr.getSubmitMode()
+                : null
+        );
+
+        console.log(
+            "[AUTH DEBUG] Other Authentication Method value:",
+            otherAuthenticationMethodAttr
+                ? otherAuthenticationMethodAttr.getValue()
+                : null
+        );
+
+        console.log(
+            "[AUTH DEBUG] Form dirty:",
+            formContext.data.entity.getIsDirty()
+        );
+
+        console.log(
+            "[SRA] onSave recordID:",
+            formContext.data.entity.getId()
+        );
+
+        console.log(
+            "[SRA] onSave form type:",
+            formContext.ui.getFormType()
+        );
+
+        console.log(
+            "[SRA] onSave entity dirty:",
+            formContext.data.entity.getIsDirty()
+        );
+
+        var businessPartnerAttr =
+            formContext.getAttribute(
+                "bdgas_businesspartner"
+            );
+
+        if (businessPartnerAttr) {
+            businessPartnerAttr.setSubmitMode(
+                "always"
+            );
+
+            console.log(
+                "[SRA] Business Partner before save:",
+                businessPartnerAttr.getValue()
+            );
+        }
+
+        console.log(
+            "[SRA] onSave executed"
+        );
+
+        console.log(
+            "[SRA] Save mode:",
+            saveMode
+        );
+
+        console.log(
+            "[SRA] Agreement auto-save:",
+            SRAAppointment.isAgreementAutoSave
+        );
+
+        /*
+         * Do not show the submission dialog for
+         * the initial save triggered by I Agree.
+         */
+        if (SRAAppointment.isAgreementAutoSave) {
+            SRAAppointment
+                .showSubmittedDialogAfterSave =
+                false;
+
+            console.log(
+                "[SRA] Dialog suppressed: " +
+                "Agreement auto-save"
+            );
+
+            return;
+        }
+
+        /*
+         * Do not show the dialog for a normal
+         * platform auto-save.
+         */
+        if (saveMode === 70) {
+            SRAAppointment
+                .showSubmittedDialogAfterSave =
+                false;
+
+            console.log(
+                "[SRA] Dialog suppressed: Auto Save"
+            );
+
+            return;
+        }
+
+        var agreementAttribute =
+            formContext.getAttribute(
+                "bdgas_sraagreementaccepted"
+            );
+
+        var agreementAccepted =
+            agreementAttribute &&
+            agreementAttribute.getValue() === true;
+
+        console.log(
+            "[SRA] Agreement accepted:",
+            agreementAccepted
+        );
+
+        if (!agreementAccepted) {
+            SRAAppointment
+                .showSubmittedDialogAfterSave =
+                false;
+
+            console.log(
+                "[SRA] Dialog suppressed: " +
+                "Agreement not accepted"
+            );
+
+            return;
+        }
+
+        SRAAppointment
+            .showSubmittedDialogAfterSave =
+            true;
+
+        console.log(
+            "[SRA] Dialog flag:",
+            SRAAppointment
+                .showSubmittedDialogAfterSave
+        );
+    };
+
+SRAAppointment.onPostSave =
+    async function (executionContext) {
+
+        console.log(
+            "[SRA] onPostSave executed"
+        );
+
+        console.log(
+            "[SRA] Dialog flag at Post Save:",
+            SRAAppointment
+                .showSubmittedDialogAfterSave
+        );
+
+        var eventArgs =
+            executionContext.getEventArgs();
+        var formContext =
+            executionContext.getFormContext();
+
+        var reopenAfterSave =
+            SRAAppointment.reopenAfterSave;
+        SRAAppointment.reopenAfterSave = false;
+
+        var savedRecordId =
+            formContext.data.entity.getId();
+
+        console.log(
+            "[SRA] onPostSave record ID:",
+            savedRecordId
+        );
+
+        console.log(
+            "[SRA] onPostSave form type:",
+            formContext.ui.getFormType()
+        );
+
+        console.log(
+            "[SRA] Business Partner after save:",
+            SRAAppointment.getAttributeValue(
+                formContext,
+                "bdgas_businesspartner"
+            )
+        );
+
+        if (!savedRecordId) {
+            SRAAppointment
+                .showSubmittedDialogAfterSave = false;
+            SRAAppointment.isCancellationConfirmed = false;
+            console.error(
+                "[SRA] Save completed without a record ID."
+            );
+            return;
+        }
+        
+        if (
+            eventArgs.getIsSaveSuccess &&
+            !eventArgs.getIsSaveSuccess()
+        ) {
+            console.log(
+                "[SRA] Save was not successful"
+            );
+            SRAAppointment
+                .showSubmittedDialogAfterSave =
+                false;
+            SRAAppointment.isCancellationConfirmed = false;
+            return;
+        }
+        SRAAppointment.isCancellationConfirmed = false;
+
+        await SRAAppointment
+            .updateOtherAuthenticationMethodVisibility(
+                formContext
+            );
+
+        if (SRAAppointment.showSubmittedDialogAfterSave) {
+            SRAAppointment.showSubmittedDialogAfterSave = false;
+
+            await Xrm.Navigation.openAlertDialog(
+                {
+                    title: "Submission Successful",
+                    text:
+                        "Your record has been submitted"
+                },
+                {
+                    height: 200,
+                    width: 450
+                }
+            );
+        }
+        else {
+            console.log(
+                "[SRA] Dialog not shown: " +
+                "flag is false"
+            );
+
+        }
+
+        if (!reopenAfterSave) {
+            return;
+        }
+
+        // Do not discard edits made while post-save work or the dialog was pending.
+        if (formContext.data.entity.getIsDirty()) {
+            console.warn(
+                "[SRA] Record reopen skipped because new unsaved changes exist."
+            );
+            return;
+        }
+
+        try {
+            await Xrm.Navigation.openForm(
+                {
+                    entityName: formContext.data.entity.getEntityName(),
+                    entityId: savedRecordId.replace(/[{}]/g, "")
+                }
+            );
+        }
+        catch (error) {
+            console.error("[SRA] Unable to reopen the saved record.", error);
+            await Xrm.Navigation.openAlertDialog({
+                text: "The record was saved, but could not be reopened. " +
+                    (error.message || String(error))
+            });
+        }
+    };
+
+SRAAppointment.getEnvironmentVariable =
+    async function (schemaName) {
+
+        if (!schemaName) {
+            return null;
+        }
+
+        var escapedSchemaName =
+            schemaName.replace(/'/g, "''");
+
+        var query =
+            "?$select=defaultvalue" +
+            "&$filter=schemaname eq '" +
+            escapedSchemaName +
+            "'" +
+            "&$expand=environmentvariabledefinition_environmentvariablevalue" +
+            "($select=value,createdon;$orderby=createdon desc;$top=1)";
+
+        var result =
+            await Xrm.WebApi.retrieveMultipleRecords(
+                "environmentvariabledefinition",
+                query
+            );
+
+        if (
+            !result ||
+            !result.entities ||
+            result.entities.length === 0
+        ) {
+            console.warn(
+                "Environment variable not found: " +
+                schemaName
+            );
+            return null;
+        }
+
+        var definition =
+            result.entities[0];
+
+        var currentValues =
+            definition
+                .environmentvariabledefinition_environmentvariablevalue;
+
+        if (
+            currentValues &&
+            currentValues.length > 0 &&
+            currentValues[0].value !== null &&
+            currentValues[0].value !== undefined &&
+            String(currentValues[0].value).trim() !== ""
+        ) {
+            return currentValues[0].value;
+        }
+
+        return definition.defaultvalue || null;
+    };
+
+SRAAppointment.availableWithRequestRequiredFields = [
+    "actualstart",
+    "bdgas_slotnumber"
+];
+
+SRAAppointment.businessOwnerRequiredFields = [
+    "bdgas_businessowner",
+    //"bdgas_businesspartner",
+    "bdgas_technicalowner"
+];
+
+SRAAppointment.reservedRequiredFields = [
+    "bdgas_srarequesttypeid",
+    "bdgas_legacysystemid",
+    "bdgas_systemdesciption",
+    "bdgas_systemhasdistinctmodulesid",
+    "bdgas_solutionarchitecture",
+    "bdgas_networkdataflowdiagram",
+    "bdgas_systemresidetext",
+    "bdgas_firewallchangestext",
+    "bdgas_requirevpnforaccessid",
+    "bdgas_authenticationmethodtext",
+    "bdgas_operatingenvironmenttext",
+    "bdgas_impacttootherapplicationsid",
+    "bdgas_systemprocessdataid",
+    "bdgas_dataclassificationid",
+    "bdgas_hostinglocationofthedata",
+    "location",
+    "bdgas_scopeofdataandprocesssupportedid",
+    "bdgas_productiondatawillbeusedid",
+    "bdgas_confidentialityimpactid",
+    "bdgas_integrityimpactid",
+    "bdgas_availabilityimpactid",
+    "bdgas_gxpapplicableid",
+    "bdgas_gxpjustification",
+    "bdgas_gxpapplicabilityid",
+    "bdgas_financialimpactid",
+    "bdgas_soxapplicableid",
+    "bdgas_operationatriskandorchangedid",
+    "bdgas_soxjustificationid",
+    "bdgas_piistoredormanagedintheappid",
+    "bdgas_piijustificationid",
+    "bdgas_drplanrequiredfromcmdbbusinessappid",
+    "bdgas_drplanstatusid",
+    "bdgas_otherregulationsorlegalconstraintimpactid"
+];
+
+SRAAppointment.regulatoryAdminTeamId =
+    "ded7f41a-d5a5-f111-b8de-7ced8dcba28c";
+
+SRAAppointment.regulatoryLockConfigurationSchemaName =
+    "bdgas_regulatorylockconfiguration";
+
+SRAAppointment.navigationDataKey =
+    "bdgas_sraAppointmentNavigationData";
+
+SRAAppointment.navigationTabs = [
+    "appointment",
+    "tab_RegulatoryAssessment",
+    "tab_SRAMeetingDetail",
+    "tab_5",
+    "tab_SRAssessment"
+];
+
+SRAAppointment.regulatoryAdminFields = [
+    "bdgas_gxpapplicableid",
+    "bdgas_gxpjustification",
+    "bdgas_storeorprocesselectronicrecordsid",
+    "bdgas_electronicsignaturecapabilityid",
+    "bdgas_gxpapplicabilityid",
+    "bdgas_financialimpactid",
+    "bdgas_soxapplicableid",
+    "bdgas_operationatriskandorchangedid",
+    "bdgas_soxjustificationid",
+    "bdgas_piistoredormanagedintheappid",
+    "bdgas_piijustificationid",
+    "bdgas_piijustification",
+    "bdgas_drplanrequiredfromcmdbbusinessappid",
+    "bdgas_drplanstatusid",
+    "bdgas_otherregulationsorlegalconstraintimpactid",
+    "bdgas_otherregulationremarks",
+    "bdgas_internaltypeid",
+    "bdgas_fundedbyid",
+    "bdgas_chargebackcategoryid",
+    "bdgas_validationlead",
+    "bdgas_validationlead2",
+    "bdgas_documentid",
+    "bdgas_documentstatusid",
+    "bdgas_taskuserstext",
+    "bdgas_assignedduedate",
+    "bdgas_assignedsubject",
+    "bdgas_assigneddescription"
+];
+
+SRAAppointment.updateConditionalMandatoryFields =
+    function (formContext) {
+        var slotStatusAttr =
+            formContext.getAttribute(
+                "bdgas_slotstatus"
+            );
+
+        if (!slotStatusAttr) {
+            console.warn(
+                "[SRA] Missing field: bdgas_slotstatus"
+            );
+            return;
+        }
+
+        var agreementAttr =
+            formContext.getAttribute(
+                "bdgas_sraagreementaccepted"
+            );
+
+        if (!agreementAttr) {
+            console.warn(
+                "[SRA] Missing field: " +
+                "bdgas_sraagreementaccepted"
+            );
+            return;
+        }
+
+        var slotStatus =
+            slotStatusAttr.getValue();
+
+        if (slotStatus === 6) {
+
+            var cancelledRegistrant =
+                formContext.getAttribute(
+                    "bdgas_registrant"
+                );
+
+            if (cancelledRegistrant) {
+                cancelledRegistrant.setRequiredLevel("none");
+            }
+
+            SRAAppointment.businessOwnerRequiredFields
+                .forEach(function (fieldName) {
+                    var attribute =
+                        formContext.getAttribute(fieldName);
+
+                    if (attribute) {
+                        attribute.setRequiredLevel("none");
+                    }
+                });
+
+            SRAAppointment.availableWithRequestRequiredFields
+                .forEach(function (fieldName) {
+                    var attribute =
+                        formContext.getAttribute(fieldName);
+
+                    if (attribute) {
+                        attribute.setRequiredLevel("none");
+                    }
+                });
+
+            SRAAppointment.reservedRequiredFields
+                .forEach(function (fieldName) {
+                    var attribute =
+                        formContext.getAttribute(fieldName);
+
+                    if (attribute) {
+                        attribute.setRequiredLevel("none");
+                    }
+                });
+
+            console.log(
+                "[SRA] Slot Status = Cancel. Mandatory fields bypassed."
+            );
+
+            SRAAppointment.updateGxpApplicabilityRequiredLevel(
+                formContext,
+                false
+            );
+            return;
+        }
+
+        var agreementAccepted =
+            agreementAttr.getValue() === true;
+
+        var requireAvailableFields =
+            slotStatus === 0;
+
+        var requireReservedFields =
+            agreementAccepted ||
+            SRAAppointment.isSraMeetingSectionVisible(
+                formContext
+            ) ||
+            SRAAppointment.isTabEditable(
+                formContext,
+                "tab_SRAssessment"
+            );
+
+        var requireBusinessOwnerFields =
+            SRAAppointment.isTabEditable(
+                formContext,
+                "appointment"
+            );
+
+        var registrant =
+            formContext.getAttribute(
+                "bdgas_registrant"
+            );
+
+        if (registrant) {
+            registrant.setRequiredLevel("required");
+        }
+
+        SRAAppointment.businessOwnerRequiredFields
+            .forEach(function (fieldName) {
+                var attribute =
+                    formContext.getAttribute(fieldName);
+
+                if (attribute) {
+                    attribute.setRequiredLevel(
+                        requireBusinessOwnerFields
+                            ? "required"
+                            : "none"
+                    );
+                }
+            });
+
+        console.log(
+            "[SRA] Slot Status:",
+            slotStatus
+        );
+
+        console.log(
+            "[SRA] Agreement Accepted:",
+            agreementAccepted
+        );
+
+        console.log(
+            "[SRA] Reserved Fields Required:",
+            requireReservedFields
+        );
+
+        SRAAppointment.availableWithRequestRequiredFields
+            .forEach(function (fieldName) {
+                var attribute =
+                    formContext.getAttribute(fieldName);
+
+                if (!attribute) {
+                    console.warn(
+                        "[SRA] Available field MISSING:",
+                        fieldName
+                    );
+                    return;
+                }
+
+                attribute.setRequiredLevel(
+                    requireAvailableFields
+                        ? "required"
+                        : "none"
+                );
+
+                console.log(
+                    "[SRA] Available field:",
+                    fieldName,
+                    attribute.getRequiredLevel()
+                );
+            });
+
+        SRAAppointment.reservedRequiredFields
+            .forEach(function (fieldName) {
+                var attribute =
+                    formContext.getAttribute(fieldName);
+
+                if (!attribute) {
+                    console.warn(
+                        "[SRA] Reserved field MISSING:",
+                        fieldName
+                    );
+                    return;
+                }
+
+                attribute.setRequiredLevel(
+                    requireReservedFields
+                        ? "required"
+                        : "none"
+                );
+
+                console.log(
+                    "[SRA] Reserved field:",
+                    fieldName,
+                    attribute.getRequiredLevel()
+                );
+            });
+
+        SRAAppointment.updateGxpApplicabilityRequiredLevel(
+            formContext,
+            requireReservedFields
+        );
+
+        if (
+            SRAAppointment.hasAttributeValue(
+                formContext,
+                "bdgas_uploadsradocument"
+            )
+        ) {
+            SRAAppointment.setAssessmentFieldsOptional(
+                formContext
+            );
+        }
+    };
+
+SRAAppointment.onUploadSraDocumentChange =
+    function (executionContext) {
+        SRAAppointment.updateConditionalMandatoryFields(
+            executionContext.getFormContext()
+        );
+    };
+
+SRAAppointment.hasAttributeValue =
+    function (formContext, fieldName) {
+        var attribute =
+            formContext.getAttribute(fieldName);
+
+        if (!attribute) {
+            return false;
+        }
+
+        var value = attribute.getValue();
+
+        if (Array.isArray(value)) {
+            return value.length > 0;
+        }
+
+        return value !== null &&
+            value !== undefined &&
+            String(value).trim() !== "";
+    };
+
+SRAAppointment.setAssessmentFieldsOptional =
+    function (formContext) {
+        var tab =
+            formContext.ui.tabs.get(
+                "tab_SRAssessment"
+            );
+
+        if (!tab) {
+            return;
+        }
+
+        tab.sections.forEach(function (section) {
+            section.controls.forEach(function (control) {
+                var attribute =
+                    control.getAttribute
+                        ? control.getAttribute()
+                        : null;
+
+                if (attribute) {
+                    attribute.setRequiredLevel(
+                        "none"
+                    );
+                }
+            });
+        });
+    };
+
+/*
+SRAAppointment.populateRegistrant =
+    function (formContext) {
+
+        var registrant =
+            formContext.getAttribute(
+                "bdgas_registrant"
+            );
+
+        if (!registrant) {
+            return;
+        }
+
+        var userSettings =
+            Xrm.Utility.getGlobalContext()
+                .userSettings;
+        var userId = String(userSettings.userId || "")
+            .replace(/[{}]/g, "");
+
+        registrant.setValue([
+            {
+                id: userId,
+                name: userSettings.userName,
+                entityType: "systemuser"
+            }
+        ]);
+
+        registrant.setSubmitMode(
+            "always"
+        );
+    };
+
+
+SRAAppointment.populateRegistrantIfAvailable =
+    function (formContext) {
+
+        var slotStatus =
+            formContext.getAttribute(
+                "bdgas_slotstatus"
+            );
+
+        if (
+            !slotStatus ||
+            slotStatus.getValue() !== 0
+        ) {
+            return;
+        }
+
+        SRAAppointment.populateRegistrant(
+            formContext
+        );
+    };
+*/
+
+/*SRAAppointment.lockRegistrant =
+function(formContext){
+ 
+    var stateCode =
+        formContext.getAttribute(
+            "statecode"
+        );
+ 
+    var slotStatus =
+        formContext.getAttribute(
+            "bdgas_slotstatus"
+        );
+ 
+    var control =
+        formContext.getControl(
+            "bdgas_registrant"
+        );
+ 
+    if (
+        !stateCode ||
+        !slotStatus ||
+        !control
+    ){
+        return;
+    }
+ 
+    var shouldLock =
+        stateCode.getValue() === 0 &&
+        slotStatus.getValue() === 0;
+ 
+    control.setDisabled(
+        shouldLock
+    );
+};*/
+
+SRAAppointment.hideSraMeetingSection =
+    function (formContext) {
+
+        var tab =
+            formContext.ui.tabs.get(
+                "appointment"
+            );
+
+        if (!tab) {
+            return;
+        }
+
+        var section =
+            tab.sections.get(
+                "SRA_Meeting"
+            );
+
+        if (!section) {
+            return;
+        }
+
+        section.setVisible(false);
+    };
+
+SRAAppointment.isCurrentUserInTeam =
+    async function (teamId) {
+
+        if (!teamId) {
+            return false;
+        }
+
+        var userId =
+            Xrm.Utility
+                .getGlobalContext()
+                .userSettings
+                .userId;
+
+        userId =
+            userId.replace(/[{}]/g, "");
+
+        teamId =
+            teamId.replace(/[{}]/g, "");
+
+        var query =
+            "?$select=teammembershipid" +
+            "&$filter=" +
+            "teamid eq " + teamId +
+            " and systemuserid eq " + userId +
+            "&$top=1";
+
+        try {
+            var result =
+                await Xrm.WebApi.retrieveMultipleRecords(
+                    "teammembership",
+                    query
+                );
+
+            return Boolean(
+                result &&
+                result.entities &&
+                result.entities.length > 0
+            );
+        }
+        catch (error) {
+            console.error(
+                "Unable to check Regulatory Admin team membership.",
+                error
+            );
+
+            /*
+             * Fail closed:
+             * If membership cannot be confirmed, treat the user as
+             * a non-member and keep the fields readonly.
+             */
+            return false;
+        }
+    };
+
+SRAAppointment.lockAlwaysReadOnlyFields =
+    function (formContext) {
+
+        [
+            /*"bdgas_requestname",*/
+            "bdgas_registrant"
+        ].forEach(function (fieldName) {
+
+            var control =
+                formContext.getControl(
+                    fieldName
+                );
+
+            if (control) {
+                control.setDisabled(true);
+            }
+        });
+    };
+
+SRAAppointment.updateRegulatoryAdminFieldAccess =
+    async function (formContext, regulatoryAdminAccess) {
+
+        var isRegulatoryAdmin =
+            typeof regulatoryAdminAccess === "boolean"
+                ? regulatoryAdminAccess
+                : await SRAAppointment.isCurrentUserInTeam(
+                    SRAAppointment.regulatoryAdminTeamId
+                );
+
+        var shouldLock =
+            !isRegulatoryAdmin;
+        
+        /*
+         * Registrant is visible only to
+         * Regulatory Admin users.
+         */
+        var registrantAttr =
+            formContext.getAttribute(
+                "bdgas_registrant"
+            );
+
+        if (registrantAttr) {
+            registrantAttr.controls.forEach(
+                function (control) {
+                    control.setVisible(
+                        isRegulatoryAdmin
+                    );
+                }
+            );
+        }
+
+        SRAAppointment.regulatoryAdminFields
+            .forEach(function (fieldName) {
+
+                var attribute =
+                    formContext.getAttribute(fieldName);
+
+                if (!attribute) {
+                    console.warn(
+                        "Regulatory Admin field not found on form: " +
+                        fieldName
+                    );
+                    return;
+                }
+
+                attribute.controls.forEach(
+                    function (control) {
+
+                        if (control) {
+                            control.setDisabled(
+                                shouldLock
+                            );
+                        }
+                    }
+                );
+            });
+    };
+
+SRAAppointment.disableAllFormFields =
+    function (formContext) {
+
+        formContext.data.entity.attributes.forEach(
+            function (attribute) {
+
+                attribute.controls.forEach(
+                    function (control) {
+
+                        if (control) {
+                            control.setDisabled(true);
+                        }
+                    }
+                );
+            }
+        );
+    };
+
+SRAAppointment.enableAllFormFields =
+    function (formContext) {
+
+        formContext.data.entity.attributes.forEach(
+            function (attribute) {
+
+                attribute.controls.forEach(
+                    function (control) {
+
+                        if (control) {
+                            control.setDisabled(false);
+                        }
+                    }
+                );
+            }
+        );
+    };
+
+SRAAppointment.updateNavigationParameterAccess =
+    async function (formContext) {
+
+        var lockConfiguration =
+            await SRAAppointment.getRegulatoryLockConfiguration();
+
+        var regulatoryAdminTeamId =
+            lockConfiguration.RegulatoryAdmin ||
+            SRAAppointment.regulatoryAdminTeamId;
+
+        var isRegulatoryAdmin =
+            await SRAAppointment.isCurrentUserInTeam(
+                regulatoryAdminTeamId
+            );
+
+        var previousAccess =
+            SRAAppointment.navigationTabAccess.get(formContext);
+        if (previousAccess) {
+            previousAccess.controls.forEach(function (wasDisabled, control) {
+                control.setDisabled(wasDisabled);
+            });
+        }
+
+        SRAAppointment.lockAlwaysReadOnlyFields(formContext);
+        await SRAAppointment.updateRegulatoryAdminFieldAccess(
+            formContext, isRegulatoryAdmin
+        );
+
+        var slotStatusAttribute =
+            formContext.getAttribute(
+                "bdgas_slotstatus"
+            );
+
+        var slotStatus =
+            slotStatusAttribute
+                ? slotStatusAttribute.getValue()
+                : null;
+
+
+        var isCurrentUserCreator =
+            SRAAppointment.hasCurrentUserAsCreator(
+                formContext
+            );
+
+        // Slot Status option values:
+        // Available = 0, Not Available = 1, Reserved = 2,
+        // Post Assessment = 3, Cancel = 6.
+
+        var editableTabs = new Set();
+        var readOnlyForm = false;
+
+        function allowTab(tabName, allowed) {
+            if (allowed !== false) {
+                editableTabs.add(tabName);
+            }
+        }
+
+        // Not Regulatory Admin.
+        var isCurrentUserRegistrant =
+            SRAAppointment.isCurrentUserRegistrant(
+                formContext
+            );
+
+
+        if (isRegulatoryAdmin) {
+
+            allowTab(
+                "appointment",
+                slotStatus !== 5
+            );
+
+            var showRegulatoryAssessmentTabs =
+                slotStatus === 6 ||
+                slotStatus === 1 ||
+                slotStatus === 2 ||
+                slotStatus === 3;
+
+            if (showRegulatoryAssessmentTabs) {
+                allowTab(
+                    "tab_RegulatoryAssessment",
+                    true
+                );
+
+                allowTab(
+                    "tab_SRAMeetingDetail",
+                    true
+                );
+            }
+
+            if (
+                slotStatus === 2 ||
+                slotStatus === 3
+            ) {
+                allowTab(
+                    "tab_5",
+                    true
+                );
+            }
+
+            SRAAppointment.setHeaderControlVisible(
+                formContext,
+                "bdgas_slotstatus",
+                true
+            );
+
+            if (SRAAppointment.hasDataParameter(
+                "MyScheduler"
+            )) {
+                allowTab(
+                    "appointment",
+                    true
+                );
+            }
+
+            if (slotStatus !== 0) {
+                allowTab(
+                    "tab_SRAssessment",
+                    true
+                );
+            }
+
+            SRAAppointment.applyNavigationTabAccess(
+                formContext, editableTabs, readOnlyForm
+            );
+            return;
+        }
+
+        if (slotStatus === 5) {
+            // Digital SRA.
+
+            if (isCurrentUserCreator) {
+                allowTab(
+                    "tab_SRAssessment",
+                    true
+                );
+            }
+            else {
+                allowTab(
+                    "appointment",
+                    true
+                );
+
+                readOnlyForm = true;
+            }
+        }
+        else if (
+            slotStatus === 0 &&
+            SRAAppointment.hasDataParameter(
+                "MyScheduler"
+            )
+        ) {
+            allowTab(
+                "appointment",
+                true
+            );
+        }
+        else if (
+            slotStatus === 2 &&
+            (isCurrentUserRegistrant || isCurrentUserCreator)
+        ) {
+            allowTab(
+                "appointment",
+                true
+            );
+
+            allowTab(
+                "tab_SRAssessment",
+                true
+            );
+        }
+        else {
+            allowTab(
+                "appointment",
+                true
+            );
+
+            readOnlyForm = true;
+        }
+
+        SRAAppointment.applyNavigationTabAccess(
+            formContext, editableTabs, readOnlyForm
+        );
+
+        var hasOwnedOnlineMeeting =
+            SRAAppointment.hasOwnedOnlineMeeting(
+                formContext
+            );
+
+        SRAAppointment.setHeaderControlVisible(
+            formContext,
+            "bdgas_slotstatus",
+            hasOwnedOnlineMeeting ||
+            isCurrentUserRegistrant || isCurrentUserCreator
+        );
+
+        if (
+            hasOwnedOnlineMeeting ||
+            isCurrentUserRegistrant ||
+            isCurrentUserCreator
+        ) {
+            SRAAppointment.enableOwnedMeetingSlotStatus(
+                formContext
+            );
+        }
+    };
+
+SRAAppointment.enableOwnedMeetingSlotStatus =
+    function (formContext) {
+
+        var slotStatusAttribute =
+            formContext.getAttribute(
+                "bdgas_slotstatus"
+            );
+
+        if (!slotStatusAttribute) {
+            return;
+        }
+
+        slotStatusAttribute.controls.forEach(
+            function (control) {
+                control.setDisabled(false);
+
+                control.getOptions().forEach(
+                    function (option) {
+                        var optionValue =
+                            Number(option.value);
+
+                        if (
+                            optionValue !== 2 &&
+                            optionValue !== 6
+                        ) {
+                            control.removeOption(
+                                option.value
+                            );
+                        }
+                    }
+                );
+            }
+        );
+    };
+
+SRAAppointment.hasOwnedOnlineMeeting =
+    function (formContext) {
+
+        var joinUrlAttribute =
+            formContext.getAttribute(
+                "onlinemeetingjoinurl"
+            );
+
+        var createdByAttribute =
+            formContext.getAttribute(
+                "createdby"
+            );
+
+        var modifiedByAttribute =
+            formContext.getAttribute(
+                "modifiedby"
+            );
+
+        if (
+            !joinUrlAttribute ||
+            !joinUrlAttribute.getValue()
+        ) {
+            return false;
+        }
+
+        var createdByValue =
+            createdByAttribute
+                ? createdByAttribute.getValue()
+                : null;
+
+        var modifiedByValue =
+            modifiedByAttribute
+                ? modifiedByAttribute.getValue()
+                : null;
+
+        var currentUserId =
+            Xrm.Utility.getGlobalContext()
+                .userSettings.userId
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+        var createdById =
+            createdByValue &&
+                createdByValue.length > 0
+                ? String(createdByValue[0].id || "")
+                    .replace(/[{}]/g, "")
+                    .toLowerCase()
+                : "";
+
+        var modifiedById =
+            modifiedByValue &&
+                modifiedByValue.length > 0
+                ? String(modifiedByValue[0].id || "")
+                    .replace(/[{}]/g, "")
+                    .toLowerCase()
+                : "";
+
+        return Boolean(
+            createdById === currentUserId ||
+            modifiedById === currentUserId
+        );
+    };
+
+SRAAppointment.isCurrentUserRegistrant =
+    function (formContext) {
+
+        var registrantAttribute =
+            formContext.getAttribute(
+                "bdgas_registrant"
+            );
+
+        if (!registrantAttribute) {
+            return false;
+        }
+
+        var registrantValue =
+            registrantAttribute.getValue();
+
+        if (
+            !registrantValue ||
+            registrantValue.length === 0
+        ) {
+            return false;
+        }
+
+        var currentUserId =
+            Xrm.Utility.getGlobalContext()
+                .userSettings.userId
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+        var registrantId =
+            String(registrantValue[0].id || "")
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+        return Boolean(
+            registrantId &&
+            registrantId === currentUserId
+        );
+    };
+
+SRAAppointment.hasCurrentUserAsCreator =
+    function (formContext) {
+
+        var createdByAttribute =
+            formContext.getAttribute(
+                "createdby"
+            );
+
+        if (!createdByAttribute) {
+            return false;
+        }
+
+        var createdByValue =
+            createdByAttribute.getValue();
+
+        if (
+            !createdByValue ||
+            createdByValue.length === 0
+        ) {
+            return false;
+        }
+
+        var currentUserId =
+            Xrm.Utility.getGlobalContext()
+                .userSettings.userId
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+        var createdById =
+            String(createdByValue[0].id || "")
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+        return Boolean(
+            createdById &&
+            createdById === currentUserId
+        );
+    };
+SRAAppointment.getRegulatoryLockConfiguration =
+    async function () {
+
+        var configValue =
+            await SRAAppointment.getEnvironmentVariable(
+                SRAAppointment.regulatoryLockConfigurationSchemaName
+            );
+
+        if (!configValue) {
+            return {};
+        }
+
+        try {
+            return JSON.parse(configValue);
+        }
+        catch (error) {
+            console.error(
+                "Invalid regulatory lock configuration.",
+                error
+            );
+
+            return {};
+        }
+    };
+
+SRAAppointment.hasDataParameter =
+    function (expectedValue) {
+
+        var data = "";
+
+        try {
+            data =
+                new URLSearchParams(
+                    window.location.search
+                ).get("data") || "";
+        }
+        catch (error) {
+            data = "";
+        }
+
+        if (!data) {
+            try {
+                var globalContext =
+                    Xrm.Utility
+                        .getGlobalContext();
+
+                if (
+                    !globalContext.getQueryStringParameters
+                ) {
+                    return false;
+                }
+
+                var queryParameters =
+                    globalContext.getQueryStringParameters();
+
+                data =
+                    queryParameters &&
+                        queryParameters.data
+                        ? queryParameters.data
+                        : "";
+            }
+            catch (error) {
+                data = "";
+            }
+        }
+
+        if (!data) {
+            try {
+                data =
+                    sessionStorage.getItem(
+                        SRAAppointment.navigationDataKey
+                    ) || "";
+            }
+            catch (error) {
+                data = "";
+            }
+        }
+
+        if (!data) {
+            return false;
+        }
+
+        try {
+            data = decodeURIComponent(data);
+        }
+        catch (error) {
+            data = String(data);
+        }
+
+        return data
+            .toLowerCase()
+            .indexOf(
+                String(expectedValue || "")
+                    .toLowerCase()
+            ) !== -1;
+    };
+
+SRAAppointment.navigationTabAccess = new WeakMap();
+
+SRAAppointment.applyNavigationTabAccess =
+    function (formContext, editableTabs, readOnlyForm) {
+        var previousAccess =
+            SRAAppointment.navigationTabAccess.get(formContext);
+        var controls = new Map();
+
+        function disableControl(control) {
+            if (control && typeof control.setDisabled === "function" &&
+                typeof control.getDisabled === "function") {
+                if (!controls.has(control)) {
+                    controls.set(control, control.getDisabled());
+                }
+                control.setDisabled(true);
+            }
+        }
+
+        if (readOnlyForm) {
+            formContext.data.entity.attributes.forEach(function (attribute) {
+                attribute.controls.forEach(disableControl);
+            });
+        }
+
+        function setTabVisibleSafe(tab, tabName, isVisible) {
+            try {
+                // Only call setVisible when the value actually changes
+                if (tab.getVisible() === isVisible) {
+                    return;
+                }
+                tab.setVisible(isVisible);
+            }
+            catch (error) {
+                // The tab list can be temporarily unavailable during save or refresh
+                console.warn(
+                    "[SRA] Unable to set tab visibility for " + tabName + ".",
+                    error
+                );
+            }
+        }
+
+        SRAAppointment.navigationTabs.forEach(function (tabName) {
+            var tab = formContext.ui.tabs.get(tabName);
+            if (!tab) {
+                return;
+            }
+            if (tabName === "tab_5") {
+                setTabVisibleSafe(
+                    tab,
+                    tabName,
+                    !readOnlyForm && editableTabs.has(tabName)
+                );
+                return;
+            }
+            setTabVisibleSafe(
+                tab,
+                tabName,
+                tabName !== "appointment" || editableTabs.has(tabName)
+            );
+            if (readOnlyForm || !editableTabs.has(tabName)) {
+                try {
+                    tab.sections.forEach(function (section) {
+                        section.controls.forEach(disableControl);
+                    });
+                }
+                catch (error) {
+                    console.warn(
+                        "[SRA] Unable to lock sections for " + tabName + ".",
+                        error
+                    );
+                }
+            }
+        });
+
+        // var assessment = formContext.ui.tabs.get("tab_SRAssessment");
+        // if (!readOnlyForm && editableTabs.has("tab_SRAssessment") &&
+        //     assessment && assessment.getVisible() &&
+        //     (!previousAccess || previousAccess.readOnlyForm ||
+        //         !previousAccess.editableTabs.has("tab_SRAssessment"))) {
+        //     assessment.setFocus();
+        // }
+
+        SRAAppointment.navigationTabAccess.set(formContext, {
+            editableTabs: editableTabs,
+            readOnlyForm: readOnlyForm,
+            controls: controls
+        });
+    };
+
+SRAAppointment.isTabEditable =
+    function (formContext, tabName) {
+        var access = SRAAppointment.navigationTabAccess.get(formContext);
+        return Boolean(
+            access && !access.readOnlyForm &&
+            access.editableTabs.has(tabName)
+        );
+    };
+
+SRAAppointment.isSraMeetingSectionVisible =
+    function (formContext) {
+
+        var tab =
+            formContext.ui.tabs.get(
+                "appointment"
+            );
+
+        if (!tab) {
+            return false;
+        }
+
+        var section =
+            tab.sections.get(
+                "SRA_Meeting"
+            );
+
+        return Boolean(
+            section &&
+            section.getVisible()
+        );
+    };
+
+SRAAppointment.setHeaderControlVisible =
+    function (formContext, fieldName, isVisible) {
+
+        [
+            "header_" + fieldName,
+            "header_process_" + fieldName
+        ].forEach(function (controlName) {
+
+            var control =
+                formContext.getControl(
+                    controlName
+                );
+
+            if (control) {
+                control.setVisible(
+                    isVisible
+                );
+            }
+        });
+    };
+
+SRAAppointment.disableLookupMRU = function (formContext) {
+
+    formContext.ui.controls.forEach(function (control) {
+
+        if (
+            control &&
+            control.getControlType &&
+            control.getControlType() === "lookup"
+        ) {
+            control.disabledMru = true;
+        }
+
+    });
+
+};
+
+SRAAppointment.setRescheduleSlotVisibilityOnLoad = function (formContext) {
+    var slotStatus = formContext.getAttribute("bdgas_slotstatus");
+    var isReserved = slotStatus && slotStatus.getValue() === 2;
+    var rescheduleSlot = formContext.getAttribute("bdgas_swapsraslotid");
+
+    if (!rescheduleSlot) {
+        return;
+    }
+
+    rescheduleSlot.controls.forEach(function (control) {
+        control.setVisible(isReserved);
+    });
+};
+
+SRAAppointment.onScheduleSraTypeChange =
+    async function (executionContext) {
+
+        var formContext =
+            executionContext.getFormContext();
+
+        var requestName =
+            formContext.getAttribute(
+                "bdgas_requestname"
+            );
+
+        if (requestName) {
+            requestName.setRequiredLevel(
+                "required"
+            );
+        }
+
+        var scheduleSraType =
+            formContext.getAttribute(
+                "bdgas_schedulesratype"
+            );
+
+        if (!scheduleSraType) {
+            return;
+        }
+
+        var scheduleSraTypeControl =
+            formContext.getControl(
+                "bdgas_schedulesratype"
+            );
+
+        //removeOption for bdgas_schedulesratype for Manual Upload
+        if (scheduleSraTypeControl) {
+            scheduleSraTypeControl.removeOption(2);
+        }
+
+        var onlineMeetingJoinUrl =
+            formContext.getAttribute(
+                "onlinemeetingjoinurl"
+            );
+
+        var isRegulatoryAdmin =
+            await SRAAppointment.isCurrentUserInTeam(
+                SRAAppointment.regulatoryAdminTeamId
+            );
+
+        var isCurrentUserCreator =
+            SRAAppointment.hasCurrentUserAsCreator(
+                formContext
+            );
+
+        var hasMySchedulerData =
+            SRAAppointment.hasDataParameter(
+                "MyScheduler"
+            );
+
+        if (!hasMySchedulerData &&
+            scheduleSraTypeControl &&
+            onlineMeetingJoinUrl &&
+            onlineMeetingJoinUrl.getValue() &&
+            !isRegulatoryAdmin &&
+            !isCurrentUserCreator
+        ) {
+            scheduleSraTypeControl.removeOption(1);
+            scheduleSraTypeControl.removeOption(3);
+        }
+
+        scheduleSraType.setRequiredLevel(
+            "none"
+        );
+
+        var selectedFieldByType = {
+            1: "regardingobjectid",
+            2: "bdgas_uploadsradocument",
+            3: "bdgas_mydigitalsraid"
+        };
+
+        var selectedField =
+            selectedFieldByType[
+            scheduleSraType.getValue()
+            ];
+
+        var eventSource =
+            executionContext.getEventSource
+                ? executionContext.getEventSource()
+                : null;
+
+        var isScheduleSraTypeChange =
+            eventSource === scheduleSraType;
+
+        [
+            "regardingobjectid",
+            "bdgas_uploadsradocument",
+            "bdgas_mydigitalsraid"
+        ].forEach(function (fieldName) {
+            var attribute =
+                formContext.getAttribute(
+                    fieldName
+                );
+
+            if (!attribute) {
+                return;
+            }
+
+            if (
+                isScheduleSraTypeChange &&
+                fieldName !== "regardingobjectid"
+            ) {
+                attribute.setValue(null);
+                attribute.setSubmitMode(
+                    "always"
+                );
+            }
+
+            attribute.setRequiredLevel(
+                fieldName === selectedField
+                    ? "required"
+                    : "none"
+            );
+
+            attribute.controls.forEach(
+                function (control) {
+                    control.setVisible(
+                        fieldName === selectedField
+                    );
+                }
+            );
+        });
+    };
+
+SRAAppointment.onRequestSourceChange =
+    async function (executionContext) {
+
+        var formContext =
+            executionContext.getFormContext();
+
+        var eventSource =
+            executionContext.getEventSource();
+
+        var lookupValue =
+            eventSource
+                ? eventSource.getValue()
+                : null;
+
+        if (!lookupValue || lookupValue.length === 0) {
+            return;
+        }
+
+        var selectedRecord = lookupValue[0];
+        var recordId = selectedRecord.id
+            .replace(/[{}]/g, "");
+
+        try {
+            var result =
+                await Xrm.WebApi.retrieveRecord(
+                    selectedRecord.entityType,
+                    recordId,
+                    "?$select=" +
+                    "bdgas_requestname," +
+                    "bdgas_configurationitemname," +
+                    "bdgas_chmdmndritmplanviewnumber"
+                );
+
+            [
+                "bdgas_requestname",
+                "bdgas_configurationitemname",
+                "bdgas_chmdmndritmplanviewnumber"
+            ].forEach(function (fieldName) {
+                var attribute =
+                    formContext.getAttribute(fieldName);
+
+                if (!attribute) {
+                    return;
+                }
+
+                attribute.setValue(
+                    result[fieldName] || null
+                );
+                attribute.setSubmitMode("always");
+            });
+        }
+        catch (error) {
+            console.error(
+                "[SRA] Unable to retrieve My Digital SRA values.",
+                error
+            );
+
+            await Xrm.Navigation.openAlertDialog({
+                text:
+                    "Unable to retrieve My Digital SRA values: " +
+                    (error.message || String(error))
+            });
+        }
+    };
+
+SRAAppointment.registerRegardingFilter =
+    function (formContext) {
+
+        var attribute =
+            formContext.getAttribute(
+                "regardingobjectid"
+            );
+
+        if (!attribute) {
+            return;
+        }
+
+        var filterXml =
+            "<filter type='or'>" +
+            "<condition attribute='bdgas_botowner' operator='eq-userid' />" +
+            "<condition attribute='bdgas_botinformedid' operator='eq-userid' />" +
+            "<condition attribute='bdgas_botvp' operator='eq-userid' />" +
+            "<condition attribute='bdgas_assigneeba' operator='eq-userid' />" +
+            "<condition attribute='bdgas_businesspartner' operator='eq-userid' />" +
+            "<condition attribute='bdgas_domainownerid' operator='eq-userid' />" +
+            "<condition attribute='bdgas_manualestimatereviewedby' operator='eq-userid' />" +
+            "<condition attribute='bdgas_leaddeveloperid' operator='eq-userid' />" +
+            "<condition attribute='createdby' operator='eq-userid' />" +
+            "<condition attribute='bdgas_requestedby' operator='eq-userid' />" +
+            "<condition attribute='bdgas_amoleadid' operator='eq-userid' />" +
+            "</filter>";
+
+        attribute.controls.forEach(function (control) {
+            if (
+                !control ||
+                !control.addPreSearch ||
+                !control.addCustomFilter
+            ) {
+                return;
+            }
+
+            if (control._sraRegardingPreSearchHandler) {
+                control.removePreSearch(
+                    control._sraRegardingPreSearchHandler
+                );
+            }
+
+            var preSearchHandler =
+                function () {
+                    control.addCustomFilter(
+                        filterXml,
+                        "bdgas_requestintake"
+                    );
+                };
+
+            control._sraRegardingPreSearchHandler =
+                preSearchHandler;
+
+            control.addPreSearch(
+                preSearchHandler
+            );
+        });
+    };
+
+SRAAppointment.toggleApplicationInvolvedSection =
+    function (executionContext) {
+
+        var formContext =
+            executionContext.getFormContext();
+
+        var impactField =
+            formContext.getAttribute(
+                "bdgas_impacttootherapplicationsid"
+            );
+
+        if (!impactField) {
+            return;
+        }
+
+        var tab =
+            formContext.ui.tabs.get(
+                "tab_SRAssessment"
+            );
+
+        if (!tab) {
+            return;
+        }
+
+        var section =
+            tab.sections.get(
+                "tab_SRAssessment_ApplicationInvolved"
+            );
+
+        if (!section) {
+            return;
+        }
+
+        var lookupValue =
+            impactField.getValue();
+
+        var showSection = false;
+
+        if (
+            lookupValue &&
+            lookupValue.length > 0
+        ) {
+            var lookupName =
+                lookupValue[0].name;
+
+            console.log(
+                "ImpactToOtherApplications:",
+                lookupName
+            );
+
+            showSection =
+                lookupName === "Yes";
+        }
+
+        section.setVisible(
+            showSection
+        );
+    };
+
+
+SRAAppointment.hasLookupValue = function (formContext, fieldName) {
+
+    var attribute =
+        formContext.getAttribute(fieldName);
+
+    if (!attribute) {
+        return false;
+    }
+
+    var value =
+        attribute.getValue();
+
+    return value !== null &&
+        Array.isArray(value) &&
+        value.length > 0;
+};
+
+SRAAppointment.getAttributeValue = function (formContext, fieldName) {
+
+    var attribute =
+        formContext.getAttribute(
+            fieldName
+        );
+
+    return attribute
+        ? attribute.getValue()
+        : null;
+};
+
+SRAAppointment.onSlotStatusChange = async function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    // Runs before the first await, so the mandatory fields are already cleared
+    // when cancelAppointment calls save.
+    try {
+        SRAAppointment.updateConditionalMandatoryFields(formContext);
+    }
+    catch (error) {
+        console.error("[SRA] updateConditionalMandatoryFields failed.", error);
+    }
+
+    try {
+        await SRAAppointment.updateNavigationParameterAccess(formContext);
+    }
+    catch (error) {
+        console.error("[SRA] updateNavigationParameterAccess failed.", error);
+    }
+
+    try {
+        SRAAppointment.updateConditionalMandatoryFields(formContext);
+    }
+    catch (error) {
+        console.error("[SRA] updateConditionalMandatoryFields failed.", error);
+    }
+};
+
+SRAAppointment.onRegardingChange = async function (executionContext) {
+    var formContext =
+        executionContext.getFormContext();
+
+    await SRAAppointment.populateBusinessOwner(
+        formContext
+    );
+
+    SRAAppointment.updateConditionalMandatoryFields(
+        formContext
+    );
+};
+
+SRAAppointment.getRaMasterBooleanLookup =
+    async function (category, booleanValue) {
+        /*
+         * Do not treat null or undefined as No.
+         * Only map an actual Boolean value.
+         */
+        if (
+            booleanValue !== true &&
+            booleanValue !== false
+        ) {
+            console.log(
+                "[SRA] RA Master mapping skipped. " +
+                "Source Boolean is null or undefined:",
+                category
+            );
+
+            return null;
+        }
+
+        var name =
+            booleanValue === true
+                ? "Yes"
+                : "No";
+
+        var escapedCategory =
+            category.replace(/'/g, "''");
+
+        var escapedName =
+            name.replace(/'/g, "''");
+
+        var query =
+            "?$select=" +
+            "bdgas_regulatoryassessmentmasterid," +
+            "bdgas_name," +
+            "bdgas_category," +
+            "bdgas_sequence" +
+            "&$filter=" +
+            "bdgas_category eq '" +
+            escapedCategory +
+            "' and " +
+            "bdgas_name eq '" +
+            escapedName +
+            "'" +
+            "&$orderby=bdgas_sequence asc" +
+            "&$top=1";
+
+        var result =
+            await Xrm.WebApi.retrieveMultipleRecords(
+                "bdgas_regulatoryassessmentmaster",
+                query
+            );
+
+        if (
+            !result ||
+            !result.entities ||
+            result.entities.length === 0
+        ) {
+            console.warn(
+                "[SRA] RA Master record not found.",
+                {
+                    category: category,
+                    name: name
+                }
+            );
+
+            return null;
+        }
+
+        var record =
+            result.entities[0];
+
+        return {
+            id: record.bdgas_regulatoryassessmentmasterid,
+            name: record.bdgas_name,
+            entityType: "bdgas_regulatoryassessmentmaster"
+        };
+    };
+
+SRAAppointment.gxpConfig = {
+    yesName: "yes (gxp applicable)",
+    noName: "no (non-gxp)",
+    notApplicableName: "not applicable",
+    nonGxpLabel: "System Complexity",
+    // RA Master Category of each target field. Verify in RA Masters.
+    targetFields: [
+        {
+            field: "bdgas_storeorprocesselectronicrecordsid",
+            category: "Store or Process Electronic Records"
+        },
+        {
+            field: "bdgas_electronicsignaturecapabilityid",
+            category: "Electronic Signature Capability"
+        }
+    ]
+};
+
+SRAAppointment.gxpChangeToken = 0;
+
+SRAAppointment.getGxpApplicableName =
+    function (formContext) {
+        var value =
+            SRAAppointment.getAttributeValue(
+                formContext,
+                "bdgas_gxpapplicableid"
+            );
+
+        if (!Array.isArray(value) || value.length === 0) {
+            return "";
+        }
+
+        return String(value[0].name || "")
+            .trim()
+            .toLowerCase();
+    };
+
+SRAAppointment.isGxpNoOrNotApplicable =
+    function (gxpName) {
+        return gxpName === SRAAppointment.gxpConfig.noName ||
+            gxpName === SRAAppointment.gxpConfig.notApplicableName;
+    };
+
+SRAAppointment.setFieldVisible =
+    function (formContext, fieldName, isVisible) {
+        var attribute = formContext.getAttribute(fieldName);
+
+        if (!attribute) {
+            console.warn("[SRA] Field not found: " + fieldName);
+            return;
+        }
+
+        attribute.controls.forEach(function (control) {
+            control.setVisible(isVisible);
+        });
+    };
+
+// UI only: visibility, label and required level. Does not change values.
+SRAAppointment.updateGxpApplicabilityRequiredLevel =
+    function (formContext, requireReservedFields) {
+        var config = SRAAppointment.gxpConfig;
+        var gxpName = SRAAppointment.getGxpApplicableName(formContext);
+        var isGxpYes = gxpName === config.yesName;
+        var isGxpNo = SRAAppointment.isGxpNoOrNotApplicable(gxpName);
+
+        // Store or Process Electronic Records / Electronic Signature Capability
+        config.targetFields.forEach(function (target) {
+            var attribute = formContext.getAttribute(target.field);
+
+            if (!attribute) {
+                console.warn("[SRA] Field not found: " + target.field);
+                return;
+            }
+
+            attribute.setRequiredLevel(
+                isGxpYes && requireReservedFields ? "required" : "none"
+            );
+        });
+
+        // GxP Applicability: hidden and not mandatory for No / Not Applicable
+        var gxpApplicability =
+            formContext.getAttribute("bdgas_gxpapplicabilityid");
+
+        SRAAppointment.setFieldVisible(
+            formContext,
+            "bdgas_gxpapplicabilityid",
+            !isGxpNo
+        );
+
+        if (gxpApplicability && isGxpNo) {
+            gxpApplicability.setRequiredLevel("none");
+        }
+        // Otherwise keeps the level set by reservedRequiredFields.
+
+        // Non-GxP Applicability: shown only for No / Not Applicable
+        SRAAppointment.setFieldVisible(
+            formContext,
+            "bdgas_nongxpapplicabilityid",
+            isGxpNo
+        );
+
+        var nonGxpAttr =
+            formContext.getAttribute("bdgas_nongxpapplicabilityid");
+
+        if (nonGxpAttr) {
+            nonGxpAttr.setRequiredLevel("none");
+
+            if (isGxpNo) {
+                nonGxpAttr.controls.forEach(function (control) {
+                    control.setLabel(config.nonGxpLabel);
+                });
+            }
+        }
+    };
+
+// User-driven only. No / Not Applicable = set both fields to "No".
+SRAAppointment.onGxpApplicableChange =
+    async function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        var config = SRAAppointment.gxpConfig;
+        var token = ++SRAAppointment.gxpChangeToken;
+        var gxpName = SRAAppointment.getGxpApplicableName(formContext);
+
+        // Apply visibility and required level immediately
+        SRAAppointment.updateConditionalMandatoryFields(formContext);
+
+        if (!SRAAppointment.isGxpNoOrNotApplicable(gxpName)) {
+            return;
+        }
+
+        try {
+            var lookups = await Promise.all(
+                config.targetFields.map(function (target) {
+                    return SRAAppointment.getRaMasterBooleanLookup(
+                        target.category,
+                        false
+                    );
+                })
+            );
+
+            // Ignore if the user changed GxP Applicable again meanwhile
+            if (token !== SRAAppointment.gxpChangeToken) {
+                return;
+            }
+
+            config.targetFields.forEach(function (target, index) {
+                var attribute = formContext.getAttribute(target.field);
+                var noLookup = lookups[index];
+
+                if (!attribute || !noLookup) {
+                    return;
+                }
+
+                var current = attribute.getValue();
+                var currentId =
+                    Array.isArray(current) && current.length > 0
+                        ? String(current[0].id || "")
+                            .replace(/[{}]/g, "")
+                            .toLowerCase()
+                        : "";
+
+                if (currentId === String(noLookup.id).toLowerCase()) {
+                    return;
+                }
+
+                attribute.setValue([noLookup]);
+                attribute.setSubmitMode("always");
+            });
+        }
+        catch (error) {
+            console.error("[SRA] Unable to set GxP fields to No:", error);
+        }
+    };
+
+    
+SRAAppointment.clearRegardingRelatedFields =
+    function (formContext) {
+
+        [
+            "bdgas_businessowner",
+            "bdgas_requestname",
+            "bdgas_aiusedid",
+            "bdgas_aiassessmentoutcome"
+        ].forEach(function (fieldName) {
+
+            var attribute =
+                formContext.getAttribute(fieldName);
+
+            if (!attribute) {
+                return;
+            }
+
+            attribute.setValue(null);
+            attribute.setSubmitMode("always");
+        });
+    };
+
+SRAAppointment.populateBusinessOwner =
+    async function (formContext) {
+        var regardingAttr =
+            formContext.getAttribute(
+                "regardingobjectid"
+            );
+
+        var businessOwnerAttr =
+            formContext.getAttribute(
+                "bdgas_businessowner"
+            );
+
+        var requestNameAttr =
+            formContext.getAttribute(
+                "bdgas_requestname"
+            );
+
+        var aiUsedAttr =
+            formContext.getAttribute(
+                "bdgas_aiusedid"
+            );
+
+        var aiAssessmentOutcomeAttr =
+            formContext.getAttribute(
+                "bdgas_aiassessmentoutcome"
+            );
+
+        /*
+         * Stop if no Project Center record is selected.
+         */
+        if (
+            !regardingAttr ||
+            !regardingAttr.getValue() ||
+            regardingAttr.getValue().length === 0
+        ) {
+
+            SRAAppointment.clearRegardingRelatedFields(
+                formContext
+            );
+
+            console.log(
+                "[SRA] Regarding cleared. Related fields reset."
+            );
+
+            return;
+        }
+
+        var regardingValue =
+            regardingAttr.getValue()[0];
+
+        /*
+         * Regarding is a multi-table lookup.
+         * Only continue when the selected record
+         * is from Project Center / Request Intake.
+         */
+        if (
+            regardingValue.entityType !==
+            "bdgas_requestintake"
+        ) {
+
+            SRAAppointment.clearRegardingRelatedFields(
+                formContext
+            );
+
+            console.log(
+                "[SRA] Regarding is not Project Center:",
+                regardingValue.entityType
+            );
+
+            return;
+        }
+
+        var requestIntakeId =
+            regardingValue.id.replace(/[{}]/g, "");
+
+        SRAAppointment.clearRegardingRelatedFields(
+            formContext
+        );
+
+        try {
+            /*
+             * Retrieve all required Project Center values
+             * through the existing single API request.
+             */
+            var result =
+                await Xrm.WebApi.retrieveRecord(
+                    "bdgas_requestintake",
+                    requestIntakeId,
+                    "?$select=" +
+                    "_bdgas_botowner_value," +
+                    "bdgas_requestintaketype," +
+                    "bdgas_requestname," +
+                    "bdgas_isaiassessment," +
+                    "bdgas_responsibleaisubmitted"
+                );
+
+            console.log(
+                "[SRA] Project Center values retrieved:",
+                {
+                    requestName:
+                        result.bdgas_requestname,
+
+                    isAiAssessment:
+                        result.bdgas_isaiassessment,
+
+                    responsibleAiSubmitted:
+                        result
+                            .bdgas_responsibleaisubmitted
+                }
+            );
+
+            /*
+             * Populate Request Name only when blank.
+             */
+            if (
+                requestNameAttr &&
+                result.bdgas_requestname
+            ) {
+                requestNameAttr.setValue(
+                    result.bdgas_requestname
+                );
+
+                requestNameAttr.setSubmitMode(
+                    "always"
+                );
+            }
+
+            /*
+             * Populate Business Owner from BOT Owner
+             * only when Business Owner is blank.
+             */
+            if (
+                businessOwnerAttr &&
+                result._bdgas_botowner_value
+            ) {
+                businessOwnerAttr.setValue([
+                    {
+                        id:
+                            result
+                                ._bdgas_botowner_value,
+
+                        name:
+                            result[
+                            "_bdgas_botowner_value@" +
+                            "OData.Community.Display.V1." +
+                            "FormattedValue"
+                            ],
+
+                        entityType:
+                            "systemuser"
+                    }
+                ]);
+
+                businessOwnerAttr.setSubmitMode(
+                    "always"
+                );
+            }
+
+            /*
+             * Populate AI Used:
+             *
+             * Project Center:
+             * bdgas_isaiassessment
+             *
+             * SRA Appointment:
+             * bdgas_aiusedid
+             *
+             * RA Master category:
+             * AI Used
+             */
+            if (
+                aiUsedAttr &&
+                (
+                    result.bdgas_isaiassessment ===
+                    true ||
+                    result.bdgas_isaiassessment ===
+                    false
+                )
+            ) {
+                var aiUsedLookup =
+                    await SRAAppointment
+                        .getRaMasterBooleanLookup(
+                            "AI Used",
+                            result.bdgas_isaiassessment
+                        );
+
+                if (aiUsedLookup) {
+                    aiUsedAttr.setValue([
+                        aiUsedLookup
+                    ]);
+
+                    aiUsedAttr.setSubmitMode(
+                        "always"
+                    );
+
+                    console.log(
+                        "[SRA] AI Used populated:",
+                        aiUsedLookup
+                    );
+                }
+            }
+
+            /*
+             * Populate AI Assessment Outcome:
+             *
+             * Project Center:
+             * bdgas_responsibleaisubmitted
+             *
+             * SRA Appointment:
+             * bdgas_aiassessmentoutcome
+             *
+             * RA Master category:
+             * AI Assessment Outcome
+             */
+            if (
+                aiAssessmentOutcomeAttr &&
+                (
+                    result
+                        .bdgas_responsibleaisubmitted ===
+                    true ||
+                    result
+                        .bdgas_responsibleaisubmitted ===
+                    false
+                )
+            ) {
+                var aiAssessmentOutcomeLookup =
+                    await SRAAppointment
+                        .getRaMasterBooleanLookup(
+                            "AI Assessment Outcome",
+                            result
+                                .bdgas_responsibleaisubmitted
+                        );
+
+                if (aiAssessmentOutcomeLookup) {
+                    aiAssessmentOutcomeAttr.setValue([
+                        aiAssessmentOutcomeLookup
+                    ]);
+
+                    aiAssessmentOutcomeAttr
+                        .setSubmitMode(
+                            "always"
+                        );
+
+                    console.log(
+                        "[SRA] AI Assessment Outcome " +
+                        "populated:",
+                        aiAssessmentOutcomeLookup
+                    );
+                }
+            }
+        }
+        catch (error) {
+            console.error(
+                "[SRA] Unable to populate values " +
+                "from Project Center:",
+                error
+            );
+        }
+    };
+
+/*
+ * Show BD Control Segment when an active
+ * BD Controlled Network assignment exists.
+ */
+SRAAppointment.toggleBDControlSegment =
+async function (executionContext) {
+    var formContext =
+        executionContext.getFormContext();
+
+    var bdControlSegmentAttr =
+        formContext.getAttribute(
+            "bdgas_bdcontrolledsegmentationtext"
+        );
+
+    if (!bdControlSegmentAttr) {
+        console.warn(
+            "[SRA] Field not found: " +
+            "bdgas_bdcontrolledsegmentationtext"
+        );
+
+        return;
+    }
+
+    function setBDControlSegmentVisible(isVisible) {
+        bdControlSegmentAttr.controls.forEach(
+            function (control) {
+                control.setVisible(isVisible);
+            }
+        );
+    }
+
+    setBDControlSegmentVisible(false);
+
+    var appointmentId =
+        formContext.data.entity.getId();
+
+    if (!appointmentId) {
+        return;
+    }
+
+    appointmentId =
+        String(appointmentId)
+            .replace(/[{}]/g, "")
+            .trim()
+            .toLowerCase();
+
+    var fetchXml =
+        "<fetch top='1'>" +
+            "<entity name='bdgas_systemresideassignment'>" +
+                "<attribute name='bdgas_systemresideassignmentid' />" +
+                "<link-entity " +
+                    "name='bdgas_regulatoryassessmentmaster' " +
+                    "to='bdgas_ramasterid' " +
+                    "from='bdgas_regulatoryassessmentmasterid' " +
+                    "alias='ramaster' " +
+                    "link-type='inner'>" +
+                    "<filter type='and'>" +
+                        "<condition " +
+                            "attribute='bdgas_name' " +
+                            "operator='eq' " +
+                            "value='BD Controlled Network' />" +
+                    "</filter>" +
+                "</link-entity>" +
+                "<filter type='and'>" +
+                    "<condition " +
+                        "attribute='bdgas_appointmentid' " +
+                        "operator='eq' " +
+                        "value='" + appointmentId + "' />" +
+                    "<condition " +
+                        "attribute='statecode' " +
+                        "operator='eq' " +
+                        "value='0' />" +
+                "</filter>" +
+            "</entity>" +
+        "</fetch>";
+
+    try {
+        var result =
+            await Xrm.WebApi.retrieveMultipleRecords(
+                "bdgas_systemresideassignment",
+                "?fetchXml=" +
+                    encodeURIComponent(fetchXml)
+            );
+
+        var hasAssignment =
+            Boolean(
+                result &&
+                Array.isArray(result.entities) &&
+                result.entities.length > 0
+            );
+
+        setBDControlSegmentVisible(
+            hasAssignment
+        );
+    }
+    catch (error) {
+        console.error(
+            "[SRA] Unable to retrieve Controlled Segmentation assignments:",
+            error
+        );
+    }
+};
+
+/*
+ * Shows Other Authentication Method when the current SRA Appointment
+ * has an active Authentication Method Assignment linked to the
+ * RA Master value "Other".
+ *
+ * Source of truth:
+ * bdgas_authenticationmethodassignment relationship records.
+ *
+ * This function does not change attribute values, submit modes,
+ * or dirty state.
+ */
+SRAAppointment.onAuthenticationMethodChange =
+async function (executionContext) {
+    await SRAAppointment.updateOtherAuthenticationMethodVisibility(
+        executionContext.getFormContext()
+    );
+};
+
+SRAAppointment.updateOtherAuthenticationMethodVisibility =
+async function (formContext) {
+    var otherAuthenticationMethodAttr =
+        formContext.getAttribute(
+            "bdgas_otherauthenticationmethod"
+        );
+
+    if (!otherAuthenticationMethodAttr) {
+        console.warn(
+            "[SRA] Field not found: " +
+            "bdgas_otherauthenticationmethod"
+        );
+
+        return;
+    }
+
+    function setOtherAuthenticationMethodVisible(
+        isVisible
+    ) {
+        otherAuthenticationMethodAttr.controls.forEach(
+            function (control) {
+                control.setVisible(
+                    isVisible
+                );
+            }
+        );
+    }
+
+    var appointmentId =
+        formContext.data.entity.getId();
+
+    /*
+     * A new unsaved SRA Appointment has no record ID, so no
+     * Authentication Method Assignment can exist yet.
+     */
+    if (!appointmentId) {
+        setOtherAuthenticationMethodVisible(
+            false
+        );
+
+        console.log(
+            "[SRA] Other Authentication Method hidden. " +
+            "SRA Appointment has not been saved yet."
+        );
+
+        return;
+    }
+
+    appointmentId =
+        String(appointmentId)
+            .replace(/[{}]/g, "")
+            .trim()
+            .toLowerCase();
+
+    var fetchXml =
+        "<fetch top='1'>" +
+            "<entity name='bdgas_authenticationmethodassignment'>" +
+                "<attribute name='bdgas_authenticationmethodassignmentid' />" +
+                "<link-entity " +
+                    "name='bdgas_regulatoryassessmentmaster' " +
+                    "to='bdgas_ramasterid' " +
+                    "from='bdgas_regulatoryassessmentmasterid' " +
+                    "alias='ramaster' " +
+                    "link-type='inner'>" +
+                    "<filter type='and'>" +
+                        "<condition " +
+                            "attribute='bdgas_name' " +
+                            "operator='eq' " +
+                            "value='Other' />" +
+                    "</filter>" +
+                "</link-entity>" +
+                "<filter type='and'>" +
+                    "<condition " +
+                        "attribute='bdgas_appointmentid' " +
+                        "operator='eq' " +
+                        "value='" + appointmentId + "' />" +
+                    "<condition " +
+                        "attribute='statecode' " +
+                        "operator='eq' " +
+                        "value='0' />" +
+                "</filter>" +
+            "</entity>" +
+        "</fetch>";
+
+    try {
+        var result =
+            await Xrm.WebApi.retrieveMultipleRecords(
+                "bdgas_authenticationmethodassignment",
+                "?fetchXml=" +
+                    encodeURIComponent(fetchXml)
+            );
+
+        var containsOther =
+            Boolean(
+                result &&
+                Array.isArray(result.entities) &&
+                result.entities.length > 0
+            );
+
+        setOtherAuthenticationMethodVisible(
+            containsOther
+        );
+
+        console.log(
+            "[SRA] Authentication Method relationship contains Other:",
+            containsOther
+        );
+
+        console.log(
+            "[SRA] Authentication Method assignment results:",
+            result && result.entities
+                ? result.entities.length
+                : 0
+        );
+    }
+    catch (error) {
+        console.error(
+            "[SRA] Unable to retrieve Authentication Method assignments:",
+            error
+        );
+
+        /*
+         * Fail safely by preserving current visibility. A failed query
+         * must not incorrectly hide a field that may contain user data.
+         */
+    }
+};
+
+/*
+ * Updates the Routed From explanation field based on bdgas_routedfromid.
+ *
+ * Routed From empty -> explanation field hidden
+ * Routed From has value -> explanation field visible, label set:
+ *   Process/AME -> "Process/ AME"
+ *   BOT Request -> "Bot Request"
+ *   Other       -> "Other"
+ *
+ * UI-only change. Does not modify field values or dirty the record.
+ */
+SRAAppointment.updateRoutedFromExplanation = function (executionContext) {
+    var formContext = executionContext.getFormContext();
+
+    var routedFromAttr =
+        formContext.getAttribute("bdgas_routedfromid");
+
+    var explanationAttr =
+        formContext.getAttribute(
+            "bdgas_othersrarequesttypeexplanation"
+        );
+
+    if (!routedFromAttr || !explanationAttr) {
+        return;
+    }
+
+    var routedFromValue = routedFromAttr.getValue();
+
+    var hasRoutedFrom =
+        Array.isArray(routedFromValue) &&
+        routedFromValue.length > 0;
+
+    explanationAttr.controls.forEach(function (control) {
+        control.setVisible(hasRoutedFrom);
+    });
+
+    if (!hasRoutedFrom) {
+        return;
+    }
+
+    var routedFromName =
+        String(routedFromValue[0].name || "").trim();
+
+    var label = null;
+
+    switch (routedFromName.toLowerCase()) {
+        case "process/ame":
+            label = "Process/ AME";
+            break;
+        case "bot request":
+            label = "Bot Request";
+            break;
+        case "other":
+            label = "Other";
+            break;
+    }
+
+    if (label) {
+        explanationAttr.controls.forEach(function (control) {
+            control.setLabel(label);
+        });
+    }
+};
+
+SRAAppointment.onRoutedFromChange = function (executionContext) {
+    SRAAppointment.updateRoutedFromExplanation(
+        executionContext
+    );
+};
+
+// Slot Status = SRA (5): open the latest appointment linked to this record
+// through bdgas_mydigitalsraid. Returns true if a redirect was started.
+SRAAppointment.redirectToLatestDigitalSraAppointment =
+    async function (formContext) {
+        if (formContext.ui.getFormType() === 1) {
+            return false;
+        }
+
+        var slotStatus =
+            SRAAppointment.getAttributeValue(
+                formContext,
+                "bdgas_slotstatus"
+            );
+
+        if (slotStatus !== 5) {
+            return false;
+        }
+
+        var currentId =
+            formContext.data.entity.getId()
+                .replace(/[{}]/g, "")
+                .toLowerCase();
+
+        if (!currentId) {
+            return false;
+        }
+
+        var query =
+            "?$select=activityid,actualstart" +
+            "&$filter=_bdgas_mydigitalsraid_value eq " + currentId +
+            " and activityid ne " + currentId +
+            "&$orderby=actualstart desc" +
+            "&$top=1";
+
+        try {
+            var result =
+                await Xrm.WebApi.retrieveMultipleRecords(
+                    "appointment",
+                    query
+                );
+
+            if (!result || !result.entities || result.entities.length === 0) {
+                return false;
+            }
+
+            var redirectId = String(result.entities[0].activityid || "");
+
+            if (!redirectId) {
+                return false;
+            }
+
+            console.log("[SRA] Redirecting to latest Digital SRA appointment:", redirectId);
+
+            await Xrm.Navigation.openForm(
+                {
+                    entityName: formContext.data.entity.getEntityName(),
+                    entityId: redirectId.replace(/[{}]/g, "")
+                }
+            );
+
+            return true;
+        }
+        catch (error) {
+            console.error("[SRA] Unable to redirect to latest Digital SRA appointment.", error);
+            return false;
+        }
+    };

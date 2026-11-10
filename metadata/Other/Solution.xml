@@ -1,0 +1,1178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.26101.184" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26101.184" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26101.00184">
+  <SolutionManifest>
+    <UniqueName>RITM3372825_IntelligentProcessAutomation</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="RITM3372825_IntelligentProcessAutomation" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Upgrade of RITM3372825_IntelligentProcessAutomation" languagecode="1033" />
+    </Descriptions>
+    <Version>1.1.0.1</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>BDGlobalAutomationSolutions</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="BD Global Automation Solutions" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>bdgas</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>10000</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="appointment" behavior="1" />
+      <RootComponent type="1" schemaName="bdgas_application" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_argoconfig" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_authenticationmethodassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_autonumber" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_budgetrequest" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_budgetrequesthistory" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_controlledsegmentationassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_devestimation" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_devtask" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_firewallchangesassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_fiscalyear" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_governancerequest" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_keycontact" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_milestonetype" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_operatingenvironmentassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_productpricing" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_projectmilestone" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_projectmilestoneapprover" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_publicholiday" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_qpabpf" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_regulatoryassessmentmaster" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_requestintake" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_requestintakeapplication" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_resourceallocation" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_rpabpf" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_serviceprovider" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_solutionarchitectureassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_sraappointmentassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_srataskassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_systemresideassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_taskassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_valuedriversassignment" behavior="0" />
+      <RootComponent type="1" schemaName="bdgas_vendor" behavior="0" />
+      <RootComponent type="1" schemaName="systemuser" behavior="1" />
+      <RootComponent type="1" schemaName="task" behavior="2" />
+      <RootComponent type="1" schemaName="team" behavior="1" />
+      <RootComponent type="20" id="{049677d3-26ac-f111-aaac-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="20" id="{d6d178d1-68b2-f111-aaac-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{0480e41b-1aa2-f111-b8dc-7ced8d23115e}" behavior="0" />
+      <RootComponent type="29" id="{1b6fbe30-0d9b-f111-b8dc-6045bded11bb}" behavior="0" />
+      <RootComponent type="29" id="{20d1c063-a69a-f111-b8dc-7ced8d23115e}" behavior="0" />
+      <RootComponent type="29" id="{22396ffa-a8ad-f111-aaac-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{2bcd3237-6d94-f111-8076-7ced8d23115e}" behavior="0" />
+      <RootComponent type="29" id="{2c7a0f78-bbd1-f111-a059-002248356178}" behavior="0" />
+      <RootComponent type="29" id="{2fb03e27-e69a-f111-b8dc-000d3a11e677}" behavior="0" />
+      <RootComponent type="29" id="{396143ba-6fb2-f111-aaab-3833c5eb9a4c}" behavior="0" />
+      <RootComponent type="29" id="{4959bb3d-0ecd-f111-a05a-70a8a58e14df}" behavior="0" />
+      <RootComponent type="29" id="{4bfab3cd-338b-f111-ab10-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{61c58b19-56a2-f111-b8db-7ced8d1777fd}" behavior="0" />
+      <RootComponent type="29" id="{63cf9d6b-a89f-f111-b8dc-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{7bf406e7-3786-f111-ab0e-7ced8d1af6b3}" behavior="0" />
+      <RootComponent type="29" id="{7dbecd99-4fab-f111-aaab-6045bded11bb}" behavior="0" />
+      <RootComponent type="29" id="{86df367b-55a2-f111-b8db-7ced8d1777fd}" behavior="0" />
+      <RootComponent type="29" id="{90a33c96-a390-f111-8077-6045bded11bb}" behavior="0" />
+      <RootComponent type="29" id="{947e2376-55b6-f111-aaac-3833c5eb9a4c}" behavior="0" />
+      <RootComponent type="29" id="{a4e255a3-bdbc-f111-aaaf-000d3a11e677}" behavior="0" />
+      <RootComponent type="29" id="{a520d5b3-a590-f111-8077-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{a68e1707-f399-f111-b8db-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{a6d63c10-2ea0-f111-b8db-00224822f2ac}" behavior="0" />
+      <RootComponent type="29" id="{bb5f03a5-9c93-f111-8076-6045bdf09dc3}" behavior="0" />
+      <RootComponent type="29" id="{bc4ca452-4897-4e04-a493-2174e8c34102}" behavior="0" />
+      <RootComponent type="29" id="{c645172f-de9a-f111-b8dc-6045bded1032}" behavior="0" />
+      <RootComponent type="29" id="{d3af33ed-04b0-f111-aaab-000d3a11e677}" behavior="0" />
+      <RootComponent type="29" id="{e9eac503-b6ac-f111-aaac-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="29" id="{edbaf2fe-186c-4500-aeff-dae94d8af89d}" behavior="0" />
+      <RootComponent type="29" id="{f1954e1d-2c8a-f111-ab0f-000d3a1350cd}" behavior="0" />
+      <RootComponent type="29" id="{fbb25a8c-af97-f111-8076-6045bded11bb}" behavior="0" />
+      <RootComponent type="29" id="{ff39c9b0-1592-f111-8077-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="300" schemaName="bdgas_intelligentprocessautomationdefaultcommandlibrary_fd3f6" behavior="0" />
+      <RootComponent type="36" id="{09a426a9-27cd-f111-a05a-70a8a58e14df}" behavior="0" />
+      <RootComponent type="36" id="{4401b0f4-b696-f111-8076-7ced8d23115e}" behavior="0" />
+      <RootComponent type="36" id="{5d78c3f3-5aab-f111-aaab-000d3a11e677}" behavior="0" />
+      <RootComponent type="36" id="{738a9a44-6eb5-f111-aaac-000d3a11e677}" behavior="0" />
+      <RootComponent type="36" id="{75d859e2-6eb5-f111-aaac-000d3a11e677}" behavior="0" />
+      <RootComponent type="36" id="{7ffc6db5-13b0-f111-aaac-7ced8d23115e}" behavior="0" />
+      <RootComponent type="36" id="{90f3d48d-a29f-f111-b8dc-000d3a11e677}" behavior="0" />
+      <RootComponent type="431" schemaName="appointment bdgas_networkdataflowdiagram" behavior="0" />
+      <RootComponent type="431" schemaName="appointment bdgas_networkdataflowdiagram2" behavior="0" />
+      <RootComponent type="431" schemaName="appointment bdgas_networkdataflowdiagram3" behavior="0" />
+      <RootComponent type="431" schemaName="appointment bdgas_networkdataflowdiagram4" behavior="0" />
+      <RootComponent type="431" schemaName="appointment bdgas_networkdataflowdiagram5" behavior="0" />
+      <RootComponent type="432" schemaName="appointment" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_/commands/SRAActivityCommands.js" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_approval" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_argoassignedtask" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ArgoChargebackAnnually" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_argodevtask" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_argonavigation" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_argoprojectcenter.html" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ARGOProjectMilestoneApproval" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ArgoSRAAppointment" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_argotask" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ArgoWorkflow" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_AssignedActionsItems" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_AuditHistory" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_BDLogo" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_BookRAMeeting" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_BudgetRequest" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_budgetrequest.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_BudgetRequestHistory" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_CreateSRA" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_DevEstimation" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_devestimation.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_DevTask" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_devtasksvg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_EditSRA" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_fiscalyear.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_function.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_GovernanceRequest" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_impactedapplication" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_intelligentprocessautomation.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_MilestoneType" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ProductPricing" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ProjectMilestone" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_projectmilestone.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ProjectMilestoneApproval" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_qpaAgreement" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_RegulatoryLock" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_RequestIntake" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_requestintake.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_requestintakeactivity.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_RequestIntakeApplication" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_requestintakeapplication.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_requestintakeuser.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_ResourceAllocation" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_resourceallocation.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_serviceprovider.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_sra.svg" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_sraAgreement" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_sraappointment" behavior="0" />
+      <RootComponent type="61" schemaName="bdgas_sradocument.svg" behavior="0" />
+      <RootComponent type="62" schemaName="bdgas_IntelligentProcessAutomation" behavior="0" />
+      <RootComponent type="80" schemaName="bdgas_IntelligentProcessAutomation" behavior="0" />
+      <RootComponent type="9" schemaName="admin_approvalstatus" behavior="0" />
+      <RootComponent type="9" schemaName="admin_businessimpact" behavior="0" />
+      <RootComponent type="9" schemaName="admin_category" behavior="0" />
+      <RootComponent type="9" schemaName="admin_dataclassification" behavior="0" />
+      <RootComponent type="9" schemaName="admin_powerappstype" behavior="0" />
+      <RootComponent type="9" schemaName="admin_riskassessment" behavior="0" />
+      <RootComponent type="9" schemaName="admin_teamsenvstatus" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_authenticationmethod" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_bdcontrolledsegmentation" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_chargebacktype" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_firewallchanges" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_impactchoice" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_operatingenvironment" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_piijustification" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_regulatoryassessmentoption" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_solutionarchitecture" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_soxjustification" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_srarequesttype" behavior="0" />
+      <RootComponent type="9" schemaName="bdgas_systemreside" behavior="0" />
+      <RootComponent type="9" schemaName="coe_envsku" behavior="0" />
+      <RootComponent type="9" schemaName="cr5d5_archivalitemtype" behavior="0" />
+      <RootComponent type="91" id="{f1fc01dd-5486-f111-ab0f-7ced8d23115e}" schemaName="BD.IPA.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=21d899d98fae15dd" behavior="0" />
+      <RootComponent type="92" id="{07ca0ba1-c989-f111-ab10-000d3a11e677}" behavior="0" />
+      <RootComponent type="92" id="{34f0e2f2-5486-f111-ab0f-6045bded11bb}" behavior="0" />
+      <RootComponent type="92" id="{36ac4060-92ce-f111-a05a-70a8a58e14df}" behavior="0" />
+      <RootComponent type="92" id="{39a28e2f-269d-f111-b8db-7ced8ddb6d93}" behavior="0" />
+      <RootComponent type="92" id="{3e5a0fd7-049d-f111-b8dc-000d3a11e677}" behavior="0" />
+      <RootComponent type="92" id="{491fd57e-3293-f111-8075-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="92" id="{50df8f95-c989-f111-ab10-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="92" id="{535375ab-2cab-f111-aaac-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="92" id="{6a89289e-e2a1-f111-b8dc-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="92" id="{6c46587c-c989-f111-ab10-000d3a11e677}" behavior="0" />
+      <RootComponent type="92" id="{87ebb76d-9d9b-f111-b8dc-7ced8d23115e}" behavior="0" />
+      <RootComponent type="92" id="{895b2b59-9d9b-f111-b8dc-7ced8d23115e}" behavior="0" />
+      <RootComponent type="92" id="{8d9b1cfb-de99-f111-b8dc-6045bdf09dc3}" behavior="0" />
+      <RootComponent type="92" id="{a1558f37-568a-f111-ab10-7ced8dcba28c}" behavior="0" />
+      <RootComponent type="92" id="{a6de004a-babb-f111-aaaf-7ced8d23115e}" behavior="0" />
+      <RootComponent type="92" id="{a7f20d26-568a-f111-ab10-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="92" id="{b8d3c35c-7ccb-f111-a05a-00224825e6aa}" behavior="0" />
+      <RootComponent type="92" id="{cee68641-269d-f111-b8db-7ced8ddb6d93}" behavior="0" />
+      <RootComponent type="92" id="{d9e5b44a-7ccb-f111-a05a-000d3a19c6ed}" behavior="0" />
+      <RootComponent type="92" id="{e1f6e856-92ce-f111-a05a-00224835947e}" behavior="0" />
+      <RootComponent type="92" id="{e2457590-e2a1-f111-b8dc-7c1e527d2a28}" behavior="0" />
+      <RootComponent type="92" id="{ef80d538-3c93-f111-8076-6045bdf09dc3}" behavior="0" />
+      <RootComponent type="92" id="{ff7c9275-6e9b-f111-b8db-7c1e527d2a28}" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Creation Budget Request History" id="{0480e41b-1aa2-f111-b8dc-7ced8d23115e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Project Milestone Approval - Approved or Rejected" id="{22396ffa-a8ad-f111-aaac-7c1e527d2a28}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="SRA Cancellation Appointment Notification" id="{2c7a0f78-bbd1-f111-a059-002248356178}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Project Center Lifecycle Notification" id="{4959bb3d-0ecd-f111-a05a-70a8a58e14df}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="DIR Email Extraction" id="{4bfab3cd-338b-f111-ab10-7c1e527d2a28}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Task - Send Daily Reminder" id="{61c58b19-56a2-f111-b8db-7ced8d1777fd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="SRA Appointment Notification" id="{63cf9d6b-a89f-f111-b8dc-7c1e527d2a28}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Budget Request History Notification" id="{7dbecd99-4fab-f111-aaab-6045bded11bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Task - Send Assigned Notification" id="{86df367b-55a2-f111-b8db-7ced8d1777fd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Delete Past Available Appointments Daily" id="{a68e1707-f399-f111-b8db-7c1e527d2a28}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Generate Appointment Monthly" id="{a6d63c10-2ea0-f111-b8db-00224822f2ac}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Create Teams Meeting" id="{bb5f03a5-9c93-f111-8076-6045bdf09dc3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="UpdateCredoStatuses" id="{c645172f-de9a-f111-b8dc-6045bded1032}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Create QPA Email Notification" id="{d3af33ed-04b0-f111-aaab-000d3a11e677}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariabledefinition" displayName="Environment Variable Definition" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Project Milestone Approval Notification" id="{e9eac503-b6ac-f111-aaac-7c1e527d2a28}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="environmentvariablevalue" displayName="Environment Variable Value" solution="EnvironmentVariables (1.0.2406.4)">
+          <package appName="EnvironmentVariables" version="1.0.2406.4">EnvironmentVariablesSolutionAnchor (1.0.2406.4)</package>
+        </Required>
+        <Dependent type="29" displayName="Project Center Lifecycle Notification" id="{4959bb3d-0ecd-f111-a05a-70a8a58e14df}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="activityid" displayName="activityid" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="activityid" displayName="activityid" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="activitytypecode" displayName="activitytypecode" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="activitytypecode" displayName="activitytypecode" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="actualdurationminutes" displayName="actualdurationminutes" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="actualdurationminutes" displayName="actualdurationminutes" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="actualend" displayName="actualend" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="actualend" displayName="actualend" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="attachmentcount" displayName="attachmentcount" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="attachmentcount" displayName="attachmentcount" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="attachmenterrors" displayName="attachmenterrors" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="attachmenterrors" displayName="attachmenterrors" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="category" displayName="category" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="category" displayName="category" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="createdby" displayName="createdby" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="createdby" displayName="createdby" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="createdon" displayName="createdon" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="createdon" displayName="createdon" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="createdonbehalfby" displayName="createdonbehalfby" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="createdonbehalfby" displayName="createdonbehalfby" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="description" displayName="description" parentSchemaName="appointment" solution="msdynce_ActivitiesPatch (9.0.26093.260917001)" />
+        <Dependent type="2" schemaName="description" displayName="description" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="globalobjectid" displayName="globalobjectid" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="globalobjectid" displayName="globalobjectid" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="importsequencenumber" displayName="importsequencenumber" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="importsequencenumber" displayName="importsequencenumber" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isalldayevent" displayName="isalldayevent" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="isalldayevent" displayName="isalldayevent" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isbilled" displayName="isbilled" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="isbilled" displayName="isbilled" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="ismapiprivate" displayName="ismapiprivate" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="ismapiprivate" displayName="ismapiprivate" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isonlinemeeting" displayName="Is Online Meeting" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isonlinemeeting" displayName="Is Online Meeting" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isonlinemeeting" displayName="Is Online Meeting" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isregularactivity" displayName="isregularactivity" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="isregularactivity" displayName="isregularactivity" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="isworkflowcreated" displayName="isworkflowcreated" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="isworkflowcreated" displayName="isworkflowcreated" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="lastonholdtime" displayName="lastonholdtime" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="lastonholdtime" displayName="lastonholdtime" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="membershiptype" displayName="Membership Type" parentSchemaName="team" parentDisplayName="Team" solution="AuthorizationCore (1.137.0.0)">
+          <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Team" parentDisplayName="Team" id="{7ba7fac1-1418-4335-935f-f7f8dfd73fcc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="modifiedby" displayName="modifiedby" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="modifiedby" displayName="modifiedby" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="modifiedfieldsmask" displayName="modifiedfieldsmask" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="modifiedfieldsmask" displayName="modifiedfieldsmask" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="modifiedon" displayName="modifiedon" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="modifiedon" displayName="modifiedon" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="modifiedonbehalfby" displayName="modifiedonbehalfby" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="modifiedonbehalfby" displayName="modifiedonbehalfby" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onholdtime" displayName="onholdtime" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="onholdtime" displayName="onholdtime" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingid" displayName="Online Meeting Id" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="RA Tracker" displayName="RA Tracker" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{21b5627b-a098-f111-b8dc-6045bdf09dc3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="RA Tracker" displayName="RA Tracker" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{21b5627b-a098-f111-b8dc-6045bdf09dc3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Quick Find All Appointments" displayName="Quick Find All Appointments" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{2aeb5a3e-cb75-4734-8d0c-6873fa8d5126}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Appointment Advanced Find View" displayName="Appointment Advanced Find View" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{56339419-5fae-4048-80b5-3278e420d375}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="All Appointments" displayName="All Appointments" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{5b5f75f6-b585-4212-952a-b4cbb64e2627}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="My Appointments" displayName="My Appointments" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{606eea12-0c33-47d3-96e1-ba1529ee8205}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="SRA Meetings" displayName="SRA Meetings" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{871a82d9-3693-f111-8075-7c1e527d2a28}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="My Completed Appointments" displayName="My Completed Appointments" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{939d9171-7353-4dc7-804e-cbb31a2b2448}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="My SRA" displayName="My SRA" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{c369ac1c-1cad-f111-aaab-6045bded11bb}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Appointment Associated View" displayName="Appointment Associated View" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{d0479533-05a4-4bd3-affc-5767379a344d}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Appointment Lookup View" displayName="Appointment Lookup View" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" id="{de2e5182-841c-43bf-8d21-46cfff36f706}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="onlinemeetingjoinurl" displayName="Online Meeting Join Url" parentSchemaName="appointment" parentDisplayName="System Regulatory Assessment" solution="msft_ActivitiesInfra_Extensions (9.2.0.81)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="ActivitiesInfra Package" version="1.0.0.0">msft_ActivitiesInfra_Anchor (1.0.0.0)</package>
+        </Required>
+        <Dependent type="92" displayName="BD.IPA.Plugins.PreAppointmentOnUpdate: Update of appointment" id="{ef80d538-3c93-f111-8076-6045bdf09dc3}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="optionalattendees" displayName="optionalattendees" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="optionalattendees" displayName="optionalattendees" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="organizer" displayName="organizer" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="organizer" displayName="organizer" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="originalstartdate" displayName="originalstartdate" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="originalstartdate" displayName="originalstartdate" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="outlookownerapptid" displayName="outlookownerapptid" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="outlookownerapptid" displayName="outlookownerapptid" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="overriddencreatedon" displayName="overriddencreatedon" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="overriddencreatedon" displayName="overriddencreatedon" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="ownerid" displayName="ownerid" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="ownerid" displayName="ownerid" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="owningbusinessunit" displayName="owningbusinessunit" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="owningbusinessunit" displayName="owningbusinessunit" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="owningteam" displayName="owningteam" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="owningteam" displayName="owningteam" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="owninguser" displayName="owninguser" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="owninguser" displayName="owninguser" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="prioritycode" displayName="prioritycode" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="prioritycode" displayName="prioritycode" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="requiredattendees" displayName="requiredattendees" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="requiredattendees" displayName="requiredattendees" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="scheduleddurationminutes" displayName="scheduleddurationminutes" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="scheduleddurationminutes" displayName="scheduleddurationminutes" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="slaid" displayName="slaid" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="slaid" displayName="slaid" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="slainvokedid" displayName="slainvokedid" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="slainvokedid" displayName="slainvokedid" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="subcategory" displayName="subcategory" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="subcategory" displayName="subcategory" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="systemmanagedusertype" displayName="System Managed User Type" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.137.0.0)">
+          <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Quick Find All Users" displayName="Quick Find All Users" parentSchemaName="systemuser" parentDisplayName="User" id="{51a81e33-e44a-485f-a24f-acbe2c978b92}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="systemmanagedusertype" displayName="System Managed User Type" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.137.0.0)">
+          <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="User Lookup View" displayName="User Lookup View" parentSchemaName="systemuser" parentDisplayName="User" id="{e88ca999-0b16-4ae9-b6a9-9edc840d42d8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="timezoneruleversionnumber" displayName="timezoneruleversionnumber" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="timezoneruleversionnumber" displayName="timezoneruleversionnumber" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="utcconversiontimezonecode" displayName="utcconversiontimezonecode" parentSchemaName="appointment" solution="System (5.0)" />
+        <Dependent type="2" schemaName="utcconversiontimezonecode" displayName="utcconversiontimezonecode" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="401" displayName="AI Reply" solution="msdyn_AISolutionDefaultTemplates (202608.4.19.2)" id="{572f57a7-7a8f-49fc-adb4-331e02c509a6}">
+          <package appName="PowerAI" version="202608.4.19.2">msdyn_AISolutionAnchor (202608.4.19.2)</package>
+        </Required>
+        <Dependent type="29" displayName="GetCredoUseCases" id="{f1954e1d-2c8a-f111-ab0f-000d3a1350cd}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="59" schemaName="Tasks by Month Due" displayName="Tasks by Month Due" parentSchemaName="task" parentDisplayName="Task" solution="msdynce_AppCommon (9.0.4.0066)" id="{9e6a8b06-6d14-46e6-bbf5-95c388c6eb7a}">
+          <package appName="msdynce_AppCommon" version="9.0.26094.10001">msdynce_AppCommonAnchor (9.0.26094.10001)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="59" schemaName="Tasks by Month Due" displayName="Tasks by Month Due" parentSchemaName="task" parentDisplayName="Task" solution="msdynce_AppCommon (9.0.4.0066)" id="{9e6a8b06-6d14-46e6-bbf5-95c388c6eb7a}">
+          <package appName="msdynce_AppCommon" version="9.0.26094.10001">msdynce_AppCommonAnchor (9.0.26094.10001)</package>
+        </Required>
+        <Dependent type="60" displayName="Project Center Tasks" parentDisplayName="Project Center" id="{c1c773de-3da7-f111-b8de-7ced8d23115e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Task" parentDisplayName="Task" solution="msdynce_Activities (9.0.1.2033)" id="{16654191-19ad-48ca-9e46-c4b4fbdad76f}">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Task" parentDisplayName="Task" id="{16654191-19ad-48ca-9e46-c4b4fbdad76f}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" solution="msdynce_Activities (9.0.1.2033)" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" solution="msdynce_Activities (9.0.1.2033)" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" solution="msdynce_Activities (9.0.1.2033)" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="Activities/SystemLibraries/Appointment_main_system_library.js" displayName="Activities/SystemLibraries/Appointment_main_system_library.js" solution="msdynce_Activities (9.0.1.2033)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="Activities/SystemLibraries/Appointment_main_system_library.js" displayName="Activities/SystemLibraries/Appointment_main_system_library.js" solution="msdynce_Activities (9.0.1.2033)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="dce_DCEPCF.PolyLookup" displayName="dce_DCEPCF.PolyLookup" solution="dce_pcfcomponents (1.1.2.0)" />
+        <Dependent type="60" displayName="RPA Form" parentDisplayName="Project Center" id="{2c6c1e7f-91ea-4271-a635-34940e6b4dfe}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="dce_DCEPCF.PolyLookup" displayName="dce_DCEPCF.PolyLookup" solution="dce_pcfcomponents (1.1.2.0)" />
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="mctools_MscrmTools.LookupToPicklist" displayName="mctools_MscrmTools.LookupToPicklist" solution="MscrmToolsPCFControls (1.14.1.0)" />
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.Activity.HyperlinkControlWithImage" displayName="MscrmControls.Activity.HyperlinkControlWithImage" solution="msdynce_ActivitiesPatch (9.0.26093.260917001)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.Activity.HyperlinkControlWithImage" displayName="MscrmControls.Activity.HyperlinkControlWithImage" solution="msdynce_ActivitiesPatch (9.0.26093.260917001)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.Activity.HyperlinkControlWithImage" displayName="MscrmControls.Activity.HyperlinkControlWithImage" solution="msdynce_ActivitiesPatch (9.0.26093.260917001)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4005)">
+          <package appName="Base Custom Controls" version="9.0.2609.4005">BaseCustomControlsCore (9.0.2609.4005)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4005)">
+          <package appName="Base Custom Controls" version="9.0.2609.4005">BaseCustomControlsCore (9.0.2609.4005)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4005)">
+          <package appName="Base Custom Controls" version="9.0.2609.4005">BaseCustomControlsCore (9.0.2609.4005)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.RichTextEditor.RichTextEditorControl" displayName="MscrmControls.RichTextEditor.RichTextEditorControl" solution="msdyn_RichTextEditor (9.0.26101.2000)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="msdyn_CustomControlsExtended" version="9.0.26101.2000">msdyn_TimelineExtended (9.0.26101.2000)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment for Interactive experience" parentDisplayName="System Regulatory Assessment" id="{230cd27c-0ce0-4b52-9fe5-d7a5ed94ba4e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.RichTextEditor.RichTextEditorControl" displayName="MscrmControls.RichTextEditor.RichTextEditorControl" solution="msdyn_RichTextEditor (9.0.26101.2000)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="msdyn_CustomControlsExtended" version="9.0.26101.2000">msdyn_TimelineExtended (9.0.26101.2000)</package>
+        </Required>
+        <Dependent type="60" displayName="Wizard" parentDisplayName="System Regulatory Assessment" id="{3a7d8836-e2d7-4bc3-919b-cc86a8d9688a}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.RichTextEditor.RichTextEditorControl" displayName="MscrmControls.RichTextEditor.RichTextEditorControl" solution="msdyn_RichTextEditor (9.0.26101.2000)">
+          <package appName="msdynce_Activities" version="9.0.26093.260917001">msdynce_EnableUCIByDefault (9.0.26093.260917001)</package>
+          <package appName="msdyn_CustomControlsExtended" version="9.0.26101.2000">msdyn_TimelineExtended (9.0.26101.2000)</package>
+        </Required>
+        <Dependent type="60" displayName="Appointment" parentDisplayName="System Regulatory Assessment" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AssignSelectedEntityPermission!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AssignSelectedEntityPermission!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.AssignSelectedEntityPermission!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.AssignSelectedEntityPermission!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AvailableOnForm!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.AvailableOnForm!0" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AvailableOnForm!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.AvailableOnForm!0" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CreatePrimaryEntityPermission!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CreatePrimaryEntityPermission!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.CreatePrimaryEntityPermission!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.CreatePrimaryEntityPermission!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.DisplayCharts!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.DisplayCharts!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.DisplayCharts!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.DisplayCharts!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.DisplayCharts!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.DisplayCharts!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.DisplayCharts!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.DisplayCharts!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableOnHomePageAspxOrOutlook!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.EnableOnHomePageAspxOrOutlook!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.EnableOnHomePageAspxOrOutlook!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.EnableOnHomePageAspxOrOutlook!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableSaveButton!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.EnableSaveButton!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.EnableSaveButton!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.EnableSaveButton!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.GridFiltersEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.GridFiltersEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.GridFiltersEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.GridFiltersEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.HideInLegacyRibbon!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.HideInLegacyRibbon!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.HybridDialogShareEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.HybridDialogShareEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.HybridDialogShareEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.HybridDialogShareEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsChartSelected!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsChartSelected!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsChartSelected!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsChartSelected!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsCustomizable!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsCustomizable!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsCustomizable!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsCustomizable!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsDefaultVisualizationModule!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsDefaultVisualizationModule!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsDefaultVisualizationModule!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsDefaultVisualizationModule!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsDeleteVisualizationEnabled!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsDeleteVisualizationEnabled!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsDeleteVisualizationEnabled!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsDeleteVisualizationEnabled!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityEnabledForCharts!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityEnabledForCharts!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsEntityEnabledForCharts!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityEnabledForCharts!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityEnabledForCharts!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityEnabledForCharts!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsEntityEnabledForCharts!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityEnabledForCharts!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsFetchxmlQuery!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsFetchxmlQuery!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsFetchxmlQuery!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsFetchxmlQuery!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsNavigateToInUCIEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsNavigateToInUCIEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsNavigateToInUCIEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsNavigateToInUCIEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsParentChartLoaded!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsParentChartLoaded!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsParentChartLoaded!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsParentChartLoaded!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsValidForHierarchyPageInUC!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsValidForHierarchyPageInUC!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsValidForHierarchyPageInUC!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsValidForHierarchyPageInUC!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsValidForHierarchyView!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsValidForHierarchyView!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsValidForHierarchyView!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsValidForHierarchyView!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsValidForHierarchyView!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsValidForHierarchyView!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.IsValidForHierarchyView!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.IsValidForHierarchyView!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OpenCustomizations!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OpenCustomizations!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.OpenCustomizations!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.OpenCustomizations!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsNotActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsNotActivity!1" id.appactionid.uniquename="bdgas__Mscrm.Form.{!EntityLogicalName}.NewRecord!bdgas_IntelligentProcessAutomation!bdgas_sraactivity!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.savedquery.Update!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.savedquery.Update!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.savedquery.Update!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.savedquery.Update!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.SelectedEntityIsBPFEntity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.SelectedEntityIsBPFEntity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.SelectedEntityIsBPFEntity!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.SelectedEntityIsBPFEntity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.SelectionCountAtLeastOne!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.SelectionCountAtLeastOne!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.SelectionCountAtLeastOne!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.SelectionCountAtLeastOne!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.SelectionCountAtLeastOne!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.SelectionCountAtLeastOne!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.SelectionCountAtLeastOne!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.SelectionCountAtLeastOne!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.SelectionCountExactlyOne!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.SelectionCountExactlyOne!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.SelectionCountExactlyOne!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.OpenActiveStage!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.SelectionCountExactlyOne!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.ShareSelectedEntityPermission!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.ShareSelectedEntityPermission!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.ShareSelectedEntityPermission!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.ShareSelectedEntityPermission!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.ShareValid!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.ShareValid!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.ShareValid!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.ShareValid!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.ShowOnDashboardPageUCI!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.ShowOnDashboardPageUCI!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.ShowOnDashboardPageUCI!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.ShowOnDashboardPageUCI!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.ShowOnlyOnModern!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.ShowOnlyOnModern!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.ShowOnlyOnModern!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.NavigateToHomepageGrid!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.ShowOnlyOnModern!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.ShowOnNonModernAndModernIfAllowed!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.ShowOnNonModernAndModernIfAllowed!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.ShowOnNonModernAndModernIfAllowed!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.ShowOnNonModernAndModernIfAllowed!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.SystemQuerySelected!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.SystemQuerySelected!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.SystemQuerySelected!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.SystemQuerySelected!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.userqueryvisualization.Delete!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.userqueryvisualization.Delete!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.userqueryvisualization.Delete!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.userqueryvisualization.Delete!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.userqueryvisualization.Write!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.userqueryvisualization.Write!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.userqueryvisualization.Write!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.userqueryvisualization.Write!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.UserVisualizationSelected!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.UserVisualizationSelected!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.UserVisualizationSelected!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.UserVisualizationSelected!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.VisualizationPaneNotMaximized!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.VisualizationPaneNotMaximized!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Assign!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.VisualizationPaneNotMaximized!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.VisualizationPaneNotMaximized!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.VisualizationPaneNotMaximized!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.VisualizationPaneNotMaximized!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Sharing!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneNotMaximized!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.VisualizationPaneRuntimeMode!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.VisualizationPaneRuntimeMode!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.VisualizationPaneRuntimeMode!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Delete!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneRuntimeMode!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.VisualizationPaneRuntimeMode!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.VisualizationPaneRuntimeMode!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.VisualizationPaneRuntimeMode!0" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.Chart.Edit!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.VisualizationPaneRuntimeMode!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.WriteCustomization!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.WriteCustomization!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=bdgas__Mscrm.HomepageGrid.%7B!EntityLogicalName%7D.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1,appactionruleid.uniquename=msdyn_Mscrm.WriteCustomization!1" id.appactionid.uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1" id.appactionruleid.uniquename="msdyn_Mscrm.WriteCustomization!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.27)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.27">PowerAppsAppFramework_Anchor (1.0.0.27)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=bdgas_IntelligentProcessAutomation,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="bdgas_IntelligentProcessAutomation" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AsyncOnSave" solution="SettingDefinitionsData (9.2.2603.2603182)" id.uniquename="AsyncOnSave">
+          <package appName="AppModule" version="9.2.2603.2603182">AppModuleSolutionAnchor (9.2.2603.2603182)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=bdgas_IntelligentProcessAutomation,settingdefinitionid.uniquename=AsyncOnSave" id.parentappmoduleid.uniquename="bdgas_IntelligentProcessAutomation" id.settingdefinitionid.uniquename="AsyncOnSave" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="FormFillBarUXEnabled" solution="msdyn_FormsInfraSettings (1.0.0.8)" id.uniquename="FormFillBarUXEnabled">
+          <package appName="PowerAppsFormsApp Package" version="1.0.0.1">PowerAppsFormsApp_Anchor (1.0.0.1)</package>
+          <package appName="PowerAppsFormsApp Package" version="1.0.0.5">msdyn_FormsInsightSettings (1.0.0.5)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=bdgas_IntelligentProcessAutomation,settingdefinitionid.uniquename=FormFillBarUXEnabled" id.parentappmoduleid.uniquename="bdgas_IntelligentProcessAutomation" id.settingdefinitionid.uniquename="FormFillBarUXEnabled" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

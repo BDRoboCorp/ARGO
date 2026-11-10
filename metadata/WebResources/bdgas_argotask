@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Tasks</title>
+    <style>
+      :root {
+        --blue: #0f6cbd;
+        --blue-soft: #eef6fc;
+        --border: #d1d1d1;
+        --border-soft: #e5e5e5;
+        --text: #242424;
+        --muted: #616161;
+        --page: #f5f5f5;
+        --surface: #ffffff;
+        --error: #a4262c;
+        --success: #107c10;
+        --warning: #8a6100;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--page);
+        font: 14px/1.4 "Segoe UI", "SegoeUI", sans-serif;
+      }
+      button, input { font: inherit; }
+      .shell { min-height: 100vh; }
+      .command-bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .brand-mark {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--blue);
+        border-radius: 2px;
+        font-weight: 600;
+      }
+      h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .status { margin-left: auto; color: var(--muted); font-size: 12px; }
+      .content { padding: 12px; }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .toolbar h2 { margin: 0; font-size: 20px; font-weight: 600; }
+      .toolbar p { margin: 2px 0 0; color: var(--muted); }
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 8px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .filter-field {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 260px;
+        flex: 1;
+      }
+      .filter-field label {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .filter-field input {
+        min-height: 32px;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+      }
+      .filter-field select {
+        min-height: 32px;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+      }
+      .action-button {
+        min-height: 32px;
+        padding: 5px 12px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+        cursor: pointer;
+      }
+      .action-button:hover { border-color: var(--blue); color: var(--blue); }
+      .action-button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .action-button:disabled:hover {
+        border-color: var(--border);
+        color: var(--text);
+      }
+      .action-button:focus-visible,
+      a:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+      .message {
+        padding: 12px;
+        border-left: 4px solid var(--blue);
+        background: var(--surface);
+      }
+      .message.error { border-left-color: var(--error); }
+      .message strong { display: block; margin-bottom: 4px; }
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 900px;
+      }
+      th:nth-child(1), td:nth-child(1) { width: 18%; }
+      th:nth-child(2), td:nth-child(2) { width: 24%; }
+      th:nth-child(3), td:nth-child(3) { width: 14%; }
+      th:nth-child(4), td:nth-child(4) { width: 8%; }
+      th:nth-child(5), td:nth-child(5) { width: 9%; }
+      th:nth-child(6), td:nth-child(6) { width: 9%; }
+      th:nth-child(7), td:nth-child(7) { width: 9%; }
+      th:nth-child(8), td:nth-child(8) { width: 9%; }
+      th, td {
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border-soft);
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      th {
+        color: var(--muted);
+        background: #fafafa;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      tbody tr:last-child td { border-bottom: 0; }
+      tbody tr { cursor: pointer; }
+      tbody tr:hover { background: #f8fbfd; }
+      a { color: var(--blue); }
+      .muted { color: var(--muted); }
+      .status-pill {
+        display: inline-block;
+        padding: 2px 6px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .status-pill.not-started { border-color: var(--warning); color: var(--warning); background: #fff8e6; }
+      .status-pill.in-progress { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
+      .status-pill.completed { border-color: var(--success); color: var(--success); background: #eafaea; }
+      .status-pill.canceled { border-color: var(--border); color: var(--muted); background: #f5f5f5; }
+      .pager {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .pager-info { color: var(--muted); font-size: 12px; margin-right: auto; }
+      @media (max-width: 640px) {
+        .content { padding: 8px; }
+        .toolbar { align-items: stretch; flex-direction: column; }
+        .status { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="command-bar">
+        <div class="brand-mark" aria-hidden="true">T</div>
+        <h1>My Tasks</h1>
+      </header>
+      <section class="content" aria-live="polite">
+        <div class="toolbar">
+          <div>
+            <h2>My Tasks</h2>
+            <p id="summaryText">Loading your tasks.</p>
+          </div>
+        </div>
+        <form class="filters" id="filterForm">
+          <div class="filter-field">
+            <label for="searchInput">Search</label>
+            <input
+              id="searchInput"
+              name="search"
+              type="search"
+              placeholder="Search by subject, description, or remarks"
+            />
+          </div>
+          <div class="filter-field" style="min-width: 180px; flex: 0;">
+            <label for="statusSelect">Status</label>
+            <select id="statusSelect" name="status">
+              <option value="">All</option>
+              <option value="2">Not Started</option>
+              <option value="3">In Progress</option>
+              <option value="4">Waiting on someone else</option>
+              <option value="5">Completed</option>
+              <option value="6">Canceled</option>
+              <option value="7">Deferred</option>
+            </select>
+          </div>
+          <button class="action-button" type="submit">Search</button>
+          <button class="action-button" id="refreshButton" type="button">
+            Refresh
+          </button>
+        </form>
+        <div id="tasksRoot"></div>
+        <div class="pager" id="pager" hidden>
+          <span class="pager-info" id="pagerInfo"></span>
+          <button class="action-button" id="prevPageButton" type="button">
+            Previous
+          </button>
+          <button class="action-button" id="nextPageButton" type="button">
+            Next
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var DEFAULT_PAGE_SIZE = 25;
+        var ASSIGNMENT_ALIAS = "assignment";
+
+        var elements = {
+          summaryText: document.getElementById("summaryText"),
+          filterForm: document.getElementById("filterForm"),
+          searchInput: document.getElementById("searchInput"),
+          statusSelect: document.getElementById("statusSelect"),
+          refreshButton: document.getElementById("refreshButton"),
+          tasksRoot: document.getElementById("tasksRoot"),
+          pager: document.getElementById("pager"),
+          pagerInfo: document.getElementById("pagerInfo"),
+          prevPageButton: document.getElementById("prevPageButton"),
+          nextPageButton: document.getElementById("nextPageButton"),
+        };
+
+        var state = {
+          pageSize: DEFAULT_PAGE_SIZE,
+          currentPage: 1,
+          // Maps page number -> paging cookie required to fetch that page.
+          pageCookies: { 1: null },
+          hasNextPage: false,
+          search: "",
+          statusCode: "",
+          isLoading: false,
+        };
+
+        document.addEventListener("DOMContentLoaded", init);
+
+        async function init() {
+          try {
+            var xrm = getXrm();
+            state.pageSize = await getPageSize(xrm);
+            wireEvents();
+            await loadPage(1);
+          } catch (error) {
+            renderMessage("Unable to load My Tasks", error.message || String(error), true);
+          }
+        }
+
+        function wireEvents() {
+          elements.filterForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            state.search = elements.searchInput.value.trim();
+            state.statusCode = elements.statusSelect.value;
+            state.pageCookies = { 1: null };
+            loadPage(1);
+          });
+
+          elements.statusSelect.addEventListener("change", function () {
+            state.statusCode = elements.statusSelect.value;
+            state.pageCookies = { 1: null };
+            loadPage(1);
+          });
+
+          elements.refreshButton.addEventListener("click", function () {
+            state.pageCookies = { 1: null };
+            loadPage(state.currentPage);
+          });
+
+          elements.prevPageButton.addEventListener("click", function () {
+            if (state.currentPage > 1) {
+              loadPage(state.currentPage - 1);
+            }
+          });
+
+              var current = window;
+              while (true) {
+                try {
+                  if (current.Xrm && current.Xrm.WebApi && current.Xrm.Navigation && current.Xrm.Utility) {
+                    return current.Xrm;
+                  }
+                } catch (error) {
+                  // Cross-origin frame; can't inspect it, keep walking up.
+                }
+
+                if (!current.parent || current.parent === current) { break; }
+                current = current.parent;
+            }
+
+              throw new Error("This web resource must be opened inside a model-driven app.");
+        }
+
+        async function getPageSize(xrm) {
+          try {
+            var userId = cleanGuid(xrm.Utility.getGlobalContext().userSettings.userId);
+            var settings = await xrm.WebApi.retrieveRecord(
+              "usersettings",
+              userId,
+              "?$select=paginglimit"
+            );
+            var limit = settings && settings.paginglimit;
+            return limit && limit > 0 ? limit : DEFAULT_PAGE_SIZE;
+          } catch (error) {
+            console.warn("Unable to read user paging limit, using default.", error);
+            return DEFAULT_PAGE_SIZE;
+          }
+        }
+
+        function buildFetchXml(page, pagingCookie, search) {
+          var searchFilter = "";
+          if (search) {
+            var likeValue = "%" + escapeXml(search) + "%";
+            searchFilter =
+              '<filter type="or">' +
+              '<condition attribute="subject" operator="like" value="' + likeValue + '" />' +
+              '<condition attribute="description" operator="like" value="' + likeValue + '" />' +
+              '<condition attribute="bdgas_remarks" operator="like" value="' + likeValue + '" />' +
+              "</filter>";
+          }
+
+          var statusFilter = "";
+          if (state.statusCode) {
+            statusFilter =
+              '<condition attribute="statuscode" operator="eq" value="' + escapeXml(state.statusCode) + '" />';
+          }
+
+          var pagingAttributes =
+            ' count="' + state.pageSize + '" page="' + page + '"' +
+            (pagingCookie ? ' paging-cookie="' + escapeXml(pagingCookie) + '"' : "");
+
+          return (
+            '<fetch version="1.0" mapping="logical" no-lock="false" distinct="true"' +
+            pagingAttributes +
+            '>' +
+            '<entity name="task">' +
+            '<attribute name="activityid" />' +
+            '<attribute name="subject" />' +
+            '<attribute name="bdgas_remarks" />' +
+            '<attribute name="description" />' +
+            '<attribute name="statuscode" />' +
+            '<attribute name="createdon" />' +
+            '<attribute name="scheduledend" />' +
+            '<attribute name="modifiedon" />' +
+            '<attribute name="modifiedby" />' +
+            '<order attribute="createdon" descending="true" />' +
+            '<link-entity name="bdgas_taskassignment" to="activityid" from="bdgas_taskid" alias="' + ASSIGNMENT_ALIAS + '" link-type="outer" />' +
+            '<filter type="or">' +
+            '<condition attribute="ownerid" operator="eq-userid" />' +
+            '<condition entityname="' + ASSIGNMENT_ALIAS + '" attribute="bdgas_userid" operator="eq-userid" />' +
+            "</filter>" +
+            searchFilter +
+            statusFilter +
+            "</entity>" +
+            "</fetch>"
+          );
+        }
+
+        async function loadPage(page) {
+          if (state.isLoading) { return; }
+          state.isLoading = true;
+          renderMessage("Loading tasks", "Please wait\u2026", false);
+
+          try {
+            var xrm = getXrm();
+            var pagingCookie = state.pageCookies[page] || null;
+            var fetchXml = buildFetchXml(page, pagingCookie, state.search);
+
+            var result = await xrm.WebApi.online.retrieveMultipleRecords(
+              "task",
+              "?fetchXml=" + fetchXml
+            );
+
+            var entities = result.entities || [];
+
+            state.currentPage = page;
+            state.hasNextPage =
+              Boolean(result.fetchXmlPagingCookie) &&
+              entities.length === state.pageSize;
+            state.pageCookies[page + 1] = result.fetchXmlPagingCookie || null;
+
+            renderResults(entities);
+            updatePager();
+
+            elements.summaryText.textContent =
+              entities.length + " task" + (entities.length === 1 ? "" : "s") +
+              (state.search ? ' matching "' + state.search + '"' : "") +
+              " on page " + state.currentPage;
+
+          } catch (error) {
+            renderMessage("Unable to load tasks", error.message || String(error), true);
+          } finally {
+            state.isLoading = false;
+          }
+        }
+
+        function renderResults(entities) {
+          if (!entities.length) {
+            renderMessage(
+              "No tasks found",
+              state.search
+                ? 'No tasks match "' + state.search + '".'
+                : "No tasks are owned by or assigned to you.",
+              false
+            );
+            return;
+          }
+
+          var table = document.createElement("table");
+          var thead = document.createElement("thead");
+          thead.innerHTML =
+            "<tr>" +
+            "<th>Subject</th>" +
+            "<th>Description</th>" +
+            "<th>Remarks</th>" +
+            "<th>Status</th>" +
+            "<th>Due Date</th>" +
+            "<th>Created On</th>" +
+            "<th>Modified On</th>" +
+            "<th>Modified By</th>" +
+            "</tr>";
+          table.appendChild(thead);
+
+          var tbody = document.createElement("tbody");
+          entities.forEach(function (entity) {
+            tbody.appendChild(createRow(entity));
+          });
+          table.appendChild(tbody);
+
+          var wrap = document.createElement("div");
+          wrap.className = "table-wrap";
+          wrap.appendChild(table);
+
+          clearChildren(elements.tasksRoot);
+          elements.tasksRoot.appendChild(wrap);
+        }
+
+        function createRow(entity) {
+          var tr = document.createElement("tr");
+          tr.tabIndex = 0;
+          tr.setAttribute("role", "button");
+
+          tr.appendChild(createCell(getFormattedValue(entity, "subject")));
+          tr.appendChild(createCell(getFormattedValue(entity, "description")));
+          tr.appendChild(createCell(getFormattedValue(entity, "bdgas_remarks")));
+          tr.appendChild(createStatusCell(entity));
+          tr.appendChild(createCell(getFormattedValue(entity, "scheduledend")));
+          tr.appendChild(createCell(getFormattedValue(entity, "createdon")));
+          tr.appendChild(createCell(getFormattedValue(entity, "modifiedon")));
+          tr.appendChild(createCell(getFormattedValue(entity, "_modifiedby_value")));
+
+          var open = function () {
+            openTask(entity.activityid);
+          };
+          tr.addEventListener("click", open);
+          tr.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              open();
+            }
+          });
+
+          return tr;
+        }
+
+        function createCell(value) {
+          var td = document.createElement("td");
+          td.textContent = value || "\u2014";
+          return td;
+        }
+
+        // statuscode 5 = Completed, 6 = Canceled; anything else is still outstanding.
+        function createStatusCell(entity) {
+          var td = document.createElement("td");
+          var pill = document.createElement("span");
+          var statusCodeMap = {
+            2: "not-started",
+            3: "in-progress",
+            4: "in-progress",
+            5: "completed",
+            6: "canceled",
+            7: "canceled",
+          };
+          var pillClass = statusCodeMap[entity.statuscode] || "not-started";
+          pill.className = "status-pill " + pillClass;
+          pill.textContent = getFormattedValue(entity, "statuscode") || "\u2014";
+          td.appendChild(pill);
+          return td;
+        }
+
+        function getFormattedValue(entity, attributeName) {
+          var formattedKey = attributeName + "@OData.Community.Display.V1.FormattedValue";
+          return entity[formattedKey] || entity[attributeName] || "";
+        }
+
+        function openTask(recordId) {
+          var pageInput = {
+            pageType: "entityrecord",
+            entityName: "task",
+            entityId: recordId,
+          };
+
+          if (openInNavigationHost(pageInput, "Task")) {
+            return;
+          }
+
+          getXrm().Navigation.navigateTo(pageInput, { target: 1 });
+        }
+
+        function openInNavigationHost(pageInput, title) {
+          try {
+            if (
+              window.parent &&
+              window.parent !== window &&
+              window.parent.bdgasArgoNavigationHost &&
+              typeof window.parent.bdgasArgoNavigationHost.openItem === "function"
+            ) {
+              pageInput.label = title;
+              window.parent.bdgasArgoNavigationHost.openItem(pageInput);
+              return true;
+            }
+          } catch (error) {
+            return false;
+          }
+
+          return false;
+        }
+
+        function updatePager() {
+          elements.pager.hidden = false;
+          elements.pagerInfo.textContent = "Page " + state.currentPage;
+          elements.prevPageButton.disabled = state.currentPage <= 1;
+          elements.nextPageButton.disabled = !state.hasNextPage;
+        }
+
+        function renderMessage(title, description, isError) {
+          var message = document.createElement("div");
+          message.className = "message" + (isError ? " error" : "");
+          var strong = document.createElement("strong");
+          strong.textContent = title;
+          var text = document.createElement("span");
+          text.textContent = description;
+          message.appendChild(strong);
+          message.appendChild(text);
+
+          clearChildren(elements.tasksRoot);
+          elements.tasksRoot.appendChild(message);
+          elements.pager.hidden = true;
+        }
+
+        function clearChildren(element) {
+          while (element.firstChild) { element.removeChild(element.firstChild); }
+        }
+
+        function cleanGuid(value) {
+          return String(value || "").replace(/[{}]/g, "");
+        }
+
+        function escapeXml(value) {
+          return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&apos;");
+        }
+
+        function getXrm() {
+          // Walk up the frame chain: works whether opened directly in an MDA (window.Xrm),
+          // or nested inside another web resource's iframe.
+          var current = window;
+          while (true) {
+            try {
+              if (current.Xrm && current.Xrm.WebApi && current.Xrm.Navigation && current.Xrm.Utility) {
+                return current.Xrm;
+              }
+            } catch (error) {
+              // Cross-origin frame; can't inspect it, keep walking up.
+            }
+
+            if (!current.parent || current.parent === current) { break; }
+            current = current.parent;
+          }
+
+          throw new Error("This web resource must be opened inside a model-driven app.");
+        }
+      })();
+    </script>
+  </body>
+</html>

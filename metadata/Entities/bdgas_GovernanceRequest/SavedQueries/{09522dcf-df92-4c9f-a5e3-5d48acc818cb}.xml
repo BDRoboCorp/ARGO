@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{09522dcf-df92-4c9f-a5e3-5d48acc818cb}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_name" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_governancerequestid">
+          <cell name="bdgas_attachment" width="33" />
+          <cell name="bdgas_requesttypeid" width="168" />
+          <cell name="bdgas_requestname" width="123" />
+          <cell name="bdgas_bddeveloperid" width="122" />
+          <cell name="bdgas_assigneeid" width="100" />
+          <cell name="a_c6aa98ee317f4b0189c43fc067b23e99.name" width="152" />
+          <cell name="statuscode" width="119" />
+          <cell name="bdgas_comments" width="181" />
+          <cell name="createdon" width="142" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_governancerequest">
+          <attribute name="bdgas_governancerequestid" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_requesttypeid" />
+          <attribute name="bdgas_bddeveloperid" />
+          <attribute name="bdgas_assigneeid" />
+          <attribute name="statuscode" />
+          <attribute name="createdon" />
+          <attribute name="bdgas_comments" />
+          <link-entity alias="a_c6aa98ee317f4b0189c43fc067b23e99" name="team" to="bdgas_teamid" from="teamid" link-type="outer" visible="false">
+            <attribute name="name" />
+          </link-entity>
+          <attribute name="bdgas_attachment" />
+          <attribute name="bdgas_requestname" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Governance Requests" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

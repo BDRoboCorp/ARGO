@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_CredoGetTokenConfig">
+  <defaultvalue>{   "url": "https://api.credo.ai/api/v1/integration/auth/token",   "method": "POST",   "xApiKey": "CMZT0ruzdFekfpzecwy8J3LMWnIsL6cy1kHRRdIZNQkcu1a8pDqZ9SJ5sVWTnnIxd",   "tenant": "becton_dickinson_sb",   "accept": "application/json" }</defaultvalue>
+  <displayname default="Credo Get Token Configuration">
+    <label description="Credo Get Token Configuration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

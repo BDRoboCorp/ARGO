@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{dbb15b7f-2ae4-4eec-a6b9-50aa175a327b}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_name" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_devtaskid">
+          <cell name="a_1865e06140aa44ccb21d18bc7e19defe.bdgas_digitalproductname" width="237" />
+          <cell name="bdgas_requestintakeid" width="142" />
+          <cell name="bdgas_assignee" width="100" />
+          <cell name="bdgas_name" width="300" />
+          <cell name="bdgas_description" width="150" />
+          <cell name="bdgas_devestimation" width="144" />
+          <cell name="bdgas_startdate" width="150" />
+          <cell name="bdgas_hours" width="150" />
+          <cell name="bdgas_completion" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" distinct="true">
+        <entity name="bdgas_devtask">
+          <attribute name="bdgas_devtaskid" />
+          <attribute name="bdgas_name" />
+          <attribute name="createdon" />
+          <attribute name="bdgas_description" />
+          <attribute name="bdgas_startdate" />
+          <attribute name="bdgas_hours" />
+          <attribute name="bdgas_completion" />
+          <attribute name="bdgas_assignee" />
+          <attribute name="bdgas_requestintakeid" />
+          <attribute name="bdgas_devestimation" />
+          <order attribute="bdgas_startdate" descending="false" />
+          <filter type="and">
+            <condition attribute="bdgas_assignee" operator="eq-userid" />
+          </filter>
+          <link-entity alias="a_1865e06140aa44ccb21d18bc7e19defe" name="bdgas_requestintake" to="bdgas_requestintakeid" from="bdgas_requestintakeid" link-type="outer" visible="false">
+            <attribute name="bdgas_digitalproductname" />
+          </link-entity>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="My Dev Tasks" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

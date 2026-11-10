@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{92513a6c-9d8f-47a9-8763-20a9d8314777}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_name" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_devtaskid">
+          <cell name="bdgas_requestintakeid" width="142" />
+          <cell name="bdgas_assignee" width="100" />
+          <cell name="bdgas_name" width="300" />
+          <cell name="bdgas_description" width="150" />
+          <cell name="bdgas_devestimation" width="144" />
+          <cell name="bdgas_startdate" width="150" />
+          <cell name="bdgas_hours" width="150" />
+          <cell name="bdgas_completion" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_devtask">
+          <attribute name="bdgas_devtaskid" />
+          <attribute name="bdgas_name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="bdgas_name" operator="like" value="{0}" />
+          </filter>
+          <attribute name="bdgas_description" />
+          <attribute name="bdgas_startdate" />
+          <attribute name="bdgas_hours" />
+          <attribute name="bdgas_completion" />
+          <attribute name="bdgas_assignee" />
+          <attribute name="bdgas_requestintakeid" />
+          <attribute name="bdgas_devestimation" />
+          <order attribute="bdgas_startdate" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Dev Tasks" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

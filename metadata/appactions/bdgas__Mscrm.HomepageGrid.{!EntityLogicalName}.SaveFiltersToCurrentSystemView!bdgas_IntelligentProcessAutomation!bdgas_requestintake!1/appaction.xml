@@ -1,0 +1,35 @@
+<appaction uniquename="bdgas__Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView!bdgas_IntelligentProcessAutomation!bdgas_requestintake!1">
+  <appmoduleid>
+    <uniquename>bdgas_IntelligentProcessAutomation</uniquename>
+  </appmoduleid>
+  <buttonaccessibilitytext default="Save Filters to Current System View">
+    <label description="Save Filters to Current System View" languagecode="1033" />
+  </buttonaccessibilitytext>
+  <buttonlabeltext default="Save Filters to Current System View">
+    <label description="Save Filters to Current System View" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Save the filters for the current system view.">
+    <label description="Save the filters for the current system view." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Save Filters to Current System View">
+    <label description="Save Filters to Current System View" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>bdgas_requestintake</logicalname>
+  </contextentity>
+  <contextvalue>bdgas_requestintake</contextvalue>
+  <hidden>1</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>1</location>
+  <name>Mscrm.HomepageGrid.{!EntityLogicalName}.SaveFiltersToCurrentSystemView</name>
+  <onclickeventtype>0</onclickeventtype>
+  <origin>2</origin>
+  <sequence>1300300030.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>2</visibilitytype>
+</appaction>

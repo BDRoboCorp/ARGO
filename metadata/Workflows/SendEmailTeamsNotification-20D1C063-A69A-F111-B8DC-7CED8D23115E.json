@@ -1,0 +1,410 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_ae6e7"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365_1": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_teams_1": {
+        "api": {
+          "name": "shared_teams"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedteams_410ae"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "<fetch top=\"1\">   <entity name=\"bdgas_requestintake\">    <attribute name=\"bdgas_requestname\" />   </entity> </fetch>",
+                  "title": "FetchXML",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_1": {
+                  "description": "IH Event Created",
+                  "title": "TemplateName",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "boolean": {
+                  "description": "",
+                  "title": "StripHTML",
+                  "type": "boolean",
+                  "x-ms-content-hint": "BOOLEAN",
+                  "x-ms-dynamically-added": true
+                },
+                "boolean_1": {
+                  "description": "",
+                  "title": "SendingEmail",
+                  "type": "boolean",
+                  "x-ms-content-hint": "BOOLEAN",
+                  "x-ms-dynamically-added": true
+                },
+                "boolean_2": {
+                  "description": "",
+                  "title": "SendingTeams",
+                  "type": "boolean",
+                  "x-ms-content-hint": "BOOLEAN",
+                  "x-ms-dynamically-added": true
+                },
+                "text_2": {
+                  "description": "tom.abdullah@bd.com",
+                  "title": "ToUser",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_3": {
+                  "description": "FileName",
+                  "title": "FileName",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_4": {
+                  "description": "",
+                  "title": "Base64String",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "boolean",
+                "boolean_1",
+                "boolean_2",
+                "text_2"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "dc82001e-eb47-499e-a2af-ba9c2eecc101"
+          }
+        }
+      },
+      "actions": {
+        "Perform_an_unbound_action_-_GetEmailContent": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "actionName": "bdgas_GetEmailContent",
+              "item/FetchXml": "@triggerBody()?['text']",
+              "item/TempateName": "@triggerBody()?['text_1']",
+              "item/StripHtml": "@triggerBody()?['boolean']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "10cc3339-e7eb-400c-9524-8093f280357f"
+          }
+        },
+        "Condition_-_SendingEmail": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@triggerBody()?['boolean_1']",
+                  "@true"
+                ]
+              },
+              {
+                "equals": [
+                  "@empty(triggerBody()?['text_2'])",
+                  "@false"
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Condition_-_hasAttachment": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@empty(triggerBody()?['text_4'])",
+                      false
+                    ]
+                  }
+                ]
+              },
+              "actions": {
+                "Send_an_email_with_Attachment": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "emailMessage/To": "@triggerBody()?['text_2']",
+                      "emailMessage/Subject": "@body('Parse_JSON')?['Subject']",
+                      "emailMessage/Body": "<p class=\"editor-paragraph\">@{body('Parse_JSON')?['Body']}</p>",
+                      "emailMessage/Attachments": [
+                        {
+                          "Name": "@triggerBody()?['text_3']",
+                          "ContentBytes": "@base64ToBinary(triggerBody()?['text_4'])"
+                        }
+                      ],
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                      "operationId": "SendEmailV2",
+                      "connectionName": "shared_office365_1"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "9595dbba-e8e2-4113-8104-a578c80c36fe"
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Send_an_email_without_attachment": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "parameters": {
+                        "emailMessage/To": "@triggerBody()?['text_2']",
+                        "emailMessage/Subject": "@body('Parse_JSON')?['Subject']",
+                        "emailMessage/Body": "<p class=\"editor-paragraph\">@{body('Parse_JSON')?['Body']}</p>",
+                        "emailMessage/Importance": "Normal"
+                      },
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                        "operationId": "SendEmailV2",
+                        "connectionName": "shared_office365_1"
+                      }
+                    },
+                    "metadata": {
+                      "operationMetadataId": "9595dbba-e8e2-4113-8104-a578c80c36fe"
+                    }
+                  }
+                }
+              }
+            },
+            "Respond_to_a_Power_App_or_flow_1": {
+              "type": "Response",
+              "kind": "PowerApp",
+              "inputs": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email_response": {
+                      "title": "Email Response",
+                      "x-ms-dynamically-added": true,
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": {}
+                },
+                "statusCode": 200,
+                "body": {
+                  "email_response": "Sent"
+                }
+              },
+              "runAfter": {
+                "Condition_-_hasAttachment": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2bd23470-a5f9-48c6-af4f-9edf9bdaa31d"
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Parse_JSON": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "2d131e48-a436-4a32-90eb-484f1f69e708"
+          }
+        },
+        "Parse_JSON": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@outputs('Perform_an_unbound_action_-_GetEmailContent')?['body/Result']",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Subject": {
+                  "type": "string"
+                },
+                "Body": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Perform_an_unbound_action_-_GetEmailContent": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ad3ddec5-48a2-4a7e-b746-cf57e525e018"
+          }
+        },
+        "Condition_-_SendingTeams": {
+          "type": "If",
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@triggerBody()?['boolean_2']",
+                  "@true"
+                ]
+              },
+              {
+                "equals": [
+                  "@empty(triggerBody()?['text_2'])",
+                  "@false"
+                ]
+              }
+            ]
+          },
+          "actions": {
+            "Apply_to_each": {
+              "type": "Foreach",
+              "foreach": "@variables('TeamsEmail')",
+              "actions": {
+                "Post_message_in_a_chat_or_channel": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "poster": "Flow bot",
+                      "location": "Chat with Flow bot",
+                      "body/recipient": "@trim(items('Apply_to_each'))",
+                      "body/messageBody": "<p class=\"editor-paragraph\">@{body('Parse_JSON')?['Subject']}</p><p class=\"editor-paragraph\">@{body('Parse_JSON')?['Body']}</p>"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams",
+                      "operationId": "PostMessageToConversation",
+                      "connectionName": "shared_teams_1"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "f8a43967-28d9-4aa1-92bb-abe68eeba522"
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "runAfter": {
+            "Condition_-_SendingEmail": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c143065b-8572-4241-90ff-d4b2c7c61b37"
+          }
+        },
+        "Compose_-_FetchXML": {
+          "type": "Compose",
+          "inputs": "@triggerBody()?['text']",
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "65710ee3-7bb0-44e3-a0ed-64ebe5240e90"
+          }
+        },
+        "Compose_-_TemplateName": {
+          "type": "Compose",
+          "inputs": "@triggerBody()?['text_1']",
+          "runAfter": {
+            "Compose_-_FetchXML": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b38eb918-10d4-49a5-b7eb-2410ab37ec4e"
+          }
+        },
+        "Compose_-_StripHTML": {
+          "type": "Compose",
+          "inputs": "@triggerBody()?['boolean']",
+          "runAfter": {
+            "Compose_-_TemplateName": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "52b70e83-17ff-4c8b-ba8e-f2684757c081"
+          }
+        },
+        "Initialize_variable": {
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "TeamsEmail",
+                "type": "array",
+                "value": "@split(triggerBody()?['text_2'], ';')"
+              }
+            ]
+          },
+          "runAfter": {
+            "Compose_-_StripHTML": [
+              "Succeeded"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

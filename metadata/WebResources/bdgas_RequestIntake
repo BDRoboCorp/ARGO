@@ -1,0 +1,1616 @@
+var RequestIntake = RequestIntake || {};
+RequestIntake.DataAccess = RequestIntake.DataAccess || {};
+RequestIntake.Events = RequestIntake.Events || {};
+RequestIntake.Business = RequestIntake.Business || {};
+
+(function () {
+
+	const APPOINTMENT_SLOT_STATUS_FIELD = "bdgas_slotstatus";
+
+	const APPOINTMENT_SLOT_STATUS_RESERVED_VALUE = 2;
+
+	const QPA_AGREEMENT_CONFIG_NAME = "bdgas_qpaAgreement";
+
+	const FIELD_PERMISSION_CONFIG_NAME =
+		"ARGO Fields Permission";
+
+	// Retrieves and parses the ARGO Fields Permission configuration used to control field accessibility on the Request Intake form.
+	this.getFieldPermissionConfig =
+		async function () {
+
+			var escapedConfigName =
+				FIELD_PERMISSION_CONFIG_NAME
+					.replace(/'/g, "''");
+
+			var query =
+				"?$select=bdgas_value" +
+				"&$filter=bdgas_name eq '" +
+				escapedConfigName +
+				"'&$top=1";
+
+			var result =
+				await Xrm.WebApi.retrieveMultipleRecords(
+					"bdgas_argoconfig",
+					query
+				);
+
+			if (
+				!result.entities ||
+				result.entities.length === 0 ||
+				!result.entities[0].bdgas_value
+			) {
+				return null;
+			}
+
+			return JSON.parse(
+				result.entities[0].bdgas_value
+			);
+		};
+
+	// Retrieves the team IDs associated with the currently logged-in user.
+	this.getCurrentUserTeamIds =
+		async function () {
+
+			var userId =
+				Xrm.Utility.getGlobalContext()
+					.userSettings.userId
+					.replace(/[{}]/g, "");
+
+			var result =
+				await Xrm.WebApi.retrieveRecord(
+					"systemuser",
+					userId,
+					"?$select=systemuserid" +
+					"&$expand=teammembership_association" +
+					"($select=teamid)"
+				);
+
+			return (
+				result.teammembership_association || []
+			).map(function (team) {
+				return String(team.teamid || "")
+					.replace(/[{}]/g, "")
+					.toLowerCase();
+			});
+		};
+
+	//Retrieves the SRA Appointment record associated with the selected SRA lookup on the Request Intake form.
+	this.getSraAppointment =
+		async function (formContext) {
+
+			var sraLookup =
+				formContext.getAttribute("bdgas_sraid")
+					.getValue();
+
+			if (!sraLookup || sraLookup.length === 0) {
+				return null;
+			}
+
+			var appointmentId =
+				sraLookup[0].id.replace(/[{}]/g, "");
+
+			var appointment =
+				await Xrm.WebApi.retrieveRecord(
+					"appointment",
+					appointmentId,
+					"?$select=activityid,subject,scheduledstart,statecode,bdgas_slotstatus"
+				);
+
+			return appointment;
+		};
+
+	//Checks whether the currently logged-in user is a member of the specified team.
+	this.isCurrentUserInTeam =
+		async function (teamId) {
+
+			if (!teamId) {
+				return false;
+			}
+
+			teamId =
+				teamId
+					.replace("{", "")
+					.replace("}", "");
+
+			var userId =
+				Xrm.Utility.getGlobalContext()
+					.userSettings.userId
+					.replace("{", "")
+					.replace("}", "");
+
+			var query =
+				"?$filter=systemuserid eq " +
+				userId +
+				" and teamid eq " +
+				teamId;
+
+			var result =
+				await Xrm.WebApi.retrieveMultipleRecords(
+					"teammembership",
+					query
+				);
+
+			return (
+				result &&
+				result.entities &&
+				result.entities.length > 0
+			);
+		};
+	
+	//Retrieves the QPA Agreement text from the configured Dataverse environment variable definition.
+	this.getQpaAgreement = async function () {
+		var query =
+			"?$select=defaultvalue" +
+			"&$filter=schemaname eq '" +
+			QPA_AGREEMENT_CONFIG_NAME +
+			"'";
+
+		var result = await Xrm.WebApi.retrieveMultipleRecords(
+			"environmentvariabledefinition",
+			query
+		);
+
+		if (
+			!result.entities ||
+			result.entities.length === 0
+		) {
+			return null;
+		}
+
+		return result.entities[0].defaultvalue;
+	};
+
+}).apply(RequestIntake.DataAccess);
+
+(function () {
+
+	const REQUEST_INTAKE_TYPE = {
+		RPA: 100000000,
+		QPA: 100000001,
+		PEGA: 100000002,
+		PROCESS_MINING: 100000003,
+		DATA: 100000004,
+		AI: 100000005
+	};
+
+	const FORM_NAMES = {
+		RPA: "RPA Form",
+		QPA: "QPA Form"
+	};
+
+	const BPF_IDS = {
+		RPA: "a520d5b3-a590-f111-8077-7c1e527d2a28",
+		QPA: "ff39c9b0-1592-f111-8077-7c1e527d2a28"
+	};
+
+	const INQUEUE_STATUS_REASON = 1;
+
+	const CONCEPT_APPROVAL_STATUS_REASON = 100000001;
+
+	const SOLUTION_DESIGN_STATUS_REASON = 100000002;
+
+	const DEV_STATUS_REASON = 100000003;
+
+	const QA_STATUS_REASON = 100000004;
+
+	const READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON = 100000005;
+
+	const PROD_STATUS_REASON = 100000006;
+
+	const INQUEUE_REQUIRED_FIELDS = [
+		"bdgas_l1option",
+		"bdgas_applicationid",
+		"bdgas_botinformed",
+		"bdgas_planviewid",
+		"bdgas_planviewrequestcreationdate",
+		"bdgas_botvp",
+		"bdgas_isaiassessment",
+		"bdgas_functionid",
+		"bdgas_groupid",
+		"bdgas_enhancementofexistingbot",
+		"bdgas_developmentteamid",
+		"bdgas_scopeofuse",
+		"bdgas_environmentsrequired",
+		"bdgas_serviceprovider",
+		"bdgas_vendorid",
+		"bdgas_bdintelligencebuid"
+	];
+
+	const CONCEPT_APPROVAL_REQUIRED_FIELDS = [
+		"bdgas_automationchartercompletedattached",
+		"bdgas_developmentsizeid",
+		"bdgas_configurationitemlink",
+		"bdgas_estimatedhours",
+		//"bdgas_soxassessment",
+		//"bdgas_gxplevel",
+		//"bdgas_informationsecurityassessment",
+		"bdgas_manualestimatereviewedby"
+		//"bdgas_privacyassessment"
+	];
+
+	const SOLUTION_DESIGN_REQUIRED_FIELDS = [
+		"bdgas_leaddeveloperid",
+		"bdgas_serviceaccountsused",
+		"bdgas_erprequest",
+		//"bdgas_tcodes",
+		//"bdgas_erpcodes",
+		"bdgas_changeticket",
+		"bdgas_ardssignoff",
+		"bdgas_automationursreceivedattached"
+	];
+
+	const DEV_REQUIRED_FIELDS = [
+		//"bdgas_finalcodereviewdate",
+		//"bdgas_finalcodereviewperformedby",
+		"bdgas_developmentstartdate",
+		"bdgas_developers",
+		//"bdgas_devlink",
+		"bdgas_issimplemediumform"
+	];
+
+
+	const QA_REQUIRED_FIELDS = [
+		"bdgas_uatcompletedate"
+		//"bdgas_qalink"
+	];
+
+
+	const PROD_REQUIRED_FIELDS = [
+		"bdgas_botbusinesscriticality",
+		"bdgas_scheduleortrigger",
+		"bdgas_triggerpath",
+		"bdgas_prodcodereleasedate",
+		"bdgas_golivedate",
+		"bdgas_schedulenotes",
+		"bdgas_fimmanagedsg",
+		"bdgas_prodlink",
+		"bdgas_botisinhypercare1",
+		"bdgas_golivebusinessverificationreceivedattach",
+		"bdgas_amosupportteamid",
+		"bdgas_kttoamo",
+		"bdgas_amoleadid"
+	];
+
+	//Ensures the appropriate Request Intake form is displayed based on the selected Request Intake Type, switching between QPA and RPA forms when required.
+	this.preventFormSelection = function (formContext) {
+
+		var requestType =
+			formContext.getAttribute(
+				"bdgas_requestintaketype"
+			);
+
+		if (!requestType) {
+			return;
+		}
+
+		var currentForm =
+			formContext.ui.formSelector.getCurrentItem();
+
+		if (!currentForm) {
+			return;
+		}
+
+		var currentFormName =
+			currentForm.getLabel();
+
+		var requestTypeValue =
+			requestType.getValue();
+
+		var shouldUseQpaForm =
+			requestTypeValue === 100000001;
+
+		var shouldUseRpaForm =
+			requestTypeValue === 100000000 ||
+			requestTypeValue === 100000002 ||
+			requestTypeValue === 100000003 ||
+			requestTypeValue === 100000004 ||
+			requestTypeValue === 100000005;
+
+		var forms =
+			formContext.ui.formSelector.items.get();
+
+		if (
+			shouldUseQpaForm &&
+			currentFormName === FORM_NAMES.RPA
+		) {
+			for (var i = 0; i < forms.length; i++) {
+				if (
+					forms[i].getLabel() === FORM_NAMES.QPA
+				) {
+					forms[i].navigate();
+					return;
+				}
+			}
+		}
+
+		if (
+			shouldUseRpaForm &&
+			currentFormName === FORM_NAMES.QPA
+		) {
+			for (var j = 0; j < forms.length; j++) {
+				if (
+					forms[j].getLabel() === FORM_NAMES.RPA
+				) {
+					forms[j].navigate();
+					return;
+				}
+			}
+		}
+	};
+
+	//Removes the RPA request Intake Type option during record creation and defaults the Request Intake Type to QPA when no value is selected.
+	this.hideRpaOptionOnCreate = function (formContext) {
+
+		if (formContext.ui.getFormType() !== 1) {
+			return;
+		}
+
+		var control = formContext.getControl("bdgas_requestintaketype");
+
+		if (control) {
+			control.removeOption(REQUEST_INTAKE_TYPE.RPA);
+		}
+
+		var attribute = formContext.getAttribute("bdgas_requestintaketype");
+
+		if (attribute && attribute.getValue() === null) {
+
+			console.log(
+				"Setting QPA Type"
+			);
+
+			attribute.setValue(REQUEST_INTAKE_TYPE.QPA);
+		}
+	};
+
+	//Removes Solution Design and Ready for Sprint Prod Move status options from the QPA form.
+	this.removeQpaStatusOptions = function (formContext) {
+		var currentForm =
+			formContext.ui.formSelector.getCurrentItem();
+
+		if (!currentForm) {
+			return;
+		}
+
+		if (currentForm.getLabel() !== FORM_NAMES.QPA) {
+			return;
+		}
+
+		var controlNames = [
+			"statuscode",
+			"header_statuscode"
+		];
+
+		controlNames.forEach(function (controlName) {
+			var control =
+				formContext.getControl(controlName);
+
+			if (!control || !control.removeOption) {
+				return;
+			}
+
+			// Remove Solution Design
+			control.removeOption(
+				SOLUTION_DESIGN_STATUS_REASON
+			);
+
+			// Remove Ready for Sprint Prod Move
+			control.removeOption(
+				READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON
+			);
+		});
+	};
+
+	//Activates the appropriate Business Process Flow based on the selected Request Intake Type.
+	this.switchBpfByType = function (formContext) {
+
+		var entityId =
+			formContext.data.entity.getId();
+
+		if (!entityId) {
+			console.log("BPF switch skipped because record has not been saved yet.");
+			return;
+		}
+
+		if (
+			!formContext.data ||
+			!formContext.data.process ||
+			!formContext.data.process.setActiveProcess ||
+			!formContext.data.process.getActiveProcess
+		) {
+			return;
+		}
+
+		var typeAttribute =
+			formContext.getAttribute("bdgas_requestintaketype");
+
+		if (!typeAttribute) {
+			return;
+		}
+
+		var requestIntakeType =
+			typeAttribute.getValue();
+
+		if (requestIntakeType === null) {
+			return;
+		}
+
+		var targetProcessId = null;
+
+		if (requestIntakeType === REQUEST_INTAKE_TYPE.QPA) {
+			targetProcessId = BPF_IDS.QPA;
+		}
+		else {
+			targetProcessId = BPF_IDS.RPA;
+		}
+
+		if (!targetProcessId) {
+			return;
+		}
+
+		var activeProcess =
+			formContext.data.process.getActiveProcess();
+
+		if (
+			activeProcess &&
+			activeProcess.getId() &&
+			activeProcess.getId().toLowerCase() ===
+			targetProcessId.toLowerCase()
+		) {
+			console.log("Correct BPF is already active.");
+			return;
+		}
+
+		formContext.data.process.setActiveProcess(
+			targetProcessId,
+			function (status) {
+
+				console.log(
+					"BPF switch result: " + status
+				);
+
+				/*
+				 Do not call formContext.data.refresh(false) here.
+				 setActiveProcess already reloads the form when it changes the process.
+				*/
+			}
+		);
+	};
+
+	//Makes Parent Request Intake mandatory when the request is marked as an enhancement of an existing bot.
+	this.setParentRequestIntakeMandatory =
+		function (formContext) {
+
+			var enhancementAttr = formContext.getAttribute("bdgas_enhancementofexistingbot");
+			var parentRequestAttr = formContext.getAttribute("bdgas_parentrequestintake");
+
+			if (!enhancementAttr || !parentRequestAttr) {
+				return;
+			}
+
+			var isEnhancement = enhancementAttr.getValue();
+
+			parentRequestAttr.setRequiredLevel(
+				isEnhancement ? "required" : "none"
+			);
+		};
+	
+	//Makes Responsible AI Submitted mandatory when AI Assessment is enabled for the request.
+	this.setResponsibleAISubmittedMandatory =
+		function (formContext) {
+			var isAIAssessmentAttr = formContext.getAttribute("bdgas_isaiassessment");
+			var isResponsibleAISubmittedAttr = formContext.getAttribute("bdgas_responsibleaisubmitted");
+
+			if (!isAIAssessmentAttr || !isResponsibleAISubmittedAttr) {
+				return;
+			}
+
+			var isAIAssessment = isAIAssessmentAttr.getValue();
+
+			isResponsibleAISubmittedAttr.setRequiredLevel(
+				isAIAssessment ? "required" : "none"
+			);
+		};
+
+	//Applies the mandatory field requirements introduced from the In Queue stage onward based on the current Status Reason.
+	this.applyInQueueMandatoryRules =
+		function (formContext) {
+
+			var statusAttr =
+				formContext.getAttribute("statuscode");
+
+			if (!statusAttr) {
+				return;
+			}
+
+			var statusValue =
+				statusAttr.getValue();
+
+			var isInQueue =
+				statusValue === INQUEUE_STATUS_REASON;
+
+			var isConceptApproval =
+				statusValue === CONCEPT_APPROVAL_STATUS_REASON;
+
+			var isSolutionDesign =
+				statusValue === SOLUTION_DESIGN_STATUS_REASON;
+
+			var isDev =
+				statusValue === DEV_STATUS_REASON;
+
+			var isQa =
+				statusValue === QA_STATUS_REASON;
+
+			var isReadyForSprintProdMove =
+				statusValue === READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON;
+
+			var isProd =
+				statusValue === PROD_STATUS_REASON;
+
+
+			var shouldApplyInQueueMandatory =
+				isInQueue || isConceptApproval || isSolutionDesign ||
+				isDev || isQa || isReadyForSprintProdMove || isProd;
+
+			INQUEUE_REQUIRED_FIELDS.forEach(function (fieldName) {
+
+				var attr =
+					formContext.getAttribute(fieldName);
+
+				if (!attr) {
+					return;
+				}
+
+				attr.setRequiredLevel(
+					shouldApplyInQueueMandatory
+						? "required"
+						: "none"
+				);
+			});
+
+			//Enhancement of Existing Bot = Yes, Parent Request Intake = mandatory
+			RequestIntake.Business
+				.setParentRequestIntakeMandatory(
+					formContext
+				);
+
+			//IsAIAssessment = Yes, isResponsibleAISubmitted = mandatory
+			RequestIntake.Business
+				.setResponsibleAISubmittedMandatory(
+					formContext
+				);
+		};
+
+	//Applies the mandatory field requirements introduced from the Concept Approval stage onward based on the current Status Reason.
+	this.applyConceptApprovalMandatoryRules =
+		function (formContext) {
+
+			var statusAttr =
+				formContext.getAttribute("statuscode");
+
+			if (!statusAttr) {
+				return;
+			}
+
+			var statusValue =
+				statusAttr.getValue();
+
+			var isConceptApproval =
+				statusValue === CONCEPT_APPROVAL_STATUS_REASON;
+
+			var isSolutionDesign =
+				statusValue === SOLUTION_DESIGN_STATUS_REASON;
+
+			var isDev =
+				statusValue === DEV_STATUS_REASON;
+
+			var isQa =
+				statusValue === QA_STATUS_REASON;
+
+			var isReadyForSprintProdMove =
+				statusValue === READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON;
+
+			var isProd =
+				statusValue === PROD_STATUS_REASON;
+
+			var shouldApplyConceptApprovalMandatory =
+				isConceptApproval || isSolutionDesign ||
+				isDev || isQa || isReadyForSprintProdMove || isProd;
+
+			CONCEPT_APPROVAL_REQUIRED_FIELDS.forEach(function (fieldName) {
+
+				var attr =
+					formContext.getAttribute(fieldName);
+
+				if (!attr) {
+					return;
+				}
+
+				attr.setRequiredLevel(
+					shouldApplyConceptApprovalMandatory
+						? "required"
+						: "none"
+				);
+			});
+		};
+	
+	//Applies the mandatory field requirements introduced from the Solution Design stage onward based on the current Status Reason.
+	this.applySolutionDesignMandatoryRules =
+		function (formContext) {
+
+			var statusAttr =
+				formContext.getAttribute("statuscode");
+
+			if (!statusAttr) {
+				return;
+			}
+
+			var statusValue =
+				statusAttr.getValue();
+
+			var isSolutionDesign =
+				statusValue === SOLUTION_DESIGN_STATUS_REASON;
+
+			var isDev =
+				statusValue === DEV_STATUS_REASON;
+
+			var isQa =
+				statusValue === QA_STATUS_REASON;
+
+			var isReadyForSprintProdMove =
+				statusValue === READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON;
+
+			var isProd =
+				statusValue === PROD_STATUS_REASON;
+
+			var shouldApplySolutionDesignMandatory =
+				isSolutionDesign || isDev || isQa ||
+				isReadyForSprintProdMove || isProd;
+
+			SOLUTION_DESIGN_REQUIRED_FIELDS.forEach(function (fieldName) {
+
+				var attr =
+					formContext.getAttribute(fieldName);
+
+				if (!attr) {
+					return;
+				}
+
+				attr.setRequiredLevel(
+					shouldApplySolutionDesignMandatory
+						? "required"
+						: "none"
+				);
+			});
+		};
+
+	//Applies the mandatory field requirements introduced from the Development stage onward based on the current Status Reason.
+	this.applyDevMandatoryRules =
+		function (formContext) {
+
+			var statusAttr =
+				formContext.getAttribute("statuscode");
+
+			if (!statusAttr) {
+				return;
+			}
+
+			var statusValue =
+				statusAttr.getValue();
+
+			var isDev =
+				statusValue === DEV_STATUS_REASON;
+
+			var isQa =
+				statusValue === QA_STATUS_REASON;
+
+			var isReadyForSprintProdMove =
+				statusValue === READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON;
+
+			var isProd =
+				statusValue === PROD_STATUS_REASON;
+
+			var shouldApplyDevMandatory =
+				isDev ||
+				isQa ||
+				isReadyForSprintProdMove ||
+				isProd;
+
+			DEV_REQUIRED_FIELDS.forEach(function (fieldName) {
+
+				var attr =
+					formContext.getAttribute(fieldName);
+
+				if (!attr) {
+					return;
+				}
+
+				attr.setRequiredLevel(
+					shouldApplyDevMandatory
+						? "required"
+						: "none"
+				);
+			});
+		};
+
+	//Applies the mandatory field requirements introduced from the QA stage onward based on the current Status Reason.
+	this.applyQaMandatoryRules =
+		function (formContext) {
+
+			var statusAttr =
+				formContext.getAttribute("statuscode");
+
+			if (!statusAttr) {
+				return;
+			}
+
+			var statusValue =
+				statusAttr.getValue();
+
+			var isQa =
+				statusValue === QA_STATUS_REASON;
+
+			var isReadyForSprintProdMove =
+				statusValue === READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON;
+
+			var isProd =
+				statusValue === PROD_STATUS_REASON;
+
+			var shouldApplyQaMandatory =
+				isQa ||
+				isReadyForSprintProdMove ||
+				isProd;
+
+			QA_REQUIRED_FIELDS.forEach(function (fieldName) {
+
+				var attr =
+					formContext.getAttribute(fieldName);
+
+				if (!attr) {
+					return;
+				}
+
+				attr.setRequiredLevel(
+					shouldApplyQaMandatory
+						? "required"
+						: "none"
+				);
+			});
+		};
+
+	//Applies the configured production-related mandatory field requirements for Ready for Sprint Prod Move and PROD statuses.
+	this.applyProdMandatoryRules =
+		function (formContext) {
+
+			var statusAttr =
+				formContext.getAttribute("statuscode");
+
+			if (!statusAttr) {
+				return;
+			}
+
+			var statusValue =
+				statusAttr.getValue();
+
+			var isReadyForSprintProdMove =
+				statusValue === READY_FOR_SPRINT_PROD_MOVE_STATUS_REASON;
+
+			var isProd =
+				statusValue === PROD_STATUS_REASON;
+
+			var shouldApplyProdMandatory =
+				isReadyForSprintProdMove ||
+				isProd;
+
+			PROD_REQUIRED_FIELDS.forEach(function (fieldName) {
+
+				var attr =
+					formContext.getAttribute(fieldName);
+
+				if (!attr) {
+					return;
+				}
+
+				attr.setRequiredLevel(
+					shouldApplyProdMandatory
+						? "required"
+						: "none"
+				);
+			});
+		};
+
+	//Disables the Most Recently Used (MRU) behavior or lookup controls on the Request Intake form.
+	this.disableLookupMru = function (formContext) {
+		formContext.ui.controls.forEach(function (control) {
+			if (
+				control &&
+				control.getControlType &&
+				control.getControlType() === "lookup"
+			) {
+				control.disabledMru = true;
+			}
+		});
+	};
+
+	//Registers the custom Development Size filter on the Development Size lookup in the Business Process Flow.
+	this.registerDevelopmentSizeBpfFilter = function (formContext) {
+
+    var control =
+        formContext.getControl(
+            "header_process_bdgas_developmentsizeid"
+        );
+
+    if (control) {
+        control.addPreSearch(
+            RequestIntake.Business.addDevelopmentSizeBpfFilter
+        );
+    }
+};
+
+	//Applies a custom lookup filter so the BPF Development Size field only displays RA Master records categorized as Development Size.
+	this.addDevelopmentSizeBpfFilter = function () {
+
+		var filter =
+			"<filter type='and'>" +
+			"<condition attribute='bdgas_category' operator='eq' value='Development Size' />" +
+			"</filter>";
+
+		var control =
+			Xrm.Page.getControl(
+				"header_process_bdgas_developmentsizeid"
+			);
+
+		if (!control) {
+			console.log("Development Size BPF control not found");
+			return;
+		}
+
+		control.addCustomFilter(
+			filter,
+			"bdgas_regulatoryassessmentmaster"
+		);
+
+		console.log("Development Size filter applied");
+	};
+
+	//Applies configured field access permissions based on the current user's team membership and the selected Request Intake Type.
+	this.applyConfiguredFieldAccess =
+		async function (formContext) {
+
+			try {
+				var results = await Promise.all([
+					RequestIntake.DataAccess
+						.getFieldPermissionConfig(),
+					RequestIntake.DataAccess
+						.getCurrentUserTeamIds()
+				]);
+
+				var config = results[0];
+				var currentUserTeamIds = results[1];
+
+				if (!config) {
+					console.warn(
+						"ARGO Fields Permission config was not found."
+					);
+					return;
+				}
+
+				var entityName =
+					formContext.data.entity
+						.getEntityName()
+						.toLowerCase();
+
+				var allFieldsEntry =
+					(config.AllFields || [])
+						.find(function (entry) {
+							return String(entry.Entity || "")
+								.toLowerCase() === entityName;
+						});
+
+				if (!allFieldsEntry) {
+					console.warn(
+						"No ARGO field configuration found for " +
+						entityName + "."
+					);
+					return;
+				}
+
+				var projectTypeAttribute =
+					formContext.getAttribute(
+						"bdgas_requestintaketype"
+					);
+
+				var projectType =
+					projectTypeAttribute
+						? projectTypeAttribute.getValue()
+						: null;
+
+				var supportedFields = {};
+
+				(config.Teams || []).forEach(function (team) {
+					var teamId = String(team.TeamId || "")
+						.replace(/[{}]/g, "")
+						.toLowerCase();
+
+					if (
+						currentUserTeamIds.indexOf(teamId) === -1 ||
+						(team.ProjectTypes || [])
+							.map(String)
+							.indexOf(String(projectType)) === -1
+					) {
+						return;
+					}
+
+					var entityEntry =
+						(team.Entities || [])
+							.find(function (entry) {
+								return String(entry.Entity || "")
+									.toLowerCase() === entityName;
+							});
+
+					if (!entityEntry) {
+						return;
+					}
+
+					(entityEntry.SupportedFields || [])
+						.forEach(function (fieldName) {
+							supportedFields[fieldName] = true;
+						});
+				});
+
+				(allFieldsEntry.Fields || [])
+					.forEach(function (fieldName) {
+						var attribute =
+							formContext.getAttribute(fieldName);
+
+						if (!attribute) {
+							return;
+						}
+
+						attribute.controls.forEach(
+							function (control) {
+								control.setDisabled(
+									!supportedFields[fieldName]
+								);
+							}
+						);
+					});
+			}
+			catch (error) {
+				console.error(
+					"Unable to apply ARGO field permissions.",
+					error
+				);
+			}
+		};
+
+	//Displays the QPA Agreement dialog and returns whether the user accepted the agreement.
+	this.showQpaAgreement = async function (formContext) {
+		try {
+			var agreementText =
+				await RequestIntake.DataAccess
+					.getQpaAgreement();
+
+			if (!agreementText) {
+				return false;
+			}
+
+			// Same pattern as SRA:
+			// default result is Cancel
+			sessionStorage.setItem(
+				"bdgas_qpaAgreementResult",
+				"cancel"
+			);
+
+			await Xrm.Navigation.navigateTo(
+				{
+					pageType: "webresource",
+					webresourceName: "bdgas_qpaAgreement",
+					data: agreementText
+				},
+				{
+					target: 2,
+					width: 700,
+					height: 600,
+					position: 1,
+					title: "QPA Agreement"
+				}
+			);
+
+			var result =
+				sessionStorage.getItem(
+					"bdgas_qpaAgreementResult"
+				);
+
+			return result === "agree";
+		}
+		catch (error) {
+			console.error(error);
+			return false;
+		}
+	};
+
+	//Extracts the numeric value from the selected Development Size name and uses it to populate the Estimates Hours field.
+	this.setEstimatedHoursFromDevelopmentSize = function (formContext) {
+		var developmentSizeAttr =
+			formContext.getAttribute(
+				"bdgas_developmentsizeid"
+			);
+
+		var estimatedHoursAttr =
+			formContext.getAttribute(
+				"bdgas_estimatedhours"
+			);
+
+		if (!developmentSizeAttr || !estimatedHoursAttr) {
+			console.warn(
+				"Estimated hours calculation skipped because " +
+				"bdgas_developmentsizeid or bdgas_estimatedhours " +
+				"is not available on the current form."
+			);
+			return;
+		}
+
+		var developmentSize =
+			developmentSizeAttr.getValue();
+
+		if (
+			!developmentSize ||
+			developmentSize.length === 0
+		) {
+			estimatedHoursAttr.setValue(null);
+			return;
+		}
+
+		var sizeName =
+			developmentSize[0].name || "";
+
+		var matches = sizeName.match(/\d+/g);
+
+		if (!matches || matches.length === 0) {
+			estimatedHoursAttr.setValue(null);
+			return;
+		}
+
+		var estimatedHours = parseInt(
+			matches[matches.length - 1],
+			10
+		);
+
+		if (isNaN(estimatedHours)) {
+			estimatedHoursAttr.setValue(null);
+			return;
+		}
+
+		estimatedHoursAttr.setValue(
+			estimatedHours
+		);
+	};
+
+	// Display-only: show the digital product name in the form header's
+	// entity label (under the record title). Nothing is saved.
+	this.setRequestIntakeDisplayName = function (formContext) {
+		var productAttr =
+			formContext.getAttribute(
+				"bdgas_digitalproductname"
+			);
+
+		if (!productAttr) {
+			return;
+		}
+
+		var productName =
+			productAttr.getValue();
+
+		if (!productName) {
+			return;
+		}
+
+		if (
+			formContext.ui &&
+			formContext.ui.setFormEntityName
+		) {
+			formContext.ui.setFormEntityName(
+				productName
+			);
+		}
+	};
+
+	//Removes mandatory requirements from the configured fields when the Request Intake Type is QPA.
+	this.applyQpaNonMandatoryRules = function (formContext) {
+
+		var currentForm =
+			formContext.ui.formSelector.getCurrentItem();
+
+		var requestType =
+			formContext.getAttribute(
+				"bdgas_requestintaketype"
+			)?.getValue();
+
+		if (requestType !== 100000001) {
+			return;
+		}
+
+		var qpaNonMandatoryFields = [
+			"bdgas_planviewid",
+			"bdgas_planviewrequestcreationdate",
+			"bdgas_manualestimatereviewedby",
+			"bdgas_developmentsizeid",
+			"bdgas_estimatedhours",
+			"bdgas_configurationitemlink",
+			"bdgas_leaddeveloperid",
+			"bdgas_changeticket",
+			"bdgas_ardssignoff",
+			"bdgas_erprequest",
+			"bdgas_developmentstartdate",
+			"bdgas_issimplemediumform",
+			"bdgas_uatcompletedate",
+			"bdgas_botbusinesscriticality",
+			"bdgas_botisinhypercare1",
+			"bdgas_scheduleortrigger",
+			"bdgas_triggerpath",
+			"bdgas_kttoamo",
+			"bdgas_golivedate",
+			"bdgas_schedulenotes",
+			"bdgas_fimmanagedsg",
+			"bdgas_prodlink"
+		];
+
+		qpaNonMandatoryFields.forEach(function (fieldName) {
+
+			var attr = formContext.getAttribute(fieldName);
+
+			if (attr) {
+				attr.setRequiredLevel("none");
+			}
+
+		});
+	};
+}).apply(RequestIntake.Business);
+
+
+(function () {
+
+	//Registers the Request Intake field and BPF event handlers uses to trigger form business logic when values or stages change.
+	var registerEvents = function (executionContext) {
+
+		var formContext = executionContext.getFormContext();
+
+		var attribute =
+			formContext.getAttribute("bdgas_requestintaketype");
+
+		if (attribute) {
+			attribute.addOnChange(
+				RequestIntake.Events.RequestIntakeTypeOnChange
+			);
+		}
+		var enhancementAttr =
+			formContext.getAttribute(
+				"bdgas_enhancementofexistingbot"
+			);
+
+		if (enhancementAttr) {
+			enhancementAttr.addOnChange(
+				RequestIntake.Events
+					.EnhancementOfExistingBotOnChange
+			);
+		}
+
+		var isAIAssessmentAttr =
+			formContext.getAttribute(
+				"bdgas_isaiassessment"
+			);
+
+		if (isAIAssessmentAttr) {
+			isAIAssessmentAttr.addOnChange(
+				RequestIntake.Events
+					.IsAIAssessmentOnChange
+			);
+		}
+
+		var statusAttr =
+			formContext.getAttribute("statuscode");
+
+		if (statusAttr) {
+			statusAttr.addOnChange(
+				RequestIntake.Events.StatusCodeOnChange
+			);
+		}
+
+		var developmentSizeAttr =
+			formContext.getAttribute(
+				"bdgas_developmentsizeid"
+			);
+
+		if (developmentSizeAttr) {
+			developmentSizeAttr.addOnChange(
+				RequestIntake.Events
+					.DevelopmentSizeOnChange
+			);
+		}
+
+		if (
+			formContext.data &&
+			formContext.data.process
+		) {
+			formContext.data.process.addOnStageChange(
+				RequestIntake.Events.BpfStageChange
+			);
+		}
+	};
+
+	//Updates the Responsible AI Submitted requirement whenever the AI Assessment value changes.
+	this.IsAIAssessmentOnChange =
+    function (executionContext) {
+        var formContext =
+            executionContext.getFormContext();
+
+        RequestIntake.Business
+            .setResponsibleAISubmittedMandatory(
+                formContext
+            );
+    };
+
+	//Reapplies field permissions and QPA field requirements, then switch's the BPF when the Request Intake Type changes.
+	this.RequestIntakeTypeOnChange = function (executionContext) {
+
+		var formContext =
+			executionContext.getFormContext();
+
+		RequestIntake.Business
+			.applyConfiguredFieldAccess(
+				formContext
+			);
+
+		RequestIntake.Business
+			.applyQpaNonMandatoryRules(
+				formContext
+			);
+
+		window.setTimeout(function () {
+			RequestIntake.Business.switchBpfByType(
+				formContext
+			);
+		}, 1500);
+	};
+
+	//Reapplies the status-based mandatory field rules when Enhancement of Existing Bot changes.
+	this.EnhancementOfExistingBotOnChange =
+		function (executionContext) {
+
+			var formContext =
+				executionContext.getFormContext();
+
+			RequestIntake.Business
+				.applyInQueueMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyConceptApprovalMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applySolutionDesignMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyDevMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyQaMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyProdMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyQpaNonMandatoryRules(
+					formContext
+				);
+
+		};
+
+	//Reapplies all status-based mandatory field rules whenever the Request Intake Status Reason changes.
+	this.StatusCodeOnChange =
+		function (executionContext) {
+
+			var formContext =
+				executionContext.getFormContext();
+
+			RequestIntake.Business
+				.applyInQueueMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyConceptApprovalMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applySolutionDesignMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyDevMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyQaMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyProdMandatoryRules(
+					formContext
+				);
+
+			RequestIntake.Business
+				.applyQpaNonMandatoryRules(
+				formContext
+				);
+		};
+
+	//Recalculates Estimated Hours whenever the selected Development Size changes.
+	this.DevelopmentSizeOnChange = function (executionContext) {
+		var formContext = executionContext.getFormContext();
+
+		RequestIntake.Business
+			.setEstimatedHoursFromDevelopmentSize(
+				formContext
+			);
+	};
+
+	//Re-registers the Development Size lookup filter when the active Business Process Flow stage changes.
+	this.BpfStageChange = function (executionContext) {
+
+		var formContext =
+			executionContext.getFormContext();
+
+		var control =
+			formContext.getControl(
+				"header_process_bdgas_developmentsizeid"
+			);
+
+		if (!control) {
+			return;
+		}
+
+		control.removePreSearch(
+			RequestIntake.Business
+				.addDevelopmentSizeBpfFilter
+		);
+
+		control.addPreSearch(
+			RequestIntake.Business
+				.addDevelopmentSizeBpfFilter
+		);
+	};
+
+	//Handles the Request Intake post-save event and currently logs that the post-save event has been triggered.
+	this.onPostSave = function (executionContext) {
+
+		console.log("Post Save triggered");
+
+	};
+
+	//Initializes the Request Intake form by registering events and applying form, BPF, QPA agreement, mandatory-field, lookup, display-name,
+    //estimated-hours, and configured field-access logic.
+	this.onLoad = async function (executionContext) {
+
+		registerEvents(executionContext);
+
+		var formContext =
+			executionContext.getFormContext();
+
+		RequestIntake.Business
+		.registerDevelopmentSizeBpfFilter(
+			formContext
+		);
+
+		RequestIntake.Business.disableLookupMru(
+			formContext
+		);
+
+		RequestIntake.Business.removeQpaStatusOptions(
+			formContext
+		);
+
+		// Show QPA agreement on create
+		if (formContext.ui.getFormType() === 1) {
+
+			// QPA was cancelled.
+    		// Close the underlying create form as well.
+			var qpaCreationCancelled =
+				sessionStorage.getItem(
+					"bdgas_qpaCreationCancelled"
+				);
+
+			if (qpaCreationCancelled === "true") {
+
+				sessionStorage.removeItem(
+					"bdgas_qpaCreationCancelled"
+				);
+
+				formContext.ui.close();
+				return;
+			}
+
+			var QPA_FORM_ID = "557c5ae5-f899-f111-b8dc-000d3a11e677";
+
+			var currentForm =
+				formContext.ui.formSelector.getCurrentItem();
+
+			var currentFormId =
+				currentForm && currentForm.getId()
+					? currentForm.getId().replace(/[{}]/g, "").toLowerCase()
+					: null;
+
+			// If New opened using RPA Form, redirect immediately to QPA Form
+			if (
+				currentFormId &&
+				currentFormId !== QPA_FORM_ID.toLowerCase()
+			) {
+				await Xrm.Navigation.navigateTo(
+					{
+						pageType: "entityrecord",
+						entityName: "bdgas_requestintake",
+						formId: QPA_FORM_ID
+					},
+					{
+						target: 1
+					}
+				);
+
+				return;
+			}
+
+			// We are now actually on QPA Form.
+			// Only now do QPA create logic.
+			
+			var agreed = await RequestIntake.Business.showQpaAgreement(
+				formContext
+			);
+			
+			//Cancel: stop QPA initialization.
+			if (!agreed) {
+
+				// Remember that QPA creation was cancelled.
+				sessionStorage.setItem(
+					"bdgas_qpaCreationCancelled",
+					"true"
+				);
+
+				// Same close behaviour used by SRA Agreement.
+				formContext.ui.close();
+
+				return;
+			}
+
+			// Agree: continue QPA initialization.
+			RequestIntake.Business.hideRpaOptionOnCreate(
+				formContext
+			);
+
+			// Temporarily remove mandatory requirements
+			// so the initial QPA record can be created.
+			var mandatoryLevels = [];
+
+			formContext.data.entity.attributes.forEach(
+				function (attribute) {
+					var requiredLevel =
+						attribute.getRequiredLevel();
+
+					if (requiredLevel !== "none") {
+						mandatoryLevels.push({
+							attribute: attribute,
+							requiredLevel: requiredLevel
+						});
+
+						attribute.setRequiredLevel("none");
+					}
+				}
+			);
+
+			try {
+				console.log(
+					"[QPA] Agreement accepted. Creating QPA record..."
+				);
+
+				await formContext.data.save();
+
+				var createdRecordId =
+					formContext.data.entity.getId();
+
+				if (!createdRecordId) {
+					throw new Error(
+						"The QPA Project Center record was not created successfully. " +
+						"No record ID was returned."
+					);
+				}
+
+				console.log(
+					"[QPA] Agreement save created record:",
+					createdRecordId
+				);
+			}
+			finally {
+				// Restore original mandatory levels.
+				mandatoryLevels.forEach(
+					function (mandatoryField) {
+						mandatoryField.attribute.setRequiredLevel(
+							mandatoryField.requiredLevel
+						);
+					}
+				);
+
+				// Apply the correct QPA mandatory-field exceptions
+				// after the initial record creation.
+				RequestIntake.Business.applyQpaNonMandatoryRules(
+					formContext
+				);
+			}
+		}
+		else {
+
+			RequestIntake.Business.preventFormSelection(
+				formContext
+			);
+
+			RequestIntake.Business.switchBpfByType(
+				formContext
+			);
+
+			RequestIntake.Business.applyInQueueMandatoryRules(
+				formContext
+			);
+
+			RequestIntake.Business.applyConceptApprovalMandatoryRules(
+				formContext
+			);
+
+			RequestIntake.Business.applySolutionDesignMandatoryRules(
+				formContext
+			);
+
+			RequestIntake.Business.applyDevMandatoryRules(
+				formContext
+			);
+
+			RequestIntake.Business.applyQaMandatoryRules(
+				formContext
+			);
+
+			RequestIntake.Business.applyProdMandatoryRules(
+				formContext
+			);
+
+			RequestIntake.Business.applyQpaNonMandatoryRules(
+				formContext
+			);
+		}
+
+		RequestIntake.Business.setEstimatedHoursFromDevelopmentSize(
+			formContext
+		);
+
+		//Display: RequestName - Request Number
+		RequestIntake.Business.setRequestIntakeDisplayName(
+   			formContext
+		);
+		await RequestIntake.Business
+			.applyConfiguredFieldAccess(
+				formContext
+			);
+	};
+}).apply(RequestIntake.Events);

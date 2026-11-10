@@ -1,0 +1,217 @@
+var MilestoneType = window.MilestoneType || {};
+
+(function (milestoneType) {
+    "use strict";
+
+    const REQUEST_INTAKE_TYPE = "bdgas_requestintaketype";
+    const REQUEST_INTAKE_STATUS = "bdgas_requestintakestatus";
+    const IS_APPROVAL_NEEDED = "bdgas_isapprovalneeded";
+    const SEND_TO = "bdgas_sendto";
+
+    const REQUEST_TYPE_RPA = 100000000;
+    const REQUEST_TYPE_QPA = 100000001;
+
+    const ALLOWED_QPA_STATUS = [
+        100000000, // In Queue
+        100000001, // Concept Approval
+        100000003, // Dev
+        100000004, // QA
+        100000006  // PROD
+    ];
+
+    const IS_NOTIFICATION = "bdgas_isnotificationneeded";
+    const NOTIFICATION_TYPE = "bdgas_notificationtype";
+    const REMINDER_DAYS = "bdgas_reminderdays";
+
+    let originalOptions = null;
+
+    //Initializes the Milestone Type form by applying status, notification,
+    //and approval logic and registering the relevant OnChange events.
+    milestoneType.onLoad = function (executionContext) {
+
+        const formContext = executionContext.getFormContext();
+
+        cacheOriginalOptions(formContext);
+
+        applyStatusFilter(formContext);
+        applyNotificationLogic(formContext);
+
+        const requestTypeAttribute =
+            formContext.getAttribute(REQUEST_INTAKE_TYPE);
+
+        if (requestTypeAttribute) {
+            requestTypeAttribute.addOnChange(function () {
+                applyStatusFilter(formContext);
+            });
+        }
+
+        const notificationAttribute =
+            formContext.getAttribute(IS_NOTIFICATION);
+
+        if (notificationAttribute) {
+            notificationAttribute.addOnChange(function () {
+                applyNotificationLogic(formContext);
+            });
+        }
+
+        applyApprovalLogic(formContext);
+
+        const approvalAttribute =
+            formContext.getAttribute(IS_APPROVAL_NEEDED);
+
+        if (approvalAttribute) {
+            approvalAttribute.addOnChange(function () {
+                applyApprovalLogic(formContext);
+            });
+        }
+};
+
+    //Controls the visibility and requirement level of Notification Type
+    //and Reminder Days based on whether notification is required.
+    function applyNotificationLogic(formContext) {
+
+        const isNotification =
+            formContext.getAttribute(IS_NOTIFICATION)?.getValue();
+
+        const notificationTypeControl =
+            formContext.getControl(NOTIFICATION_TYPE);
+
+        const reminderDaysControl =
+            formContext.getControl(REMINDER_DAYS);
+
+        const notificationTypeAttribute =
+            formContext.getAttribute(NOTIFICATION_TYPE);
+
+        const reminderDaysAttribute =
+            formContext.getAttribute(REMINDER_DAYS);
+
+        if (
+            !notificationTypeControl ||
+            !reminderDaysControl ||
+            !notificationTypeAttribute ||
+            !reminderDaysAttribute
+        ) {
+            return;
+        }
+
+        const showFields = isNotification === true;
+
+        notificationTypeControl.setVisible(showFields);
+        reminderDaysControl.setVisible(showFields);
+
+        notificationTypeAttribute.setRequiredLevel(
+            showFields ? "required" : "none"
+        );
+
+        reminderDaysAttribute.setRequiredLevel(
+            showFields ? "required" : "none"
+        );
+
+        if (!showFields) {
+
+            notificationTypeAttribute.setValue(null);
+            reminderDaysAttribute.setValue(null);
+
+            // notificationTypeAttribute.fireOnChange();
+            // reminderDaysAttribute.fireOnChange();
+        }
+    }
+
+    //Controls the visibility of the Send To field based on whether
+    //approval is required and clears its value when it is hidden.
+    function applyApprovalLogic(formContext) {
+        const isApprovalNeeded =
+            formContext.getAttribute(IS_APPROVAL_NEEDED)?.getValue();
+
+        const sendToControl =
+            formContext.getControl(SEND_TO);
+
+        const sendToAttribute =
+            formContext.getAttribute(SEND_TO);
+
+        if (!sendToControl || !sendToAttribute) {
+            return;
+        }
+
+        const showSendTo = isApprovalNeeded === false;
+
+        sendToControl.setVisible(showSendTo);
+
+        if (!showSendTo) {
+            sendToAttribute.setValue(null);
+        }
+    }
+
+    //Stores the original Request Intake Status options so they can be restored or filtered based on the selected Request Intake Type.
+    function cacheOriginalOptions(formContext) {
+
+        if (originalOptions) {
+            return;
+        }
+
+        const statusControl =
+            formContext.getControl(REQUEST_INTAKE_STATUS);
+
+        if (!statusControl) {
+            return;
+        }
+
+        originalOptions = statusControl.getOptions();
+    }
+
+    //Filters the Request Intake Status options based on the selected Request Intake Type and clears the current status if it is not allowed.
+    function applyStatusFilter(formContext) {
+
+        const requestType =
+            formContext.getAttribute(REQUEST_INTAKE_TYPE)?.getValue();
+
+        const statusAttribute =
+            formContext.getAttribute(REQUEST_INTAKE_STATUS);
+
+        const statusControl =
+            formContext.getControl(REQUEST_INTAKE_STATUS);
+
+        if (!statusControl || !statusAttribute) {
+            return;
+        }
+
+        statusControl.clearOptions();
+
+        let allowedStatuses = [];
+
+        switch (requestType) {
+
+            case REQUEST_TYPE_QPA:
+                allowedStatuses = ALLOWED_QPA_STATUS;
+                break;
+
+            default:
+                originalOptions.forEach(function (option) {
+                    statusControl.addOption(option);
+                });
+                return;
+        }
+
+        originalOptions.forEach(function (option) {
+
+            if (allowedStatuses.includes(option.value)) {
+
+                statusControl.addOption({
+                    text: option.text,
+                    value: option.value
+                });
+            }
+        });
+
+        const currentValue = statusAttribute.getValue();
+
+        if (
+            currentValue !== null &&
+            !allowedStatuses.includes(currentValue)
+        ) {
+            statusAttribute.setValue(null);
+            statusAttribute.fireOnChange();
+        }
+    }
+
+})(MilestoneType);

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RibbonDiffXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomActions>
+    <HideCustomAction HideActionId="bdgas.AccessChecker.OpenDialog.appointment.Button.Hide" Location="AccessChecker.OpenDialog.appointment.Button" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddAppointment.Hide" Location="Mscrm.Form.appointment.AddAppointment" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddCampaignResponse.Hide" Location="Mscrm.Form.appointment.AddCampaignResponse" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddConnection.Hide" Location="Mscrm.Form.appointment.AddConnection" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddEmail.Hide" Location="Mscrm.Form.appointment.AddEmail" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddFax.Hide" Location="Mscrm.Form.appointment.AddFax" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddFile.Hide" Location="Mscrm.Form.appointment.AddFile" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddLetter.Hide" Location="Mscrm.Form.appointment.AddLetter" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddNote.Hide" Location="Mscrm.Form.appointment.AddNote" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddNoteToActivity.Hide" Location="Mscrm.Form.appointment.AddNoteToActivity" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddOtherActivities.Hide" Location="Mscrm.Form.appointment.AddOtherActivities" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddPhone.Hide" Location="Mscrm.Form.appointment.AddPhone" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddRecurringAppointment.Hide" Location="Mscrm.Form.appointment.AddRecurringAppointment" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddServiceActivity.Hide" Location="Mscrm.Form.appointment.AddServiceActivity" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddTask.Hide" Location="Mscrm.Form.appointment.AddTask" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.AddToQueue.Hide" Location="Mscrm.Form.appointment.AddToQueue" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Assign.Hide" Location="Mscrm.Form.appointment.Assign" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Close.Hide" Location="Mscrm.Form.appointment.Close" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.ConvertTo.Hide" Location="Mscrm.Form.appointment.ConvertTo" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.CopySelected.Hide" Location="Mscrm.Form.appointment.CopySelected" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.CustomizeEntity.Hide" Location="Mscrm.Form.appointment.CustomizeEntity" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Flows.RefreshCommandBar.Flows.Hide" Location="Mscrm.Form.appointment.Flows.RefreshCommandBar.Flows" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Flows.RefreshCommandBar.Hide" Location="Mscrm.Form.appointment.Flows.RefreshCommandBar" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.FormDesign.Hide" Location="Mscrm.Form.appointment.FormDesign" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.MailMerge.Hide" Location="Mscrm.Form.appointment.MailMerge" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.OnlineTeamsMeeting.Hide" Location="Mscrm.Form.appointment.OnlineTeamsMeeting" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.PDFButtonId.Hide" Location="Mscrm.Form.appointment.PDFButtonId" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Permissions.Grant.Hide" Location="Mscrm.Form.appointment.Permissions.Grant" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Permissions.GrantUCI.Hide" Location="Mscrm.Form.appointment.Permissions.GrantUCI" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Permissions.Hide" Location="Mscrm.Form.appointment.Permissions" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Permissions.Sharing.Hide" Location="Mscrm.Form.appointment.Permissions.Sharing" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.QueueItemDetail.Hide" Location="Mscrm.Form.appointment.QueueItemDetail" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Refreshed.EditSeries.Hide" Location="Mscrm.Form.appointment.Refreshed.EditSeries" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Refreshed.Recurrence.Hide" Location="Mscrm.Form.appointment.Refreshed.Recurrence" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.Reports.Hide" Location="Mscrm.Form.appointment.Reports" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.RunScript.Hide" Location="Mscrm.Form.appointment.RunScript" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.RunWorkflow.Hide" Location="Mscrm.Form.appointment.RunWorkflow" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.SaveAsComplete.Hide" Location="Mscrm.Form.appointment.SaveAsComplete" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.SendSelected.Hide" Location="Mscrm.Form.appointment.SendSelected" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.Form.appointment.SuggestProduct.Hide" Location="Mscrm.Form.appointment.SuggestProduct" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.Delete.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.Delete" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.Edit.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.Edit" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.Expand.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.Expand" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.Export.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.Export" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.Import.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.Import" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.New.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.New" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.RefreshButton.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.RefreshButton" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Chart.SaveCopy.Hide" Location="Mscrm.HomepageGrid.appointment.Chart.SaveCopy" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.Charts.Hide" Location="Mscrm.HomepageGrid.appointment.Charts" />
+    <HideCustomAction HideActionId="bdgas.Mscrm.HomepageGrid.appointment.MBPF.ConvertTo.Hide" Location="Mscrm.HomepageGrid.appointment.MBPF.ConvertTo" />
+  </CustomActions>
+  <Templates>
+    <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
+  </Templates>
+  <CommandDefinitions />
+  <RuleDefinitions>
+    <TabDisplayRules />
+    <DisplayRules />
+    <EnableRules />
+  </RuleDefinitions>
+  <LocLabels />
+</RibbonDiffXml>

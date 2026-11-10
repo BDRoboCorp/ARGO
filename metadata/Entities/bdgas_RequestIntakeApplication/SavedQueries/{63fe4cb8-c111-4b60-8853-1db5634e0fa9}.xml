@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{63fe4cb8-c111-4b60-8853-1db5634e0fa9}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_requestintakeapplication" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_requestintakeapplicationid">
+          <cell name="bdgas_application" width="206" />
+          <cell name="bdgas_requestintakeapplication" width="160" />
+          <cell name="bdgas_name" width="199" />
+          <cell name="bdgas_directionality" width="170" />
+          <cell name="bdgas_location" width="124" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_requestintakeapplication">
+          <attribute name="bdgas_requestintakeapplicationid" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="bdgas_requestintakeapplication" operator="like" value="{0}" />
+          </filter>
+          <attribute name="bdgas_directionality" />
+          <attribute name="bdgas_application" />
+          <attribute name="bdgas_requestintakeapplication" />
+          <attribute name="bdgas_name" />
+          <attribute name="bdgas_location" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Request Intake Applications" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -21,3 +21,6 @@ WHERE a.body LIKE '%https://org6547479b.crm.dynamics.com/%'
 - edit environment variable
 
 Refer to videos
+
+
+pac solution unpack --zipfile "E:\CRM\ARGO_SourceCode\solutions\RITM3372825_IntelligentProcessAutomation_1_1_0_1_managed.zip" --folder "E:\CRM\ARGO_SourceCode\metadata"

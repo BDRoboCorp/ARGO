@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{9860adae-91fe-44d5-b734-119c4591dbd1}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{20e49eb3-d7f5-4a4e-bbe2-104036841f90}" name="StageStep3" locklevel="0" expanded="true" visible="false" labelid="{cb82c367-fd01-4ffa-bdf4-329d65759fb5}">
+          <labels>
+            <label description="In Queue" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{b2f1498a-0eb0-3228-1361-f1d19cd7cd66}" name="StageStep3_section1" labelid="{51548408-0e72-4a27-b39f-58092b6469d2}">
+                  <labels>
+                    <label description="In Queue" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{99007e9a-b9b5-4c23-838c-1270c10d2959}" showlabel="true" visible="true" labelid="{932a7d1b-e4b2-4180-b892-5b27e150079c}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_digitalproductname" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_digitalproductname" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{365de4c7-b6b7-4c40-8d46-5faf20e7392d}" showlabel="true" visible="true" labelid="{473111d0-c74b-4c2a-a9f9-8075b00c4777}">
+                        <labels>
+                          <label description="Description" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_description" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_description" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a9615c5a-0ec3-4a52-b198-3eb5cbda5e8e}" showlabel="true" visible="true" labelid="{c84971bf-7fab-412d-8717-c42b8f9b20a7}">
+                        <labels>
+                          <label description="BOT Owner" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_botowner" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_botowner" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{500555b6-8ff0-49f5-a888-8fa14b44d821}" showlabel="true" visible="true" labelid="{53c40cac-541e-41bd-b0df-1f89b7866c7f}">
+                        <labels>
+                          <label description="BOT VP" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_botvp" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_botvp" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8ddb2ee8-8ae1-4d44-ac8c-d4e0b216d536}" showlabel="true" visible="true" labelid="{979186b7-004e-45ab-a86e-75ceab551d73}">
+                        <labels>
+                          <label description="Assignee (BA)" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_assigneeba" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_assigneeba" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{9b229ac6-52f9-4ccf-9c67-0d76edd0cff4}" name="StageStep15" locklevel="0" expanded="true" visible="false" labelid="{78f3f282-0404-4d84-9f8f-de5311cb3abd}">
+          <labels>
+            <label description="Concept Approval" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{ccb4bee2-7654-cc63-53a0-4d2c96d4d7b9}" name="StageStep15_section1" labelid="{efb35e69-752b-4a76-bd9a-0924f6ef8596}">
+                  <labels>
+                    <label description="Concept Approval" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{1769badd-943a-45c1-ba75-5e2d50a16227}" showlabel="true" visible="true" labelid="{83ad5f58-a7eb-45d4-89e1-97cdae0401c5}">
+                        <labels>
+                          <label description="Automation Charter Completed &amp; Attached" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_automationchartercompletedattached" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_automationchartercompletedattached" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d338d6c8-1762-4b16-9fb1-b763d65dadaf}" showlabel="true" visible="true" labelid="{9b60621d-7d71-4b90-be3c-c9bc11b121f8}">
+                        <labels>
+                          <label description="Manual Estimate Reviewed By" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_manualestimatereviewedby" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_manualestimatereviewedby" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cec3cb83-ff32-4563-80db-88520666aaab}" showlabel="true" visible="true" labelid="{70412ada-f96f-4013-bb40-ec70ddf4d31c}">
+                        <labels>
+                          <label description="Development Size" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_developmentsizeid" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_developmentsizeid" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5f37b8a6-dea1-4144-a3d3-1f3d51869481}" showlabel="true" visible="true" labelid="{1d54c27b-3895-4887-800b-fee4e507eea1}">
+                        <labels>
+                          <label description="Configuration Item Link" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_configurationitemlink" classid="{71716b6c-711e-476c-8ab8-5d11542bfb47}" datafieldname="bdgas_configurationitemlink" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e3669e0e-3057-49c1-ab3f-29eb19317b6e}" showlabel="true" visible="true" labelid="{cf12dae7-c138-46ee-8e0f-238061b518ab}">
+                        <labels>
+                          <label description="Estimated Hours" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_estimatedhours" classid="{c6d124ca-7eda-4a60-aea9-7fb8d318b68f}" datafieldname="bdgas_estimatedhours" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{3bc694f9-c0c0-4e27-bf82-319794ef674c}" name="StageStep27" locklevel="0" expanded="true" visible="false" labelid="{4a24a896-a3aa-4326-83dd-ac1e9fef18ed}">
+          <labels>
+            <label description="Solution Design" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{0cf7d98a-01d1-27c6-b43e-9700a0cef80f}" name="StageStep27_section1" labelid="{9fbc1809-68d5-4774-970e-a6c2a2c8a063}">
+                  <labels>
+                    <label description="Solution Design" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d24d5594-ad5e-4f19-bb13-d0b182e2b44a}" showlabel="true" visible="true" labelid="{555748f2-e849-4558-a21f-9843dd25e5f8}">
+                        <labels>
+                          <label description="Lead Developer" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_leaddeveloperid" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_leaddeveloperid" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0386568f-540c-4f7d-903a-d0951ba0296f}" showlabel="true" visible="true" labelid="{58fb4ed7-d8b0-4045-9610-d20132ec8858}">
+                        <labels>
+                          <label description="Change Ticket #" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_changeticket" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_changeticket" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0054efe0-9298-4d97-bb07-7722d4d88bfe}" showlabel="true" visible="true" labelid="{f25f98d6-cd99-4277-9a77-4c4c94196659}">
+                        <labels>
+                          <label description="ARDS Signoff Received &amp; Attached" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_ardssignoff" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_ardssignoff" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4ac66929-9575-4e5d-b48a-280ef6e23e2b}" showlabel="true" visible="true" labelid="{fd687a59-9e21-4a8d-ab7c-d3dd00d670f1}">
+                        <labels>
+                          <label description="Automation URS Received &amp; Attached" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_automationursreceivedattached" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_automationursreceivedattached" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{c67a308d-a3a4-4f60-9bf3-02936c0cd870}" name="StageStep37" locklevel="0" expanded="true" visible="false" labelid="{929e5663-1eb9-401f-8ce7-84e2fa24b6a5}">
+          <labels>
+            <label description="DEV" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{16c9edbf-265b-50c0-bb7a-0b937098cdf3}" name="StageStep37_section1" labelid="{d4d2813e-cad1-452f-98aa-a13b8e4e717b}">
+                  <labels>
+                    <label description="DEV" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{7e989ce9-76d5-4b11-842a-ba7c7f9e5027}" showlabel="true" visible="true" labelid="{2ebc786c-87b5-4476-8277-3d6ca65109ae}">
+                        <labels>
+                          <label description="Development Start Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_developmentstartdate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_developmentstartdate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fa3cdd6a-b584-4c44-b4ab-2597ad143367}" showlabel="true" visible="true" labelid="{803c1e08-286b-48c9-a4b6-d984cba402b8}">
+                        <labels>
+                          <label description="Final Code Review Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_finalcodereviewdate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_finalcodereviewdate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1ef4ae85-e7f5-4e67-8ea7-c2acf37cb8b5}" showlabel="true" visible="true" labelid="{b78feb45-0fb9-4aad-8cca-b797a6c324dc}">
+                        <labels>
+                          <label description="Final Code Review Performed By" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_finalcodereviewperformedby" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_finalcodereviewperformedby" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{216e41d1-cb10-4555-9061-5c3084d365b1}" name="StageStep45" locklevel="0" expanded="true" visible="false" labelid="{e6c16f48-0315-4294-b4db-2cb3b05a0d49}">
+          <labels>
+            <label description="QA" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{e8458d58-4798-004c-bd33-03868456a5ea}" name="StageStep45_section1" labelid="{859e6e79-271a-4126-8fc2-fbc6da7781e8}">
+                  <labels>
+                    <label description="QA" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{6de9e498-0a69-4ceb-91f0-a1d03b1a4496}" showlabel="true" visible="true" labelid="{e2866a84-d7ec-4ab5-9591-336e991e8256}">
+                        <labels>
+                          <label description="CSV-Computer Validation Form Status" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_csvcomputervalidationformstatus" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_csvcomputervalidationformstatus" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{461f3941-0f44-45e5-9824-a5ec711ec68b}" showlabel="true" visible="true" labelid="{9b1d7375-d2a8-4ac9-8108-fadfa250d9af}">
+                        <labels>
+                          <label description="UAT Complete Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_uatcompletedate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_uatcompletedate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{007a2005-3ecc-467a-8d85-7f6dbc7bc9aa}" showlabel="true" visible="true" labelid="{2c8b16fa-b26d-4144-a461-8edf3db6bf42}">
+                        <labels>
+                          <label description="BOT Business Criticality" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_botbusinesscriticality" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_botbusinesscriticality" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{308935ac-6c1c-47af-afff-a2f6a9c03485}" showlabel="true" visible="true" labelid="{a3c1ded6-bdeb-4bd8-b2ec-f7ffa416ca32}">
+                        <labels>
+                          <label description="Schedule or Trigger" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_scheduleortrigger" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_scheduleortrigger" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8c9b16ce-282c-4010-bf09-8dfdeed1e150}" showlabel="true" visible="true" labelid="{6cdba489-4ca7-43a4-a16a-52183229d8a9}">
+                        <labels>
+                          <label description="FIM Managed SG" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_fimmanagedsg" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_fimmanagedsg" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{000fc56d-1811-4736-8fad-a23df438dd23}" showlabel="true" visible="true" labelid="{7d78ae33-133b-46a7-8cac-b8c2a9f16598}">
+                        <labels>
+                          <label description="Trigger Path" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_triggerpath" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_triggerpath" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9a3cf365-ef59-4916-b75d-c312fb8933b1}" showlabel="true" visible="true" labelid="{f4064980-d02e-4553-927f-dea65a8fbecd}">
+                        <labels>
+                          <label description="PROD Link" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_prodlink" classid="{71716b6c-711e-476c-8ab8-5d11542bfb47}" datafieldname="bdgas_prodlink" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{748e2077-fd7e-4373-bd3f-46be0af6bc0f}" showlabel="true" visible="true" labelid="{79807926-59e7-4775-8dc4-e0334d26bc92}">
+                        <labels>
+                          <label description="Schedule Notes" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_schedulenotes" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_schedulenotes" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{65f578ec-d731-4299-a210-86f51454aae5}" showlabel="true" visible="true" labelid="{58324d05-0773-456e-babc-59333398e6d5}">
+                        <labels>
+                          <label description="AMO Lead" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_amoleadid" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_amoleadid" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{25359aef-8ff3-4a4a-9e9f-6a0ebd5b5ee9}" showlabel="true" visible="true" labelid="{60c060ec-9188-4a66-ad22-bb344735801c}">
+                        <labels>
+                          <label description="AMO Support Team" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_amosupportteamid" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="bdgas_amosupportteamid" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{9c6ca60c-e86a-4e6b-9b25-5001d0df3a44}" name="StageStep67" locklevel="0" expanded="true" visible="false" labelid="{e372fd2f-323e-4671-abaf-1d3ff032b852}">
+          <labels>
+            <label description="Ready For Sprint Prod Move" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{0afcb5bc-0150-8bcc-c791-c2d5a4882382}" name="StageStep67_section1" labelid="{874f6644-ca46-4254-96e5-cb5e26af877c}">
+                  <labels>
+                    <label description="Ready For Sprint Prod Move" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{9237081d-0270-43af-a140-3552dee6357f}" showlabel="true" visible="true" labelid="{3e073528-b3d0-41a7-ad62-03ae4e8ac8d8}">
+                        <labels>
+                          <label description="PROD Code Release Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_prodcodereleasedate" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_prodcodereleasedate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{35a76644-40da-48ae-af3e-e95ac1a3ed41}" showlabel="true" visible="true" labelid="{03d999fe-38e5-438d-b27b-ed4379683271}">
+                        <labels>
+                          <label description="PROD Link" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_prodlink" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_prodlink" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a8338684-4ae0-4d70-9883-c38ef4e3150e}" showlabel="true" visible="true" labelid="{ac32bb24-f716-4aef-a4e0-645d69e8cdf0}">
+                        <labels>
+                          <label description="BOT is in HyperCare?" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_botisinhypercare1" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_botisinhypercare1" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{12fbac4a-b21d-46ce-8cde-4296982b61f4}" showlabel="true" visible="true" labelid="{312df31e-8a6a-47fb-b10b-ad64709933ef}">
+                        <labels>
+                          <label description="Hypercare exit Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_golivedate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_golivedate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{2bc53733-aad8-4382-9054-72da19398c90}" name="StageStep77" locklevel="0" expanded="true" visible="false" labelid="{11d66ee8-8de0-45ca-81b7-663d7697bea3}">
+          <labels>
+            <label description="Hypercare" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{e5a1d210-e4f1-0f1b-34fe-8912d0fb77d4}" name="StageStep77_section1" labelid="{93c11003-7546-4061-87fb-a9289e0459a5}">
+                  <labels>
+                    <label description="Hypercare" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{b64b27b2-4a8e-4561-9352-1f46a373e7b0}" showlabel="true" visible="true" labelid="{9628390f-fd5e-4041-959d-5432eb3b90ce}">
+                        <labels>
+                          <label description="KT to AMO" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_kttoamo" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_kttoamo" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{65bac032-1d40-41d3-910d-eeb3770e2c76}" showlabel="true" visible="true" labelid="{7cd950b1-8214-444d-aa6a-a1e353d2fb62}">
+                        <labels>
+                          <label description="KT Approval Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_ktapprovaldate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_ktapprovaldate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{f2170979-8ecb-4e66-bcc7-e6057e45f222}" name="StageStep83" locklevel="0" expanded="true" visible="false" labelid="{6040518c-2214-469a-9649-50520a768e35}">
+          <labels>
+            <label description="Prod" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{938cdfde-a0f2-e7b0-2fa0-53e1a1bf7f04}" name="StageStep83_section1" labelid="{bee0cab3-da20-4707-9f55-7bd2c46b825b}">
+                  <labels>
+                    <label description="Prod" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{f1617c3f-7ece-4f86-b03b-074ec0996acb}" showlabel="true" visible="true" labelid="{43350d4b-d38c-4527-98cf-0ed8724225df}">
+                        <labels>
+                          <label description="BOT Business Criticality" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_botbusinesscriticality" classid="{3ef39988-22bb-4f0b-bbbe-64b5a3748aee}" datafieldname="bdgas_botbusinesscriticality" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c77321d7-0e44-4854-a046-62b25d2d8337}" showlabel="true" visible="true" labelid="{42348c38-eed7-413b-b5d5-2ed0955a732f}">
+                        <labels>
+                          <label description="Schedule or Trigger" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_scheduleortrigger" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_scheduleortrigger" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fdfaee58-a995-49d4-92e7-b06029ed39f4}" showlabel="true" visible="true" labelid="{4e346bf7-8d68-41de-845a-b0d44a46569e}">
+                        <labels>
+                          <label description="FIM Managed SG" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_fimmanagedsg" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="bdgas_fimmanagedsg" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4f303a7a-1973-438a-a338-9fe99ffc010a}" showlabel="true" visible="true" labelid="{5d0c681f-c027-4d4a-a96d-2c50c16967b0}">
+                        <labels>
+                          <label description="Trigger Path" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_triggerpath" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_triggerpath" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f3e9055e-9a2a-4ff8-a702-1bff06ee71f2}" showlabel="true" visible="true" labelid="{78ce664c-7f69-4ce0-a58e-fcc6b0a964ea}">
+                        <labels>
+                          <label description="PROD Link" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_prodlink" classid="{71716b6c-711e-476c-8ab8-5d11542bfb47}" datafieldname="bdgas_prodlink" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cfae0e37-a0f0-4e6b-b87e-698b37624ec7}" showlabel="true" visible="true" labelid="{70564c24-3a06-48c4-a0d9-92163b4d6235}">
+                        <labels>
+                          <label description="Schedule Notes" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_schedulenotes" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_schedulenotes" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f1b64f1d-a6cb-4345-a0c9-22b26978fbfd}" showlabel="true" visible="true" labelid="{53b048d6-66e8-49a5-bb33-0ea15599b0d9}">
+                        <labels>
+                          <label description="PROD Code Release Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_prodcodereleasedate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_prodcodereleasedate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5d51709e-0c81-4a0d-ac3b-92aad0b483a7}" showlabel="true" visible="true" labelid="{4f0b9f89-ab7f-410f-b332-bb7a415548f0}">
+                        <labels>
+                          <label description="BOT is in HyperCare?" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_botisinhypercare1" classid="{67fac785-cd58-4f9f-abb3-4b7ddc6ed5ed}" datafieldname="bdgas_botisinhypercare1" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e172da53-8b05-4242-af7c-cd94358ef0bb}" showlabel="true" visible="true" labelid="{3a9a5d0d-0abe-42b8-9917-b29899c17f0e}">
+                        <labels>
+                          <label description="Hypercare exit Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_bdgas_requestintake_bdgas_rpabpf:bdgas_golivedate" classid="{5b773807-9fb2-42db-97c3-7a91eff8adff}" datafieldname="bdgas_golivedate" disabled="false" relationship="bpf_bdgas_requestintake_bdgas_rpabpf" isrequired="true" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

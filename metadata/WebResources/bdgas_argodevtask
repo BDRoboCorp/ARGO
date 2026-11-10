@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Developer Activities</title>
+    <style>
+      :root {
+        --blue: #0f6cbd;
+        --blue-strong: #115ea3;
+        --blue-soft: #eef6fc;
+        --border: #d1d1d1;
+        --border-soft: #e5e5e5;
+        --text: #242424;
+        --muted: #616161;
+        --page: #f5f5f5;
+        --surface: #ffffff;
+        --error: #a4262c;
+      }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body { margin: 0; color: var(--text); background: var(--page); font: 14px/1.4 "Segoe UI", "SegoeUI", sans-serif; }
+      button, input, select { font: inherit; }
+      .shell { min-height: 100vh; }
+      .command-bar { height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 12px; border-bottom: 1px solid var(--border-soft); background: var(--surface); }
+      .brand-mark { width: 24px; height: 24px; display: grid; place-items: center; color: #fff; background: var(--blue); border-radius: 2px; font-weight: 600; }
+      h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .status { margin-left: auto; color: var(--muted); font-size: 12px; }
+      .content { padding: 12px; }
+      .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+      .toolbar h2 { margin: 0; font-size: 20px; font-weight: 600; }
+      .toolbar p { margin: 2px 0 0; color: var(--muted); }
+      .toolbar-actions { display: flex; align-items: center; gap: 8px; }
+      .filters { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; margin-bottom: 10px; padding: 10px 12px; border: 1px solid var(--border-soft); background: var(--surface); }
+      .filter-field { display: flex; flex-direction: column; gap: 3px; min-width: 220px; flex: 1; }
+      .filter-field label { color: var(--muted); font-size: 12px; }
+      .filter-field input, .filter-field select { min-height: 32px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 2px; color: var(--text); background: var(--surface); }
+      .action-button { min-height: 32px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 2px; color: var(--text); background: var(--surface); cursor: pointer; }
+      .action-button:hover { border-color: var(--blue); color: var(--blue); }
+      .primary-action-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border-color: var(--blue-strong); color: #fff; background: var(--blue); }
+      .primary-action-button[hidden] { display: none; }
+      .primary-action-button:hover { border-color: var(--blue-strong); color: #fff; background: var(--blue-strong); }
+      .primary-action-button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+      .button-icon { display: inline-grid; width: 16px; height: 16px; place-items: center; font-size: 17px; line-height: 1; }
+      .table-wrap { overflow-x: auto; border: 1px solid var(--border-soft); background: var(--surface); }
+      table { width: 100%; border-collapse: collapse; min-width: 720px; }
+      th, td { padding: 8px 10px; border-bottom: 1px solid var(--border-soft); text-align: left; vertical-align: top; }
+      th { color: var(--muted); background: #fafafa; font-size: 12px; font-weight: 600; white-space: nowrap; }
+      .group-row { cursor: pointer; background: #f8fbfd; font-weight: 600; }
+      .group-row:hover { background: var(--blue-soft); }
+      .group-row td { border-top: 1px solid var(--border); }
+      .detail-row td:first-child { padding-left: 28px; }
+      .detail-row:hover { background: #f8fbfd; }
+      .record-link { color: var(--blue); cursor: pointer; text-decoration: none; }
+      .record-link:hover { text-decoration: underline; }
+      .hours { font-variant-numeric: tabular-nums; white-space: nowrap; }
+      .muted { color: var(--muted); }
+      .message { padding: 12px; border-left: 4px solid var(--blue); background: var(--surface); }
+      .message.error { border-left-color: var(--error); }
+      .message strong { display: block; margin-bottom: 4px; }
+      @media (max-width: 640px) { .content { padding: 8px; } .toolbar { align-items: stretch; flex-direction: column; } .status { display: none; } .action-button { width: 100%; } }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="command-bar"><div class="brand-mark">D</div><h1>Developer Activities</h1></header>
+      <section class="content" aria-live="polite">
+        <div class="toolbar"><div><h2>Developer Activities</h2><p id="summaryText">Loading daily tasks.</p></div><div class="toolbar-actions"><button class="action-button primary-action-button" id="newButton" type="button" hidden><span class="button-icon" aria-hidden="true">+</span><span>New</span></button></div></div>
+        <form class="filters" id="filterForm">
+          <div class="filter-field"><label for="taskFilter">Daily Task Name</label><input id="taskFilter" type="search" placeholder="Filter by daily task name" /></div>
+          <div class="filter-field"><label for="estimationFilter">Development Estimation</label><input id="estimationFilter" type="search" placeholder="Filter by development estimation" /></div>
+          <div class="filter-field"><label for="assigneeFilter">Assignee</label><select id="assigneeFilter"><option value="">All assignees</option></select></div>
+          <button class="action-button" type="submit">Search</button><button class="action-button" id="refreshButton" type="button">Refresh</button>
+        </form>
+        <div id="activitiesRoot"></div>
+      </section>
+    </main>
+    <script>
+      (function () {
+        "use strict";
+        var elements = { root: document.getElementById("activitiesRoot"), summary: document.getElementById("summaryText"), form: document.getElementById("filterForm"), taskFilter: document.getElementById("taskFilter"), estimationFilter: document.getElementById("estimationFilter"), assigneeFilter: document.getElementById("assigneeFilter"), refresh: document.getElementById("refreshButton"), newButton: document.getElementById("newButton") };
+        var state = { records: [], taskFilter: "", estimationFilter: "", assigneeId: "", requestIntakeId: "", requestIntakeName: "" };
+
+        elements.form.addEventListener("submit", function (event) { event.preventDefault(); state.taskFilter = elements.taskFilter.value.trim().toLowerCase(); state.estimationFilter = elements.estimationFilter.value.trim().toLowerCase(); state.assigneeId = elements.assigneeFilter.value; render(); });
+        elements.refresh.addEventListener("click", loadActivities);
+        elements.newButton.addEventListener("click", openNewRecord);
+        loadActivities();
+
+        async function loadActivities() {
+          try {
+            var xrm = getXrm();
+            var requestIntake = getCurrentRequestIntake();
+            if (!requestIntake.id) throw new Error("The current Project Center record ID is unavailable.");
+            state.requestIntakeId = requestIntake.id;
+            state.requestIntakeName = requestIntake.name;
+            elements.newButton.hidden = !(await canCreateDevTask(xrm));
+            var query = "?$select=bdgas_devtaskid,bdgas_name,bdgas_description,bdgas_hours,bdgas_completion,_bdgas_assignee_value,_bdgas_devestimation_value&$filter=_bdgas_requestintakeid_value eq " + state.requestIntakeId + "&$orderby=bdgas_name asc";
+            var result = await xrm.WebApi.retrieveMultipleRecords("bdgas_devtask", query);
+            state.records = result.entities || [];
+            populateAssignees(state.records);
+            render();
+          } catch (error) { renderMessage("Unable to load developer activities", error.message || String(error), true); }
+        }
+
+        function render() {
+          var records = state.records.filter(function (record) {
+            var name = String(record.bdgas_name || "").toLowerCase();
+            var estimationName = getDevelopmentEstimationName(record).toLowerCase();
+            var assigneeId = cleanGuid(record._bdgas_assignee_value);
+            return (!state.taskFilter || name.indexOf(state.taskFilter) !== -1) && (!state.estimationFilter || estimationName.indexOf(state.estimationFilter) !== -1) && (!state.assigneeId || assigneeId === state.assigneeId);
+          });
+          var groups = groupRecords(records);
+          clearChildren(elements.root);
+          if (!groups.length) { renderMessage("No activities found", "No developer activities match the selected filters.", false); elements.summary.textContent = "No matching activities."; return; }
+          var table = document.createElement("table");
+          table.innerHTML = "<thead><tr><th>Daily Task Name</th><th>Description</th><th>Hours</th><th>% Completion</th><th>Progress Hours</th><th>Assignee</th></tr></thead>";
+          var body = document.createElement("tbody");
+          groups.forEach(function (group) {
+            var groupRow = document.createElement("tr"); groupRow.className = "group-row"; groupRow.setAttribute("aria-expanded", "false");
+            groupRow.innerHTML = "<td colspan=\"2\">+ " + escapeHtml(group.name) + "</td><td class=\"hours\">" + formatHours(group.hours) + "</td><td></td><td class=\"hours\">" + formatHours(group.progressHours) + "</td><td>" + group.records.length + " record" + (group.records.length === 1 ? "" : "s") + "</td>";
+            var details = [];
+            body.appendChild(groupRow);
+            group.records.forEach(function (record) { var row = createDetailRow(record); row.hidden = true; details.push(row); body.appendChild(row); });
+            groupRow.addEventListener("click", function () { var expanded = groupRow.getAttribute("aria-expanded") === "true"; groupRow.setAttribute("aria-expanded", String(!expanded)); groupRow.firstChild.textContent = (expanded ? "+ " : "- ") + group.name; details.forEach(function (row) { row.hidden = expanded; }); });
+          });
+          table.appendChild(body);
+          var totalHours = records.reduce(function (total, record) { return total + (Number(record.bdgas_hours) || 0); }, 0);
+          var totalProgressHours = records.reduce(function (total, record) { return total + getProgressHours(record); }, 0);
+          var footer = document.createElement("tfoot");
+          var totalRow = document.createElement("tr");
+          totalRow.innerHTML = "<th colspan=\"2\">Total</th><th class=\"hours\">" + formatHours(totalHours) + "</th><th></th><th class=\"hours\">" + formatHours(totalProgressHours) + "</th><th>" + records.length + " record" + (records.length === 1 ? "" : "s") + "</th>";
+          footer.appendChild(totalRow); table.appendChild(footer);
+          var wrap = document.createElement("div"); wrap.className = "table-wrap"; wrap.appendChild(table); elements.root.appendChild(wrap);
+          elements.summary.textContent = records.length + " record" + (records.length === 1 ? "" : "s") + " grouped into " + groups.length + " development estimation" + (groups.length === 1 ? "" : "s") + ".";
+        }
+
+        function createDetailRow(record) {
+          var row = document.createElement("tr"); row.className = "detail-row";
+          var name = record.bdgas_name || "Unnamed task"; var link = document.createElement("a"); link.className = "record-link"; link.href = "#"; link.textContent = name; link.addEventListener("click", function (event) { event.preventDefault(); event.stopPropagation(); openRecord(record.bdgas_devtaskid, name); });
+          var nameCell = document.createElement("td"); nameCell.appendChild(link); row.appendChild(nameCell); row.appendChild(createCell(record.bdgas_description || "-")); row.appendChild(createCell(formatHours(record.bdgas_hours), "hours")); row.appendChild(createCell(formatCompletion(record.bdgas_completion), "hours")); row.appendChild(createCell(formatHours(getProgressHours(record)), "hours")); row.appendChild(createCell(getAssigneeName(record) || "-")); return row;
+        }
+
+        function openRecord(recordId, title) {
+          var pageInput = { pageType: "entityrecord", entityName: "bdgas_devtask", entityId: cleanGuid(recordId), label: title };
+          if (window.parent && window.parent !== window && window.parent.bdgasArgoNavigationHost && typeof window.parent.bdgasArgoNavigationHost.openItem === "function") { window.parent.bdgasArgoNavigationHost.openItem(pageInput); return; }
+          getXrm().Navigation.navigateTo(pageInput, { target: 1 });
+        }
+
+        function openNewRecord() {
+          getXrm().Navigation.openForm(
+            { entityName: "bdgas_devtask" },
+            {
+              bdgas_requestintakeid: state.requestIntakeId,
+              bdgas_requestintakeidname: state.requestIntakeName,
+              bdgas_requestintakeidtype: "bdgas_requestintake"
+            }
+          );
+        }
+
+        async function canCreateDevTask(xrm) {
+          var privileges = await xrm.Utility.getGlobalContext().userSettings.getSecurityRolePrivilegesInfo();
+          return Object.keys(privileges).some(function (privilegeId) {
+            return String(privileges[privilegeId].privilegeName || "").toLowerCase() === "prvcreatebdgas_devtask";
+          });
+        }
+
+        function getCurrentRequestIntake() {
+          var current = window;
+          while (true) {
+            try {
+              var entity = current.Xrm && current.Xrm.Page && current.Xrm.Page.data && current.Xrm.Page.data.entity;
+              if (entity && entity.getEntityName() === "bdgas_requestintake") {
+                return {
+                  id: cleanGuid(entity.getId()),
+                  name: entity.getPrimaryAttributeValue() || ""
+                };
+              }
+            } catch (error) {}
+            if (!current.parent || current.parent === current) break;
+            current = current.parent;
+          }
+          return { id: "", name: "" };
+        }
+
+        function groupRecords(records) { var groups = {}; records.forEach(function (record) { var name = getDevelopmentEstimationName(record) || "No Development Estimation"; if (!groups[name]) groups[name] = { name: name, hours: 0, progressHours: 0, records: [] }; groups[name].hours += Number(record.bdgas_hours) || 0; groups[name].progressHours += getProgressHours(record); groups[name].records.push(record); }); return Object.keys(groups).sort().map(function (key) { return groups[key]; }); }
+        function populateAssignees(records) { var values = {}; records.forEach(function (record) { var id = cleanGuid(record._bdgas_assignee_value); var name = getAssigneeName(record); if (id && name) values[id] = name; }); clearChildren(elements.assigneeFilter); var all = document.createElement("option"); all.value = ""; all.textContent = "All assignees"; elements.assigneeFilter.appendChild(all); Object.keys(values).sort(function (a, b) { return values[a].localeCompare(values[b]); }).forEach(function (id) { var option = document.createElement("option"); option.value = id; option.textContent = values[id]; elements.assigneeFilter.appendChild(option); }); }
+        function getAssigneeName(record) { return record["_bdgas_assignee_value@OData.Community.Display.V1.FormattedValue"] || (record.bdgas_devtask_assignee_systemuser && record.bdgas_devtask_assignee_systemuser.fullname) || ""; }
+        function getDevelopmentEstimationName(record) { return record["_bdgas_devestimation_value@OData.Community.Display.V1.FormattedValue"] || ""; }
+        function getProgressHours(record) { return (Number(record.bdgas_completion) || 0) / 100 * (Number(record.bdgas_hours) || 0); }
+        function createCell(value, className) { var cell = document.createElement("td"); cell.textContent = value; if (className) cell.className = className; return cell; }
+        function formatHours(value) { var hours = Number(value) || 0; return hours.toLocaleString(undefined, { maximumFractionDigits: 2 }); }
+        function formatCompletion(value) { return (Number(value) || 0).toLocaleString(undefined, { maximumFractionDigits: 2 }) + "%"; }
+        function getXrm() { var current = window; while (true) { try { if (current.Xrm && current.Xrm.WebApi && current.Xrm.Navigation && current.Xrm.Utility) return current.Xrm; } catch (error) {} if (!current.parent || current.parent === current) break; current = current.parent; } throw new Error("This web resource must be opened inside a model-driven app."); }
+        function renderMessage(title, body, isError) { var message = document.createElement("div"); message.className = "message" + (isError ? " error" : ""); var strong = document.createElement("strong"); strong.textContent = title; var text = document.createElement("span"); text.textContent = body; message.appendChild(strong); message.appendChild(text); clearChildren(elements.root); elements.root.appendChild(message); }
+        function clearChildren(element) { while (element.firstChild) element.removeChild(element.firstChild); }
+        function cleanGuid(value) { return String(value || "").replace(/[{}]/g, "").toLowerCase(); }
+        function escapeHtml(value) { return String(value || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+      })();
+    </script>
+  </body>
+</html>

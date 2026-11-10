@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{2aeb5a3e-cb75-4734-8d0c-6873fa8d5126}</savedqueryid>
+    <queryapi></queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" preview="1" icon="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="186" />
+          <cell name="scheduledstart" width="157" />
+          <cell name="regardingobjectid" width="100" />
+          <cell name="bdgas_requestname" width="123" />
+          <cell name="instancetypecode" width="100" ishidden="1" />
+          <cell name="bdgas_slotstatus" width="101" />
+          <cell name="onlinemeetingjoinurl" width="178" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="scheduledstart" />
+          <attribute name="instancetypecode" />
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="subject" operator="like" value="{0}" />
+            <condition attribute="bdgas_requestname" operator="like" value="{0}" />
+            <condition attribute="regardingobjectid" operator="like" value="{0}" />
+            <condition attribute="bdgas_documentid" operator="like" value="{0}" />
+            <condition attribute="bdgas_configurationitemserialnumber" operator="like" value="{0}" />
+            <condition attribute="bdgas_configurationitemname" operator="like" value="{0}" />
+          </filter>
+          <attribute name="bdgas_slotstatus" />
+          <attribute name="onlinemeetingjoinurl" />
+          <attribute name="regardingobjectid" />
+          <attribute name="bdgas_requestname" />
+          <order attribute="scheduledstart" descending="false" />
+          <attribute name="activityid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find All Appointments" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

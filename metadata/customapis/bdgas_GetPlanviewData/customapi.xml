@@ -1,0 +1,18 @@
+<customapi uniquename="bdgas_GetPlanviewData">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="GetPlanviewData">
+    <label description="GetPlanviewData" languagecode="1033" />
+  </description>
+  <displayname default="GetPlanviewData">
+    <label description="GetPlanviewData" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>GetPlanviewData</name>
+  <plugintypeid>
+    <plugintypeexportkey>4E21BA5BED22F1EA277E56A6C27F07632F57E191DF5F205FD762E0D8DD756A42</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

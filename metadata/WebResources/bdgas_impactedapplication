@@ -1,0 +1,41 @@
+var impactedApplication = impactedApplication || {};
+(function() {
+	this.formOnLoad = function(context) {
+		var formContext = context.getFormContext();
+		setFieldsNotRequired(formContext);
+
+		var application = formContext.getAttribute("bdgas_application");
+		if (application) {
+			application.addOnChange(onApplicationChange);
+		}
+	};
+
+	function setFieldsNotRequired(formContext) {
+		var fieldNames = ["bdgas_requestintakeid", "bdgas_appointmentid"];
+		fieldNames.forEach(function(fieldName) {
+			var attribute = formContext.getAttribute(fieldName);
+			if (attribute) {
+				attribute.setRequiredLevel("none");
+			}
+		});
+	}
+
+	// Copy the selected application's name into bdgas_requestintakeapplication.
+	function onApplicationChange(context) {
+		var formContext = context.getFormContext();
+		var nameAttribute = formContext.getAttribute("bdgas_requestintakeapplication");
+		var application = formContext.getAttribute("bdgas_application").getValue();
+		if (!nameAttribute || !application || !application.length) {
+			return;
+		}
+
+		var applicationId = application[0].id.replace(/[{}]/g, "");
+		Xrm.WebApi.retrieveRecord("bdgas_application", applicationId, "?$select=bdgas_applicationname")
+			.then(function(result) {
+				nameAttribute.setValue(result.bdgas_applicationname || null);
+			})
+			.catch(function(error) {
+				console.error("Unable to retrieve the application name.", error);
+			});
+	}
+}).apply(impactedApplication);

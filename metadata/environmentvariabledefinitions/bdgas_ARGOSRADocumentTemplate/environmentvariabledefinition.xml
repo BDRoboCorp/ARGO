@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_ARGOSRADocumentTemplate">
+  <defaultvalue>[   {     "DocumentTemplateId": "2049b11b-40d3-f111-a059-00224835947e"   },   {     "DocumentTemplateId": "b42a5215-40d3-f111-a059-00224835947e"   },   {     "DocumentTemplateId": "c1be540f-40d3-f111-a059-00224835947e"   },   {     "DocumentTemplateId": "d325ef01-40d3-f111-a059-00224835947e"   },   {     "DocumentTemplateId": "a8771c74-3cd3-f111-a059-00224835947e"   } ]</defaultvalue>
+  <displayname default="ARGO SRA Document Template">
+    <label description="ARGO SRA Document Template" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

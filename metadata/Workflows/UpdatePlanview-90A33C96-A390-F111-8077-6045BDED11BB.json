@@ -1,0 +1,482 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_b7289"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_uiflow-1": {
+        "api": {
+          "name": "shared_uiflow"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_shareduiflow_e4001"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_b44f2"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "ARGO Application URL (bdgas_ARGOApplicationURL)": {
+          "defaultValue": "https://org6547479b.crm.dynamics.com/main.aspx?appid=cebc59c4-bf80-f111-ab0f-000d3a11e677&forceUCI=1",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bdgas_ARGOApplicationURL"
+          }
+        },
+        "ARGO notification flows (bdgas_ARGOnotificationflows)": {
+          "defaultValue": {
+            "Recipients": "temmy.raharjo@bd.com;jordan.cheng@bd.com;muhammad.zhafari@bd.com"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_ARGOnotificationflows"
+          }
+        },
+        "Planview Configuration (bdgas_PlanviewConfiguration)": {
+          "defaultValue": {
+            "PlanviewEnvironment": "bdtsandbox1",
+            "PlanviewURL": "https://bdtgs-sb.pvcloud.com/planview/Login/body.aspx?manual=y",
+            "PlanviewUsername": "RPA2426774",
+            "PlanviewPassword": "RPA2426774",
+            "PlanviewReviewer": "christopher.tan@bd.com;weelung.lee@bd.com"
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "bdgas_PlanviewConfiguration"
+          }
+        }
+      },
+      "triggers": {
+        "When_Request_Intake_modified": {
+          "type": "OpenApiConnectionWebhook",
+          "description": "When Lifecycle is Solution Design",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/entityname": "bdgas_requestintake",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "statuscode",
+              "subscriptionRequest/filterexpression": "statuscode eq 100000002",
+              "subscriptionRequest/name": "90a33c96-a390-f111-8077-6045bded11bb"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "c48b22e5-7f71-4aa5-a894-4a94e1da867c"
+          }
+        }
+      },
+      "actions": {
+        "Try_Scope": {
+          "type": "Scope",
+          "actions": {
+            "Perform_an_unbound_action_GetPlanviewData": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "actionName": "bdgas_GetPlanviewData",
+                  "item/RequestIntakeId": "@triggerOutputs()?['body/bdgas_requestintakeid']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "PerformUnboundAction",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            },
+            "Parse_JSON_Planview_Data": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@outputs('Perform_an_unbound_action_GetPlanviewData')?['body/Result']",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ProjectName": {
+                      "type": "string"
+                    },
+                    "BusinessValueScore": {
+                      "type": "string"
+                    },
+                    "Size&Complexity": {
+                      "type": "string"
+                    },
+                    "ReusabilityScore": {
+                      "type": "string"
+                    },
+                    "ValueRealizationScore": {
+                      "type": "string"
+                    },
+                    "OpportunityScore": {
+                      "type": "integer"
+                    },
+                    "BusinessCapabilityStatus": {
+                      "type": "string"
+                    },
+                    "DataClassification": {
+                      "type": "string"
+                    },
+                    "ImpactedPlatformsOrDomains": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ApplicationName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "ApplicationName"
+                        ]
+                      }
+                    },
+                    "DeliveryModel": {
+                      "type": "string"
+                    },
+                    "WorkDescription": {
+                      "type": "string"
+                    },
+                    "Scope": {
+                      "type": "string"
+                    },
+                    "OutOfScope": {
+                      "type": "string"
+                    },
+                    "ResponsibleAIRiskProfile": {
+                      "type": "string"
+                    },
+                    "CINumber": {
+                      "type": "string"
+                    },
+                    "ExLTOwner": {
+                      "type": "string"
+                    },
+                    "KnownVendorsOrPartners": {
+                      "type": "string"
+                    },
+                    "RAMeetingCompleted": {
+                      "type": "string"
+                    },
+                    "RAMeetingDate": {
+                      "type": "string"
+                    },
+                    "RAApplicability": {
+                      "type": "boolean"
+                    },
+                    "AssessmentsRequired": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "AssessmentName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "AssessmentName"
+                        ]
+                      }
+                    },
+                    "BenefitsAnticipated": {
+                      "type": "string"
+                    },
+                    "BenefitType(P)": {
+                      "type": "string"
+                    },
+                    "BDStrategyAlignment": {
+                      "type": "string"
+                    },
+                    "RoadmapAlignment": {
+                      "type": "string"
+                    },
+                    "SuccessCriteriaKPIs": {
+                      "type": "string"
+                    },
+                    "ResourceAllocations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "PICName": {
+                            "type": "string"
+                          },
+                          "Percentage": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "PICName",
+                          "Percentage"
+                        ]
+                      }
+                    },
+                    "FinancePOC": {
+                      "type": "string"
+                    },
+                    "CostCenterOperations": {
+                      "type": "string"
+                    },
+                    "CostCenterDevelopment": {
+                      "type": "string"
+                    },
+                    "TotalDevelopmentCost": {
+                      "type": "integer"
+                    },
+                    "TotalOperationCost": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Perform_an_unbound_action_GetPlanviewData": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Run_a_flow_built_with_Power_Automate_for_desktop": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "uiFlowId": "bc4ca452-4897-4e04-a493-2174e8c34102",
+                  "runMode": "attended",
+                  "item/varPlanviewDataJSON": "@string(body('Parse_JSON_Planview_Data'))",
+                  "item/varPlanviewURL": "@body('Parse_JSON_Env_Variable')?['PlanviewURL']",
+                  "item/varPlanviewUsername": "@body('Parse_JSON_Env_Variable')?['PlanviewUsername']",
+                  "item/varPlanviewPassword": "@body('Parse_JSON_Env_Variable')?['PlanviewPassword']",
+                  "item/varPlanviewEnvi": "@body('Parse_JSON_Env_Variable')?['PlanviewEnvironment']",
+                  "item/varLogPath": "@body('Parse_JSON_Env_Variable')?['LogPath']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_uiflow",
+                  "operationId": "RunUIFlow_V2",
+                  "connectionName": "shared_uiflow-1"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON_Env_Variable": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Parse_JSON_Env_Variable": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('Planview Configuration (bdgas_PlanviewConfiguration)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "PlanviewEnvironment": {
+                      "type": "string"
+                    },
+                    "PlanviewURL": {
+                      "type": "string"
+                    },
+                    "PlanviewUsername": {
+                      "type": "string"
+                    },
+                    "PlanviewPassword": {
+                      "type": "string"
+                    },
+                    "PlanviewReviewer": {
+                      "type": "string"
+                    },
+                    "LogPath": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Parse_JSON_Planview_Data": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Condition_Desktop_Flow_Result": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  {
+                    "not": {
+                      "equals": [
+                        "@outputs('Run_a_flow_built_with_Power_Automate_for_desktop')?['body/varIsSuccess']",
+                        "@string('false')"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "actions": {
+                "Compose_Request_Intake_URL": {
+                  "type": "Compose",
+                  "inputs": "@{parameters('ARGO Application URL (bdgas_ARGOApplicationURL)')}&pagetype=entityrecord&etn=bdgas_requestintake&id=@{triggerOutputs()?['body/bdgas_requestintakeid']}"
+                },
+                "Compose_Body_Email": {
+                  "type": "Compose",
+                  "inputs": "<p>Hello Team,</p>\n<br>\n<p>\nThe automated update of the <strong>Planview</strong> record has been completed successfully. The record is now ready for review and validation prior to submission.\n</p>\n\n<p>\n<strong>Record Information</strong>\n</p>\n\n<ul>\n    <li>\n        <strong>Planview ID: </strong>\n        @{triggerOutputs()?['body/bdgas_planviewid']}\n    </li>\n\n    <li>\n        <strong>Planview Project Name: </strong>\n        <a href=\"@{outputs('Run_a_flow_built_with_Power_Automate_for_desktop')?['body/varPlanviewRecordURL']}\">\n            @{triggerOutputs()?['body/bdgas_digitalproductname']}\n        </a>\n    </li>\n\n    <li>\n        <strong>Request No (ARGO): </strong>\n        @{triggerOutputs()?['body/bdgas_requestintake']}\n    </li>\n\n    <li>\n        <strong>Request Name (ARGO): </strong>\n        @{triggerOutputs()?['body/bdgas_digitalproductname']}\n    </li>\n\n    <li>\n        <strong>Request Intake Link (ARGO): </strong>\n        <a href=\"@{outputs('Compose_Request_Intake_URL')}\">\n            View BOT in ARGO App\n        </a>\n    </li>\n</ul>\n\n<p>\nKindly review the record and proceed with the submission if all information has been validated and no further changes are required.\n</p>\n\n<br>\n\n<p>\nThank you.\n</p>\n\n<p>\nBest regards,\n</p>\n<p>\n<strong>ARGO Notification</strong>\n</p>\n\n<hr>\n\n<p style=\"font-size:12px;color:#666666;\">\nThis is an automated notification generated by ARGO App. No reply is required. BD Restricted.\n</p>",
+                  "runAfter": {
+                    "Compose_Request_Intake_URL": [
+                      "SUCCEEDED"
+                    ]
+                  }
+                },
+                "Send_an_email_(V2)": {
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "emailMessage/To": "@body('Parse_JSON_Env_Variable')?['PlanviewReviewer']",
+                      "emailMessage/Subject": "[DEV] ARGO - Planview Ready for Review",
+                      "emailMessage/Body": "@outputs('Compose_Body_Email')",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                      "operationId": "SendEmailV2",
+                      "connectionName": "shared_office365"
+                    }
+                  },
+                  "runAfter": {
+                    "Compose_Body_Email": [
+                      "SUCCEEDED"
+                    ]
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Compose_Throw_Error": {
+                    "type": "Compose",
+                    "inputs": "@int('INVALID')"
+                  }
+                }
+              },
+              "runAfter": {
+                "Run_a_flow_built_with_Power_Automate_for_desktop": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {}
+        },
+        "CatchScope": {
+          "type": "Scope",
+          "actions": {
+            "Send_an_email_(V2)_1": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@body('Parse_JSON')?['Recipients']",
+                  "emailMessage/Subject": "[ARGO System Notification] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br><b><strong class=\"editor-text-bold\">Flow Name:</strong></b> @{outputs('Get_Workflow_Details')?['tags']?['flowDisplayName']}</p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Flow URL:</strong></b> <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a></p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">ARGO Record: </strong></b><a href=\"@{outputs('Record_URL')}\" class=\"editor-link\">View Record</a><br><br>Kindly contact IT Support for further assistance.<br><br><i><b><strong class=\"editor-text-bold editor-text-italic\">Do not reply to this email as it was automatically generated by the system.</strong></b></i><br><br>Thank you,<br>ARGO System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "503d7713-0632-47ae-87e7-eecda3637bbf"
+              }
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "https://make.powerautomate.com/environments/@{outputs('Get_Workflow_Details')?['tags']?['environmentName']}/flows/@{outputs('Get_Workflow_Details')?['name']}/runs/@{outputs('Get_Workflow_Details')?['run']['name']}",
+              "runAfter": {
+                "Get_Workflow_Details": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5dac59e2-9883-49ed-882e-6b8d857bf307"
+              }
+            },
+            "Get_Workflow_Details": {
+              "type": "Compose",
+              "inputs": "@workflow()",
+              "metadata": {
+                "operationMetadataId": "b7f5e576-5cae-4bae-b2b6-2c889e0abe66"
+              }
+            },
+            "Record_URL": {
+              "type": "Compose",
+              "inputs": "@{parameters('ARGO Application URL (bdgas_ARGOApplicationURL)')}&pagetype=entityrecord&etn=bdgas_requestintake&id=@{triggerOutputs()?['body/bdgas_requestintakeid']}",
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Parse_JSON": {
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('ARGO notification flows (bdgas_ARGOnotificationflows)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Recipients": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Record_URL": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Try_Scope": [
+              "TimedOut",
+              "Failed",
+              "Skipped"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0523e571-68ec-4397-9fb8-b467e2c6089a"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

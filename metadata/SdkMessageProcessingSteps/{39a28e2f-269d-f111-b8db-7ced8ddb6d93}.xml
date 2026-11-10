@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="BD.IPA.Plugins.PreBudgetRequestOnCreate: Create of bdgas_budgetrequest" SdkMessageProcessingStepId="{39a28e2f-269d-f111-b8db-7ced8ddb6d93}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeExportKey>BD861E3FE18D9D3DBF8236C4172A6D799335D366773952BE0A9C5A067FACF573</PluginTypeExportKey>
+  <PrimaryEntity>bdgas_budgetrequest</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>BD.IPA.Plugins.PreBudgetRequestOnCreate: Create of bdgas_budgetrequest</Description>
+  <FilteringAttributes>bdgas_fee,bdgas_isrecurring</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

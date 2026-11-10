@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{e5a0fdbc-f496-4b0e-9d64-a11b29327fe6}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_name" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_budgetrequestid">
+          <cell name="a_9ff7406c2ba9454d9b282d6025f95015.bdgas_digitalproductname" width="234" />
+          <cell name="bdgas_chargebacktype" width="138" />
+          <cell name="bdgas_fee" width="150" />
+          <cell name="bdgas_financepoc" width="164" />
+          <cell name="bdgas_costcenter" width="150" />
+          <cell name="bdgas_datechargeback" width="150" />
+          <cell name="bdgas_isrecurring" width="150" />
+          <cell name="bdgas_nextchargebackdate" width="150" />
+          <cell name="bdgas_name" width="300" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_budgetrequest">
+          <attribute name="bdgas_budgetrequestid" />
+          <attribute name="bdgas_name" />
+          <attribute name="createdon" />
+          <order attribute="bdgas_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_costcenter" />
+          <attribute name="bdgas_datechargeback" />
+          <attribute name="bdgas_fee" />
+          <attribute name="bdgas_isrecurring" />
+          <attribute name="bdgas_nextchargebackdate" />
+          <attribute name="bdgas_chargebacktype" />
+          <link-entity alias="a_9ff7406c2ba9454d9b282d6025f95015" name="bdgas_requestintake" to="bdgas_requestintakeid" from="bdgas_requestintakeid" link-type="outer" visible="false">
+            <attribute name="bdgas_digitalproductname" />
+          </link-entity>
+          <attribute name="bdgas_financepoc" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Budget Requests" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Regulatory Assessment Scheduler</title>
+    <style>
+      :root {
+        --blue: #0f6cbd;
+        --blue-soft: #eef6fc;
+        --border: #d1d1d1;
+        --border-soft: #e5e5e5;
+        --text: #242424;
+        --muted: #616161;
+        --page: #f5f5f5;
+        --surface: #ffffff;
+        --error: #a4262c;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--page);
+        font: 14px/1.4 "Segoe UI", "SegoeUI", sans-serif;
+      }
+      button { font: inherit; }
+      .shell { min-height: 100vh; }
+      .command-bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        border-bottom: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .brand-mark {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--blue);
+        border-radius: 2px;
+        font-weight: 600;
+      }
+      h1 { margin: 0; font-size: 16px; font-weight: 600; }
+      .status { margin-left: auto; color: var(--muted); font-size: 12px; }
+      .content { padding: 12px; }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .toolbar h2 { margin: 0; font-size: 20px; font-weight: 600; }
+      .toolbar p { margin: 2px 0 0; color: var(--muted); }
+      .toolbar-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 8px;
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .filter-field {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 180px;
+      }
+      .filter-field label {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .filter-field input {
+        min-height: 32px;
+        padding: 5px 8px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+      }
+      .refresh-button {
+        min-height: 32px;
+        padding: 5px 12px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        color: var(--text);
+        background: var(--surface);
+        cursor: pointer;
+      }
+      .refresh-button:hover { border-color: var(--blue); color: var(--blue); }
+      .refresh-button:focus-visible,
+      .group-toggle:focus-visible,
+      a:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+      .message {
+        padding: 12px;
+        border-left: 4px solid var(--blue);
+        background: var(--surface);
+      }
+      .message.error { border-left-color: var(--error); }
+      .message strong { display: block; margin-bottom: 4px; }
+      .group {
+        margin-top: 8px;
+        border: 1px solid var(--border-soft);
+        background: var(--surface);
+      }
+      .group-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 9px 12px;
+        border: 0;
+        border-bottom: 1px solid var(--border-soft);
+        color: var(--text);
+        background: var(--surface);
+        text-align: left;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .group-toggle:hover { background: var(--blue-soft); }
+      .group-count { color: var(--muted); font-size: 12px; font-weight: 400; }
+      .table-wrap { overflow-x: auto; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 900px;
+      }
+      th:nth-child(1), td:nth-child(1) { width: 21%; }
+      th:nth-child(2), td:nth-child(2) { width: 17%; }
+      th:nth-child(3), td:nth-child(3) { width: 17%; }
+      th:nth-child(4), td:nth-child(4) { width: 14%; }
+      th:nth-child(5), td:nth-child(5) { width: 9%; }
+      th:nth-child(6), td:nth-child(6) { width: 10%; }
+      th:nth-child(7), td:nth-child(7) { width: 12%; }
+      th, td {
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border-soft);
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+      }
+      th {
+        color: var(--muted);
+        background: #fafafa;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      tbody tr:last-child td { border-bottom: 0; }
+      tbody tr:hover { background: #f8fbfd; }
+      a { color: var(--blue); }
+      .muted { color: var(--muted); }
+      .status-pill {
+        display: inline-block;
+        padding: 2px 6px;
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 12px;
+      }
+      .status-available {
+        border-color: #107c10;
+        color: #107c10;
+        background: #f1faf1;
+      }
+      .status-reserved {
+        border-color: #8a6100;
+        color: #8a6100;
+        background: #fff8e1;
+      }
+      .status-cancelled {
+        border-color: #a4262c;
+        color: #a4262c;
+        background: #fdf3f4;
+      }
+      .status-other {
+        border-color: var(--blue);
+        color: var(--blue);
+        background: var(--blue-soft);
+      }
+      @media (max-width: 640px) {
+        .content { padding: 8px; }
+        .toolbar { align-items: stretch; flex-direction: column; }
+        .refresh-button { width: 100%; }
+        .status { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="command-bar">
+        <div class="brand-mark" aria-hidden="true">P</div>
+        <h1>Regulatory Assessment Scheduler</h1>
+      </header>
+      <section class="content" aria-live="polite">
+        <div class="toolbar">
+          <div>
+            <h2>Regulatory Assessment Scheduler</h2>
+            <p id="summaryText">Loading appointment records.</p>
+          </div>
+          <div class="toolbar-actions">
+            <button
+              class="refresh-button"
+              id="createSraMeetingButton"
+              type="button"
+              hidden
+            >
+              Create SRA Meeting
+            </button>
+            <button class="refresh-button" id="refreshButton" type="button">
+              Refresh
+            </button>
+          </div>
+        </div>
+        <form class="filters" id="filterForm">
+          <div class="filter-field">
+            <label for="sortDateFilter">Filter Date</label>
+            <input id="sortDateFilter" name="sortDate" type="date" />
+          </div>
+          <div class="filter-field">
+            <label for="subjectFilter">Subject</label>
+            <input
+              id="subjectFilter"
+              name="subject"
+              type="search"
+              placeholder="Search subject"
+            />
+          </div>
+          <div class="filter-field">
+            <label for="documentIdFilter">Document ID</label>
+            <input
+              id="documentIdFilter"
+              name="documentId"
+              type="search"
+              placeholder="Search document ID"
+            />
+          </div>
+          <button class="refresh-button" type="submit">Search</button>
+        </form>
+        <div id="appointmentsRoot"></div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var PAGE_SIZE = 100;
+        var NAVIGATION_DATA_KEY = "bdgas_sraAppointmentNavigationData";
+        var REGULATORY_LOCK_CONFIG_SCHEMA_NAME =
+          "bdgas_regulatorylockconfiguration";
+        var elements = {
+          root: document.getElementById("appointmentsRoot"),
+          refresh: document.getElementById("refreshButton"),
+          createSraMeeting: document.getElementById("createSraMeetingButton"),
+          filterForm: document.getElementById("filterForm"),
+          sortDateFilter: document.getElementById("sortDateFilter"),
+          subjectFilter: document.getElementById("subjectFilter"),
+          documentIdFilter: document.getElementById("documentIdFilter"),
+          summary: document.getElementById("summaryText"),
+        };
+        var publicHolidayDates = new Set();
+        var dateRulesReady = loadPublicHolidayDates(getXrm());
+
+        elements.refresh.addEventListener("click", loadAppointments);
+        elements.createSraMeeting.addEventListener(
+          "click",
+          openQuickCreateAppointment,
+        );
+        elements.filterForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          loadAppointments();
+        });
+        initializeDateRules();
+
+        async function initializeDateRules() {
+          try {
+            await dateRulesReady;
+            var firstSelectableDate = getNextSelectableDate(
+              toLocalDateOnly(new Date()),
+            );
+            elements.sortDateFilter.min = firstSelectableDate;
+            await loadAppointments();
+          } catch (error) {
+            renderMessage("Unable to load scheduler dates", error.message || String(error), true);
+          }
+        }
+
+        async function loadAppointments() {
+          elements.createSraMeeting.hidden = true;
+          elements.summary.textContent = "Loading appointment records.";
+          clearChildren(elements.root);
+
+          try {
+            await dateRulesReady;
+            var xrm = getXrm();
+            var access = await getRegulatoryAdminAccess(xrm);
+            elements.createSraMeeting.hidden = !access;
+            var hasSelectedFilterDate =
+              Boolean(elements.sortDateFilter.value);
+            var selectedDate = elements.sortDateFilter.value
+              ? getNextSelectableDate(
+                  getPreviousDate(elements.sortDateFilter.value),
+                )
+              : getDefaultAppointmentDate(
+                  toLocalDateOnly(new Date()),
+                );
+
+            if (
+              elements.sortDateFilter.value &&
+              selectedDate
+            ) {
+              elements.sortDateFilter.value = selectedDate;
+            }
+
+            var appointments = await retrieveAllAppointments(xrm, {
+              sortDate: selectedDate,
+              filterFromDate: !hasSelectedFilterDate,
+              subject: elements.subjectFilter.value.trim(),
+              documentId: elements.documentIdFilter.value.trim(),
+            });
+            renderAppointments(appointments);
+          } catch (error) {
+            renderMessage("Unable to load appointments", error.message || String(error), true);
+          }
+        }
+
+        async function loadPublicHolidayDates(xrm) {
+          var nextQuery =
+            "?$select=bdgas_date&$orderby=bdgas_date asc";
+
+          while (nextQuery) {
+            var result = await xrm.WebApi.retrieveMultipleRecords(
+              "bdgas_publicholiday",
+              nextQuery,
+              PAGE_SIZE,
+            );
+
+            (result.entities || []).forEach(function (record) {
+              var holidayDate = toDateOnly(record.bdgas_date);
+              if (holidayDate) {
+                publicHolidayDates.add(holidayDate);
+              }
+            });
+
+            nextQuery = getQueryOptions(result.nextLink);
+          }
+        }
+
+        function getXrm() {
+          var current = window;
+          while (true) {
+            try {
+              if (current.Xrm && current.Xrm.WebApi && current.Xrm.Navigation && current.Xrm.Utility) {
+                return current.Xrm;
+              }
+            } catch (error) {
+              // Cross-origin frame; can't inspect it, keep walking up.
+            }
+
+            if (!current.parent || current.parent === current) { break; }
+            current = current.parent;
+          }
+
+          throw new Error("This web resource must be opened inside a model-driven app.");
+        }
+
+        async function getRegulatoryAdminAccess(xrm) {
+          var teamId = await getRegulatoryAdminTeamId(xrm);
+          if (!teamId) {
+            return false;
+          }
+
+          var userId = cleanGuid(
+            xrm.Utility.getGlobalContext().userSettings.userId,
+          );
+          var result = await xrm.WebApi.retrieveRecord(
+            "systemuser",
+            userId,
+            "?$select=systemuserid&$expand=teammembership_association($select=teamid)",
+          );
+
+          return (result.teammembership_association || []).some(function (team) {
+            return cleanGuid(team.teamid) === teamId;
+          });
+        }
+
+        async function getRegulatoryAdminTeamId(xrm) {
+          var query =
+            "?$select=defaultvalue&$filter=schemaname eq '" +
+            REGULATORY_LOCK_CONFIG_SCHEMA_NAME +
+            "'&$expand=environmentvariabledefinition_environmentvariablevalue($select=value)";
+          var result = await xrm.WebApi.retrieveMultipleRecords(
+            "environmentvariabledefinition",
+            query,
+          );
+
+          if (!result.entities.length) {
+            return "";
+          }
+
+          var definition = result.entities[0];
+          var values =
+            definition.environmentvariabledefinition_environmentvariablevalue ||
+            [];
+          var currentValue =
+            values.length && values[0].value
+              ? values[0].value
+              : definition.defaultvalue;
+
+          if (!currentValue) {
+            return "";
+          }
+
+          try {
+            return cleanGuid(JSON.parse(currentValue).RegulatoryAdmin);
+          } catch (error) {
+            return "";
+          }
+        }
+
+        function openQuickCreateAppointment() {
+          getXrm().Navigation.openForm(
+            {
+              entityName: "appointment",
+              useQuickCreateForm: true,
+            },
+          );
+        }
+
+        async function retrieveAllAppointments(xrm, filters) {
+          var today = toLocalDateOnly(new Date());
+          var earliestSortDate = getNextDate(today);
+          var filterConditions = [
+            "bdgas_sratemplate eq true",
+            "(bdgas_slotstatus eq 0 or bdgas_slotstatus eq 2)",
+            "sortdate ge " + toLocalMidnightIso(earliestSortDate),
+          ];
+          if (filters.sortDate) {
+            filterConditions.push(
+              "sortdate ge " + toLocalMidnightIso(filters.sortDate),
+            );
+            if (!filters.filterFromDate) {
+              filterConditions.push(
+                "sortdate lt " +
+                  toLocalMidnightIso(getNextDate(filters.sortDate)),
+              );
+            }
+          }
+          if (filters.documentId) {
+            filterConditions.push(
+              "contains(bdgas_documentid, '" +
+                escapeODataString(filters.documentId) +
+                "')",
+            );
+          }
+          if (filters.subject) {
+            filterConditions.push(
+              "contains(subject, '" +
+                escapeODataString(filters.subject) +
+                "')",
+            );
+          }
+
+          var query =
+            "?$select=subject,instancetypecode,bdgas_documentid,actualstart," +
+            "bdgas_slotstatus,onlinemeetingjoinurl,_regardingobjectid_value,bdgas_requestname," +
+            "activityid,bdgas_slotnumber,sortdate&$filter=" +
+            filterConditions.join(" and ") +
+            "&" +
+            "$orderby=sortdate asc,bdgas_slotnumber asc";
+          var records = [];
+          var nextQuery = query;
+
+          while (nextQuery) {
+            var result = await xrm.WebApi.retrieveMultipleRecords(
+              "appointment",
+              nextQuery,
+              PAGE_SIZE,
+            );
+            records = records.concat(result.entities || []);
+            nextQuery = getQueryOptions(result.nextLink);
+          }
+
+          return records.filter(function (record) {
+            return !publicHolidayDates.has(toLocalDateOnly(record.sortdate));
+          });
+        }
+
+        function getNextDate(value) {
+          var date = new Date(value + "T00:00:00Z");
+          date.setUTCDate(date.getUTCDate() + 1);
+          return date.toISOString().slice(0, 10);
+        }
+
+        function getPreviousDate(value) {
+          var date = new Date(value + "T00:00:00Z");
+          date.setUTCDate(date.getUTCDate() - 1);
+          return date.toISOString().slice(0, 10);
+        }
+
+        function getNextSelectableDate(value) {
+          var candidate = getNextDate(value);
+
+          while (
+            isWeekend(candidate) ||
+            publicHolidayDates.has(candidate)
+          ) {
+            candidate = getNextDate(candidate);
+          }
+
+          return candidate;
+        }
+
+        function getDefaultAppointmentDate(value) {
+          var date = new Date(value + "T00:00:00Z");
+          var day = date.getUTCDay();
+          var daysToAdd = day === 4 ? 4 : day >= 5 ? 2 - day + 7 : 2;
+
+          date.setUTCDate(date.getUTCDate() + daysToAdd);
+
+          var candidate = date.toISOString().slice(0, 10);
+          while (
+            isWeekend(candidate) ||
+            publicHolidayDates.has(candidate)
+          ) {
+            candidate = getNextDate(candidate);
+          }
+
+          return candidate;
+        }
+
+        function isWeekend(value) {
+          var day = new Date(value + "T00:00:00Z").getUTCDay();
+          return day === 0 || day === 6;
+        }
+
+        function toDateOnly(value) {
+          return value
+            ? String(value).slice(0, 10)
+            : "";
+        }
+
+        // sortdate is stored in UTC, so convert it to the user's local
+        // calendar date before comparing with date-only values.
+        function toLocalDateOnly(value) {
+          var date = value instanceof Date ? value : new Date(value);
+          if (!value || isNaN(date.getTime())) {
+            return "";
+          }
+
+          return (
+            date.getFullYear() +
+            "-" +
+            String(date.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(date.getDate()).padStart(2, "0")
+          );
+        }
+
+        function toLocalMidnightIso(value) {
+          var parts = value.split("-");
+          return new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2]),
+          ).toISOString();
+        }
+
+        function escapeODataString(value) {
+          return String(value).replace(/'/g, "''");
+        }
+
+        function getQueryOptions(nextLink) {
+          if (!nextLink) {
+            return null;
+          }
+
+          var queryStart = nextLink.indexOf("?");
+          return queryStart === -1 ? null : nextLink.substring(queryStart);
+        }
+
+        function renderAppointments(appointments) {
+          if (!appointments.length) {
+            elements.summary.textContent = "No SRA appointments were found.";
+            renderMessage("No appointments", "No SRA appointments were found for the selected filters.", false);
+            return;
+          }
+
+          var groups = groupBySortDate(appointments);
+          var availableSlotCount = getAvailableSlotCount(appointments);
+          elements.summary.textContent =
+            "Total Slots: " +
+            availableSlotCount +
+            " | " +
+            groups.length +
+            " sort date group" +
+            (groups.length === 1 ? "" : "s") +
+            ".";
+
+          groups.forEach(function (group) {
+            elements.root.appendChild(createGroup(group));
+          });
+        }
+
+        function groupBySortDate(records) {
+          var groups = [];
+          var groupMap = {};
+
+          records.forEach(function (record) {
+            var key = record.sortdate || "no-sort-date";
+            if (!groupMap[key]) {
+              groupMap[key] = { key: key, records: [] };
+              groups.push(groupMap[key]);
+            }
+            groupMap[key].records.push(record);
+          });
+
+          return groups.sort(function (left, right) {
+            if (left.key === "no-sort-date") return 1;
+            if (right.key === "no-sort-date") return -1;
+            return new Date(left.key) - new Date(right.key);
+          });
+        }
+
+        function getAvailableSlotCount(records) {
+          return records.filter(function (record) {
+            return Number(record.bdgas_slotstatus) === 0;
+          }).length;
+        }
+
+        function createGroup(group) {
+          var section = document.createElement("section");
+          section.className = "group";
+
+          var toggle = document.createElement("button");
+          toggle.className = "group-toggle";
+          toggle.type = "button";
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.innerHTML =
+            "<span>" + escapeHtml(formatDate(group.key)) +
+            "</span><span class=\"group-count\">(" +
+            getAvailableSlotCount(group.records) +
+            " available slot" +
+            (getAvailableSlotCount(group.records) === 1 ? "" : "s") +
+            ")</span>";
+
+          var tableWrap = document.createElement("div");
+          tableWrap.className = "table-wrap group-table";
+          tableWrap.hidden = true;
+          tableWrap.appendChild(createTable(group.records));
+          toggle.addEventListener("click", function () {
+            var expanded = toggle.getAttribute("aria-expanded") === "true";
+            collapseGroups();
+            if (!expanded) {
+              toggle.setAttribute("aria-expanded", "true");
+              tableWrap.hidden = false;
+            }
+          });
+
+          section.appendChild(toggle);
+          section.appendChild(tableWrap);
+          return section;
+        }
+
+        function createTable(records) {
+          var table = document.createElement("table");
+          table.innerHTML =
+            "<thead><tr>" +
+            "<th>Subject</th><th>Request Name</th><th>Document ID</th>" +
+            "<th>Date &amp; Time</th><th>Slot</th><th>Status</th>" +
+            "<th>Online meeting</th>" +
+            "</tr></thead>";
+          var body = document.createElement("tbody");
+
+          records.forEach(function (record) {
+            var row = document.createElement("tr");
+            row.appendChild(createAppointmentLinkCell(record, record.subject));
+            row.appendChild(createTextCell(getRequestName(record)));
+            row.appendChild(createTextCell(record.bdgas_documentid));
+            row.appendChild(createTextCell(formatDateTime(record.actualstart)));
+            row.appendChild(createTextCell(record.bdgas_slotnumber));
+            row.appendChild(createStatusCell(record, "bdgas_slotstatus"));
+            row.appendChild(createMeetingCell(record.onlinemeetingjoinurl));
+            body.appendChild(row);
+          });
+
+          table.appendChild(body);
+          return table;
+        }
+
+        function createTextCell(value) {
+          var cell = document.createElement("td");
+          cell.textContent = value === null || value === undefined || value === "" ? "-" : String(value);
+          return cell;
+        }
+
+        function createAppointmentLinkCell(record, value) {
+          var cell = document.createElement("td");
+          if (!value) {
+            cell.textContent = "-";
+            return cell;
+          }
+
+          if (!record.activityid) {
+            cell.textContent = String(value);
+            return cell;
+          }
+
+          var link = document.createElement("a");
+          link.href = "#";
+          link.textContent = String(value);
+          link.addEventListener("click", function (event) {
+            event.preventDefault();
+            openAppointmentRecord(record.activityid);
+          });
+          cell.appendChild(link);
+          return cell;
+        }
+
+        function getRequestName(record) {
+          return record.bdgas_requestname || "";
+        }
+
+        function createStatusCell(record, attributeName) {
+          var value = record[attributeName];
+          var cell = document.createElement("td");
+          if (value !== null && value !== undefined && value !== "") {
+            var pill = document.createElement("span");
+            var label =
+              getFormattedValue(record, attributeName) || getOptionLabel(value);
+            pill.className = "status-pill " + getStatusClass(label);
+            pill.textContent = label;
+            cell.appendChild(pill);
+          } else {
+            cell.textContent = "";
+          }
+          return cell;
+        }
+
+        function getStatusClass(value) {
+          var normalizedValue = String(value || "").trim().toLowerCase();
+          if (normalizedValue === "available") return "status-available";
+          if (normalizedValue === "reserved") return "status-reserved";
+          if (
+            normalizedValue === "cancelled" ||
+            normalizedValue === "canceled"
+          ) {
+            return "status-cancelled";
+          }
+          return "status-other";
+        }
+
+        function collapseGroups() {
+          elements.root.querySelectorAll(".group-table").forEach(function (table) {
+            table.hidden = true;
+          });
+          elements.root.querySelectorAll(".group-toggle").forEach(function (button) {
+            button.setAttribute("aria-expanded", "false");
+          });
+        }
+
+        function openAppointmentRecord(activityId) {
+          var pageInput = {
+            pageType: "entityrecord",
+            entityName: "appointment",
+            entityId: cleanGuid(activityId),
+            data: "MyScheduler",
+          };
+
+          if (openInNavigationHost(pageInput, "SRA Appointment")) {
+            return;
+          }
+
+          sessionStorage.setItem(NAVIGATION_DATA_KEY, pageInput.data);
+          getXrm().Navigation.navigateTo(
+            {
+              pageType: pageInput.pageType,
+              entityName: pageInput.entityName,
+              entityId: pageInput.entityId,
+            },
+            { target: 1 },
+          );
+        }
+
+        function openInNavigationHost(pageInput, title) {
+          try {
+            if (
+              window.parent &&
+              window.parent !== window &&
+              window.parent.bdgasArgoNavigationHost &&
+              typeof window.parent.bdgasArgoNavigationHost.openItem === "function"
+            ) {
+              pageInput.label = title;
+              window.parent.bdgasArgoNavigationHost.openItem(pageInput);
+              return true;
+            }
+          } catch (error) {
+            return false;
+          }
+
+          return false;
+        }
+
+        function createMeetingCell(url) {
+          var cell = document.createElement("td");
+          if (!url) {
+            cell.textContent = "-";
+            return cell;
+          }
+
+          var link = document.createElement("a");
+          link.href = url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Join Teams meeting";
+          cell.appendChild(link);
+          return cell;
+        }
+
+        function getLookupName(value) {
+          if (!value) return "";
+          if (typeof value === "string") return value;
+          return value.Name || value.name || value["@OData.Community.Display.V1.FormattedValue"] || "";
+        }
+
+        function getFormattedValue(record, attributeName) {
+          return (
+            record[attributeName + "@OData.Community.Display.V1.FormattedValue"] ||
+            ""
+          );
+        }
+
+        function getOptionLabel(value) {
+          if (value && typeof value === "object") {
+            return value["@OData.Community.Display.V1.FormattedValue"] || value.Value || value.value || "";
+          }
+          return value === null || value === undefined ? "" : String(value);
+        }
+
+        function formatDate(value) {
+          if (!value || value === "no-sort-date") return "No sort date";
+          var date = new Date(value);
+          return isNaN(date.getTime())
+            ? String(value)
+            : date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+        }
+
+        function formatDateTime(value) {
+          if (!value) return "-";
+          var date = new Date(value);
+          return isNaN(date.getTime())
+            ? String(value)
+            : date.toLocaleString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+              });
+        }
+
+        function renderMessage(title, body, isError) {
+          var message = document.createElement("div");
+          message.className = "message" + (isError ? " error" : "");
+          var heading = document.createElement("strong");
+          heading.textContent = title;
+          var text = document.createElement("span");
+          text.textContent = body;
+          message.appendChild(heading);
+          message.appendChild(text);
+          elements.root.appendChild(message);
+        }
+
+        function escapeHtml(value) {
+          return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        }
+
+        function clearChildren(element) {
+          while (element.firstChild) element.removeChild(element.firstChild);
+        }
+
+        function cleanGuid(value) {
+          return String(value || "").replace(/[{}]/g, "");
+        }
+
+      })();
+    </script>
+  </body>
+</html>

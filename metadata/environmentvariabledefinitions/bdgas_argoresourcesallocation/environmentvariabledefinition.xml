@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_argoresourcesallocation">
+  <defaultvalue>[     {         "PIC": "8ee1ef2c-b275-f111-ab0f-7ced8d23115e",         "ApplicationId": "bc2ca425-efab-f111-aaab-6045bded11bb",         "Percentage": 5     },     {         "PIC": "977de7b2-6c8a-f111-ab10-7ced8d23115e",         "ApplicationId": "bc2ca425-efab-f111-aaab-6045bded11bb",         "Percentage": 10     },     {         "PIC": "6f02a98f-be17-ed11-b83e-000d3a4e6e08",         "ApplicationId": "bc2ca425-efab-f111-aaab-6045bded11bb",         "Percentage": 15     } ]</defaultvalue>
+  <displayname default="ARGO Resources Allocation">
+    <label description="ARGO Resources Allocation" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

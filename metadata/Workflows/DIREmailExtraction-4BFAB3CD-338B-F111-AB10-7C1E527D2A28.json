@@ -1,0 +1,641 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_b44f2"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_conversionservice": {
+        "api": {
+          "name": "shared_conversionservice"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedconversionservice_5562a"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_b7289"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365-1": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_new_email_arrives_(V3)": {
+          "type": "OpenApiConnectionNotification",
+          "inputs": {
+            "parameters": {
+              "includeAttachments": false,
+              "subjectFilter": "New Digital Innovation Request",
+              "importance": "Any",
+              "fetchOnlyWithAttachment": false,
+              "folderPath": "Inbox"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "operationId": "OnNewEmailV3",
+              "connectionName": "shared_office365"
+            }
+          },
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "metadata": {
+            "operationMetadataId": "973044df-3286-4129-aa67-774fc0f6ba1f"
+          }
+        }
+      },
+      "actions": {
+        "Html_to_text": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "Content": "<p>@{triggerOutputs()?['body/body']}</p>"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_conversionservice",
+              "operationId": "HtmlToText",
+              "connectionName": "shared_conversionservice"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "0abb11c9-c0f2-42c3-b650-58bfd95f2dc2"
+          }
+        },
+        "Compose_-_Request_Number": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Digital Innovation Request #: '\r\n)\r\n),\r\n'Request name:'\r\n)\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Link_to_Work_Item_on_PlanView": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "955decd9-79e7-4ca2-89f7-cd20e467f807"
+          }
+        },
+        "try": {
+          "type": "Scope",
+          "actions": {
+            "List_rows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_requestintakes",
+                  "$filter": "bdgas_requestnumber eq '@{trim(outputs('Compose_-_Request_Number'))}'"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "668d6010-820e-4efc-91e1-24fa3ea6e8d1"
+              }
+            },
+            "Condition": {
+              "type": "If",
+              "expression": {
+                "greater": [
+                  "@length(body('List_rows')?['value'])",
+                  0
+                ]
+              },
+              "actions": {
+                "Terminate": {
+                  "type": "Terminate",
+                  "inputs": {
+                    "runStatus": "Failed",
+                    "runError": {
+                      "message": "Request already exists"
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "c9c2db93-906b-43a4-847b-f1edf7eacced"
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Search_Projects_based_on_Digital_Name": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "parameters": {
+                        "entityName": "bdgas_requestintakes",
+                        "fetchXml": "<fetch top='1'>\n  <entity name='bdgas_requestintake'>\n    <attribute name='bdgas_requestintakeid' />\n    <filter>\n      <condition attribute='bdgas_digitalproductname' operator='eq' value='@{replace(\r\n    replace(\r\n        replace(\r\n            replace(\r\n                replace(\r\n                    outputs('Compose_-_Request_Name'),\r\n                    '&', '&amp;'\r\n                ),\r\n                '<', '&lt;'\r\n            ),\r\n            '>', '&gt;'\r\n        ),\r\n        '\"', '&quot;'\r\n    ),\r\n    '''', '&apos;'\r\n)\r\n }' />\n    </filter>\n    <order attribute='createdon' descending='true' />\n  </entity>\n</fetch>"
+                      },
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "operationId": "ListRecords",
+                        "connectionName": "shared_commondataserviceforapps"
+                      }
+                    }
+                  },
+                  "Check_if_Project_Exists": {
+                    "type": "If",
+                    "expression": {
+                      "and": [
+                        {
+                          "equals": [
+                            "@empty(outputs('Search_Projects_based_on_Digital_Name')?['body/value']?[0]?['bdgas_requestintakeid'])",
+                            "@false"
+                          ]
+                        }
+                      ]
+                    },
+                    "actions": {
+                      "Update_Planview_Information": {
+                        "type": "OpenApiConnection",
+                        "inputs": {
+                          "parameters": {
+                            "entityName": "bdgas_requestintakes",
+                            "recordId": "@outputs('Search_Projects_based_on_Digital_Name')?['body/value']?[0]?['bdgas_requestintakeid']",
+                            "item/bdgas_emaillinktoworkitemonplanview": "@outputs('Compose_-_Link_to_Work_Item_on_PlanView')",
+                            "item/bdgas_planviewid": "@outputs('Compose_-_Request_Number')"
+                          },
+                          "host": {
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                            "operationId": "UpdateOnlyRecord",
+                            "connectionName": "shared_commondataserviceforapps"
+                          }
+                        }
+                      }
+                    },
+                    "else": {
+                      "actions": {
+                        "List_rows_-_Requestor_user": {
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "systemusers",
+                              "$filter": "fullname eq '@{trim(outputs('Compose_-_Requestor'))}'"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "operationId": "ListRecords",
+                              "connectionName": "shared_commondataserviceforapps"
+                            }
+                          }
+                        },
+                        "List_rows_-_Find_Project_Owner_user": {
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "systemusers",
+                              "$filter": "fullname eq '@{trim(outputs('Compose_-_Project_Owner'))}'"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "operationId": "ListRecords",
+                              "connectionName": "shared_commondataserviceforapps"
+                            }
+                          },
+                          "runAfter": {
+                            "List_rows_-_Requestor_user": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "83c64c00-6212-44ed-be11-af4e944e922b"
+                          }
+                        },
+                        "List_rows_-_Find_BOT_Informed_user": {
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "systemusers",
+                              "$filter": "fullname eq '@{trim(outputs('Compose_-_Requestor'))}'"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "operationId": "ListRecords",
+                              "connectionName": "shared_commondataserviceforapps"
+                            }
+                          },
+                          "runAfter": {
+                            "List_rows_-_Find_Project_Owner_user": [
+                              "Succeeded"
+                            ]
+                          }
+                        },
+                        "Add_a_new_row_-_Request_Intake": {
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "bdgas_requestintakes",
+                              "item/bdgas_botowner@odata.bind": "@concat(\r\n'systemusers(',\r\nfirst(body('List_rows_-_Find_Project_Owner_User')?['value'])?['systemuserid'],')'\r\n)",
+                              "item/bdgas_description": "@{outputs('Compose_-_Problem_Observed')}\n\n@{outputs('Compose_-_Benefits_Anticipated')}\n\n@{outputs('Compose_-_Data_Description')}",
+                              "item/bdgas_requestnumber": "@outputs('Compose_-_Request_Number')",
+                              "item/bdgas_enhancementofexistingbot": false,
+                              "item/bdgas_requestintaketype": 100000000,
+                              "item/bdgas_digitalproductname": "@outputs('Compose_-_Request_Name')",
+                              "item/bdgas_botinformedid@odata.bind": "@concat(\r\n'systemusers(',\r\nfirst(body('List_rows_-_Find_BOT_Informed_user')?['value'])?['systemuserid'],')'\r\n)",
+                              "item/bdgas_assignedto": "@outputs('Compose_-_Assigned_To')",
+                              "item/bdgas_businesspartnerlead": "@outputs('Compose_-_Business_Partner_Lead')",
+                              "item/bdgas_impactedgroups": "@outputs('Compose_-_Impacted_Groups')",
+                              "item/bdgas_emaillinktoworkitemonplanview": "@outputs('Compose_-_Link_to_Work_Item_on_PlanView')",
+                              "item/bdgas_portfolioanalyst": "@outputs('Compose_-_Portfolio_Analyst')",
+                              "item/bdgas_problemobserved": "@outputs('Compose_-_Problem_Observed')",
+                              "item/bdgas_projectowner": "@outputs('Compose_-_Project_Owner')",
+                              "item/bdgas_requestname": "@outputs('Compose_-_Request_name')",
+                              "item/bdgas_sponsor": "@outputs('Compose_-_Sponsor')",
+                              "item/bdgas_tgsltowner": "@outputs('Compose_-_TGS_LT_Owner')",
+                              "item/bdgas_planviewid": "@outputs('Compose_-_Request_Number')",
+                              "item/bdgas_requestor@odata.bind": "@concat(\r\n'systemusers(',\r\nfirst(body('List_rows_-_Requestor_user')?['value'])?['systemuserid'],')'\r\n)",
+                              "item/bdgas_triagedtechnology": "@outputs('Compose_-_Triaged_Technology')",
+                              "item/bdgas_visibility": true
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "operationId": "CreateRecord",
+                              "connectionName": "shared_commondataserviceforapps"
+                            }
+                          },
+                          "runAfter": {
+                            "List_rows_-_Find_BOT_Informed_user": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "c723f2a8-12b8-4b09-9132-42eebb58c85f"
+                          }
+                        }
+                      }
+                    },
+                    "runAfter": {
+                      "Search_Projects_based_on_Digital_Name": [
+                        "Succeeded"
+                      ]
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "List_rows": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5caf8ce3-722c-4260-b702-26c535fee44a"
+              }
+            }
+          },
+          "runAfter": {
+            "Compose_-_TGS_LT_Owner": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0f123612-d0df-4aca-946f-c6dc04b848a4"
+          }
+        },
+        "Compose_-_Email_Body": {
+          "type": "Compose",
+          "inputs": "@body('Html_to_text')",
+          "runAfter": {
+            "Html_to_text": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "abe18c64-d348-47eb-8066-0714d1b1d294"
+          }
+        },
+        "Compose_-_Triaged_technology_based_on_user_submission": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Triaged technology based on user submission: '\r\n)\r\n),\r\n'Assigned to:'\r\n)\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Email_Body": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6cc67836-099e-4a47-9835-d596370a7c1b"
+          }
+        },
+        "Compose_-_Assigned_To": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Assigned to: '\r\n)\r\n),\r\n'Link to Work Item on PlanView:'\r\n)\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Triaged_technology_based_on_user_submission": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "eb546b41-469e-4abc-b1b3-ee8ab78de532"
+          }
+        },
+        "Compose_-_Link_to_Work_Item_on_PlanView": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Link to Work Item on PlanView:'\r\n)\r\n),\r\n'Below are additional details related to the submission:'\r\n)\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Assigned_To": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "05385dfa-7a4a-4622-ad71-756c57578901"
+          }
+        },
+        "Compose_-_Request_name": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Request name: '\r\n)\r\n),\r\n'DI Technology Type'\r\n)\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Concat_Request_No._DIR": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "50d88669-9cfa-4428-8354-4fa4993afe18"
+          }
+        },
+        "Compose_-_Triaged_Technology": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Triaged Technology'\r\n)\r\n),\r\n'Impacted Groups'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Digital_Product_Name": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b9313b96-4921-4a4e-8491-4a3d98d89c86"
+          }
+        },
+        "Compose_-_Impacted_Groups": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Impacted Groups'\r\n)\r\n),\r\n'Problem Observed'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Triaged_Technology": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9acc9029-0ac2-46fb-8c80-71420bafdcdc"
+          }
+        },
+        "Compose_-_Problem_Observed": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Problem Observed'\r\n)\r\n),\r\n'Benefits Anticipated'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Impacted_Groups": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b6e340ce-2824-4545-a04a-0a7289e3de23"
+          }
+        },
+        "Compose_-_Benefits_Anticipated": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Benefits Anticipated'\r\n)\r\n),\r\n'Data Description'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Problem_Observed": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4819d9d4-8830-458b-a8a3-7a9eb15ee7b8"
+          }
+        },
+        "Compose_-_Data_Description": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Data Description'\r\n)\r\n),\r\n'Requestor'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Benefits_Anticipated": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "27fb66b1-5105-4b13-af3b-c98d33bbe668"
+          }
+        },
+        "Compose_-_Requestor": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Requestor'\r\n)\r\n),\r\n'Project Owner'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Data_Description": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8151f689-4648-402d-a98b-cf2b0d04dbde"
+          }
+        },
+        "Compose_-_Project_Owner": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Project Owner'\r\n)\r\n),\r\n'Sponsor'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Requestor": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f03889a4-f261-471d-bc37-31d3ac61b17a"
+          }
+        },
+        "Compose_-_Sponsor": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Sponsor'\r\n)\r\n),\r\n'Business Partner Lead'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Project_Owner": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f92539df-e166-4c7d-996d-c0de0ff2fc28"
+          }
+        },
+        "Compose_-_Business_Partner_Lead": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Business Partner Lead'\r\n)\r\n),\r\n'Portfolio Analyst'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Sponsor": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3e7a47b0-beeb-4fea-a5b3-5f8eff5a03b7"
+          }
+        },
+        "Compose_-_Portfolio_Analyst": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Portfolio Analyst'\r\n)\r\n),\r\n'TGS LT Owner'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Business_Partner_Lead": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f13726a8-0b80-4b63-a990-8eba48e612bc"
+          }
+        },
+        "Compose_-_TGS_LT_Owner": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'TGS LT Owner'\r\n)\r\n),\r\n'Thanks and Regards'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Portfolio_Analyst": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "acd14c79-3b9d-4faf-b3d4-adec2a60c824"
+          }
+        },
+        "Compose_-_DI_Technology_Type": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'DI Technology Type'\r\n)\r\n),\r\n'Digital Product Name'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_Request_name": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "17112a0b-cd64-485b-ae13-892375feb2d9"
+          }
+        },
+        "Compose_-_Digital_Product_Name": {
+          "type": "Compose",
+          "inputs": "@trim(\r\nreplace(\r\nfirst(\r\nsplit(\r\nlast(\r\nsplit(\r\noutputs('Compose_-_Email_Body'),\r\n'Digital Product Name'\r\n)\r\n),\r\n'Triaged Technology'\r\n)\r\n),\r\n':',\r\n''\r\n)\r\n)",
+          "runAfter": {
+            "Compose_-_DI_Technology_Type": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e5c15895-5df5-41ec-ac24-f85b153cd0d5"
+          }
+        },
+        "Compose_-_Concat_Request_No._DIR": {
+          "type": "Compose",
+          "inputs": "@concat('DIR-', trim(outputs('Compose_-_Request_Number')))",
+          "runAfter": {
+            "Compose_-_Request_Number": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4db4ee23-1963-41c0-bcfa-2f8f1b790e5d"
+          }
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Send_an_email_(V2)": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[Extraction DIR Email] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365-1"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "try": [
+              "TimedOut",
+              "Skipped",
+              "Failed"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

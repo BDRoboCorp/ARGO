@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{9e4270b7-58d6-4ca2-b490-d31bc4ae1934}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_preferredname" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_keycontactid">
+          <cell name="bdgas_preferredname" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_keycontact">
+          <attribute name="bdgas_keycontactid" />
+          <attribute name="bdgas_preferredname" />
+          <attribute name="createdon" />
+          <order attribute="bdgas_preferredname" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Key Contacts" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

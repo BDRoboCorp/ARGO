@@ -1,0 +1,18 @@
+<customapi uniquename="bdgas_GetEmailContent">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="GetEmailContent">
+    <label description="GetEmailContent" languagecode="1033" />
+  </description>
+  <displayname default="GetEmailContent">
+    <label description="GetEmailContent" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>GetEmailContent</name>
+  <plugintypeid>
+    <plugintypeexportkey>FE65CE1CBA3AE4F03AF30AFCA2E70CA4EF83BD0DAAD1A6FCEF54ECFC929058DB</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

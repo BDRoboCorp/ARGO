@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{be636dda-14d1-f111-a059-3833c5e5115e}</WebResourceId>
+  <Name>bdgas_BookRAMeeting</Name>
+  <DisplayName>BookRAMeeting</DisplayName>
+  <WebResourceType>5</WebResourceType>
+  <IntroducedVersion>1.1.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/bdgas_BookRAMeetingBE636DDA-14D1-F111-A059-3833C5E5115E</FileName>
+</WebResource>

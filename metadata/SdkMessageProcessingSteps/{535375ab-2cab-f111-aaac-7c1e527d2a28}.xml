@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="BD.IPA.Plugins.PreBudgetRequestHistoryUpdate: Update of bdgas_budgetrequesthistory" SdkMessageProcessingStepId="{535375ab-2cab-f111-aaac-7c1e527d2a28}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeExportKey>AA40F4C76B81E3A985A7066B6EAF955774F5DF2A300705FCB240ED8F5278C0B0</PluginTypeExportKey>
+  <PrimaryEntity>bdgas_budgetrequesthistory</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>BD.IPA.Plugins.PreBudgetRequestHistoryUpdate: Update of bdgas_budgetrequesthistory</Description>
+  <FilteringAttributes>bdgas_approvalbotowner,bdgas_approvalfinancepoc,statuscode</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

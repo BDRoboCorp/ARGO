@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="BD.IPA.Plugins.PreAppointmentOnUpdate: Update of appointment" SdkMessageProcessingStepId="{ef80d538-3c93-f111-8076-6045bdf09dc3}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeExportKey>09EC67003CC2868FBECC7220F62591DF26A92D36F33DC7774FC82CBFED1091D9</PluginTypeExportKey>
+  <PrimaryEntity>appointment</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>BD.IPA.Plugins.PreAppointmentOnUpdate: Update of appointment</Description>
+  <FilteringAttributes>bdgas_nongxpapplicabilityformatted,bdgas_aiusedid,bdgas_assigneddescription,bdgas_assignedduedate,bdgas_assignedsubject,bdgas_assignedtoid,bdgas_authenticationmethodtext,bdgas_availabilityimpactid,bdgas_bdcontrolledsegmentationtext,bdgas_businessowner,bdgas_businesspartner,bdgas_chargebackcategoryid,bdgas_childsystemcomponents,bdgas_confidentialityimpactid,bdgas_configurationitemserialnumber,bdgas_dataclassificationid,bdgas_drplanrequiredfromcmdbbusinessappid,bdgas_drplanstatusid,bdgas_electronicsignaturecapabilityid,bdgas_financialimpactid,bdgas_firewallchangestext,bdgas_fundedbyid,bdgas_chmdmndritmplanviewnumber,bdgas_gxpapplicableid,bdgas_impacttootherapplicationsid,bdgas_integrityimpactid,bdgas_internaltypeid,bdgas_legacysystemid,bdgas_mydigitalsraid,regardingobjectid,onlinemeetingjoinurl,bdgas_operatingenvironmenttext,bdgas_optionalemails,bdgas_otherregulationsorlegalconstraintimpactid,bdgas_otherrequiredemails,bdgas_piijustificationid,bdgas_presenter,bdgas_registrant,bdgas_requirvpnforaccessid,bdgas_swapsraslotid,bdgas_scopeofdataandprocesssupportedid,bdgas_slotstatus,bdgas_solutionarchitecturetext,bdgas_soxapplicableid,bdgas_soxjustificationid,bdgas_srarequesttypeid,bdgas_documentstatusid,statuscode,bdgas_storeorprocesselectronicrecordsid,bdgas_gxpapplicabilityid,bdgas_systemprocessdataid,bdgas_systemresidetext,bdgas_systemhasdistinctmodulesid,bdgas_validationlead,bdgas_validationlead2,bdgas_productiondatawillbeusedid</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

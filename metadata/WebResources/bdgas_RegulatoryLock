@@ -1,0 +1,231 @@
+var RegulatoryLock = RegulatoryLock || {};
+
+(function () {
+
+    const ENV_VARIABLE_SCHEMA_NAME =
+        "bdgas_regulatorylockconfiguration";
+
+    const RESERVED_SLOT_STATUS = 2;
+
+    const SCHEDULED_STATECODE = 3;
+
+    this.apply = async function (
+        formContext,
+        requestIntakeLookupField
+    ) {
+
+        try {
+
+            var requestLookup =
+                formContext.getAttribute(
+                    requestIntakeLookupField
+                );
+
+            if (
+                !requestLookup ||
+                !requestLookup.getValue()
+            ) {
+                return;
+            }
+
+            var requestIntakeId =
+                requestLookup
+                .getValue()[0]
+                .id
+                .replace(/[{}]/g, "");
+
+            var config =
+                await this.getRegulatoryLockConfig();
+
+            var requestIntake =
+                await Xrm.WebApi.retrieveRecord(
+                    "bdgas_requestintake",
+                    requestIntakeId,
+                    "?$select=_bdgas_sraid_value"
+                );
+
+            if (
+                !requestIntake._bdgas_sraid_value
+            ) {
+                return;
+            }
+
+            var appointment =
+                await Xrm.WebApi.retrieveRecord(
+                    "appointment",
+                    requestIntake._bdgas_sraid_value,
+                    "?$select=scheduledstart,statecode,bdgas_slotstatus"
+                );
+
+            if (
+                appointment.statecode !==
+                SCHEDULED_STATECODE
+            ) {
+                return;
+            }
+
+            if (
+                appointment.bdgas_slotstatus !==
+                RESERVED_SLOT_STATUS
+            ) {
+                return;
+            }
+
+            var appointmentStart =
+                new Date(
+                    appointment.scheduledstart
+                );
+
+            var currentTime =
+                new Date();
+
+            var hoursUntilAppointment =
+                (
+                    appointmentStart.getTime()
+                    -
+                    currentTime.getTime()
+                ) / 36e5;
+
+            var lockingHours =
+                parseFloat(
+                    config.LockingHours
+                );
+
+            var isRegulatoryAdmin =
+                await this.isCurrentUserInTeam(
+                    config.RegulatoryAdmin
+                );
+
+            if (isRegulatoryAdmin) {
+                return;
+            }
+
+            if (
+                hoursUntilAppointment <=
+                lockingHours
+            ) {
+
+                formContext.ui
+                .setFormNotification(
+                    "This record is locked because the Regulatory Assessment locking window has been reached.",
+                    "WARNING",
+                    "REGULATORY_LOCK"
+                );
+
+                this.lockAllAttributes(
+                    formContext
+                );
+            }
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+    };
+
+    this.getRegulatoryLockConfig =
+        async function () {
+
+        var result =
+            await Xrm.WebApi
+                .retrieveMultipleRecords(
+                    "environmentvariabledefinition",
+                    "?$select=schemaname,defaultvalue"
+                );
+
+        for (
+            var i = 0;
+            i < result.entities.length;
+            i++
+        ) {
+
+            if (
+                result.entities[i]
+                    .schemaname &&
+                result.entities[i]
+                    .schemaname
+                    .toLowerCase() ===
+                ENV_VARIABLE_SCHEMA_NAME
+                    .toLowerCase()
+            ) {
+
+                return JSON.parse(
+                    result.entities[i]
+                        .defaultvalue
+                );
+            }
+        }
+
+        return null;
+    };
+
+    this.isCurrentUserInTeam =
+        async function (teamId) {
+
+        if (!teamId) {
+            return false;
+        }
+
+        teamId =
+            teamId
+                .replace("{", "")
+                .replace("}", "");
+
+        var userId =
+            Xrm.Utility
+                .getGlobalContext()
+                .userSettings
+                .userId
+                .replace("{", "")
+                .replace("}", "");
+
+        var result =
+            await Xrm.WebApi
+                .retrieveMultipleRecords(
+                    "teammembership",
+                    "?$filter=systemuserid eq "
+                    + userId +
+                    " and teamid eq "
+                    + teamId
+                );
+
+        return (
+            result.entities &&
+            result.entities.length > 0
+        );
+    };
+
+    this.lockAllAttributes =
+        function (formContext) {
+
+        formContext.data.entity.attributes
+            .forEach(function (attribute) {
+
+                attribute.controls
+                    .forEach(function (control) {
+
+                        try {
+
+                            if (
+                                control &&
+                                typeof control.setDisabled === "function"
+                            ) {
+                                control.setDisabled(
+                                    true
+                                );
+                            }
+
+                        }
+                        catch (e) {
+                            console.log(
+                                e.message
+                            );
+                        }
+
+                    });
+
+            });
+
+    };
+
+}).apply(RegulatoryLock);

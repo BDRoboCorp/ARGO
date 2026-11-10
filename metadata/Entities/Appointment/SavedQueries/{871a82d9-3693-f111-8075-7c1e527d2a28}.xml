@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{871a82d9-3693-f111-8075-7c1e527d2a28}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" preview="1" icon="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="186" />
+          <cell name="sortdate" width="100" />
+          <cell name="bdgas_slotnumber" width="112" />
+          <cell name="regardingobjectid" width="100" />
+          <cell name="bdgas_requestname" width="123" />
+          <cell name="instancetypecode" width="100" ishidden="1" />
+          <cell name="bdgas_slotstatus" width="101" />
+          <cell name="onlinemeetingjoinurl" width="178" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="appointment">
+          <attribute name="subject" />
+          <attribute name="instancetypecode" />
+          <attribute name="bdgas_slotstatus" />
+          <attribute name="onlinemeetingjoinurl" />
+          <attribute name="regardingobjectid" />
+          <filter type="and">
+            <condition attribute="bdgas_sratemplate" operator="eq" value="1" />
+          </filter>
+          <attribute name="bdgas_requestname" />
+          <attribute name="activityid" />
+          <attribute name="bdgas_slotnumber" />
+          <attribute name="sortdate" />
+          <order attribute="sortdate" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="SRA Meetings" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

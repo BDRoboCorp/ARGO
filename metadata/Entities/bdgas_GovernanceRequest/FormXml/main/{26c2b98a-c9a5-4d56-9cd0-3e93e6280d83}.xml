@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{26c2b98a-c9a5-4d56-9cd0-3e93e6280d83}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{01cb68ca-a1d3-495c-b505-d5bbe7c8b5c3}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{f1846712-6c7e-4bca-85d2-103034a5d0c5}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{751c243c-3277-4c35-b8ac-36e71bf2ea31}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request Number" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestintakeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_requestintakeid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0182718e-67c1-4fbd-88eb-4369fa31cba0}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request Name" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requestname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="bdgas_requestname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bb100190-a19d-4a80-a8d7-997d543444aa}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request Type" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_requesttypeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_requesttypeid" disabled="false">
+                          <parameters>
+                            <DisableMru>true</DisableMru>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C}</DefaultViewId>
+                            <AvailableViewIds>{9BC0EA1E-CA89-4A0D-A309-072585A32D22},{15B5D087-3FB2-F111-AAAB-6045BDED11BB},{5B4C67F5-3CA7-F111-B8DE-7CED8D23115E},{50A583AA-77A6-F111-B8DE-7C1E527D2A28},{EA9DE5E2-87B2-F111-AAAB-000D3A11E677},{86A40140-88B2-F111-AAAB-3833C5EB9A4C},{0AD18998-61A7-F111-B8DE-7CED8D23115E},{D8BDD36B-87B2-F111-AAAB-3833C5EB9A4C},{B8615B01-88B2-F111-AAAB-6045BDED11BB},{21E49B62-88B2-F111-AAAC-7C1E527D2A28},{C8CE5B82-88B2-F111-AAAB-3833C5EB9A4C},{7DAC8626-88B2-F111-AAAB-000D3A11E677},{F804D59C-88B2-F111-AAAB-000D3A11E677},{BA3BEE97-87B2-F111-AAAB-3833C5EB9A4C},{8A7601B8-87B2-F111-AAAC-7C1E527D2A28},{B7D70427-C0AA-F111-AAAC-7C1E527D2A28},{C1101740-C0AA-F111-AAAB-6045BDED11BB},{651D6656-77AA-F111-AAAC-6045BDF09DC3},{33C00AD1-76AA-F111-AAAB-000D3A11E677},{675B1BCF-78A6-F111-B8DE-7C1E527D2A28},{BD957C9F-77A6-F111-B8DE-6045BDF09DC3},{852FEF3C-BDA5-F111-B8DE-7C1E527D2A28},{AFEA1774-77AA-F111-AAAB-6045BDED11BB},{488742D9-90AA-F111-AAAB-000D3A11E677},{FF9EC6C0-78A6-F111-B8DE-000D3A11E677},{053ADB9E-78A6-F111-B8DE-7C1E527D2A28},{A5A41BAD-78A6-F111-B8DE-7CED8D23115E},{B87D7DD5-77A6-F111-B8DE-6045BDF09DC3},{42D9120D-78A6-F111-B8DE-6045BDF09DC3},{BFE9FDDA-78A6-F111-B8DD-70A8A593A821},{7CDDA67B-87BC-F111-AAAF-3833C5EB9A4C},{6D5CDCE8-77A6-F111-B8DD-70A8A593A821},{DFBF89BA-77A6-F111-B8DF-6045BDED11BB},{EC161AF8-77A6-F111-B8DD-70A8A593A821},{73D505E8-FD88-4199-B10F-F526BBE4CBD4},{10911F8C-77A6-F111-B8DD-70A8A593A821},{676EB2B9-78A6-F111-B8DE-000D3A11E677},{C5B3675A-77A6-F111-B8DE-6045BDF09DC3},{FF041D28-78A6-F111-B8DE-000D3A11E677},{6961985C-78A6-F111-B8DD-70A8A593A821},{52E9A244-78A6-F111-B8DD-70A8A593A821},{91064C50-78A6-F111-B8DE-7CED8D23115E},{D2AB9159-76A6-F111-B8DE-000D3A11E677},{93413298-7B3B-4149-A15E-ACE4957AB86B},{90225CD0-76A6-F111-B8DE-7C1E527D2A28},{4C525715-77AA-F111-AAAB-6045BDED11BB},{5161035C-C0AA-F111-AAAB-6045BDED11BB},{263FB9EB-76A6-F111-B8DE-7CED8D23115E},{3D092D10-77A6-F111-B8DE-6045BDF09DC3},{6436BE1B-78A6-F111-B8DE-000D3A11E677},{26756837-78A6-F111-B8DD-70A8A593A821},{B6C43943-77A6-F111-B8DD-70A8A593A821},{D74186C7-77A6-F111-B8DE-6045BDF09DC3},{B285BD79-77A6-F111-B8DE-7CED8D23115E},{1AE1076A-77A6-F111-B8DF-6045BDED11BB},{96597B2F-77AA-F111-AAAB-000D3A11E677}</AvailableViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ff8eddbc-8e0c-4490-9d5b-bd05b0808c29}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Requestor" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_bddeveloperid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_bddeveloperid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7e216cf5-85ae-4ae2-a7c5-52263e012002}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Assignee's Team" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_teamid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_teamid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ad2da8f9-65b9-40fa-84f9-77904ec088e5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Assignee" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_assigneeid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_assigneeid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d566d58b-781c-438c-a544-e6f4a9e3065d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Attachment" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_attachment" classid="{0A7FF475-B016-4687-9CE5-042BFDBD6519}" datafieldname="bdgas_attachment" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6234a63f-f474-4537-b7ad-50559c950618}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="Comments" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_comments" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="bdgas_comments" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{c3db64d1-2002-4083-80a5-2488eb8e569b}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{52e585fb-ce2d-468a-a93e-c0be3b0ef3f2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b018a8a9-52e9-4202-809e-3bfa38c64c35}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{cf78e3b0-5167-4eef-aada-57b3385242e3}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ce5dc2e1-b74b-4452-88cb-376d6b561c8b}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Status Reason" languagecode="1033" />
+              </labels>
+              <control id="header_statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+            </cell>
+            <cell id="{5a85c6ba-cc25-474d-9db1-d9782fc1f71f}" colspan="1" rowspan="1" visible="false">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{7f17eda9-cff7-4242-a89c-edf732cbeed0}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{070f9871-3e43-4b26-a82a-0135399d6b60}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{65d1bd9b-c2fc-410f-a71f-473c07fcab73}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6c903924-f632-4e5f-bd21-c0cf29bba2b5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <Navigation>
+        <NavBar>
+          <NavBarByRelationshipItem Area="ProcessCenter" Show="false" RelationshipName="hardcoded_{B7196B13-6B9D-42CD-BD58-B19A3953126F}navAsyncOperations" Id="navAsyncOperations" Sequence="9500">
+            <Titles>
+              <Title Text="System Jobs" LCID="1033" />
+            </Titles>
+          </NavBarByRelationshipItem>
+        </NavBar>
+      </Navigation>
+      <formLibraries>
+        <Library name="bdgas_GovernanceRequest" libraryUniqueId="{127f4442-810a-41d7-859a-f851054ca7a4}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="GovernanceRequest.Events.OnLoad" libraryName="bdgas_GovernanceRequest" handlerUniqueId="{8723f416-48d8-4b21-a235-e5afa99a3ede}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onsave" application="false" active="false">
+          <Handlers>
+            <Handler functionName="GovernanceRequest.Events.OnSave" libraryName="bdgas_GovernanceRequest" handlerUniqueId="{d5593d75-36ff-4527-bec1-4182cd7b600b}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="bdgas_requestintakeid">
+          <Handlers>
+            <Handler functionName="GovernanceRequest.Business.PopulateRequestName" libraryName="bdgas_GovernanceRequest" handlerUniqueId="{0fec3104-94b8-4153-a188-ca27a5f8e4de}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

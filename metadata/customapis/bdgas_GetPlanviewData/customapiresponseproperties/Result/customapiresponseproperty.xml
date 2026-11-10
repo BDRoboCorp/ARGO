@@ -1,0 +1,8 @@
+<customapiresponseproperty uniquename="Result">
+  <displayname default="GetPlanviewData-Out-Result">
+    <label description="GetPlanviewData-Out-Result" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>GetPlanviewData-Out-Result</name>
+  <type>10</type>
+</customapiresponseproperty>

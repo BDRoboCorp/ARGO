@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{16654191-19ad-48ca-9e46-c4b4fbdad76f}</formid>
+    <IntroducedVersion>6.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls" solutionaction="Modified">
+      <tabs>
+        <tab name="TASK_TAB" verticallayout="true" id="{ADFD103B-691E-4A92-B4CF-F844B645A1F7}" IsUserDefined="0" showlabel="false" expanded="true" ordinalvalue="0">
+          <columns>
+            <column width="67%" id="0">
+              <sections>
+                <section name="TASK" showlabel="false" showbar="false" id="{EBB3C46D-5E9B-4EBB-A9E4-B8C25D364BB3}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{5FD2BE87-C1CF-41A6-9AD9-4D273733422E}" showlabel="true" locklevel="0" colspan="2" labelid="{f670bd68-6ea9-4665-b504-834f4c254a07}" ordinalvalue="10000">
+                        <labels>
+                          <label description="Subject" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Description" showlabel="true" showbar="false" locklevel="0" id="{bde07399-10a4-ddc1-ae5c-39b7ac6a0d7c}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" height="auto" labelid="{3e311b53-86ab-4733-ac24-54eba6327ebd}" ordinalvalue="1">
+                  <rows>
+                    <row>
+                      <cell id="{34941c93-b671-08a7-5b39-5d4e1443b6e0}" showlabel="false" locklevel="0" auto="true" rowspan="5" ordinalvalue="10000">
+                        <labels>
+                          <label description="Description" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                        <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="true" solutionaction="Modified" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="task details" showlabel="false" showbar="false" locklevel="0" id="{96BF03F6-399F-42D0-8295-08E1B8890D01}" IsUserDefined="0" layout="varwidth" columns="11" labelid="{a75b944b-2152-476c-8a9c-73cfeda7c0fa}" visible="false" ordinalvalue="3" solutionaction="Modified">
+                  <rows>
+                    <row>
+                      <cell showlabel="true" id="{E1DB7569-03E5-4B12-A5C0-4E875D1163D8}" locklevel="0" colspan="2" labelid="{1f99d1b9-9de8-4d2f-86f7-0c589f6c24df}" visible="true" ordinalvalue="10000" solutionaction="Modified">
+                        <labels>
+                          <label description="Regarding" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell showlabel="true" id="{CC840E7F-65AB-4F53-B495-4AEA458370B0}" labelid="{a7a7baec-6af8-4ab9-8952-8f009923ee1d}" ordinalvalue="10001">
+                        <labels>
+                          <label description="Duration" languagecode="1033" solutionaction="Modified" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="TASK_TAB_section_6" id="492de0c2-0c57-4606-9c89-4e5b11270c3f" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115" ordinalvalue="2" solutionaction="Added">
+                  <labels>
+                    <label description="Remarks" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{da7d23db-42d5-46aa-ab1a-108985d75e1c}" locklevel="0" colspan="1" rowspan="1" showlabel="false" ordinalvalue="10000">
+                        <labels>
+                          <label description="Remarks" languagecode="1033" />
+                        </labels>
+                        <control id="bdgas_remarks" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="bdgas_remarks" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="1">
+              <sections>
+                <section name="tab_2_section_2" showlabel="false" showbar="false" locklevel="0" id="{7a19c1aa-7ac9-5449-dcb0-208db3ecd341}" IsUserDefined="0" layout="varwidth" columns="11" labelwidth="115" labelid="{bb6af410-fa41-4b02-aed7-2d9c15d663d5}" visible="true" ordinalvalue="0" solutionaction="Modified">
+                  <labels>
+                    <label description="Assigned Users" languagecode="1033" solutionaction="Added" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell locklevel="0" id="{f26dc9a6-9fb6-4788-830b-7b79006712fb}" rowspan="4" colspan="1" auto="false" showlabel="true" ordinalvalue="10002" solutionaction="Added">
+                        <labels>
+                          <label description="Assigned Users" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>bdgas_taskassignment_taskid_task</RelationshipName>
+                            <TargetEntityType>bdgas_taskassignment</TargetEntityType>
+                            <ViewId>{950d3e52-e481-478c-be23-6eeda6edda04}</ViewId>
+                            <ViewIds>{950d3e52-e481-478c-be23-6eeda6edda04}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell locklevel="0" id="{9422d611-b777-4334-8222-8ac7b44e4b4d}" ordinalvalue="20003" solutionaction="Added">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{D7EF0A4A-7B76-4B39-A2E0-4207EC3C8C2D}" columns="1111" celllabelposition="Top" labelwidth="115">
+        <rows>
+          <row>
+            <cell id="{0A9B5273-AD20-4A08-8990-64CB20861D81}" showlabel="true" ordinalvalue="10000">
+              <labels>
+                <label description="Priority" languagecode="1033" solutionaction="Modified" />
+              </labels>
+            </cell>
+            <cell showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{E3CC7544-665F-4BDC-874C-FD933C7C05ED}" ordinalvalue="20001" solutionaction="Removed" />
+            <cell id="{6A04844E-9375-4428-BF70-85C6C3556B8B}" ordinalvalue="40003" solutionaction="Modified">
+              <labels>
+                <label description="Activity Status" languagecode="1033" solutionaction="Modified" />
+              </labels>
+              <control id="header_statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" solutionaction="Modified" />
+            </cell>
+            <cell id="{59BF22C1-8C1D-4235-8516-4647EDEAE36C}" showlabel="true" locklevel="1" ordinalvalue="50004" solutionaction="Modified">
+              <labels>
+                <label description="Owner" languagecode="1033" solutionaction="Modified" />
+              </labels>
+            </cell>
+          </row>
+          <row>
+            <cell locklevel="0" id="{d788c745-bddd-4a45-bb5b-9a270ba99540}" ordinalvalue="20001" solutionaction="Added">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{50fa9091-f4cb-4098-8d9b-2c3df47bdf14}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="30002" solutionaction="Added">
+              <labels>
+                <label description="SRA Appointment" languagecode="1033" />
+              </labels>
+              <control id="header_bdgas_appointment" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bdgas_appointment" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{e7701dce-ba73-4b97-ab04-9116f4a9ea6c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left" solutionaction="Added">
+        <rows>
+          <row>
+            <cell id="{edccdc39-adab-4afa-8853-0d955f1cebf4}" showlabel="false" ordinalvalue="10000">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{101b9ca0-3312-41ba-a540-e4cab665c341}" showlabel="false" ordinalvalue="20001">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{7f772f1c-5ffd-4cdf-9e19-aa787a9005bb}" showlabel="false" ordinalvalue="30002">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+    </form>
+    <LocalizedNames>
+      <LocalizedName description="Task" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Updated default Task form." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

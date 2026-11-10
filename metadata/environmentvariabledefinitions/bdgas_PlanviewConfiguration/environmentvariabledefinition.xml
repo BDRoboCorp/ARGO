@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="bdgas_PlanviewConfiguration">
+  <defaultvalue>{ 	"PlanviewEnvironment": "bdtsandbox1", 	"PlanviewURL": "https://bdtgs-sb.pvcloud.com/planview/Login/body.aspx?manual=y", 	"PlanviewUsername": "RPA2426774", 	"PlanviewPassword": "RPA2426774", 	"PlanviewReviewer": "christopher.tan@bd.com;weelung.lee@bd.com", 	"LogPath": "E:\RPA\ARGOPlanview\Error" }</defaultvalue>
+  <displayname default="Planview Configuration">
+    <label description="Planview Configuration" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

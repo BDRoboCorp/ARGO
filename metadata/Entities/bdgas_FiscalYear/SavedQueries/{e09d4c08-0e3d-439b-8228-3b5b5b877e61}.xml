@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{e09d4c08-0e3d-439b-8228-3b5b5b877e61}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bdgas_fiscalyear" select="1" icon="1" preview="1">
+        <row name="result" id="bdgas_fiscalyearid">
+          <cell name="bdgas_fiscalyear" width="300" />
+          <cell name="bdgas_startdate" width="150" />
+          <cell name="bdgas_enddate" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bdgas_fiscalyear">
+          <attribute name="bdgas_fiscalyearid" />
+          <attribute name="bdgas_fiscalyear" />
+          <attribute name="createdon" />
+          <order attribute="bdgas_fiscalyear" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="bdgas_startdate" />
+          <attribute name="bdgas_enddate" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Fiscal Years" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,330 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "bdgas_sharedcommondataserviceforapps_52065"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_office365": {
+        "api": {
+          "name": "shared_office365"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedoffice365_28f0a"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "type": "Recurrence",
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2026-07-28T02:00:00Z",
+            "schedule": {
+              "hours": [
+                "10"
+              ]
+            },
+            "timeZone": "Singapore Standard Time"
+          },
+          "metadata": {
+            "operationMetadataId": "1cf7a02a-8b77-42eb-969f-02b602329a5a"
+          }
+        }
+      },
+      "actions": {
+        "Get_JSON_Token": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@first(\r\n    first(\r\n        body('Get_Environment_Variable_-_Credo_Get_Token_Configuration')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                },
+                "xApiKey": {
+                  "type": "string"
+                },
+                "tenant": {
+                  "type": "string"
+                },
+                "accept": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Get_Environment_Variable_-_Credo_Get_Token_Configuration": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e1cbff63-cd98-4682-ac33-0d2c9a318fc3"
+          }
+        },
+        "Retrieve_Request_Intake_CREDO_AI_Is_not_null_and_Status_Code_is_Concept_Approval": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "bdgas_requestintakes",
+              "$select": "bdgas_digitalproductname,bdgas_description,bdgas_isaiassessment,bdgas_credoaiid,bdgas_credoaistatus,bdgas_credoaiid",
+              "$filter": "((bdgas_isaiassessment eq true and bdgas_responsibleaisubmitted eq true and bdgas_credoaiid ne null) or (statuscode eq 1 and statuscode eq 100000001 and statuscode eq 100000002))"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {
+            "Get_JSON_Token": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4dc020c1-5586-44dd-a23a-9c309d1e84c7"
+          }
+        },
+        "Each_Request_Intake": {
+          "type": "Foreach",
+          "foreach": "@outputs('Retrieve_Request_Intake_CREDO_AI_Is_not_null_and_Status_Code_is_Concept_Approval')?['body/value']",
+          "actions": {
+            "Update_a_row": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "bdgas_requestintakes",
+                  "recordId": "@items('Each_Request_Intake')?['bdgas_requestintakeid']",
+                  "item/bdgas_credoaistatus": "@body('Parse_JSON')?['workflow_stage_step']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Scope_-_Call_CREDO_AI": [
+                  "Succeeded",
+                  "Skipped",
+                  "Failed"
+                ]
+              }
+            },
+            "Scope_-_Call_CREDO_AI": {
+              "type": "Scope",
+              "actions": {
+                "Call_CREDO_AI": {
+                  "type": "Http",
+                  "inputs": {
+                    "uri": "https://api.credo.ai/api/v1/integration/use_cases/@{item()?['bdgas_credoaiid']}",
+                    "method": "GET",
+                    "headers": {
+                      "Authorization": "Bearer @{body('Get_JSON_Token')?['access_token']}",
+                      "X-API-Key": "CMZTOruzdFekfpzecwy8J3LMWnsL6cy1kHRRdlZNQkcu1a8pDqZ9SiJsVWTnnlxd",
+                      "X-Tenant": "becton_dickinson_sb",
+                      "accept": "application/json"
+                    }
+                  },
+                  "runtimeConfiguration": {
+                    "contentTransfer": {
+                      "transferMode": "Chunked"
+                    }
+                  }
+                },
+                "Condition": {
+                  "type": "If",
+                  "expression": {
+                    "and": [
+                      {
+                        "equals": [
+                          "@outputs('Call_CREDO_AI')?['statusCode']",
+                          200
+                        ]
+                      }
+                    ]
+                  },
+                  "actions": {
+                    "Parse_JSON": {
+                      "type": "ParseJson",
+                      "inputs": {
+                        "content": "@body('Call_CREDO_AI')",
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "questionnaire_ids": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "creator_id": {
+                              "type": "string"
+                            },
+                            "workflow_stage_id": {
+                              "type": "string"
+                            },
+                            "workflow_stage_step": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "else": {
+                    "actions": {}
+                  },
+                  "runAfter": {
+                    "Call_CREDO_AI": [
+                      "Succeeded",
+                      "Skipped",
+                      "Failed"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Retrieve_Request_Intake_CREDO_AI_Is_not_null_and_Status_Code_is_Concept_Approval": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3fe26f0f-f35a-42ad-ba4c-39fc3f3f4145"
+          }
+        },
+        "Get_Environment_Variable_-_Credo_Get_Token_Configuration": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "environmentvariabledefinitions",
+              "$select": "schemaname,environmentvariabledefinitionid",
+              "$filter": "schemaname eq 'bdgas_CredoGetTokenConfig'",
+              "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "runAfter": {}
+        },
+        "Scope_-_Catch": {
+          "type": "Scope",
+          "actions": {
+            "Flow_URL": {
+              "type": "Compose",
+              "inputs": "@concat(\r\n'https://make.powerautomate.com/environments/',\r\nworkflow()?['tags']?['environmentName'],\r\n'/flows/',\r\nworkflow()?['name'],\r\n'/runs/',\r\nworkflow()?['run']?['name']\r\n)",
+              "runAfter": {
+                "Get_workflow_details": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_Environment_Variables_-_ARGO_notification_flows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "environmentvariabledefinitions",
+                  "$select": "schemaname,environmentvariabledefinitionid",
+                  "$filter": "schemaname eq 'bdgas_ARGOnotificationflows'",
+                  "$expand": "environmentvariabledefinition_environmentvariablevalue($select=value)"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              },
+              "runAfter": {
+                "Flow_URL": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "ARGO_notification_flows_value": {
+              "type": "Compose",
+              "inputs": "@first(\r\n    first(\r\n        body('Get_Environment_Variables_-_ARGO_notification_flows')?['value']\r\n    )?['environmentvariabledefinition_environmentvariablevalue']\r\n)?['value']",
+              "runAfter": {
+                "Get_Environment_Variables_-_ARGO_notification_flows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_workflow_details": {
+              "type": "Compose",
+              "inputs": "@workflow()"
+            },
+            "Send_an_email_(V2)_2": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@json(outputs('ARGO_notification_flows_value'))?['Recipients']",
+                  "emailMessage/Subject": "[UpdateCredoStatuses] Power Automate Flow Failed",
+                  "emailMessage/Body": "<p class=\"editor-paragraph\">Dear,<br><br>This is a system-generated email to inform you that your forwarded email could not be processed by the system due to the following error:<br><br>Flow Name: @{outputs('Get_workflow_details')?['tags']?['flowDisplayName']}<br>Flow URL: <a href=\"@{outputs('Flow_URL')}\" class=\"editor-link\">View Flow</a><br><br>Kindly contact IT Support for further assistance.<br><br>Do not reply to this email as it was automatically generated by the system.<br><br>Thank you,<br>BD System Notification</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              },
+              "runAfter": {
+                "ARGO_notification_flows_value": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Each_Request_Intake": [
+              "Skipped",
+              "Failed",
+              "TimedOut"
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

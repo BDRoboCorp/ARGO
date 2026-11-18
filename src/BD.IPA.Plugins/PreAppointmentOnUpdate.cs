@@ -112,8 +112,8 @@ namespace BD.IPA.Plugins
                 !string.IsNullOrEmpty(stateManager.Target.bdgas_ConfigurationItemSerialNumber))
             {
                 var serialNumber = stateManager.Target.bdgas_ConfigurationItemSerialNumber;
-                var valid = (serialNumber.StartsWith("APP") && int.TryParse(serialNumber.Replace("APP", ""), out var _) && serialNumber.Length == 10) ||
-                        (serialNumber.StartsWith("BOT -") && serialNumber.Length == 10);
+                var valid = (serialNumber.StartsWith("APP") && int.TryParse(serialNumber.Replace("APP", ""), out var _) && serialNumber.Length == 11) ||
+                        (serialNumber.StartsWith("BOT -") && serialNumber.Length == 11);
                 if (!valid)
                 {
                     throw new InvalidPluginExecutionException("Configuration Item Serial Number must be blank or follow the format APP######## or BOT - ####");
